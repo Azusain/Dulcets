@@ -20,6 +20,7 @@ export function GetLanguageFromPath() {
   if (["zh", "en", "jp"].includes(langSegment)) {
     return langSegment;
   }
+  return "jp";
 }
 
 export function GetLanguageDict(key: string | undefined) {
@@ -45,7 +46,7 @@ export default function LanguageSwitcher({
   const router = useRouter();
   const pathname = usePathname();
 
-  const [currentLang, setCurrentLang] = useState("jp");
+  const [currentLang, setCurrentLang] = useState(GetLanguageFromPath());
 
   const selectedIndex = languages.findIndex(
     (lang) => lang.code === currentLang
