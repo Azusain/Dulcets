@@ -1,6 +1,7 @@
+import { CreateTranslator } from "@/utils/translator";
+import { MainPage } from "../page";
 import zh from "../../../public/locales/zh.json";
-import { createTranslator, I18nPage } from "../page";
 
 export default function ZhPage() {
-  return <I18nPage t={createTranslator(zh)} />;
+  return <MainPage t={CreateTranslator(zh)} />;
 }

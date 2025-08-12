@@ -1,3 +1,5 @@
+import DsNavigation from "@/components/navigation";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -15,7 +17,12 @@ export default function RootLayout({
         <link rel="icon" type="image/png" href="/images/favicon.png" />
         <title>Dulcets</title>
       </head>
-      <body>{children}</body>
+      <body className="bg-black">
+        <header>
+          <DsNavigation />
+        </header>
+        {children}
+      </body>
     </html>
   );
 }
