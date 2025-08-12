@@ -2,10 +2,11 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
+
+import { CreateTranslator } from "@/utils/translator";
 import jp from "../../public/locales/jp.json";
 import en from "../../public/locales/en.json";
 import zh from "../../public/locales/zh.json";
-import { CreateTranslator } from "@/utils/translator";
 
 const languages = [
   { code: "jp", label: "JP" },

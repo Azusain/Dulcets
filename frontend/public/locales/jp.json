@@ -1,5 +1,45 @@
 {
-  "about":"私たちについて",
   "release": "リリース",
-  "information": "会社概要"
+  "information": "会社概要",
+  "loading": "読み込み中",
+  "hero": {
+    "subtitle": "二次元と技術の融合した音楽世界を探索し、未来音楽の無限の可能性を感じる",
+    "explore_artists": "アーティストを探索",
+    "latest_releases": "最新リリース"
+  },
+  "about": {
+    "title": "私たちについて",
+    "story_title": "私たちの物語",
+    "story_p1": "Dulcetsは2023年に設立された、二次元音楽制作と仮想アーティスト育成に特化した革新的な音楽会社です。従来の音楽の境界を破り、技術と芸術を完璧に融合させ、独特な音楽体験を創造することに専念しています。",
+    "story_p2": "音楽は現実と仮想世界を繋ぐ橋だと信じており、先進的な技術と創造性豊かなチームを通じて、私たちは全く新しい音楽宇宙を構築しています。",
+    "stats": {
+      "artists": "仮想アーティスト",
+      "releases": "音楽作品",
+      "fans": "ファン数"
+    }
+  },
+  "releases": {
+    "title": "最新リリース",
+    "desc": "私たちの最新音楽作品を探索し、未来音楽の魅力を感じてください"
+  },
+  "music_production": "音楽制作サービス",
+  "music_production.desc": "プロの音楽制作チームが、高品質な音楽作品をお作りします",
+  "music_production.services.recording.title": "制作・録音",
+  "music_production.services.recording.feature1": "プロ級録音設備と音響処理スペース",
+  "nav": {
+    "about": "私たちについて",
+    "releases": "音楽リリース"
+  },
+  "footer": {
+    "company_desc": "二次元と技術の融合した音楽世界を探索し、未来音楽の無限の可能性を感じる",
+    "quick_links": "クイックリンク",
+    "contact_us": "お問い合わせ",
+    "address": "東京都豊島区駒込3-1-3 エコプレイス駒込A-216",
+    "email": "Dulcets.info@gmail.com",
+    "subscribe_title": "更新を購読",
+    "subscribe_desc": "ニュースレターを購読して、最新の音楽と活動情報を入手してください",
+    "email_placeholder": "メールアドレスを入力",
+    "subscribe_button": "購読",
+    "copyright": "© 2025 Dulcets音楽会社. 全著作権所有."
+  }
 }

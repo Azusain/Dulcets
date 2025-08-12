@@ -22,9 +22,9 @@ const DsNavigation = () => {
       <div className="flex items-center space-x-6">
         <div className="hidden md:flex space-x-6 text-sm">
           <a href="#about" className="hover:underline">
-            {t("about")}
+            {t("about.title")}
           </a>
-          <a href="#release" className="hover:underline">
+          <a href="#releases" className="hover:underline">
             {t("release")}
           </a>
           <a href="#information" className="hover:underline">

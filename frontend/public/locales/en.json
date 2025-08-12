@@ -1,5 +1,45 @@
 {
-  "about":"About",
   "release": "Releases",
-  "information": "Information"
+  "information": "Information",
+  "loading": "Loading",
+  "hero": {
+    "subtitle": "Explore the fusion of 2D and technology in the music world, feel the infinite possibilities of future music",
+    "explore_artists": "Explore Artists",
+    "latest_releases": "Latest Releases"
+  },
+  "about": {
+    "title": "About Us",
+    "story_title": "Our Story",
+    "story_p1": "Dulcets was founded in 2023, an innovative music company specializing in 2D music creation and virtual artist development. We are dedicated to breaking traditional music boundaries, perfectly fusing technology with art to create unique musical experiences.",
+    "story_p2": "We believe music is the bridge connecting reality and virtual worlds. Through advanced technology and our creative team, we are building an entirely new musical universe.",
+    "stats": {
+      "artists": "Virtual Artists",
+      "releases": "Music Works",
+      "fans": "Fans"
+    }
+  },
+  "releases": {
+    "title": "Latest Releases",
+    "desc": "Explore our latest music works and feel the charm of future music"
+  },
+  "music_production": "Music Production Services",
+  "music_production.desc": "Professional music production team creates high-quality music works for you",
+  "music_production.services.recording.title": "Production & Recording",
+  "music_production.services.recording.feature1": "Professional recording equipment and acoustic processing space",
+  "nav": {
+    "about": "About Us",
+    "releases": "Music Releases"
+  },
+  "footer": {
+    "company_desc": "Explore the fusion of 2D and technology in the music world, feel the infinite possibilities of future music",
+    "quick_links": "Quick Links",
+    "contact_us": "Contact Us",
+    "address": "3-1-3 Komagome, Toshima-ku, Tokyo, Eco Place Komagome A-216",
+    "email": "Dulcets.info@gmail.com",
+    "subscribe_title": "Subscribe to Updates",
+    "subscribe_desc": "Subscribe to our newsletter to get the latest music and event information",
+    "email_placeholder": "Enter your email address",
+    "subscribe_button": "Subscribe",
+    "copyright": "© 2025 Dulcets Music Company. All rights reserved."
+  }
 }
