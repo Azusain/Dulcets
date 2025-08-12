@@ -1,15 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dulcets - 二次元音乐公司</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.9.1/dist/gsap.min.js"></script>
-</head>
+
 <body>
     <!-- 加载动画 -->
     <div class="loader-container fixed inset-0 z-50 flex items-center justify-center bg-black">
@@ -25,40 +15,91 @@
     </div>
     <div id="main-content" class="opacity-0 duration-1000">
     <!-- 导航栏 -->
-    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center">
-                <div class="text-white text-2xl font-bold font-orbitron tracking-wider">
-                    <span class="text-blue-400">D</span><span class="text-pink-500">ulcets</span>
-                </div>
-            </div>
-            <div class="hidden md:flex space-x-8 ml-auto">
-                <a href="#about" class="nav-link text-white hover:text-blue-400 transition-colors duration-300" data-i18n="nav.about">关于我们</a>
-                <a href="#releases" class="nav-link text-white hover:text-blue-400 transition-colors duration-300" data-i18n="nav.releases">音乐发布</a>
-                <a href="#pricing" class="nav-link text-white hover:text-blue-400 transition-colors duration-300" data-i18n="nav.pricing">价格表</a>
-                <a href="#artworks" class="nav-link text-white hover:text-blue-400 transition-colors duration-300" data-i18n="nav.artworks">绘画作品</a>
-                <a href="#modeling" class="nav-link text-white hover:text-blue-400 transition-colors duration-300" data-i18n="nav.modeling">3D建模</a>
-            </div>
-            <div class="hidden md:block ml-8">
-                <select id="language-selector" class="bg-gray-800/80 text-white border border-white/20 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-purple-500 transition-colors duration-300">
-                    <option value="zh-CN">中文</option>
-                    <option value="en">English</option>
-                    <option value="ja">日本語</option>
-                </select>
-            </div>
-            <div class="md:hidden flex items-center space-x-4">
-                <select id="language-selector-mobile" class="bg-gray-800/80 text-white border border-white/20 rounded-lg px-2 py-1 text-xs focus:outline-none focus:border-purple-500 transition-colors duration-300">
-                    <option value="zh-CN">中文</option>
-                    <option value="en">English</option>
-                    <option value="ja">日本語</option>
-                </select>
-                <button id="menu-toggle" class="text-white focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
+    <nav
+      id="navbar"
+      className="fixed top-0 left-0 w-full z-50 transition-all duration-500"
+    >
+      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+        <div className="flex items-center">
+          <div className="text-white text-2xl font-bold font-orbitron tracking-wider">
+            <span className="text-blue-400">D</span>
+            <span className="text-pink-500">ulcets</span>
+          </div>
         </div>
+        <div className="hidden md:flex space-x-8 ml-auto">
+          <a
+            href="#about"
+            className="nav-link text-white hover:text-blue-400 transition-colors duration-300"
+            data-i18n="nav.about"
+          >
+            关于我们
+          </a>
+          <a
+            href="#releases"
+            className="nav-link text-white hover:text-blue-400 transition-colors duration-300"
+            data-i18n="nav.releases"
+          >
+            音乐发布
+          </a>
+          <a
+            href="#pricing"
+            className="nav-link text-white hover:text-blue-400 transition-colors duration-300"
+            data-i18n="nav.pricing"
+          >
+            价格表
+          </a>
+          <a
+            href="#artworks"
+            className="nav-link text-white hover:text-blue-400 transition-colors duration-300"
+            data-i18n="nav.artworks"
+          >
+            绘画作品
+          </a>
+          <a
+            href="#modeling"
+            className="nav-link text-white hover:text-blue-400 transition-colors duration-300"
+            data-i18n="nav.modeling"
+          >
+            3D建模
+          </a>
+        </div>
+        <div className="hidden md:block ml-8">
+          <select
+            id="language-selector"
+            className="bg-gray-800/80 text-white border border-white/20 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-purple-500 transition-colors duration-300"
+          >
+            <option value="zh-CN">中文</option>
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+          </select>
+        </div>
+        <div className="md:hidden flex items-center space-x-4">
+          <select
+            id="language-selector-mobile"
+            className="bg-gray-800/80 text-white border border-white/20 rounded-lg px-2 py-1 text-xs focus:outline-none focus:border-purple-500 transition-colors duration-300"
+          >
+            <option value="zh-CN">中文</option>
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+          </select>
+          <button id="menu-toggle" className="text-white focus:outline-none">
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </nav>
         <!-- 移动端菜单 -->
         <div id="mobile-menu" class="hidden md:hidden bg-black/80 backdrop-blur-md">
             <div class="container mx-auto px-6 py-4 flex flex-col space-y-4">

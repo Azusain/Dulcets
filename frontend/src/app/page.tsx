@@ -1,4 +1,6 @@
+import DsNavigation from "@/components/navigation";
 import { redirect } from "next/navigation";
+import "../app/global.css";
 
 interface HomePageInterface {
   t: (key: string) => string;
@@ -11,7 +13,7 @@ export default function HomePage() {
 export function I18nPage({ t }: HomePageInterface) {
   return (
     <div>
-      <h1>{t("about")}</h1>
+      <DsNavigation />
     </div>
   );
 }

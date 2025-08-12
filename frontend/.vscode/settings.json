@@ -1,0 +1,7 @@
+{
+  "i18n-ally.localesPaths": ["out/locales", "public/locales"],
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "tailwindCSS.experimental.configFile": "src/app/global.css"
+}
