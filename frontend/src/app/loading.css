@@ -1,0 +1,75 @@
+/* CSS-Only Loading Animation */
+@keyframes fadeOut {
+  0% { opacity: 1; visibility: visible; }
+  90% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+@keyframes spinRing {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeInContent {
+  0% { opacity: 0; }
+  90% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.loading-screen {
+  animation: fadeOut 3s ease-in-out forwards;
+}
+
+.main-content {
+  animation: fadeInContent 3s ease-in-out forwards;
+  opacity: 0;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.spinner-ring {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top: 4px solid #3b82f6;
+  border-radius: 50%;
+  animation: spinRing 1s linear infinite;
+}
+
+/* Ensure the loading screen disappears after animation */
+.loading-screen[style*="visibility: hidden"] {
+  display: none !important;
+}
+
+/* Blog-style Grid Utilities */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Post Grid Hover Effects */
+.post-grid:hover .post-grid-thumbnail img {
+  transform: scale(1.05);
+}
+
+.post-grid {
+  transition: all 0.3s ease;
+}
+
+.post-grid:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}

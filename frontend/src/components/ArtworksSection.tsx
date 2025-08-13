@@ -1,121 +1,79 @@
-"use client";
 import { HomePageInterface } from "@/components/MainPage";
 
 export default function ArtworksSection({ t }: HomePageInterface) {
-  const artworks = [
-    {
-      id: 1,
-      title: "星际漫游概念图",
-      category: "科幻 / 场景设计",
-      description: "未来宇宙飞船与行星景观的概念设计，融合科技与幻想元素",
-      date: "2023.05",
-      hoverColor: "rgba(236,72,153,0.3)"
-    },
-    {
-      id: 2,
-      title: "虚拟歌姬 - 星梦",
-      category: "角色设计 / 二次元",
-      description: "原创虚拟歌姬角色设计，融合未来科技感与日系二次元风格",
-      date: "2023.03",
-      hoverColor: "rgba(139,92,246,0.3)"
-    },
-    {
-      id: 3,
-      title: "赛博朋克城市夜景",
-      category: "场景插画 / 科幻",
-      description: "未来都市夜景插画，霓虹灯光与雨夜街道的氛围营造",
-      date: "2023.01",
-      hoverColor: "rgba(59,130,246,0.3)"
-    },
-    {
-      id: 4,
-      title: "幻想森林精灵",
-      category: "角色插画 / 奇幻",
-      description: "森林精灵角色插画，融合自然元素与梦幻色彩",
-      date: "2022.12",
-      hoverColor: "rgba(245,158,11,0.3)"
-    },
-    {
-      id: 5,
-      title: "机械少女",
-      category: "角色设计 / 机械朋克",
-      description: "融合机械元素与少女形象的角色设计，展现力量与美感",
-      date: "2022.10",
-      hoverColor: "rgba(16,185,129,0.3)"
-    },
-    {
-      id: 6,
-      title: "未来都市街景",
-      category: "场景插画 / 未来主义",
-      description: "未来都市的日常生活场景插画，展现科技与人文的融合",
-      date: "2022.09",
-      hoverColor: "rgba(239,68,68,0.3)"
-    }
-  ];
-
   return (
-    <section id="artworks" className="py-20 bg-gradient-to-b from-black to-gray-900 text-white">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-[clamp(1.8rem,5vw,3rem)] font-bold font-orbitron mb-4">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500">绘画作品展示</span>
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto mb-6"></div>
-          <p className="text-gray-400 max-w-2xl mx-auto">精选二次元风格绘画作品，展现独特的艺术视觉魅力</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {artworks.map((artwork) => {
-            const getHoverColorClass = (color: string) => {
-              switch (color) {
-                case 'rgba(236,72,153,0.3)':
-                  return 'hover:shadow-[0_0_20px_rgba(236,72,153,0.3)]';
-                case 'rgba(139,92,246,0.3)':
-                  return 'hover:shadow-[0_0_20px_rgba(139,92,246,0.3)]';
-                case 'rgba(59,130,246,0.3)':
-                  return 'hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]';
-                case 'rgba(245,158,11,0.3)':
-                  return 'hover:shadow-[0_0_20px_rgba(245,158,11,0.3)]';
-                case 'rgba(16,185,129,0.3)':
-                  return 'hover:shadow-[0_0_20px_rgba(16,185,129,0.3)]';
-                case 'rgba(239,68,68,0.3)':
-                  return 'hover:shadow-[0_0_20px_rgba(239,68,68,0.3)]';
-                default:
-                  return 'hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]';
-              }
-            };
-            
-            return (
-            <div 
-              key={artwork.id}
-              className={`artwork-card group relative rounded-xl overflow-hidden bg-gray-800/50 backdrop-blur-sm border border-white/10 transform transition-all duration-500 hover:-translate-y-2 ${getHoverColorClass(artwork.hoverColor)}`}
-            >
-              <div className="aspect-[4/3] overflow-hidden">
-                <img 
-                  src="https://www.dmoe.cc/random.php" 
-                  alt={artwork.title} 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                />
+    <section className="overflow-x-hidden bg-white text-black">
+      <div className="container mx-auto">
+        <div className="grid grid-cols-12 md:grid-cols-none gap-x-8">
+          {/* Text Content - Left Side */}
+          <div className="col-start-1 col-end-5 py-24 xl:col-end-6 md:col-auto md:pb-0 md:pt-16">
+            <div className="w-fit rounded-md py-1 px-3 text-xs font-medium uppercase leading-none tracking-wider text-gray-600 bg-gray-100">
+              Artwork
+            </div>
+            <h2 className="mt-4 text-8xl font-light leading-none xl:text-7xl md:text-6xl sm:text-5xl relative">
+              <span className="text-black relative">
+                绘画作品
+                <span className="absolute inset-0 text-blue-500 -z-10 translate-x-2 translate-y-2 opacity-30">绘画作品</span>
+              </span><br />展示
+            </h2>
+            <p className="mr-12 mt-8 text-lg leading-relaxed xl:mr-0 xl:text-base md:mt-6 md:max-w-xl">
+              精选二次元风格绘画作品，融合传统艺术与现代数字创作技术，展现独特的艺术视觉魅力和创意表达。
+            </p>
+            <div className="mt-8 space-y-4 xl:mt-6 md:mt-4">
+              <div className="flex items-center">
+                <div className="w-2 h-2 bg-black rounded-full mr-3"></div>
+                <span className="text-gray-700">角色设计与概念艺术</span>
               </div>
-              <div className="p-5">
-                <h3 className="text-xl font-bold mb-1 text-white group-hover:text-pink-400 transition-colors duration-300">
-                  {artwork.title}
-                </h3>
-                <p className="text-gray-400 text-sm mb-3">{artwork.category}</p>
-                <p className="text-gray-300 text-sm mb-4">{artwork.description}</p>
-                <div className="flex justify-between items-center">
-                  <span className="text-xs text-gray-500">创作于 {artwork.date}</span>
-                  <a 
-                    href="#" 
-                    className="text-pink-400 hover:text-pink-300 text-sm transition-colors duration-300"
-                  >
-                    查看详情
-                  </a>
-                </div>
+              <div className="flex items-center">
+                <div className="w-2 h-2 bg-black rounded-full mr-3"></div>
+                <span className="text-gray-700">场景插画与环境设计</span>
+              </div>
+              <div className="flex items-center">
+                <div className="w-2 h-2 bg-black rounded-full mr-3"></div>
+                <span className="text-gray-700">数字绘画与传统艺术</span>
               </div>
             </div>
-            );
-          })}
+            <a className="inline-flex items-center justify-center px-6 py-3 bg-black text-white font-medium transition-colors duration-200 hover:bg-gray-800 mt-8 xl:mt-6 md:mt-4" href="#">
+              查看作品集
+              <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+          
+          {/* Images - Right Side */}
+          <div className="col-start-5 col-end-13 py-12 xl:col-start-6 md:col-auto md:-mx-7 md:py-8 sm:-mx-4">
+            <div className="grid grid-cols-2 gap-4 md:gap-3">
+              <div className="space-y-4 md:space-y-3">
+                <img 
+                  alt="绘画作品1" 
+                  loading="lazy" 
+                  className="w-full rounded-lg object-cover aspect-[4/5]" 
+                  src="https://www.dmoe.cc/random.php?1" 
+                />
+                <img 
+                  alt="绘画作品2" 
+                  loading="lazy" 
+                  className="w-full rounded-lg object-cover aspect-[4/3]" 
+                  src="https://www.dmoe.cc/random.php?2" 
+                />
+              </div>
+              <div className="space-y-4 pt-8 md:space-y-3 md:pt-6">
+                <img 
+                  alt="绘画作品3" 
+                  loading="lazy" 
+                  className="w-full rounded-lg object-cover aspect-[4/3]" 
+                  src="https://www.dmoe.cc/random.php?3" 
+                />
+                <img 
+                  alt="绘画作品4" 
+                  loading="lazy" 
+                  className="w-full rounded-lg object-cover aspect-[4/5]" 
+                  src="https://www.dmoe.cc/random.php?4" 
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

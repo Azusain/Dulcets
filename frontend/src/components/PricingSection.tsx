@@ -1,148 +1,128 @@
-"use client";
 import { HomePageInterface } from "@/components/MainPage";
 
 export default function PricingSection({ t }: HomePageInterface) {
   return (
-    <section id="pricing" className="py-20 bg-black text-white">
-      <div className="container mx-auto px-6">
+    <section id="pricing" className="bg-white py-20">
+      <div className="max-w-4xl mx-auto px-8">
+        {/* Simple Header */}
         <div className="text-center mb-16">
-          <h2 className="text-[clamp(1.8rem,5vw,3rem)] font-bold font-orbitron mb-4">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-yellow-500">服务价位</span>
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-yellow-500 mx-auto mb-6"></div>
-          <p className="text-gray-400 max-w-2xl mx-auto">透明合理的价格体系，满足不同音乐制作需求</p>
+          <h2 className="text-4xl font-light mb-6 text-black tracking-wide">料金表</h2>
+          <div className="w-20 h-px bg-gray-300 mx-auto mb-8"></div>
+          <p className="text-base text-gray-600 leading-relaxed">
+            音楽制作の各種サービス料金をご案内いたします
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {/* Basic Plan */}
-          <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 transform transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)]">
-            <div className="p-6 border-b border-white/10">
-              <h3 className="text-xl font-bold text-white mb-2">基础制作</h3>
-              <div className="text-3xl font-bold text-white">¥8,800<span className="text-sm font-normal text-gray-400">/首</span></div>
-            </div>
-            <div className="p-6">
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-start">
-                  <svg className="w-5 h-5 text-purple-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-300">3小时录音时间</span>
-                </li>
-                <li className="flex items-start">
-                  <svg className="w-5 h-5 text-purple-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-300">基础混音与母带处理</span>
-                </li>
-                <li className="flex items-start">
-                  <svg className="w-5 h-5 text-purple-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-300">1名录音师服务</span>
-                </li>
-                <li className="flex items-start text-gray-500">
-                  <svg className="w-5 h-5 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-                  </svg>
-                  <span>乐手与歌手指导</span>
-                </li>
-                <li className="flex items-start text-gray-500">
-                  <svg className="w-5 h-5 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-                  </svg>
-                  <span>著作权让渡</span>
-                </li>
-              </ul>
-              <a href="#" className="block w-full py-3 bg-purple-600/80 hover:bg-purple-500 transition-colors duration-300 rounded-lg text-center font-medium">选择此方案</a>
+        {/* Clean Table-Style Layout */}
+        <div className="space-y-12">
+          
+          {/* Vocal Mix & Mastering */}
+          <div className="">
+            <h3 className="text-2xl font-light text-black mb-6 pb-2 border-b border-gray-200">歌ってみた Mix & Mastering</h3>
+            <div className="space-y-4">
+              <div className="flex justify-between items-center py-3">
+                <span className="text-gray-700">ワンコーラス</span>
+                <span className="font-medium text-black">￥8,000</span>
+              </div>
+              <div className="flex justify-between items-center py-3 border-b border-gray-100">
+                <span className="text-gray-700">フルコーラス</span>
+                <span className="font-medium text-black">￥12,000</span>
+              </div>
+              <div className="pt-4">
+                <p className="text-sm text-gray-600 mb-3">オプション: Vocal Tuning & Timing</p>
+                <div className="pl-4 space-y-2">
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-gray-500">ワンコーラス</span>
+                    <span className="text-gray-700">+￥5,000</span>
+                  </div>
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-gray-500">フルコーラス</span>
+                    <span className="text-gray-700">+￥7,000</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Professional Plan (Featured) */}
-          <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-purple-500 transform transition-all duration-500 hover:-translate-y-4 hover:shadow-[0_0_30px_rgba(139,92,246,0.5)] relative">
-            <div className="absolute top-0 right-0 bg-purple-500 text-white text-xs font-bold px-3 py-1">推荐</div>
-            <div className="p-6 border-b border-white/10">
-              <h3 className="text-xl font-bold text-white mb-2">专业制作</h3>
-              <div className="text-3xl font-bold text-white">¥18,800<span className="text-sm font-normal text-gray-400">/首</span></div>
-            </div>
-            <div className="p-6">
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-start">
-                  <svg className="w-5 h-5 text-purple-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-300">8小时录音时间</span>
-                </li>
-                <li className="flex items-start">
-                  <svg className="w-5 h-5 text-purple-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-300">高级混音与母带处理</span>
-                </li>
-                <li className="flex items-start">
-                  <svg className="w-5 h-5 text-purple-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-300">1名录音师+1名制作人</span>
-                </li>
-                <li className="flex items-start">
-                  <svg className="w-5 h-5 text-purple-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-300">基础乐手与歌手指导</span>
-                </li>
-                <li className="flex items-start text-gray-500">
-                  <svg className="w-5 h-5 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-                  </svg>
-                  <span>著作权让渡</span>
-                </li>
-              </ul>
-              <a href="#" className="block w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-90 transition-opacity duration-300 rounded-lg text-center font-medium">选择此方案</a>
+          {/* Mix & Mastering */}
+          <div className="">
+            <h3 className="text-2xl font-light text-black mb-6 pb-2 border-b border-gray-200">Mix & Mastering</h3>
+            <div className="space-y-4">
+              <div className="flex justify-between items-center py-3">
+                <span className="text-gray-700">1～20 tracks</span>
+                <span className="font-medium text-black">￥30,000</span>
+              </div>
+              <div className="flex justify-between items-center py-3">
+                <span className="text-gray-700">21～40 tracks</span>
+                <span className="font-medium text-black">￥35,000</span>
+              </div>
+              <div className="flex justify-between items-center py-3 border-b border-gray-100">
+                <span className="text-gray-700">40 tracks 以上</span>
+                <span className="font-medium text-black">+￥500 / track</span>
+              </div>
+              <div className="pt-4">
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-gray-600">Vocal Tuning & Timing</span>
+                    <span className="text-gray-700">+￥7,000</span>
+                  </div>
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-gray-600">Mastering のみ</span>
+                    <span className="text-gray-700">￥6,000 / track</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Premium Plan */}
-          <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 transform transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)]">
-            <div className="p-6 border-b border-white/10">
-              <h3 className="text-xl font-bold text-white mb-2">全能制作</h3>
-              <div className="text-3xl font-bold text-white">¥38,800<span className="text-sm font-normal text-gray-400">/首</span></div>
-            </div>
-            <div className="p-6">
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-start">
-                  <svg className="w-5 h-5 text-purple-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-300">无限录音时间</span>
-                </li>
-                <li className="flex items-start">
-                  <svg className="w-5 h-5 text-purple-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-300">顶级混音与母带处理</span>
-                </li>
-                <li className="flex items-start">
-                  <svg className="w-5 h-5 text-purple-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-300">全套制作团队服务</span>
-                </li>
-                <li className="flex items-start">
-                  <svg className="w-5 h-5 text-purple-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-300">专业乐手与歌手指导</span>
-                </li>
-                <li className="flex items-start">
-                  <svg className="w-5 h-5 text-purple-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span className="text-gray-300">完整著作权让渡</span>
-                </li>
-              </ul>
-              <a href="#" className="block w-full py-3 bg-purple-600/80 hover:bg-purple-500 transition-colors duration-300 rounded-lg text-center font-medium">选择此方案</a>
+          {/* BGM & Original */}
+          <div className="">
+            <h3 className="text-2xl font-light text-black mb-6 pb-2 border-b border-gray-200">楽曲制作</h3>
+            <div className="space-y-6">
+              <div className="">
+                <div className="flex justify-between items-center py-3">
+                  <span className="text-gray-700">Intro/BGM アレンジ</span>
+                  <span className="font-medium text-black">￥50,000 - ￥120,000</span>
+                </div>
+                <p className="text-sm text-gray-500 pl-0 mt-1">1:30 BGM トラック、Mix、Mastering 込み</p>
+              </div>
+              
+              <div className="border-t border-gray-100 pt-6">
+                <div className="flex justify-between items-center py-3">
+                  <span className="text-gray-700">オリジナルアレンジ</span>
+                  <span className="font-medium text-black">￥70,000～</span>
+                </div>
+                <p className="text-sm text-gray-500 pl-0 mt-1">TV サイズ カスタムカバー楽曲インスト</p>
+              </div>
+              
+              <div className="border-t border-gray-100 pt-6">
+                <div className="flex justify-between items-center py-3">
+                  <span className="text-gray-700">オリジナル楽曲</span>
+                  <span className="font-medium text-black">￥150,000～</span>
+                </div>
+                <p className="text-sm text-gray-500 pl-0 mt-1">メロディ・歌詞制作込み</p>
+              </div>
             </div>
           </div>
+
+          {/* Genres */}
+          <div className="text-center pt-8 border-t border-gray-200">
+            <p className="text-sm text-gray-600">対応ジャンル: J-Pop・J-Rock・アニメソング・BGM など</p>
+          </div>
+
+        </div>
+
+        {/* Simple Contact */}
+        <div className="text-center mt-16">
+          <a 
+            href="#contact" 
+            className="inline-flex items-center px-8 py-3 text-black border border-gray-300 hover:bg-gray-50 transition-colors duration-200 font-light tracking-wide"
+          >
+            お見積もり依頼
+            <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
         </div>
       </div>
     </section>

@@ -9,13 +9,26 @@
   },
   "about": {
     "title": "关于我们",
-    "story_title": "我们的故事",
-    "story_p1": "Dulcets成立于2023年，是一家专注于二次元音乐创作与虚拟艺人培养的创新型音乐公司。我们致力于打破传统音乐边界，将科技与艺术完美融合，打造独特的音乐体验。",
-    "story_p2": "我们相信音乐是连接现实与虚拟世界的桥梁，通过先进的技术和富有创意的团队，我们正在构建一个全新的音乐宇宙。",
+    "content": "我们致力于制作独特而迷人的日本动漫歌曲、J-pop、J-Rock和背景音乐（BGM）。无论是令人兴奋的主题曲还是打动人心的插入曲，我们的团队都会精心打磨每一个音符。我们的作曲家、编曲家和混音工程师不仅在这些音乐风格方面是专家，而且对细节也有着敏锐的洞察力。我们相信每个客户都有独特的音乐需求，因此我们会量身定制每一部作品，使其完美契合您的项目并超越您的期望。让我们一起将您的音乐想象变为现实。",
+    "genres": {
+      "anime_song": {
+        "title": "ANIME SONG",
+        "subtitle": "アニメソング"
+      },
+      "jrock": {
+        "title": "J-ROCK"
+      },
+      "jpop": {
+        "title": "J-POP"
+      },
+      "bgm": {
+        "title": "BGM"
+      }
+    },
     "stats": {
-      "artists": "虚拟艺人",
-      "releases": "音乐作品",
-      "fans": "粉丝数量"
+      "artists": "アーティスト",
+      "releases": "リリース",
+      "fans": "ファン"
     }
   },
   "releases": {
@@ -27,14 +40,105 @@
   "music_production.services.recording.title": "制作与录音",
   "music_production.services.recording.feature1": "专业级录音设备与声学处理空间",
   "nav": {
+    "home": "首页",
     "about": "关于我们",
     "releases": "音乐发布"
+  },
+  "works": {
+    "title": "我们的作品",
+    "read_more": "阅读更多"
+  },
+  "pricing": {
+    "title": "服务价位",
+    "desc": "透明合理的价格体系，满足不同音乐制作需求",
+    "basic": {
+      "title": "基础制作",
+      "price": "￥8,800",
+      "per_unit": "/首",
+      "features": [
+        "3小时录音时间",
+        "基础混音与母带处理",
+        "1名录音师服务",
+        "乐手与歌手指导",
+        "著作权让渡"
+      ]
+    },
+    "professional": {
+      "title": "专业制作",
+      "price": "￥18,800",
+      "per_unit": "/首",
+      "badge": "推荐",
+      "features": [
+        "8小时录音时间",
+        "高级混音与母带处理",
+        "1名录音师+1名制作人",
+        "基础乐手与歌手指导",
+        "著作权让渡"
+      ]
+    },
+    "premium": {
+      "title": "全能制作",
+      "price": "￥38,800",
+      "per_unit": "/首",
+      "features": [
+        "无限录音时间",
+        "顶级混音与母带处理",
+        "全套制作团队服务",
+        "专业乐手与歌手指导",
+        "完整著作权让渡"
+      ]
+    },
+    "select_plan": "选择此方案"
+  },
+  "artworks": {
+    "title": "绘画作品展示",
+    "desc": "精选二次元风格绘画作品，展现独特的艺术视觉魅力",
+    "view_details": "查看详情",
+    "created_on": "创作于"
+  },
+  "modeling": {
+    "title": "3D建模服务",
+    "desc": "专业的3D建模团队，打造高质量虚拟角色与场景",
+    "character_modeling": {
+      "title": "虚拟角色建模",
+      "desc": "从概念设计到完整的 3D 模型，我们提供高质量虚拟角色建模服务，可用于动画、游戏和虚拟偶像直播。",
+      "features": [
+        "高精度角色建模与纹理",
+        "骨骼绑定与动画设置",
+        "实时渲染优化"
+      ]
+    },
+    "scene_modeling": {
+      "title": "场景与道具建模",
+      "desc": "打造沉浸式虚拟场景与道具，为音乐MV、游戏和虚拟演出提供高质量3D环境资产。",
+      "features": [
+        "环境场景设计与建模",
+        "高精度道具建模",
+        "光照与材质设置"
+      ]
+    },
+    "learn_more": "了解更多"
+  },
+  "music_production_services": {
+    "title": "乐手与歌手准备",
+    "features": [
+      "专业乐手团队，涵盖各类乐器",
+      "歌手声乐指导与情感表达训练",
+      "个性化编曲与和声设计"
+    ]
   },
   "footer": {
     "company_desc": "探索二次元与科技融合的音乐世界，感受未来音乐的无限可能",
     "quick_links": "快速链接",
+    "services": "服务",
+    "music_production": "音乐制作",
+    "mixing_mastering": "混音和母带处理",
+    "artwork_design": "艺术作品设计",
+    "pricing": "价格表",
+    "artworks": "绘画作品",
+    "modeling": "3D建模",
     "contact_us": "联系我们",
-    "address": "東京都豊島区駒込3－1－3　エコプレイス駒込Ａ－２１６",
+    "address": "（东京都豊島区驹込3－1－3　エコプレイス驹込Ａ－２１６",
     "email": "Dulcets.info@gmail.com",
     "subscribe_title": "订阅更新",
     "subscribe_desc": "订阅我们的 newsletter，获取最新的音乐和活动信息",

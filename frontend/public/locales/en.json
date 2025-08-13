@@ -9,13 +9,54 @@
   },
   "about": {
     "title": "About Us",
-    "story_title": "Our Story",
-    "story_p1": "Dulcets was founded in 2023, an innovative music company specializing in 2D music creation and virtual artist development. We are dedicated to breaking traditional music boundaries, perfectly fusing technology with art to create unique musical experiences.",
-    "story_p2": "We believe music is the bridge connecting reality and virtual worlds. Through advanced technology and our creative team, we are building an entirely new musical universe.",
+    "content": "We are dedicated to crafting unique and captivating Japanese anime songs, J-pop, J-Rock, and background music (BGM). Whether it's an exhilarating theme song or a heart-touching insert track, our team meticulously refines every note. Our composers, arrangers, and mixing engineers are not only experts in these musical styles but also have a keen eye for detail. We believe that each client has distinct musical needs, so we tailor each piece to perfectly fit your project and exceed your expectations. Let's bring your musical vision to life together.",
+    "genres": {
+      "anime_song": {
+        "title": "ANIME SONG",
+        "subtitle": "アニメソング"
+      },
+      "jrock": {
+        "title": "J-ROCK"
+      },
+      "jpop": {
+        "title": "J-POP"
+      },
+      "bgm": {
+        "title": "BGM"
+      }
+    },
     "stats": {
-      "artists": "Virtual Artists",
-      "releases": "Music Works",
-      "fans": "Fans"
+      "artists": "アーティスト",
+      "releases": "リリース",
+      "fans": "ファン"
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "We provide a full range of music services, from production to marketing, to help you succeed.",
+    "music": {
+      "title": "Music Production",
+      "description": "High-quality music production, including composing, arranging, and recording."
+    },
+    "artist": {
+      "title": "Artist Management",
+      "description": "Comprehensive artist management services to help you grow your career."
+    },
+    "production": {
+      "title": "Sound Production",
+      "description": "Professional sound production, including mixing, mastering, and sound effects."
+    },
+    "distribution": {
+      "title": "Music Distribution",
+      "description": "Global music distribution to all major platforms, including Spotify, Apple Music, and more."
+    },
+    "marketing": {
+      "title": "Music Marketing",
+      "description": "Customized music marketing campaigns to help you reach your target audience."
+    },
+    "events": {
+      "title": "Event Planning",
+      "description": "Professional event planning services, including concerts, fan meetings, and more."
     }
   },
   "releases": {
@@ -27,12 +68,103 @@
   "music_production.services.recording.title": "Production & Recording",
   "music_production.services.recording.feature1": "Professional recording equipment and acoustic processing space",
   "nav": {
+    "home": "Home",
     "about": "About Us",
     "releases": "Music Releases"
+  },
+  "works": {
+    "title": "Our Works",
+    "read_more": "Read More"
+  },
+  "pricing": {
+    "title": "Service Pricing",
+    "desc": "Transparent and reasonable pricing system to meet different music production needs",
+    "basic": {
+      "title": "Basic Production",
+      "price": "$1,200",
+      "per_unit": "/track",
+      "features": [
+        "3 hours recording time",
+        "Basic mixing and mastering",
+        "1 sound engineer service",
+        "Musicians and vocal coaching",
+        "Copyright transfer"
+      ]
+    },
+    "professional": {
+      "title": "Professional Production",
+      "price": "$2,500",
+      "per_unit": "/track",
+      "badge": "Recommended",
+      "features": [
+        "8 hours recording time",
+        "Advanced mixing and mastering",
+        "1 sound engineer + 1 producer",
+        "Basic musicians and vocal coaching",
+        "Copyright transfer"
+      ]
+    },
+    "premium": {
+      "title": "Complete Production",
+      "price": "$5,200",
+      "per_unit": "/track",
+      "features": [
+        "Unlimited recording time",
+        "Premium mixing and mastering",
+        "Full production team service",
+        "Professional musicians and vocal coaching",
+        "Complete copyright transfer"
+      ]
+    },
+    "select_plan": "Select This Plan"
+  },
+  "artworks": {
+    "title": "Artwork Gallery",
+    "desc": "Selected 2D style artwork showcasing unique artistic visual appeal",
+    "view_details": "View Details",
+    "created_on": "Created on"
+  },
+  "modeling": {
+    "title": "3D Modeling Services",
+    "desc": "Professional 3D modeling team creating high-quality virtual characters and scenes",
+    "character_modeling": {
+      "title": "Virtual Character Modeling",
+      "desc": "From concept design to complete 3D models, we provide high-quality virtual character modeling services for animation, games, and virtual idol streaming.",
+      "features": [
+        "High-precision character modeling and textures",
+        "Rigging and animation setup",
+        "Real-time rendering optimization"
+      ]
+    },
+    "scene_modeling": {
+      "title": "Scene and Prop Modeling",
+      "desc": "Creating immersive virtual scenes and props, providing high-quality 3D environment assets for music MVs, games, and virtual performances.",
+      "features": [
+        "Environment scene design and modeling",
+        "High-precision prop modeling",
+        "Lighting and material setup"
+      ]
+    },
+    "learn_more": "Learn More"
+  },
+  "music_production_services": {
+    "title": "Musicians & Singers",
+    "features": [
+      "Professional musician team covering various instruments",
+      "Vocal coaching and emotional expression training",
+      "Personalized arrangement and harmony design"
+    ]
   },
   "footer": {
     "company_desc": "Explore the fusion of 2D and technology in the music world, feel the infinite possibilities of future music",
     "quick_links": "Quick Links",
+    "services": "Services",
+    "music_production": "Music Production",
+    "mixing_mastering": "Mixing & Mastering",
+    "artwork_design": "Artwork Design",
+    "pricing": "Pricing",
+    "artworks": "Artworks",
+    "modeling": "3D Modeling",
     "contact_us": "Contact Us",
     "address": "3-1-3 Komagome, Toshima-ku, Tokyo, Eco Place Komagome A-216",
     "email": "Dulcets.info@gmail.com",
