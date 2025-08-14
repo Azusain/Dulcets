@@ -1,11 +1,14 @@
 import type { NextConfig } from "next";
 
+// Only use basePath for production builds (GitHub Pages)
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig: NextConfig = {
   output: "export",
-  // Set base path for GitHub Pages (repository name)
-  basePath: '/Dulcets',
-  // Ensure assets work correctly
-  assetPrefix: '/Dulcets',
+  // Set base path for GitHub Pages only in production
+  basePath: isProd ? '/Dulcets' : '',
+  // Ensure assets work correctly in production
+  assetPrefix: isProd ? '/Dulcets' : '',
   // Disable image optimization for static export
   images: {
     unoptimized: true,
