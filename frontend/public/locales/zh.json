@@ -127,6 +127,41 @@
       "个性化编曲与和声设计"
     ]
   },
+  "pricing_page": {
+    "title": "详细价格表",
+    "subtitle": "我们为各种音乐制作服务提供详细的价格信息",
+    "back_to_home": "返回主页",
+    "vocal_mix_mastering": {
+      "title": "人声混音与母带处理",
+      "one_chorus": "一段副歌",
+      "full_chorus": "完整歌曲",
+      "options": "选项: 人声调整与时间修正"
+    },
+    "mix_mastering": {
+      "title": "混音与母带处理",
+      "tracks_1_20": "1-20 轨道",
+      "tracks_21_40": "21-40 轨道",
+      "tracks_40_plus": "40+ 轨道",
+      "vocal_tuning": "人声调整与时间修正",
+      "mastering_only": "仅母带处理"
+    },
+    "music_production": {
+      "title": "音乐制作",
+      "intro_bgm": "Intro/BGM 编排",
+      "intro_bgm_desc": "1:30 BGM 曲目，包含混音与母带处理",
+      "original_arrangement": "原创编排",
+      "original_arrangement_desc": "TV 版定制翻唱伴奏",
+      "original_song": "原创歌曲",
+      "original_song_desc": "包含旋律与歌词创作"
+    },
+    "genres": "支持类型: J-Pop、J-Rock、动漫歌曲、BGM 等",
+    "contact": {
+      "title": "报价与咨询",
+      "subtitle": "请告诉我们您的项目详情。我们将为您提供最佳方案。",
+      "email_consultation": "邮件咨询",
+      "chat_consultation": "聊天咨询"
+    }
+  },
   "footer": {
     "company_desc": "探索二次元与科技融合的音乐世界，感受未来音乐的无限可能",
     "quick_links": "快速链接",

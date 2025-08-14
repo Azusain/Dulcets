@@ -157,6 +157,41 @@
       "個人化されたアレンジとハーモニーデザイン"
     ]
   },
+  "pricing_page": {
+    "title": "詳細料金表",
+    "subtitle": "音楽制作の各種サービス料金を詳しくご案内いたします",
+    "back_to_home": "ホームに戻る",
+    "vocal_mix_mastering": {
+      "title": "歌ってみた Mix & Mastering",
+      "one_chorus": "ワンコーラス",
+      "full_chorus": "フルコーラス",
+      "options": "オプション: Vocal Tuning & Timing"
+    },
+    "mix_mastering": {
+      "title": "Mix & Mastering",
+      "tracks_1_20": "1～20 tracks",
+      "tracks_21_40": "21～40 tracks",
+      "tracks_40_plus": "40 tracks 以上",
+      "vocal_tuning": "Vocal Tuning & Timing",
+      "mastering_only": "Mastering のみ"
+    },
+    "music_production": {
+      "title": "楽曲制作",
+      "intro_bgm": "Intro/BGM アレンジ",
+      "intro_bgm_desc": "1:30 BGM トラック、Mix、Mastering 込み",
+      "original_arrangement": "オリジナルアレンジ",
+      "original_arrangement_desc": "TV サイズ カスタムカバー楽曲インスト",
+      "original_song": "オリジナル楽曲",
+      "original_song_desc": "メロディ・歌詞制作込み"
+    },
+    "genres": "対応ジャンル: J-Pop・J-Rock・アニメソング・BGM など",
+    "contact": {
+      "title": "お見積もり・ご相談",
+      "subtitle": "プロジェクトの詳細をお聞かせください。最適なプランをご提案いたします。",
+      "email_consultation": "メールで相談",
+      "chat_consultation": "チャットで相談"
+    }
+  },
   "footer": {
     "company_desc": "二次元と技術の融合した音楽世界を探索し、未来音楽の無限の可能性を感じる",
     "quick_links": "クイックリンク",

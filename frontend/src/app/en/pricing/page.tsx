@@ -1,10 +1,10 @@
 import PricingSection from "@/components/PricingSection";
-import jp from "../../../public/locales/jp.json";
+import en from "../../../../public/locales/en.json";
 
-export default function PricingPage() {
+export default function EnPricingPage() {
   const t = (key: string) => {
     const keys = key.split('.');
-    let value: any = jp;
+    let value: any = en;
     for (const k of keys) {
       value = value?.[k];
     }
@@ -27,7 +27,7 @@ export default function PricingPage() {
           </p>
           <div className="mt-8">
             <a 
-              href="/"
+              href="/en"
               className="inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors"
             >
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

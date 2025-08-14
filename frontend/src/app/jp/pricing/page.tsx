@@ -1,7 +1,7 @@
 import PricingSection from "@/components/PricingSection";
-import jp from "../../../public/locales/jp.json";
+import jp from "../../../../public/locales/jp.json";
 
-export default function PricingPage() {
+export default function JpPricingPage() {
   const t = (key: string) => {
     const keys = key.split('.');
     let value: any = jp;
@@ -27,7 +27,7 @@ export default function PricingPage() {
           </p>
           <div className="mt-8">
             <a 
-              href="/"
+              href="/jp"
               className="inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors"
             >
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

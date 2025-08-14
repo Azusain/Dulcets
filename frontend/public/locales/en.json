@@ -157,6 +157,41 @@
       "Personalized arrangement and harmony design"
     ]
   },
+  "pricing_page": {
+    "title": "Detailed Pricing",
+    "subtitle": "We provide detailed pricing information for various music production services",
+    "back_to_home": "Back to Home",
+    "vocal_mix_mastering": {
+      "title": "Vocal Mix & Mastering",
+      "one_chorus": "One Chorus",
+      "full_chorus": "Full Chorus",
+      "options": "Options: Vocal Tuning & Timing"
+    },
+    "mix_mastering": {
+      "title": "Mix & Mastering",
+      "tracks_1_20": "1-20 tracks",
+      "tracks_21_40": "21-40 tracks",
+      "tracks_40_plus": "40+ tracks",
+      "vocal_tuning": "Vocal Tuning & Timing",
+      "mastering_only": "Mastering only"
+    },
+    "music_production": {
+      "title": "Music Production",
+      "intro_bgm": "Intro/BGM Arrangement",
+      "intro_bgm_desc": "1:30 BGM track, including Mix & Mastering",
+      "original_arrangement": "Original Arrangement",
+      "original_arrangement_desc": "TV size custom cover instrumental",
+      "original_song": "Original Song",
+      "original_song_desc": "Including melody and lyrics creation"
+    },
+    "genres": "Supported genres: J-Pop, J-Rock, Anime Songs, BGM, etc.",
+    "contact": {
+      "title": "Quote & Consultation",
+      "subtitle": "Please tell us about your project details. We will propose the best plan for you.",
+      "email_consultation": "Email Consultation",
+      "chat_consultation": "Chat Consultation"
+    }
+  },
   "footer": {
     "company_desc": "Explore the fusion of 2D and technology in the music world, feel the infinite possibilities of future music",
     "quick_links": "Quick Links",
