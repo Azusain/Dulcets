@@ -1,39 +1,29 @@
 "use client";
 
-import { useAssetPath } from "@/hooks/useAssetPath";
 import { useEffect, useState } from "react";
 
 export default function VideoBackground() {
-  const { getAssetPath } = useAssetPath();
   const [videoSources, setVideoSources] = useState({
     mp4: "/videos/hero-background.mp4",
     webm: "/videos/hero-background.webm"
   });
   
   useEffect(() => {
-    // Direct detection as backup
+    // Direct detection - no hooks, no dependencies
     const isGitHubPages = typeof window !== 'undefined' && window.location.hostname.includes('github.io');
-    const directBasePath = isGitHubPages ? '/Dulcets' : '';
+    const basePath = isGitHubPages ? '/Dulcets' : '';
     
     const sources = {
-      mp4: getAssetPath("/videos/hero-background.mp4"),
-      webm: getAssetPath("/videos/hero-background.webm")
+      mp4: `${basePath}/videos/hero-background.mp4`,
+      webm: `${basePath}/videos/hero-background.webm`
     };
     
-    // Double-check with direct method
-    const backupSources = {
-      mp4: `${directBasePath}/videos/hero-background.mp4`,
-      webm: `${directBasePath}/videos/hero-background.webm`
-    };
+    console.log('VideoBackground - GitHub Pages:', isGitHubPages);
+    console.log('VideoBackground - Base path:', basePath);
+    console.log('VideoBackground - Final sources:', sources);
     
-    console.log('VideoBackground sources comparison:');
-    console.log('Hook method:', sources);
-    console.log('Direct method:', backupSources);
-    
-    // Use direct method for now to ensure it works
-    console.log('Using DIRECT method for guaranteed GitHub Pages compatibility');
-    setVideoSources(backupSources);
-  }, [getAssetPath]);
+    setVideoSources(sources);
+  }, []); // Only run once on mount
 
   return (
     <>
