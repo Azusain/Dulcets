@@ -1,112 +1,238 @@
-"use client";
+'use client';
 
-import { ImageLightbox, useLightbox } from './ImageLightbox';
+import React, { useState } from 'react';
+import Lightbox from 'yet-another-react-lightbox';
+import 'yet-another-react-lightbox/styles.css';
+import '../styles/lightbox.css';
 
-// Clean Polaroid component - no text, just image
-const PolaroidPhoto = ({ src, alt, className, style, delay = 0, onClick }: {
-  src: string;
-  alt: string;
-  className?: string;
-  style?: React.CSSProperties;
-  delay?: number;
-  onClick: () => void;
-}) => {
+interface Artwork {
+  id: number;
+  title: string;
+  image: string;
+}
+
+const artworks: Artwork[] = [
+  { id: 1, title: '绘画作品 1', image: '/images/artworks/artwork1.jpg' },
+  { id: 2, title: '绘画作品 2', image: '/images/artworks/artwork2.jpg' },
+  { id: 3, title: '绘画作品 3', image: '/images/artworks/artwork3.jpg' },
+  { id: 4, title: '绘画作品 4', image: '/images/artworks/artwork4.jpg' },
+  { id: 5, title: '绘画作品 5', image: '/images/artworks/artwork5.jpg' },
+  { id: 6, title: '绘画作品 6', image: '/images/artworks/artwork6.jpg' },
+  { id: 7, title: '绘画作品 7', image: '/images/artworks/artwork7.jpg' },
+  { id: 8, title: '绘画作品 8', image: '/images/artworks/artwork8.jpg' },
+];
+
+const PolaroidPhoto = ({ artwork, onClick, index }: { artwork: Artwork; onClick: () => void; index: number }) => {
+  const rotations = [-8, 5, -3, 12, -5, 8, -10, 3];
+  
   return (
-    <div 
-      className={`polaroid-photo group cursor-pointer ${className}`} 
+    <div
+      className="polaroid-photo"
       style={{
-        ...style,
-        animationDelay: `${delay}ms`
+        transform: `rotate(${rotations[index % rotations.length]}deg)`,
+        animationDelay: `${index * 0.1}s`,
       }}
       onClick={onClick}
     >
-      <div className="polaroid-frame bg-white shadow-xl transform transition-all duration-300 group-hover:scale-105 group-hover:rotate-0 group-hover:shadow-2xl group-hover:z-20 relative overflow-hidden">
-        <div className="polaroid-image-container p-2 pb-8">
-          <img 
-            src={src}
-            alt={alt}
-            loading="lazy"
-            className="w-full h-full object-cover rounded-sm"
-          />
-        </div>
-        
-        {/* Hover overlay with zoom icon */}
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-          <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 rounded-full p-2">
-            <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-            </svg>
-          </div>
-        </div>
+      <div className="polaroid-frame">
+        <img src={artwork.image} alt={artwork.title} />
       </div>
+
+      <style jsx>{`
+        .polaroid-photo {
+          width: 200px;
+          height: 240px;
+          background: white;
+          padding: 15px 15px 45px 15px;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+          cursor: pointer;
+          transition: all 0.3s ease;
+          animation: fadeInUp 0.6s ease forwards;
+          opacity: 0;
+          transform-origin: center;
+          flex-shrink: 0;
+        }
+
+        .polaroid-photo:hover {
+          transform: rotate(0deg) scale(1.05);
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+          z-index: 10;
+        }
+
+        .polaroid-frame {
+          width: 100%;
+          height: 170px;
+          overflow: hidden;
+          background: #f8f8f8;
+        }
+
+        .polaroid-frame img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px) rotate(var(--initial-rotation));
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) rotate(var(--initial-rotation));
+          }
+        }
+      `}</style>
     </div>
   );
 };
 
-// Scattered photos client component
-export const ArtworkPhotos = () => {
-  const { lightboxState, openLightbox, closeLightbox } = useLightbox();
+export default function ArtworksSectionWithLightbox() {
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const lightboxImages = artworks.map(artwork => ({
+    src: artwork.image,
+    alt: artwork.title,
+  }));
+
+  const openLightbox = (index: number) => {
+    setCurrentImageIndex(index);
+    setLightboxOpen(true);
+  };
 
   return (
-    <>
-      {/* Lightbox Modal */}
-      <ImageLightbox 
-        lightboxState={lightboxState}
-        onClose={closeLightbox}
-        theme="light"
-      />
-      
-      <div className="scattered-photos relative w-full h-[500px]">
-        {/* Photo 1 - Top Left */}
-        <PolaroidPhoto
-          src="/images/artworks/artwork1.jpg"
-          alt="绘画作品 1"
-          className="absolute top-4 left-8 w-72 md:w-56 sm:w-48"
-          style={{ transform: 'rotate(-8deg)' }}
-          delay={100}
-          onClick={() => openLightbox("/images/artworks/artwork1.jpg", "绘画作品 1")}
-        />
+    <section className="artworks-section">
+      <div className="container">
+        <h2 className="section-title">绘画作品展示</h2>
         
-        {/* Photo 2 - Top Right */}
-        <PolaroidPhoto
-          src="/images/artworks/artwork2.jpg"
-          alt="绘画作品 2"
-          className="absolute top-12 right-8 w-76 md:w-60 sm:w-52"
-          style={{ transform: 'rotate(12deg)' }}
-          delay={300}
-          onClick={() => openLightbox("/images/artworks/artwork2.jpg", "绘画作品 2")}
-        />
-        
-        {/* Photo 3 - Middle Left */}
-        <PolaroidPhoto
-          src="/images/artworks/artwork3.jpg"
-          alt="绘画作品 3"
-          className="absolute top-60 left-12 w-68 md:w-54 sm:w-46"
-          style={{ transform: 'rotate(3deg)' }}
-          delay={500}
-          onClick={() => openLightbox("/images/artworks/artwork3.jpg", "绘画作品 3")}
-        />
-        
-        {/* Photo 4 - Bottom Right */}
-        <PolaroidPhoto
-          src="/images/artworks/artwork4.jpg"
-          alt="绘画作品 4"
-          className="absolute bottom-16 right-12 w-64 md:w-52 sm:w-44"
-          style={{ transform: 'rotate(-15deg)' }}
-          delay={700}
-          onClick={() => openLightbox("/images/artworks/artwork4.jpg", "绘画作品 4")}
-        />
-        
-        {/* Photo 5 - Center (partially hidden) */}
-        <PolaroidPhoto
-          src="/images/artworks/artwork5.jpg"
-          alt="绘画作品 5"
-          className="absolute top-36 left-1/2 transform -translate-x-1/2 w-60 md:w-48 sm:w-40 opacity-75"
-          style={{ transform: 'translateX(-50%) rotate(-2deg)', zIndex: -1 }}
-          delay={900}
-          onClick={() => openLightbox("/images/artworks/artwork5.jpg", "绘画作品 5")}
-        />
+        <div className="polaroid-container">
+          <div className="polaroid-scroll">
+            {artworks.map((artwork, index) => (
+              <PolaroidPhoto
+                key={artwork.id}
+                artwork={artwork}
+                index={index}
+                onClick={() => openLightbox(index)}
+              />
+            ))}
+          </div>
+        </div>
       </div>
-    </>
+
+      {lightboxOpen && (
+        <Lightbox
+          open={lightboxOpen}
+          close={() => setLightboxOpen(false)}
+          slides={lightboxImages}
+          index={currentImageIndex}
+          styles={{
+            container: { backgroundColor: 'rgba(0, 0, 0, 0.9)' },
+          }}
+        />
+      )}
+
+      <style jsx>{`
+        .artworks-section {
+          min-height: 40vh;
+          background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f4c75 100%);
+          position: relative;
+          overflow: hidden;
+          padding: 50px 0;
+        }
+
+        .artworks-section::before {
+          content: '';
+          position: absolute;
+          top: 20%;
+          left: -10%;
+          width: 200px;
+          height: 200px;
+          background: radial-gradient(circle, rgba(139, 69, 196, 0.15) 0%, transparent 70%);
+          border-radius: 50%;
+          filter: blur(40px);
+        }
+
+        .artworks-section::after {
+          content: '';
+          position: absolute;
+          bottom: 10%;
+          right: -5%;
+          width: 150px;
+          height: 150px;
+          background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+          border-radius: 50%;
+          filter: blur(30px);
+        }
+
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
+          position: relative;
+          z-index: 1;
+        }
+
+        .section-title {
+          font-size: 4rem;
+          font-weight: 900;
+          text-align: center;
+          margin-bottom: 30px;
+          color: #000000;
+          text-shadow: 
+            8px 8px 0px #3b82f6,
+            16px 16px 0px #8b45c4;
+          letter-spacing: 2px;
+        }
+
+        .polaroid-container {
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          overflow-x: auto;
+          padding: 20px 0;
+        }
+
+        .polaroid-scroll {
+          display: flex;
+          gap: 30px;
+          padding: 0 20px;
+          align-items: center;
+          min-width: max-content;
+        }
+
+        .polaroid-container::-webkit-scrollbar {
+          height: 8px;
+        }
+
+        .polaroid-container::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 4px;
+        }
+
+        .polaroid-container::-webkit-scrollbar-thumb {
+          background: rgba(59, 130, 246, 0.6);
+          border-radius: 4px;
+        }
+
+        .polaroid-container::-webkit-scrollbar-thumb:hover {
+          background: rgba(59, 130, 246, 0.8);
+        }
+
+        @media (max-width: 768px) {
+          .section-title {
+            font-size: 2.5rem;
+            text-shadow: 
+              4px 4px 0px #3b82f6,
+              8px 8px 0px #8b45c4;
+          }
+          
+          .artworks-section {
+            min-height: 35vh;
+            padding: 30px 0;
+          }
+        }
+      `}</style>
+    </section>
   );
-};
+}

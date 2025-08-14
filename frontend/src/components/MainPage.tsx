@@ -1,7 +1,7 @@
 import HeroSection from '@/components/HeroSection';
 import PricingSection from '@/components/PricingSection';
-import ArtworksSection from '@/components/ArtworksSection';
-import ModelingSection from '@/components/ModelingSection';
+import ArtworksSectionWithLightbox from '@/components/ArtworksSectionWithLightbox';
+import ModelingSectionWithLightbox from '@/components/ModelingSectionWithLightbox';
 import ContactSection from '@/components/ContactSection';
 import { MainPageClient, AnimatedStatsWrapper } from '@/components/MainPageClient';
 import { ServiceCard } from '@/components/ServiceCard';
@@ -293,10 +293,10 @@ export function MainPage({ translations }: HomePageInterface) {
         <PricingSection t={t} />
 
         {/* Artworks Section */}
-        <ArtworksSection t={t} />
+        <ArtworksSectionWithLightbox />
 
         {/* 3D Modeling Section */}
-        <ModelingSection t={t} />
+        <ModelingSectionWithLightbox />
 
         {/* Contact Section */}
         <ContactSection t={t} />
