@@ -67,46 +67,7 @@ export default function ModelingSectionWithLightbox() {
     <section className="modeling-section">
       <div className="container max-w-7xl mx-auto px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 py-20">
-          {/* Left Side - Title and Description */}
-          <div className="flex flex-col justify-center space-y-8">
-            <div>
-              <div className="inline-block mb-4">
-                <span className="text-sm font-medium uppercase tracking-wider text-cyan-600 bg-cyan-50 px-4 py-2 rounded-full">
-                  🎯 3D Studio
-                </span>
-              </div>
-              
-              <h2 className="text-7xl lg:text-8xl font-black leading-tight text-black mb-6">
-                <span className="relative">
-                  3D建模
-                  <span className="absolute inset-0 text-cyan-400 -z-10 translate-x-3 translate-y-3 opacity-30">3D建模</span>
-                </span>
-                <br />
-                <span className="text-6xl lg:text-7xl text-gray-600">服务</span>
-              </h2>
-            </div>
-            
-            <div className="space-y-6 text-lg leading-relaxed text-gray-700">
-              <p>
-                <span className="font-semibold text-gray-900">专业的3D建模团队</span>，从概念设计到游戏动画制作，为您提供全方位的三维内容创作解决方案。
-              </p>
-              
-              <p>
-                我们精通<span className="text-cyan-600 font-medium">角色建模、场景构建、材质渲染和动画制作</span>，无论是游戏资产、建筑可视化还是产品展示，都能为您带来震撼的视觉效果。
-              </p>
-              
-              <p>
-                运用最新的3D技术和工具，我们将您的创意转化为<span className="text-purple-600 font-medium">栩栩如生的三维世界</span>。
-              </p>
-            </div>
-            
-            <div className="flex items-center space-x-4 pt-6">
-              <div className="w-12 h-0.5 bg-gradient-to-r from-cyan-500 to-purple-500"></div>
-              <span className="text-sm text-gray-500 font-medium">点击作品浏览详情</span>
-            </div>
-          </div>
-          
-          {/* Right Side - Photo Wall */}
+          {/* Left Side - Photo Wall */}
           <div className="relative">
             <div className="scattered-photos relative w-full h-[800px]">
               {models.slice(0, 6).map((model, index) => {
@@ -150,6 +111,45 @@ export default function ModelingSectionWithLightbox() {
               
               {/* Tech grid overlay */}
               <div className="absolute inset-0 tech-grid opacity-20 pointer-events-none"></div>
+            </div>
+          </div>
+          
+          {/* Right Side - Title and Description */}
+          <div className="flex flex-col justify-center space-y-8">
+            <div>
+              <div className="inline-block mb-4">
+                <span className="text-sm font-medium uppercase tracking-wider text-cyan-600 bg-cyan-50 px-4 py-2 rounded-full">
+                  🎯 3D Studio
+                </span>
+              </div>
+              
+              <h2 className="text-7xl lg:text-8xl font-black leading-tight text-black mb-6">
+                <span className="relative">
+                  3D建模
+                  <span className="absolute inset-0 text-cyan-400 -z-10 translate-x-3 translate-y-3 opacity-30">3D建模</span>
+                </span>
+                <br />
+                <span className="text-6xl lg:text-7xl text-gray-600">服务</span>
+              </h2>
+            </div>
+            
+            <div className="space-y-6 text-lg leading-relaxed text-gray-700">
+              <p>
+                <span className="font-semibold text-gray-900">专业的3D建模团队</span>，从概念设计到游戏动画制作，为您提供全方位的三维内容创作解决方案。
+              </p>
+              
+              <p>
+                我们精通<span className="text-cyan-600 font-medium">角色建模、场景构建、材质渲染和动画制作</span>，无论是游戏资产、建筑可视化还是产品展示，都能为您带来震撼的视觉效果。
+              </p>
+              
+              <p>
+                运用最新的3D技术和工具，我们将您的创意转化为<span className="text-purple-600 font-medium">栩栩如生的三维世界</span>。
+              </p>
+            </div>
+            
+            <div className="flex items-center space-x-4 pt-6">
+              <div className="w-12 h-0.5 bg-gradient-to-r from-cyan-500 to-purple-500"></div>
+              <span className="text-sm text-gray-500 font-medium">点击作品浏览详情</span>
             </div>
           </div>
         </div>

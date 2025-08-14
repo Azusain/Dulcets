@@ -14,6 +14,7 @@ const DsNavigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { isLoading } = useLoading();
   const [faviconPath, setFaviconPath] = useState("/images/favicon.png");
+  const [showNav, setShowNav] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,27 +28,39 @@ const DsNavigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Always show dark background initially to prevent white flash
-  const shouldShowDarkBackground = isScrolled || isLoading;
-  
+  // Handle navigation visibility based on loading state
+  useEffect(() => {
+    if (isLoading) {
+      // Hide navigation immediately when loading starts
+      setShowNav(false);
+    } else {
+      // Show navigation with delay after loading completes (to sync with hero video)
+      const timer = setTimeout(() => {
+        setShowNav(true);
+      }, 300); // Small delay to allow hero content to start appearing
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading]);
+
   const navStyle: React.CSSProperties = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: '16px 24px',
     color: 'white',
+    backgroundColor: isScrolled ? 'rgba(0, 0, 0, 0.95)' : 'transparent',
+    backdropFilter: isScrolled ? 'blur(10px)' : 'none',
+    WebkitBackdropFilter: isScrolled ? 'blur(10px)' : 'none',
     boxShadow: isScrolled 
       ? '0 4px 32px rgba(0, 0, 0, 0.3), 0 8px 64px rgba(0, 0, 0, 0.2)' 
       : 'none',
     borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.3)' : 'none',
+    opacity: showNav ? 1 : 0,
+    transform: showNav ? 'translateY(0)' : 'translateY(-100%)',
+    transition: isLoading 
+      ? 'none' 
+      : 'all 0.8s cubic-bezier(0.4, 0.0, 0.2, 1), opacity 0.6s ease-out 0.2s, transform 0.8s ease-out',
   };
-  
-  // Only override background styles when not loading to allow smooth transitions
-  if (!isLoading) {
-    navStyle.backgroundColor = shouldShowDarkBackground ? 'rgba(0, 0, 0, 0.95)' : 'transparent';
-    navStyle.backdropFilter = shouldShowDarkBackground ? 'blur(10px)' : 'none';
-    navStyle.WebkitBackdropFilter = shouldShowDarkBackground ? 'blur(10px)' : 'none';
-  }
 
   return (
     <nav style={navStyle}>

@@ -32,12 +32,6 @@ export default function RootLayout({
               right: 0 !important;
               z-index: 9999 !important;
               width: 100% !important;
-              background-color: rgba(0, 0, 0, 0.95) !important;
-              backdrop-filter: blur(10px) !important;
-              -webkit-backdrop-filter: blur(10px) !important;
-            }
-            nav.nav-loaded {
-              transition: all 0.3s ease-in-out !important;
             }
           `
         }} />
