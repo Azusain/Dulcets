@@ -576,3 +576,75 @@ nav {
   pointer-events: none;
   z-index: -1;
 }
+
+/* Polaroid Photo Styles */
+.polaroid-photo {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.polaroid-frame {
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.font-handwriting {
+  font-family: 'Kalam', cursive;
+}
+
+.scattered-photos {
+  position: relative;
+  min-height: 600px;
+}
+
+@media (max-width: 768px) {
+  .scattered-photos {
+    min-height: 400px;
+  }
+}
+
+/* 3D Modeling Polaroid Styles */
+.polaroid-photo-3d {
+  animation: slideInFromLeft 1s ease-out forwards;
+  opacity: 0;
+  transform: translateX(-50px) rotate(-10deg);
+}
+
+@keyframes slideInFromLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+.polaroid-frame-3d {
+  border-radius: 4px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+}
+
+.scattered-photos-3d {
+  position: relative;
+  min-height: 650px;
+}
+
+@media (max-width: 768px) {
+  .scattered-photos-3d {
+    min-height: 450px;
+  }
+}
+
+.tech-grid {
+  background-image: 
+    linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}

@@ -38,44 +38,6 @@ const PolaroidPhoto3D = ({ src, alt, className, style, delay = 0 }: {
 export default function ModelingSection({ t }: ComponentWithTranslation) {
   return (
     <>
-      <style jsx>{`
-        .polaroid-photo-3d {
-          animation: slideInFromLeft 1s ease-out forwards;
-          opacity: 0;
-          transform: translateX(-50px) rotate(-10deg);
-        }
-        
-        @keyframes slideInFromLeft {
-          to {
-            opacity: 1;
-            transform: translateX(0) rotate(0deg);
-          }
-        }
-        
-        .polaroid-frame-3d {
-          border-radius: 4px;
-          cursor: pointer;
-          backdrop-filter: blur(10px);
-        }
-        
-        .scattered-photos-3d {
-          position: relative;
-          min-height: 650px;
-        }
-        
-        @media (max-width: 768px) {
-          .scattered-photos-3d {
-            min-height: 450px;
-          }
-        }
-        
-        .tech-grid {
-          background-image: 
-            linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px);
-          background-size: 20px 20px;
-        }
-      `}</style>
       
       <section className="overflow-hidden bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 text-white relative">
         {/* Tech grid background */}

@@ -36,40 +36,6 @@ const PolaroidPhoto = ({ src, alt, className, style, delay = 0 }: {
 export default function ArtworksSection({ t }: ComponentWithTranslation) {
   return (
     <>
-      <style jsx>{`
-        .polaroid-photo {
-          animation: fadeInUp 0.8s ease-out forwards;
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        
-        @keyframes fadeInUp {
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        .polaroid-frame {
-          border-radius: 2px;
-          cursor: pointer;
-        }
-        
-        .font-handwriting {
-          font-family: 'Kalam', cursive;
-        }
-        
-        .scattered-photos {
-          position: relative;
-          min-height: 600px;
-        }
-        
-        @media (max-width: 768px) {
-          .scattered-photos {
-            min-height: 400px;
-          }
-        }
-      `}</style>
       
       <section className="overflow-hidden bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 text-black relative">
         {/* Background decoration */}
