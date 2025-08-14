@@ -3,8 +3,7 @@ import { ModelingPhotos } from "./ModelingSectionWithLightbox";
 
 export default function ModelingSection({ t }: ComponentWithTranslation) {
   return (
-      
-      <section className="overflow-hidden bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 text-white relative">
+    <section className="overflow-hidden bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 text-white relative">
         {/* Tech grid background */}
         <div className="absolute inset-0 tech-grid opacity-30"></div>
         
@@ -67,7 +66,6 @@ export default function ModelingSection({ t }: ComponentWithTranslation) {
           <div className="absolute top-3/4 right-1/3 w-1 h-1 bg-purple-400 rounded-full opacity-60 animate-pulse" style={{animationDelay: '1s'}}></div>
           <div className="absolute top-1/2 right-1/4 w-1 h-1 bg-blue-400 rounded-full opacity-60 animate-pulse" style={{animationDelay: '2s'}}></div>
         </div>
-      </section>
-    </>
+    </section>
   );
 }

@@ -3,8 +3,7 @@ import { ArtworkPhotos } from "./ArtworksSectionWithLightbox";
 
 export default function ArtworksSection({ t }: ComponentWithTranslation) {
   return (
-      
-      <section className="overflow-hidden bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 text-black relative">
+    <section className="overflow-hidden bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 text-black relative">
         {/* Background decoration */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-10 w-32 h-32 bg-pink-300 rounded-full blur-3xl"></div>
@@ -57,7 +56,6 @@ export default function ArtworksSection({ t }: ComponentWithTranslation) {
             </div>
           </div>
         </div>
-      </section>
-    </>
+    </section>
   );
 }
