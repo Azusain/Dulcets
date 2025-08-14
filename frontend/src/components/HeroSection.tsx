@@ -9,6 +9,11 @@ const staticParticles = Array.from({ length: 50 }, (_, i) => ({
 }));
 
 export default function HeroSection({ t }: ComponentWithTranslation) {
+  // The basePath and assetPrefix in next.config.ts should automatically handle this
+  const videoSources = {
+    mp4: "/videos/hero-background.mp4",
+    webm: "/videos/hero-background.webm"
+  };
   return (
     <section id="hero" className="relative h-screen overflow-hidden">
       {/* Video Background */}
@@ -22,8 +27,8 @@ export default function HeroSection({ t }: ComponentWithTranslation) {
           playsInline
           preload="auto"
         >
-          <source src="/videos/hero-background.mp4" type="video/mp4" />
-          <source src="/videos/hero-background.webm" type="video/webm" />
+          <source src={videoSources.mp4} type="video/mp4" />
+          <source src={videoSources.webm} type="video/webm" />
         </video>
 
         {/* CSS Fallback Background - shows when video fails */}

@@ -1,4 +1,4 @@
-import DsNavigation from "@/components/navigation";
+import ConditionalNavigation from "@/components/ConditionalNavigation";
 import "./global.css";
 import "./loading.css";
 
@@ -36,7 +36,7 @@ export default function RootLayout({
         <title>Dulcets</title>
       </head>
       <body>
-        <DsNavigation />
+        <ConditionalNavigation />
         {children}
       </body>
     </html>
