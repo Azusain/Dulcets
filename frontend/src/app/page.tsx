@@ -1,5 +1,6 @@
-import { redirect } from "next/navigation";
+import { MainPage } from "@/components/MainPage";
+import jp from "../../public/locales/jp.json";
 
 export default function HomePage() {
-  redirect("/jp");
+  return <MainPage translations={jp} />;
 }
