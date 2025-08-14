@@ -1,11 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useAssetPath } from "@/hooks/useAssetPath";
 import LanguageSwitcher, {
   GetLanguageDict,
   GetLanguageFromPath,
 } from "./language_switcher";
 
 const DsNavigation = () => {
+  const { getAssetPath } = useAssetPath();
   const init_t = GetLanguageDict(GetLanguageFromPath());
   const [t, setTranslator] = useState<(key: string) => string>(() => init_t);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -49,7 +51,7 @@ const DsNavigation = () => {
     <nav style={navStyle}>
       <div className="cursor-pointer">
         <img
-          src="/images/favicon.png"
+          src={getAssetPath("/images/favicon.png")}
           alt="Dulcets Logo"
           className="h-26 w-46"
         />
