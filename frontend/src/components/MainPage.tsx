@@ -37,7 +37,7 @@ export function MainPage({ translations }: HomePageInterface) {
   return (
     <div className="min-h-screen text-white" style={{ background: 'transparent' }}>
       {/* CSS-Only Loading Animation */}
-      <div className="loading-screen fixed inset-0 z-[90] flex items-center justify-center bg-gray-900">
+      <div className="loading-screen fixed inset-0 z-[999998] flex items-center justify-center bg-gray-900">
         <div className="text-center">
           <div className="text-6xl font-bold text-white mb-4">
             <span className="text-gray-300">D</span>

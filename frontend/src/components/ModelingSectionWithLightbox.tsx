@@ -48,70 +48,66 @@ const PolaroidPhoto3D = ({ src, alt, className, style, delay = 0, onClick }: {
 
 // Scattered 3D photos client component
 export const ModelingPhotos = () => {
-  const { lightbox, openLightbox, closeLightbox } = useLightbox();
+  const { lightboxState, openLightbox, closeLightbox } = useLightbox();
 
   return (
     <>
       {/* Lightbox Modal */}
-      {lightbox && (
-        <ImageLightbox 
-          src={lightbox.src} 
-          alt={lightbox.alt} 
-          isOpen={!!lightbox} 
-          onClose={closeLightbox}
-          theme="dark"
-        />
-      )}
+      <ImageLightbox 
+        lightboxState={lightboxState}
+        onClose={closeLightbox}
+        theme="dark"
+      />
       
-      <div className="scattered-photos-3d relative">
+      <div className="scattered-photos-3d relative w-full h-[500px]">
         {/* Photo 1 - Top Left */}
         <PolaroidPhoto3D
-          src="https://www.dmoe.cc/random.php?5"
-          alt="角色建模"
-          className="absolute top-8 left-12 w-64 md:w-48 sm:w-40"
+          src="/images/modeling/model1.jpg"
+          alt="3D作品 1"
+          className="absolute top-8 left-12 w-72 md:w-56 sm:w-48"
           style={{ transform: 'rotate(8deg)' }}
           delay={200}
-          onClick={() => openLightbox("https://www.dmoe.cc/random.php?5", "角色建模")}
+          onClick={() => openLightbox("/images/modeling/model1.jpg", "3D作品 1")}
         />
         
         {/* Photo 2 - Top Right */}
         <PolaroidPhoto3D
-          src="https://www.dmoe.cc/random.php?6"
-          alt="场景渲染"
-          className="absolute top-20 right-8 w-68 md:w-50 sm:w-42"
+          src="/images/modeling/model2.jpg"
+          alt="3D作品 2"
+          className="absolute top-16 right-12 w-76 md:w-60 sm:w-52"
           style={{ transform: 'rotate(-12deg)' }}
           delay={400}
-          onClick={() => openLightbox("https://www.dmoe.cc/random.php?6", "场景渲染")}
+          onClick={() => openLightbox("/images/modeling/model2.jpg", "3D作品 2")}
         />
         
         {/* Photo 3 - Middle Left */}
         <PolaroidPhoto3D
-          src="https://www.dmoe.cc/random.php?7"
-          alt="材质贴图"
-          className="absolute top-64 left-8 w-60 md:w-44 sm:w-38"
+          src="/images/modeling/model3.jpg"
+          alt="3D作品 3"
+          className="absolute top-64 left-8 w-68 md:w-54 sm:w-46"
           style={{ transform: 'rotate(-5deg)' }}
           delay={600}
-          onClick={() => openLightbox("https://www.dmoe.cc/random.php?7", "材质贴图")}
+          onClick={() => openLightbox("/images/modeling/model3.jpg", "3D作品 3")}
         />
         
         {/* Photo 4 - Bottom Center */}
         <PolaroidPhoto3D
-          src="https://www.dmoe.cc/random.php?8"
-          alt="动画绑定"
-          className="absolute bottom-16 left-1/2 transform -translate-x-1/2 w-72 md:w-52 sm:w-44"
+          src="/images/modeling/model4.jpg"
+          alt="3D作品 4"
+          className="absolute bottom-12 left-1/2 transform -translate-x-1/2 w-80 md:w-64 sm:w-52"
           style={{ transform: 'translateX(-50%) rotate(15deg)' }}
           delay={800}
-          onClick={() => openLightbox("https://www.dmoe.cc/random.php?8", "动画绑定")}
+          onClick={() => openLightbox("/images/modeling/model4.jpg", "3D作品 4")}
         />
         
         {/* Photo 5 - Center Background */}
         <PolaroidPhoto3D
-          src="https://www.dmoe.cc/random.php?12"
-          alt="环境设计"
-          className="absolute top-44 left-1/3 w-52 md:w-38 sm:w-32 opacity-70"
+          src="/images/modeling/model5.jpg"
+          alt="3D作品 5"
+          className="absolute top-40 left-1/3 w-60 md:w-48 sm:w-40 opacity-75"
           style={{ transform: 'rotate(2deg)', zIndex: -1 }}
           delay={1000}
-          onClick={() => openLightbox("https://www.dmoe.cc/random.php?12", "环境设计")}
+          onClick={() => openLightbox("/images/modeling/model5.jpg", "3D作品 5")}
         />
       </div>
     </>

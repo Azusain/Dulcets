@@ -45,70 +45,66 @@ const PolaroidPhoto = ({ src, alt, className, style, delay = 0, onClick }: {
 
 // Scattered photos client component
 export const ArtworkPhotos = () => {
-  const { lightbox, openLightbox, closeLightbox } = useLightbox();
+  const { lightboxState, openLightbox, closeLightbox } = useLightbox();
 
   return (
     <>
       {/* Lightbox Modal */}
-      {lightbox && (
-        <ImageLightbox 
-          src={lightbox.src} 
-          alt={lightbox.alt} 
-          isOpen={!!lightbox} 
-          onClose={closeLightbox}
-          theme="light"
-        />
-      )}
+      <ImageLightbox 
+        lightboxState={lightboxState}
+        onClose={closeLightbox}
+        theme="light"
+      />
       
-      <div className="scattered-photos relative">
+      <div className="scattered-photos relative w-full h-[500px]">
         {/* Photo 1 - Top Left */}
         <PolaroidPhoto
-          src="https://www.dmoe.cc/random.php?1"
-          alt="角色设计"
-          className="absolute top-8 left-4 w-64 md:w-48 sm:w-40"
+          src="/images/artworks/artwork1.jpg"
+          alt="绘画作品 1"
+          className="absolute top-4 left-8 w-72 md:w-56 sm:w-48"
           style={{ transform: 'rotate(-8deg)' }}
           delay={100}
-          onClick={() => openLightbox("https://www.dmoe.cc/random.php?1", "角色设计")}
+          onClick={() => openLightbox("/images/artworks/artwork1.jpg", "绘画作品 1")}
         />
         
         {/* Photo 2 - Top Right */}
         <PolaroidPhoto
-          src="https://www.dmoe.cc/random.php?2"
-          alt="场景插画"
-          className="absolute top-16 right-2 w-72 md:w-52 sm:w-44"
+          src="/images/artworks/artwork2.jpg"
+          alt="绘画作品 2"
+          className="absolute top-12 right-8 w-76 md:w-60 sm:w-52"
           style={{ transform: 'rotate(12deg)' }}
           delay={300}
-          onClick={() => openLightbox("https://www.dmoe.cc/random.php?2", "场景插画")}
+          onClick={() => openLightbox("/images/artworks/artwork2.jpg", "绘画作品 2")}
         />
         
         {/* Photo 3 - Middle Left */}
         <PolaroidPhoto
-          src="https://www.dmoe.cc/random.php?3"
-          alt="概念艺术"
-          className="absolute top-60 left-20 w-68 md:w-50 sm:w-42"
+          src="/images/artworks/artwork3.jpg"
+          alt="绘画作品 3"
+          className="absolute top-60 left-12 w-68 md:w-54 sm:w-46"
           style={{ transform: 'rotate(3deg)' }}
           delay={500}
-          onClick={() => openLightbox("https://www.dmoe.cc/random.php?3", "概念艺术")}
+          onClick={() => openLightbox("/images/artworks/artwork3.jpg", "绘画作品 3")}
         />
         
         {/* Photo 4 - Bottom Right */}
         <PolaroidPhoto
-          src="https://www.dmoe.cc/random.php?4"
-          alt="数字绘画"
-          className="absolute bottom-12 right-4 w-60 md:w-44 sm:w-38"
+          src="/images/artworks/artwork4.jpg"
+          alt="绘画作品 4"
+          className="absolute bottom-16 right-12 w-64 md:w-52 sm:w-44"
           style={{ transform: 'rotate(-15deg)' }}
           delay={700}
-          onClick={() => openLightbox("https://www.dmoe.cc/random.php?4", "数字绘画")}
+          onClick={() => openLightbox("/images/artworks/artwork4.jpg", "绘画作品 4")}
         />
         
         {/* Photo 5 - Center (partially hidden) */}
         <PolaroidPhoto
-          src="https://www.dmoe.cc/random.php?11"
-          alt="环境设计"
-          className="absolute top-40 left-1/2 transform -translate-x-1/2 w-56 md:w-42 sm:w-36 opacity-80"
+          src="/images/artworks/artwork5.jpg"
+          alt="绘画作品 5"
+          className="absolute top-36 left-1/2 transform -translate-x-1/2 w-60 md:w-48 sm:w-40 opacity-75"
           style={{ transform: 'translateX(-50%) rotate(-2deg)', zIndex: -1 }}
           delay={900}
-          onClick={() => openLightbox("https://www.dmoe.cc/random.php?11", "环境设计")}
+          onClick={() => openLightbox("/images/artworks/artwork5.jpg", "绘画作品 5")}
         />
       </div>
     </>
