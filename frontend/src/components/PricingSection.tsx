@@ -1,6 +1,6 @@
-import { HomePageInterface } from "@/components/MainPage";
+import { ComponentWithTranslation } from "@/components/MainPage";
 
-export default function PricingSection({ t }: HomePageInterface) {
+export default function PricingSection({ t }: ComponentWithTranslation) {
   return (
     <section id="pricing" className="bg-white py-20">
       <div className="max-w-4xl mx-auto px-8">

@@ -10,6 +10,10 @@ export interface HomePageInterface {
   translations: Record<string, any>;
 }
 
+export interface ComponentWithTranslation {
+  t: (key: string) => string;
+}
+
 // Helper function to get translation value from translations object
 function getTranslation(translations: Record<string, any>, key: string): string {
   const keys = key.split('.');

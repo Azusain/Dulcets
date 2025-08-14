@@ -1,6 +1,6 @@
-import { HomePageInterface } from "@/components/MainPage";
+import { ComponentWithTranslation } from "@/components/MainPage";
 
-export default function ModelingSection({ t }: HomePageInterface) {
+export default function ModelingSection({ t }: ComponentWithTranslation) {
   return (
     <section className="overflow-x-hidden bg-gray-50 text-black">
       <div className="container mx-auto">

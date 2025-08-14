@@ -1,7 +1,7 @@
 import React from 'react';
-import { HomePageInterface } from "@/components/MainPage";
+import { ComponentWithTranslation } from "@/components/MainPage";
 
-export default function ContactSection({ t }: HomePageInterface) {
+export default function ContactSection({ t }: ComponentWithTranslation) {
   return (
     <section id="contact" className="bg-white py-16">
       <div className="max-w-6xl mx-auto px-6">

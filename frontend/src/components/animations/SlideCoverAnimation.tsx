@@ -69,28 +69,27 @@ export default function SlideCoverAnimation({
       ...getCoverTransform('initial'),
       transition: {
         duration: 0.8,
-        delay: delay,
-        ease: [0.25, 0.46, 0.45, 0.94]
+        delay: delay
       }
     },
     exit: {
       ...getCoverTransform('exit'),
       transition: {
         duration: 0.6,
-        delay: delay + 0.3,
-        ease: [0.76, 0, 0.24, 1]
+        delay: delay + 0.3
       }
     }
   };
 
   const contentVariants = {
-    hidden: { opacity: 0 },
+    hidden: { 
+      opacity: 0
+    },
     visible: { 
       opacity: 1,
       transition: {
         duration: 0.4,
-        delay: delay + 0.5,
-        ease: 'easeOut'
+        delay: delay + 0.5
       }
     }
   };

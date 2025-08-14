@@ -45,6 +45,9 @@ const BackgroundMusic: React.FC<BackgroundMusicProps> = ({ section, isActive }) 
     const audio = audioRef.current;
     if (!audio || !userHasInteracted) return;
 
+    // Set volume via ref
+    audio.volume = 0.15;
+
     if (isActive && !isPlaying) {
       const playPromise = audio.play();
       if (playPromise !== undefined) {
@@ -69,7 +72,6 @@ const BackgroundMusic: React.FC<BackgroundMusicProps> = ({ section, isActive }) 
       loop
       preload="none"
       style={{ display: 'none' }}
-      volume={0.15} // Very subtle volume - 精美但是不做作
       onEnded={() => setIsPlaying(false)}
       onPause={() => setIsPlaying(false)}
       onPlay={() => setIsPlaying(true)}

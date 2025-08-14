@@ -88,8 +88,7 @@ export default function SlideInAnimation({
       opacity: 1,
       transition: {
         duration: duration,
-        delay: delay,
-        ease: [0.25, 0.46, 0.45, 0.94], // Smooth easing
+        delay: delay
       },
     },
   };
@@ -100,8 +99,7 @@ export default function SlideInAnimation({
       ...getCoverFinalPosition(),
       transition: {
         duration: duration * 0.6,
-        delay: delay + duration * 0.2,
-        ease: [0.76, 0, 0.24, 1], // Sharp easing for cover
+        delay: delay + duration * 0.2
       },
     },
   };

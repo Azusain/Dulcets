@@ -1,4 +1,4 @@
-import { HomePageInterface } from "@/components/MainPage";
+import { ComponentWithTranslation } from "@/components/MainPage";
 
 // Pre-generated particles for static rendering
 const staticParticles = Array.from({ length: 50 }, (_, i) => ({
@@ -8,7 +8,7 @@ const staticParticles = Array.from({ length: 50 }, (_, i) => ({
   duration: `${2 + (i % 3)}s`,
 }));
 
-export default function HeroSection({ t }: HomePageInterface) {
+export default function HeroSection({ t }: ComponentWithTranslation) {
   return (
     <section id="hero" className="relative h-screen overflow-hidden">
       {/* Video Background */}

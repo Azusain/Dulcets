@@ -1,6 +1,6 @@
-import { HomePageInterface } from "@/components/MainPage";
+import { ComponentWithTranslation } from "@/components/MainPage";
 
-export default function ArtworksSection({ t }: HomePageInterface) {
+export default function ArtworksSection({ t }: ComponentWithTranslation) {
   return (
     <section className="overflow-x-hidden bg-white text-black">
       <div className="container mx-auto">
