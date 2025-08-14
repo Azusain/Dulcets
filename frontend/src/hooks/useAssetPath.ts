@@ -2,36 +2,50 @@
 
 import { useEffect, useState } from "react";
 
+function detectBasePath(): string {
+  if (typeof window === 'undefined') return '';
+  
+  const hostname = window.location.hostname;
+  const pathname = window.location.pathname;
+  const isGitHubPages = hostname.includes('github.io');
+  const isInDulcetsPath = pathname.startsWith('/Dulcets');
+  
+  // Use basePath if we're on GitHub Pages or already in the Dulcets path
+  const needsBasePath = isGitHubPages || isInDulcetsPath;
+  const detectedBasePath = needsBasePath ? '/Dulcets' : '';
+  
+  console.log('detectBasePath:', {
+    hostname,
+    pathname,
+    isGitHubPages,
+    isInDulcetsPath,
+    needsBasePath,
+    detectedBasePath
+  });
+  
+  return detectedBasePath;
+}
+
 export function useAssetPath() {
-  const [basePath, setBasePath] = useState("");
+  // Initialize with immediate detection
+  const [basePath, setBasePath] = useState(() => detectBasePath());
 
   useEffect(() => {
-    // Check if we're on GitHub Pages
-    const hostname = window.location.hostname;
-    const pathname = window.location.pathname;
-    const isGitHubPages = hostname.includes('github.io');
-    const isInDulcetsPath = pathname.startsWith('/Dulcets');
-    
-    // Use basePath if we're on GitHub Pages or already in the Dulcets path
-    const needsBasePath = isGitHubPages || isInDulcetsPath;
-    const detectedBasePath = needsBasePath ? '/Dulcets' : '';
-    
-    setBasePath(detectedBasePath);
-    
-    console.log('useAssetPath:', {
-      hostname,
-      pathname,
-      isGitHubPages,
-      isInDulcetsPath,
-      needsBasePath,
-      basePath: detectedBasePath
-    });
-  }, []);
+    // Re-detect on mount to ensure accuracy
+    const detected = detectBasePath();
+    if (detected !== basePath) {
+      setBasePath(detected);
+      console.log('useAssetPath: basePath updated to:', detected);
+    }
+  }, [basePath]);
 
   const getAssetPath = (path: string) => {
     // Ensure path starts with /
     const cleanPath = path.startsWith('/') ? path : `/${path}`;
-    return `${basePath}${cleanPath}`;
+    const fullPath = `${basePath}${cleanPath}`;
+    
+    console.log(`getAssetPath: ${path} -> ${fullPath}`);
+    return fullPath;
   };
 
   return { basePath, getAssetPath };
