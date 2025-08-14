@@ -1,5 +1,5 @@
 import HeroSection from '@/components/HeroSection';
-import PricingSection from '@/components/PricingSection';
+import PricingOverview from '@/components/PricingOverview';
 import ArtworksSectionWithLightbox from '@/components/ArtworksSectionWithLightbox';
 import ModelingSectionWithLightbox from '@/components/ModelingSectionWithLightbox';
 import ContactSection from '@/components/ContactSection';
@@ -275,7 +275,7 @@ export function MainPage({ translations }: HomePageInterface) {
         </section>
 
         {/* Pricing Section */}
-        <PricingSection t={t} />
+        <PricingOverview />
 
         {/* Artworks Section */}
         <ArtworksSectionWithLightbox />
