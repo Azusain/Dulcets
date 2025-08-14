@@ -6,6 +6,7 @@ import ContactSection from '@/components/ContactSection';
 import { MainPageClient, AnimatedStatsWrapper } from '@/components/MainPageClient';
 import { ServiceCard } from '@/components/ServiceCard';
 import SlideCoverAnimation from '@/components/animations/SlideCoverAnimation';
+import LoadingManager from '@/components/LoadingManager';
 
 export interface HomePageInterface {
   translations: Record<string, any>;
@@ -35,23 +36,7 @@ export function MainPage({ translations }: HomePageInterface) {
   // Create a local t function for this component
   const t = (key: string) => getTranslation(translations, key);
   return (
-    <div className="min-h-screen text-white" style={{ background: 'transparent' }}>
-      {/* CSS-Only Loading Animation */}
-      <div className="loading-screen fixed inset-0 z-[999998] flex items-center justify-center bg-gray-900">
-        <div className="text-center">
-          <div className="text-6xl font-bold text-white mb-4">
-            <span className="text-gray-300">D</span>
-            <span className="text-white">ulcets</span>
-          </div>
-          <div className="text-2xl text-gray-300 mb-4">{t("loading")}</div>
-          <div className="loading-spinner">
-            <div className="spinner-ring"></div>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div id="main-content" className="main-content">
+    <LoadingManager loadingText={t("loading")}>
         {/* Hero Section with Video Background */}
         <HeroSection t={t} />
 
@@ -156,21 +141,21 @@ export function MainPage({ translations }: HomePageInterface) {
             {/* Works Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
-                {
-                  title: "【オリジナル曲】Dulcets - Aquamarine piano ver.",
-                  titleEn: "【Original Song】Dulcets - Aquamarine piano ver.",
-                  titleJp: "【オリジナル曲】Dulcets - Aquamarine piano ver.",
-                  excerpt:
-                    "Dulcets原創作品《Aquamarine》鋼琴版本！純淨的鋼琴旋律演繹，展現歌曲不同層次的情感深度，189次觀看...",
-                  excerptEn:
-                    "Dulcets original work 'Aquamarine' piano version! Pure piano melody interpretation, showcasing different emotional depths of the song, 189 views...",
-                  excerptJp:
-                    "Dulcetsオリジナル作品『Aquamarine』ピアノバージョン！純粋なピアノメロディで楽曲の異なる感情の深さを表現、189回視聴...",
-                  date: "1個月前",
-                  duration: "3:20",
-                  image: "https://i.ytimg.com/vi/IpEJkpp1GM4/hqdefault.jpg",
-                  videoUrl: "https://www.youtube.com/watch?v=IpEJkpp1GM4",
-                },
+              {
+                title: "【オリジナル曲】Dulcets - Aquamarine piano ver.",
+                titleEn: "【Original Song】Dulcets - Aquamarine piano ver.",
+                titleJp: "【オリジナル曲】Dulcets - Aquamarine piano ver.",
+                excerpt:
+                  "Dulcets原創作品《Aquamarine》鋼琴版本！純淨的鋼琴旋律演繹，展現歌曲不同層次的情感深度，189次觀看...",
+                excerptEn:
+                  "Dulcets original work 'Aquamarine' piano version! Pure piano melody interpretation, showcasing different emotional depths of the song, 189 views...",
+                excerptJp:
+                  "Dulcetsオリジナル作品『Aquamarine』ピアノバージョン！純粋なピアノメロディで楽曲の異なる感情の深さを表現、189回視聴...",
+                date: "1個月前",
+                duration: "3:20",
+                image: "https://i.ytimg.com/vi/IpEJkpp1GM4/hqdefault.jpg",
+                videoUrl: "https://www.youtube.com/watch?v=IpEJkpp1GM4",
+              },
                 {
                   title: "【MV】【歌ってみた】クリスマスソング（covered by Dulcets）",
                   titleEn: "【MV】【Cover】Christmas Song (covered by Dulcets)",
@@ -489,7 +474,6 @@ export function MainPage({ translations }: HomePageInterface) {
         
         {/* Client-side functionality (Background Music, etc.) */}
         <MainPageClient translations={translations} />
-      </div>
-    </div>
+    </LoadingManager>
   );
 }

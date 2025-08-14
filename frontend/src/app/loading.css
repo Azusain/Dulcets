@@ -17,12 +17,11 @@
 }
 
 .loading-screen {
-  animation: fadeOut 3s ease-in-out forwards;
+  animation: fadeOut 1s ease-in-out forwards;
 }
 
-.main-content {
-  animation: fadeInContent 3s ease-in-out forwards;
-  opacity: 0;
+.main-content-react {
+  /* Controlled by React state, no CSS animation needed */
 }
 
 .loading-spinner {

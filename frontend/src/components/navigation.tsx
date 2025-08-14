@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useAssetPath } from "@/hooks/useAssetPath";
+import { useLoading } from "@/contexts/LoadingContext";
 import LanguageSwitcher, {
   GetLanguageDict,
   GetLanguageFromPath,
@@ -11,6 +12,7 @@ const DsNavigation = () => {
   const init_t = GetLanguageDict(GetLanguageFromPath());
   const [t, setTranslator] = useState<(key: string) => string>(() => init_t);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { isLoading } = useLoading();
   const [faviconPath, setFaviconPath] = useState("/images/favicon.png");
 
   useEffect(() => {
@@ -25,17 +27,10 @@ const DsNavigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Always show dark background initially to prevent white flash
+  const shouldShowDarkBackground = isScrolled || isLoading;
+  
   const navStyle: React.CSSProperties = {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    width: '100%',
-    height: 'auto',
-    zIndex: 999,
-    backgroundColor: isScrolled ? 'rgba(0, 0, 0, 0.95)' : 'transparent',
-    backdropFilter: isScrolled ? 'blur(10px)' : 'none',
-    WebkitBackdropFilter: isScrolled ? 'blur(10px)' : 'none', // Safari support
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -45,8 +40,14 @@ const DsNavigation = () => {
       ? '0 4px 32px rgba(0, 0, 0, 0.3), 0 8px 64px rgba(0, 0, 0, 0.2)' 
       : 'none',
     borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.3)' : 'none',
-    transition: 'all 0.3s ease-in-out'
   };
+  
+  // Only override background styles when not loading to allow smooth transitions
+  if (!isLoading) {
+    navStyle.backgroundColor = shouldShowDarkBackground ? 'rgba(0, 0, 0, 0.95)' : 'transparent';
+    navStyle.backdropFilter = shouldShowDarkBackground ? 'blur(10px)' : 'none';
+    navStyle.WebkitBackdropFilter = shouldShowDarkBackground ? 'blur(10px)' : 'none';
+  }
 
   return (
     <nav style={navStyle}>

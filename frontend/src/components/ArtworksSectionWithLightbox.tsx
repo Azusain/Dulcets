@@ -36,60 +36,15 @@ const PolaroidPhoto = ({ artwork, onClick, index }: { artwork: Artwork; onClick:
     <div
       className="polaroid-photo"
       style={{
+        '--initial-rotation': `${rotations[index % rotations.length]}deg`,
         transform: `rotate(${rotations[index % rotations.length]}deg)`,
         animationDelay: `${index * 0.1}s`,
-      }}
+      } as React.CSSProperties}
       onClick={onClick}
     >
       <div className="polaroid-frame">
         <img src={artwork.image} alt={artwork.title} />
       </div>
-
-      <style jsx>{`
-        .polaroid-photo {
-          width: 200px;
-          height: 240px;
-          background: white;
-          padding: 15px 15px 45px 15px;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-          cursor: pointer;
-          transition: all 0.3s ease;
-          animation: fadeInUp 0.6s ease forwards;
-          opacity: 0;
-          transform-origin: center;
-          flex-shrink: 0;
-        }
-
-        .polaroid-photo:hover {
-          transform: rotate(0deg) scale(1.05);
-          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-          z-index: 10;
-        }
-
-        .polaroid-frame {
-          width: 100%;
-          height: 170px;
-          overflow: hidden;
-          background: #f8f8f8;
-        }
-
-        .polaroid-frame img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px) rotate(var(--initial-rotation));
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0) rotate(var(--initial-rotation));
-          }
-        }
-      `}</style>
     </div>
   );
 };
@@ -110,53 +65,88 @@ export default function ArtworksSectionWithLightbox() {
 
   return (
     <section className="artworks-section">
-      <div className="container">
-        <div className="grid grid-cols-12 gap-x-16 w-full max-w-7xl mx-auto items-center min-h-screen">
-          {/* Text Content - Left Side */}
-          <div className="col-start-1 col-end-6 flex flex-col justify-center">
-            <h2 className="text-[clamp(4rem,12vw,8rem)] font-bold leading-none text-center">
-              <span className="text-black relative">
-                绘画作品展示
-                <span className="absolute inset-0 text-blue-400 -z-10 translate-x-4 translate-y-4 opacity-60">绘画作品展示</span>
-              </span>
-            </h2>
-            <p className="mt-8 text-lg leading-relaxed text-gray-700 text-center max-w-lg mx-auto">
-              精选二次元风格绘画作品，融合传统艺术与现代数字创作技术，展现独特的艺术视觉魅力和创意表达。我们专业的绘画团队致力于角色设计、场景插画和数字艺术创作。
-            </p>
+      <div className="container max-w-7xl mx-auto px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 py-20">
+          {/* Left Side - Title and Description */}
+          <div className="flex flex-col justify-center space-y-8">
+            <div>
+              <div className="inline-block mb-4">
+                <span className="text-sm font-medium uppercase tracking-wider text-blue-600 bg-blue-50 px-4 py-2 rounded-full">
+                  ✨ Artwork Gallery
+                </span>
+              </div>
+              
+              <h2 className="text-7xl lg:text-8xl font-black leading-tight text-black mb-6">
+                <span className="relative">
+                  绘画作品
+                  <span className="absolute inset-0 text-blue-400 -z-10 translate-x-3 translate-y-3 opacity-30">绘画作品</span>
+                </span>
+                <br />
+                <span className="text-6xl lg:text-7xl text-gray-600">展示</span>
+              </h2>
+            </div>
+            
+            <div className="space-y-6 text-lg leading-relaxed text-gray-700">
+              <p>
+                <span className="font-semibold text-gray-900">精选二次元风格绘画作品</span>，融合传统艺术与现代数字创作技术，展现独特的艺术视觉魅力和创意表达。
+              </p>
+              
+              <p>
+                我们专业的绘画团队致力于<span className="text-blue-600 font-medium">角色设计、场景插画和数字艺术创作</span>，每一幅作品都蕴含着丰富的情感和故事。
+              </p>
+              
+              <p>
+                从概念草图到最终渲染，我们用心雕琢每一个细节，为您带来<span className="text-purple-600 font-medium">视觉盛宴</span>。
+              </p>
+            </div>
+            
+            <div className="flex items-center space-x-4 pt-6">
+              <div className="w-12 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500"></div>
+              <span className="text-sm text-gray-500 font-medium">点击照片查看大图</span>
+            </div>
           </div>
           
-          {/* Scattered Polaroid Photos - Right Side */}
-          <div className="col-start-7 col-end-13 flex items-center justify-center">
-            <div className="scattered-photos relative w-full h-[500px]">
-              {artworks.slice(0, 5).map((artwork, index) => {
+          {/* Right Side - Photo Wall */}
+          <div className="relative">
+            <div className="scattered-photos relative w-full h-[800px]">
+              {artworks.slice(0, 6).map((artwork, index) => {
                 const positions = [
-                  { left: '5%', top: '20%', rotation: -8 },
-                  { left: '25%', top: '40%', rotation: 5 },
-                  { left: '45%', top: '15%', rotation: -3 },
-                  { left: '65%', top: '35%', rotation: 12 },
-                  { left: '80%', top: '25%', rotation: -5 },
+                  { left: '5%', top: '5%', rotation: -8, scale: 0.9 },
+                  { left: '40%', top: '0%', rotation: 12, scale: 1.0 },
+                  { left: '70%', top: '15%', rotation: -5, scale: 0.85 },
+                  { left: '10%', top: '40%', rotation: 15, scale: 1.1 },
+                  { left: '45%', top: '45%', rotation: -10, scale: 0.95 },
+                  { left: '75%', top: '60%', rotation: 8, scale: 1.0 },
                 ];
                 const pos = positions[index];
                 
                 return (
                   <div
                     key={artwork.id}
-                    className="polaroid-photo"
+                    className="polaroid-photo-large"
                     style={{
                       position: 'absolute',
                       left: pos.left,
                       top: pos.top,
-                      transform: `rotate(${pos.rotation}deg)`,
-                      animationDelay: `${index * 0.2}s`,
+                      transform: `rotate(${pos.rotation}deg) scale(${pos.scale})`,
+                      animationDelay: `${index * 0.15}s`,
                     }}
                     onClick={() => openLightbox(index)}
                   >
-                    <div className="polaroid-frame">
+                    <div className="polaroid-frame-large">
                       <img src={artwork.image} alt={artwork.title} />
+                    </div>
+                    <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">{index + 1}</span>
                     </div>
                   </div>
                 );
               })}
+              
+              {/* Decorative elements */}
+              <div className="absolute top-10 right-10 w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+              <div className="absolute bottom-20 left-5 w-1 h-1 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+              <div className="absolute top-1/2 right-5 w-1.5 h-1.5 bg-pink-400 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
             </div>
           </div>
         </div>
@@ -176,23 +166,22 @@ export default function ArtworksSectionWithLightbox() {
 
       <style jsx>{`
         .artworks-section {
-          min-height: 40vh;
-          background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f4c75 100%);
+          background: #ffffff;
           position: relative;
           overflow: hidden;
-          padding: 50px 0;
+          padding: 80px 0;
         }
 
         .artworks-section::before {
           content: '';
           position: absolute;
-          top: 20%;
-          left: -10%;
-          width: 200px;
-          height: 200px;
-          background: radial-gradient(circle, rgba(139, 69, 196, 0.15) 0%, transparent 70%);
+          top: 10%;
+          left: -5%;
+          width: 300px;
+          height: 300px;
+          background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
           border-radius: 50%;
-          filter: blur(40px);
+          filter: blur(50px);
         }
 
         .artworks-section::after {
@@ -200,11 +189,11 @@ export default function ArtworksSectionWithLightbox() {
           position: absolute;
           bottom: 10%;
           right: -5%;
-          width: 150px;
-          height: 150px;
-          background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+          width: 200px;
+          height: 200px;
+          background: radial-gradient(circle, rgba(139, 69, 196, 0.05) 0%, transparent 70%);
           border-radius: 50%;
-          filter: blur(30px);
+          filter: blur(40px);
         }
 
         .container {

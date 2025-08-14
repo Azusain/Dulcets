@@ -1,4 +1,5 @@
 import ConditionalNavigation from "@/components/ConditionalNavigation";
+import { LoadingProvider } from "@/contexts/LoadingContext";
 import "./global.css";
 import "./loading.css";
 
@@ -30,14 +31,22 @@ export default function RootLayout({
               right: 0 !important;
               z-index: 9999 !important;
               width: 100% !important;
+              background-color: rgba(0, 0, 0, 0.95) !important;
+              backdrop-filter: blur(10px) !important;
+              -webkit-backdrop-filter: blur(10px) !important;
+            }
+            nav.nav-loaded {
+              transition: all 0.3s ease-in-out !important;
             }
           `
         }} />
         <title>Dulcets</title>
       </head>
       <body>
-        <ConditionalNavigation />
-        {children}
+        <LoadingProvider>
+          <ConditionalNavigation />
+          {children}
+        </LoadingProvider>
       </body>
     </html>
   );

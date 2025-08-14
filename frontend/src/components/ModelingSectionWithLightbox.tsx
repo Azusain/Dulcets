@@ -36,60 +36,15 @@ const PolaroidPhoto = ({ model, onClick, index }: { model: Model; onClick: () =>
     <div
       className="polaroid-photo"
       style={{
+        '--initial-rotation': `${rotations[index % rotations.length]}deg`,
         transform: `rotate(${rotations[index % rotations.length]}deg)`,
         animationDelay: `${index * 0.1}s`,
-      }}
+      } as React.CSSProperties}
       onClick={onClick}
     >
       <div className="polaroid-frame">
         <img src={model.image} alt={model.title} />
       </div>
-
-      <style jsx>{`
-        .polaroid-photo {
-          width: 200px;
-          height: 240px;
-          background: white;
-          padding: 15px 15px 45px 15px;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-          cursor: pointer;
-          transition: all 0.3s ease;
-          animation: fadeInUp 0.6s ease forwards;
-          opacity: 0;
-          transform-origin: center;
-          flex-shrink: 0;
-        }
-
-        .polaroid-photo:hover {
-          transform: rotate(0deg) scale(1.05);
-          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-          z-index: 10;
-        }
-
-        .polaroid-frame {
-          width: 100%;
-          height: 170px;
-          overflow: hidden;
-          background: #f8f8f8;
-        }
-
-        .polaroid-frame img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px) rotate(var(--initial-rotation));
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0) rotate(var(--initial-rotation));
-          }
-        }
-      `}</style>
     </div>
   );
 };
@@ -110,53 +65,91 @@ export default function ModelingSectionWithLightbox() {
 
   return (
     <section className="modeling-section">
-      <div className="container">
-        <div className="grid grid-cols-12 gap-x-16 w-full max-w-7xl mx-auto items-center min-h-screen">
-          {/* Text Content - Left Side */}
-          <div className="col-start-1 col-end-6 flex flex-col justify-center">
-            <h2 className="text-[clamp(4rem,12vw,8rem)] font-bold leading-none text-center">
-              <span className="text-black relative">
-                3D建模服务
-                <span className="absolute inset-0 text-cyan-400 -z-10 translate-x-4 translate-y-4 opacity-60">3D建模服务</span>
-              </span>
-            </h2>
-            <p className="mt-8 text-lg leading-relaxed text-gray-700 text-center max-w-lg mx-auto">
-              专业的3D建模团队，将电脑商品与场景建模服务，从概念设计到游戏和动画制作，我们提供不同类型的创新。我们致力于不同类型和规模的创作，能够提供无论是传统的艺术设计、复杂的场景环境建模还是高品质的材质。
-            </p>
+      <div className="container max-w-7xl mx-auto px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 py-20">
+          {/* Left Side - Title and Description */}
+          <div className="flex flex-col justify-center space-y-8">
+            <div>
+              <div className="inline-block mb-4">
+                <span className="text-sm font-medium uppercase tracking-wider text-cyan-600 bg-cyan-50 px-4 py-2 rounded-full">
+                  🎯 3D Studio
+                </span>
+              </div>
+              
+              <h2 className="text-7xl lg:text-8xl font-black leading-tight text-black mb-6">
+                <span className="relative">
+                  3D建模
+                  <span className="absolute inset-0 text-cyan-400 -z-10 translate-x-3 translate-y-3 opacity-30">3D建模</span>
+                </span>
+                <br />
+                <span className="text-6xl lg:text-7xl text-gray-600">服务</span>
+              </h2>
+            </div>
+            
+            <div className="space-y-6 text-lg leading-relaxed text-gray-700">
+              <p>
+                <span className="font-semibold text-gray-900">专业的3D建模团队</span>，从概念设计到游戏动画制作，为您提供全方位的三维内容创作解决方案。
+              </p>
+              
+              <p>
+                我们精通<span className="text-cyan-600 font-medium">角色建模、场景构建、材质渲染和动画制作</span>，无论是游戏资产、建筑可视化还是产品展示，都能为您带来震撼的视觉效果。
+              </p>
+              
+              <p>
+                运用最新的3D技术和工具，我们将您的创意转化为<span className="text-purple-600 font-medium">栩栩如生的三维世界</span>。
+              </p>
+            </div>
+            
+            <div className="flex items-center space-x-4 pt-6">
+              <div className="w-12 h-0.5 bg-gradient-to-r from-cyan-500 to-purple-500"></div>
+              <span className="text-sm text-gray-500 font-medium">点击作品浏览详情</span>
+            </div>
           </div>
           
-          {/* Scattered Polaroid Photos - Right Side */}
-          <div className="col-start-7 col-end-13 flex items-center justify-center">
-            <div className="scattered-photos relative w-full h-[500px]">
-              {models.slice(0, 5).map((model, index) => {
+          {/* Right Side - Photo Wall */}
+          <div className="relative">
+            <div className="scattered-photos relative w-full h-[800px]">
+              {models.slice(0, 6).map((model, index) => {
                 const positions = [
-                  { left: '8%', top: '8%', rotation: 8 },
-                  { left: '16%', top: '16%', rotation: -12 },
-                  { left: '64%', top: '8%', rotation: -5 },
-                  { left: '12%', top: '40%', rotation: 15 },
-                  { left: '33%', top: '40%', rotation: 2 },
+                  { left: '8%', top: '8%', rotation: 10, scale: 0.95 },
+                  { left: '42%', top: '2%', rotation: -8, scale: 1.05 },
+                  { left: '72%', top: '18%', rotation: 12, scale: 0.9 },
+                  { left: '12%', top: '45%', rotation: -12, scale: 1.1 },
+                  { left: '48%', top: '50%', rotation: 6, scale: 0.85 },
+                  { left: '75%', top: '65%', rotation: -9, scale: 1.0 },
                 ];
                 const pos = positions[index];
                 
                 return (
                   <div
                     key={model.id}
-                    className="polaroid-photo"
+                    className="polaroid-photo-large"
                     style={{
                       position: 'absolute',
                       left: pos.left,
                       top: pos.top,
-                      transform: `rotate(${pos.rotation}deg)`,
-                      animationDelay: `${index * 0.2}s`,
+                      transform: `rotate(${pos.rotation}deg) scale(${pos.scale})`,
+                      animationDelay: `${index * 0.15}s`,
                     }}
                     onClick={() => openLightbox(index)}
                   >
-                    <div className="polaroid-frame">
+                    <div className="polaroid-frame-large">
                       <img src={model.image} alt={model.title} />
+                    </div>
+                    <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-cyan-500 rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">{index + 1}</span>
                     </div>
                   </div>
                 );
               })}
+              
+              {/* Decorative elements */}
+              <div className="absolute top-12 right-8 w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+              <div className="absolute bottom-24 left-8 w-1 h-1 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '0.7s' }}></div>
+              <div className="absolute top-1/3 right-12 w-1.5 h-1.5 bg-pink-400 rounded-full animate-pulse" style={{ animationDelay: '1.2s' }}></div>
+              
+              {/* Tech grid overlay */}
+              <div className="absolute inset-0 tech-grid opacity-20 pointer-events-none"></div>
             </div>
           </div>
         </div>
@@ -176,35 +169,34 @@ export default function ModelingSectionWithLightbox() {
 
       <style jsx>{`
         .modeling-section {
-          min-height: 40vh;
-          background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+          background: #f8f9fa;
           position: relative;
           overflow: hidden;
-          padding: 50px 0;
+          padding: 80px 0;
         }
 
         .modeling-section::before {
           content: '';
           position: absolute;
-          top: 20%;
-          left: -10%;
-          width: 200px;
-          height: 200px;
-          background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%);
+          top: 15%;
+          left: -5%;
+          width: 250px;
+          height: 250px;
+          background: radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
           border-radius: 50%;
-          filter: blur(40px);
+          filter: blur(45px);
         }
 
         .modeling-section::after {
           content: '';
           position: absolute;
-          bottom: 10%;
+          bottom: 15%;
           right: -5%;
-          width: 150px;
-          height: 150px;
-          background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
+          width: 180px;
+          height: 180px;
+          background: radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 70%);
           border-radius: 50%;
-          filter: blur(30px);
+          filter: blur(35px);
         }
 
         .container {

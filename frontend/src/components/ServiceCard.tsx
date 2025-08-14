@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import { getAssetPath } from '../utils/assetPath';
 
 interface ServiceCardProps {
   image: string;
@@ -12,6 +13,9 @@ interface ServiceCardProps {
 
 export const ServiceCard = ({ image, title, description, href = "#", delay = 0 }: ServiceCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
+  
+  // Process image path to handle both external URLs and local paths
+  const processedImage = image.startsWith('http') ? image : getAssetPath(image);
 
   return (
     <div 
@@ -24,7 +28,7 @@ export const ServiceCard = ({ image, title, description, href = "#", delay = 0 }
         {/* Image Container */}
         <div className="relative w-full aspect-[4/3] overflow-hidden">
           <img 
-            src={image}
+            src={processedImage}
             alt={title}
             className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105"
           />
