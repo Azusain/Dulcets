@@ -55,11 +55,11 @@ const DsNavigation = () => {
       ? '0 4px 32px rgba(0, 0, 0, 0.3), 0 8px 64px rgba(0, 0, 0, 0.2)' 
       : 'none',
     borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.3)' : 'none',
-    opacity: showNav ? 1 : 0,
-    transform: showNav ? 'translateY(0)' : 'translateY(-100%)',
+    opacity: isLoading ? 0 : (showNav ? 1 : 0),
+    transform: isLoading ? 'translateY(0)' : (showNav ? 'translateY(0)' : 'translateY(-100%)'),
     transition: isLoading 
-      ? 'none' 
-      : 'all 0.8s cubic-bezier(0.4, 0.0, 0.2, 1), opacity 0.6s ease-out 0.2s, transform 0.8s ease-out',
+      ? 'opacity 0s' 
+      : 'all 0.3s ease-in-out, opacity 0.6s ease-out 0.2s, transform 0.8s ease-out 0.3s',
   };
 
   return (
