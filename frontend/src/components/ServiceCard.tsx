@@ -26,12 +26,30 @@ export const ServiceCard = ({ image, title, description, href = "#", delay = 0 }
           <img 
             src={image}
             alt={title}
-            className="w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-105"
+            className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105"
           />
           
-          {/* Clean hover effect - subtle scale only */}
+          {/* Text Overlay - slides up from bottom (NO BLACK BACKGROUND) */}
           <div 
-            className={`absolute top-4 right-4 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md transition-all duration-300 ${
+            className={`absolute inset-0 flex flex-col justify-end p-6 transition-all duration-700 ease-out ${
+              isHovered 
+                ? 'transform translate-y-0 opacity-100' 
+                : 'transform translate-y-full opacity-0'
+            }`}
+          >
+            <div className="space-y-3">
+              <h3 className="text-lg font-bold text-white leading-tight drop-shadow-lg">
+                {title}
+              </h3>
+              <p className="text-sm text-white/90 leading-relaxed drop-shadow-md">
+                {description}
+              </p>
+            </div>
+          </div>
+          
+          {/* Arrow Icon - appears on hover */}
+          <div 
+            className={`absolute top-4 right-4 w-8 h-8 bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm transition-all duration-500 ${
               isHovered 
                 ? 'opacity-100 transform scale-100' 
                 : 'opacity-0 transform scale-75'
@@ -51,16 +69,6 @@ export const ServiceCard = ({ image, title, description, href = "#", delay = 0 }
               />
             </svg>
           </div>
-        </div>
-        
-        {/* Content Below Image */}
-        <div className="p-6">
-          <h3 className="text-xl font-bold text-gray-800 mb-3 leading-tight">
-            {title}
-          </h3>
-          <p className="text-sm text-gray-600 leading-relaxed">
-            {description}
-          </p>
         </div>
       </a>
     </div>

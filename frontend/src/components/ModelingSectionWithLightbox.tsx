@@ -111,18 +111,53 @@ export default function ModelingSectionWithLightbox() {
   return (
     <section className="modeling-section">
       <div className="container">
-        <h2 className="section-title">3D建模服务</h2>
-        
-        <div className="polaroid-container">
-          <div className="polaroid-scroll">
-            {models.map((model, index) => (
-              <PolaroidPhoto
-                key={model.id}
-                model={model}
-                index={index}
-                onClick={() => openLightbox(index)}
-              />
-            ))}
+        <div className="grid grid-cols-12 gap-x-16 w-full max-w-7xl mx-auto items-center min-h-screen">
+          {/* Text Content - Left Side */}
+          <div className="col-start-1 col-end-6 flex flex-col justify-center">
+            <h2 className="text-[clamp(4rem,12vw,8rem)] font-bold leading-none text-center">
+              <span className="text-black relative">
+                3D建模服务
+                <span className="absolute inset-0 text-cyan-400 -z-10 translate-x-4 translate-y-4 opacity-60">3D建模服务</span>
+              </span>
+            </h2>
+            <p className="mt-8 text-lg leading-relaxed text-gray-700 text-center max-w-lg mx-auto">
+              专业的3D建模团队，将电脑商品与场景建模服务，从概念设计到游戏和动画制作，我们提供不同类型的创新。我们致力于不同类型和规模的创作，能够提供无论是传统的艺术设计、复杂的场景环境建模还是高品质的材质。
+            </p>
+          </div>
+          
+          {/* Scattered Polaroid Photos - Right Side */}
+          <div className="col-start-7 col-end-13 flex items-center justify-center">
+            <div className="scattered-photos relative w-full h-[500px]">
+              {models.slice(0, 5).map((model, index) => {
+                const positions = [
+                  { left: '8%', top: '8%', rotation: 8 },
+                  { left: '16%', top: '16%', rotation: -12 },
+                  { left: '64%', top: '8%', rotation: -5 },
+                  { left: '12%', top: '40%', rotation: 15 },
+                  { left: '33%', top: '40%', rotation: 2 },
+                ];
+                const pos = positions[index];
+                
+                return (
+                  <div
+                    key={model.id}
+                    className="polaroid-photo"
+                    style={{
+                      position: 'absolute',
+                      left: pos.left,
+                      top: pos.top,
+                      transform: `rotate(${pos.rotation}deg)`,
+                      animationDelay: `${index * 0.2}s`,
+                    }}
+                    onClick={() => openLightbox(index)}
+                  >
+                    <div className="polaroid-frame">
+                      <img src={model.image} alt={model.title} />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
