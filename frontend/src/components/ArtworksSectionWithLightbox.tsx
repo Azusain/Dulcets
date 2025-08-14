@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import '../styles/lightbox.css';
+import { getAssetPath } from '../utils/assetPath';
 
 interface Artwork {
   id: number;
@@ -11,16 +12,22 @@ interface Artwork {
   image: string;
 }
 
-const artworks: Artwork[] = [
-  { id: 1, title: '绘画作品 1', image: '/images/artworks/artwork1.jpg' },
-  { id: 2, title: '绘画作品 2', image: '/images/artworks/artwork2.jpg' },
-  { id: 3, title: '绘画作品 3', image: '/images/artworks/artwork3.jpg' },
-  { id: 4, title: '绘画作品 4', image: '/images/artworks/artwork4.jpg' },
-  { id: 5, title: '绘画作品 5', image: '/images/artworks/artwork5.jpg' },
-  { id: 6, title: '绘画作品 6', image: '/images/artworks/artwork6.jpg' },
-  { id: 7, title: '绘画作品 7', image: '/images/artworks/artwork7.jpg' },
-  { id: 8, title: '绘画作品 8', image: '/images/artworks/artwork8.jpg' },
+const artworksData = [
+  { id: 1, title: '绘画作品 1', imagePath: '/images/artworks/artwork1.jpg' },
+  { id: 2, title: '绘画作品 2', imagePath: '/images/artworks/artwork2.jpg' },
+  { id: 3, title: '绘画作品 3', imagePath: '/images/artworks/artwork3.jpg' },
+  { id: 4, title: '绘画作品 4', imagePath: '/images/artworks/artwork4.jpg' },
+  { id: 5, title: '绘画作品 5', imagePath: '/images/artworks/artwork5.jpg' },
+  { id: 6, title: '绘画作品 6', imagePath: '/images/artworks/artwork6.jpg' },
+  { id: 7, title: '绘画作品 7', imagePath: '/images/artworks/artwork7.jpg' },
+  { id: 8, title: '绘画作品 8', imagePath: '/images/artworks/artwork8.jpg' },
 ];
+
+// Generate artworks with proper paths
+const artworks: Artwork[] = artworksData.map(item => ({
+  ...item,
+  image: getAssetPath(item.imagePath)
+}));
 
 const PolaroidPhoto = ({ artwork, onClick, index }: { artwork: Artwork; onClick: () => void; index: number }) => {
   const rotations = [-8, 5, -3, 12, -5, 8, -10, 3];

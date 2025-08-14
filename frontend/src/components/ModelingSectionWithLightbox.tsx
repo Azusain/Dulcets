@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import '../styles/lightbox.css';
+import { getAssetPath } from '../utils/assetPath';
 
 interface Model {
   id: number;
@@ -11,16 +12,22 @@ interface Model {
   image: string;
 }
 
-const models: Model[] = [
-  { id: 1, title: '3D作品 1', image: '/images/modeling/model1.jpg' },
-  { id: 2, title: '3D作品 2', image: '/images/modeling/model2.jpg' },
-  { id: 3, title: '3D作品 3', image: '/images/modeling/model3.jpg' },
-  { id: 4, title: '3D作品 4', image: '/images/modeling/model4.jpg' },
-  { id: 5, title: '3D作品 5', image: '/images/modeling/model5.jpg' },
-  { id: 6, title: '3D作品 6', image: '/images/modeling/model6.jpg' },
-  { id: 7, title: '3D作品 7', image: '/images/modeling/model7.jpg' },
-  { id: 8, title: '3D作品 8', image: '/images/modeling/model8.jpg' },
+const modelsData = [
+  { id: 1, title: '3D作品 1', imagePath: '/images/modeling/model1.jpg' },
+  { id: 2, title: '3D作品 2', imagePath: '/images/modeling/model2.jpg' },
+  { id: 3, title: '3D作品 3', imagePath: '/images/modeling/model3.jpg' },
+  { id: 4, title: '3D作品 4', imagePath: '/images/modeling/model4.jpg' },
+  { id: 5, title: '3D作品 5', imagePath: '/images/modeling/model5.jpg' },
+  { id: 6, title: '3D作品 6', imagePath: '/images/modeling/model6.jpg' },
+  { id: 7, title: '3D作品 7', imagePath: '/images/modeling/model7.jpg' },
+  { id: 8, title: '3D作品 8', imagePath: '/images/modeling/model8.jpg' },
 ];
+
+// Generate models with proper paths
+const models: Model[] = modelsData.map(item => ({
+  ...item,
+  image: getAssetPath(item.imagePath)
+}));
 
 const PolaroidPhoto = ({ model, onClick, index }: { model: Model; onClick: () => void; index: number }) => {
   const rotations = [-8, 5, -3, 12, -5, 8, -10, 3];
