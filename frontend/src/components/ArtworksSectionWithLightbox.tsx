@@ -65,7 +65,7 @@ export const ArtworkPhotos = () => {
         <PolaroidPhoto
           src="https://www.dmoe.cc/random.php?1"
           alt="角色设计"
-          className="absolute top-0 left-0 w-48 md:w-36 sm:w-32"
+          className="absolute top-8 left-4 w-64 md:w-48 sm:w-40"
           style={{ transform: 'rotate(-8deg)' }}
           delay={100}
           onClick={() => openLightbox("https://www.dmoe.cc/random.php?1", "角色设计")}
@@ -75,7 +75,7 @@ export const ArtworkPhotos = () => {
         <PolaroidPhoto
           src="https://www.dmoe.cc/random.php?2"
           alt="场景插画"
-          className="absolute top-12 right-8 w-56 md:w-40 sm:w-36"
+          className="absolute top-16 right-2 w-72 md:w-52 sm:w-44"
           style={{ transform: 'rotate(12deg)' }}
           delay={300}
           onClick={() => openLightbox("https://www.dmoe.cc/random.php?2", "场景插画")}
@@ -85,7 +85,7 @@ export const ArtworkPhotos = () => {
         <PolaroidPhoto
           src="https://www.dmoe.cc/random.php?3"
           alt="概念艺术"
-          className="absolute top-48 left-16 w-52 md:w-38 sm:w-34"
+          className="absolute top-60 left-20 w-68 md:w-50 sm:w-42"
           style={{ transform: 'rotate(3deg)' }}
           delay={500}
           onClick={() => openLightbox("https://www.dmoe.cc/random.php?3", "概念艺术")}
@@ -95,7 +95,7 @@ export const ArtworkPhotos = () => {
         <PolaroidPhoto
           src="https://www.dmoe.cc/random.php?4"
           alt="数字绘画"
-          className="absolute bottom-8 right-0 w-44 md:w-34 sm:w-30"
+          className="absolute bottom-12 right-4 w-60 md:w-44 sm:w-38"
           style={{ transform: 'rotate(-15deg)' }}
           delay={700}
           onClick={() => openLightbox("https://www.dmoe.cc/random.php?4", "数字绘画")}
@@ -105,7 +105,7 @@ export const ArtworkPhotos = () => {
         <PolaroidPhoto
           src="https://www.dmoe.cc/random.php?11"
           alt="环境设计"
-          className="absolute top-32 left-1/2 transform -translate-x-1/2 w-40 md:w-32 sm:w-28 opacity-80"
+          className="absolute top-40 left-1/2 transform -translate-x-1/2 w-56 md:w-42 sm:w-36 opacity-80"
           style={{ transform: 'translateX(-50%) rotate(-2deg)', zIndex: -1 }}
           delay={900}
           onClick={() => openLightbox("https://www.dmoe.cc/random.php?11", "环境设计")}

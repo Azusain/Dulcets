@@ -34,7 +34,7 @@ export const ImageLightbox = ({ src, alt, isOpen, onClose, theme = 'light' }: {
 
   return (
     <div 
-      className={`fixed inset-0 z-[9999] ${isDark ? 'bg-gray-900/95' : 'bg-black/90'} backdrop-blur-sm flex items-center justify-center p-4`}
+      className={`fixed inset-0 z-[999999] ${isDark ? 'bg-gray-900/95' : 'bg-black/90'} backdrop-blur-sm flex items-center justify-center p-4`}
       onClick={onClose}
     >
       <div className="relative max-w-7xl max-h-[90vh] w-full">

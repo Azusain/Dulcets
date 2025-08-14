@@ -4,6 +4,7 @@ import ArtworksSection from '@/components/ArtworksSection';
 import ModelingSection from '@/components/ModelingSection';
 import ContactSection from '@/components/ContactSection';
 import { MainPageClient, AnimatedStatsWrapper } from '@/components/MainPageClient';
+import { ServiceCard } from '@/components/ServiceCard';
 import SlideCoverAnimation from '@/components/animations/SlideCoverAnimation';
 
 export interface HomePageInterface {
@@ -135,25 +136,25 @@ export function MainPage({ translations }: HomePageInterface) {
         </section>
 
         {/* Our Works Section */}
-        <section id="works" className="py-24 bg-gray-50 text-black">
-          <div className="max-w-6xl mx-auto px-6">
-            {/* G-angle inspired section header */}
-            <header className="mb-16 text-center">
-              <div className="mb-8">
-                <h2 className="text-5xl font-light mb-2 text-black">
-                  {t("works.title")}
-                </h2>
-                <p className="text-lg font-medium uppercase tracking-wider text-gray-500">
-                  OUR WORKS
-                </p>
+        <section id="works" className="py-16 bg-gray-50">
+          <div className="container mx-auto px-6">
+            {/* Section Header */}
+            <div className="text-center mb-12">
+              <div className="inline-block mb-4">
+                <span className="text-sm font-medium uppercase tracking-wider text-gray-500 bg-white px-4 py-2 rounded-full">
+                  Our Works
+                </span>
               </div>
-              <p className="text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed">
+              <h2 className="text-4xl font-bold text-gray-800 mb-4">
+                {t("works.title")}
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
                 {t("works.lead_description") || "私たちがこれまでに手がけた音楽作品・映像コンテンツをご紹介します。オリジナル楽曲からカバー作品まで、多様なジャンルの作品をお楽しみください。"}
               </p>
-            </header>
+            </div>
 
-            {/* Works Grid Layout */}
-            <div className="grid md:grid-cols-3 gap-12">
+            {/* Works Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
                   title: "【オリジナル曲】Dulcets - Aquamarine piano ver.",
@@ -274,43 +275,14 @@ export function MainPage({ translations }: HomePageInterface) {
                 const content = getLocalizedContent();
 
                 return (
-                  <article key={index} className="group overflow-hidden">
-                    {/* Image */}
-                    <div className="aspect-[16/9] overflow-hidden mb-5">
-                      <img
-                        src={post.image}
-                        alt={content.title}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                    </div>
-
-                    {/* Content */}
-                    <div>
-                      <div className="text-sm text-gray-500 mb-2">
-                        {post.date}
-                      </div>
-                      <h3 className="text-xl font-normal mb-3 text-black">
-                        <a
-                          href="#"
-                          className="hover:text-gray-600 transition-colors duration-200"
-                        >
-                          {content.title}
-                        </a>
-                      </h3>
-
-                      <p className="text-gray-700 text-base mb-4">
-                        {content.excerpt}
-                      </p>
-
-                      <a
-                        className="text-sm text-gray-500 hover:text-black transition-colors duration-200"
-                        href="#"
-                      >
-                        {t("works.read_more")} →
-                      </a>
-                    </div>
-                  </article>
+                  <ServiceCard
+                    key={index}
+                    image={post.image}
+                    title={content.title}
+                    description={content.excerpt}
+                    href={post.videoUrl}
+                    delay={index * 100}
+                  />
                 );
               })}
             </div>

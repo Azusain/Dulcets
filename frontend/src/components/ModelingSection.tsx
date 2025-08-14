@@ -26,31 +26,17 @@ export default function ModelingSection({ t }: ComponentWithTranslation) {
               <div className="w-fit rounded-full py-2 px-4 text-xs font-medium uppercase leading-none tracking-wider text-cyan-300 bg-cyan-400/10 backdrop-blur-sm border border-cyan-400/30">
                 🚀 3D Modeling
               </div>
-              <h2 className="mt-6 text-9xl font-bold leading-none xl:text-8xl md:text-7xl sm:text-6xl relative">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 relative">
+              <h2 className="mt-6 text-[clamp(6rem,16vw,12rem)] font-bold leading-none relative">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-500 relative">
                   3D 建模
-                  <span className="absolute inset-0 text-cyan-300 -z-10 translate-x-3 translate-y-3 opacity-30">3D 建模</span>
+                  <span className="absolute inset-0 text-blue-400 -z-10 translate-x-4 translate-y-4 opacity-60">3D 建模</span>
                 </span><br />
                 <span className="text-gray-200">服务</span>
               </h2>
-              <p className="mt-8 text-lg leading-relaxed xl:text-base md:mt-6 text-gray-300">
-                专业的3D建模团队，提供高质量虚拟角色与场景建模服务，从概念设计到完整3D模型制作，满足动画、游戏和虚拟演出需求。
+              <p className="mt-10 text-lg leading-relaxed xl:text-base md:mt-8 text-gray-300 mb-8">
+                专业的3D建模团队，提供高质量虚拟角色与场景建模服务，从概念设计到完整３Ｄ模型制作，满足动画、游戏和虚拟演出需求。我们的技术团队掌握先进的3D建模技术和工作流程，能够为您提供从角色设计、环境建模到动画绑定的全方位解决方案。无论是精细的角色建模、复杂的场景环境还是精美的材质贴图，都能以最高的标准为您呈现。
               </p>
-              <div className="mt-8 space-y-4 xl:mt-6 md:mt-4">
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-cyan-400 rounded-full mr-3 shadow-sm shadow-cyan-400/50"></div>
-                  <span className="text-gray-300">虚拟角色建模与绑定</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full mr-3 shadow-sm shadow-blue-400/50"></div>
-                  <span className="text-gray-300">场景环境与道具制作</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-purple-400 rounded-full mr-3 shadow-sm shadow-purple-400/50"></div>
-                  <span className="text-gray-300">纹理材质与光照设置</span>
-                </div>
-              </div>
-              <a className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-medium rounded-full transition-all duration-300 hover:from-cyan-600 hover:to-blue-600 hover:shadow-lg hover:shadow-cyan-500/25 hover:scale-105 mt-8 xl:mt-6 md:mt-4" href="#">
+              <a className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-medium transition-all duration-300 hover:from-cyan-600 hover:to-blue-600 hover:shadow-lg hover:shadow-cyan-500/25 hover:scale-105 mt-8 xl:mt-6 md:mt-4" href="#">
                 了解建模服务
                 <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>

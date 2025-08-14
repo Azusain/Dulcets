@@ -68,7 +68,7 @@ export const ModelingPhotos = () => {
         <PolaroidPhoto3D
           src="https://www.dmoe.cc/random.php?5"
           alt="角色建模"
-          className="absolute top-4 left-8 w-48 md:w-36 sm:w-32"
+          className="absolute top-8 left-12 w-64 md:w-48 sm:w-40"
           style={{ transform: 'rotate(8deg)' }}
           delay={200}
           onClick={() => openLightbox("https://www.dmoe.cc/random.php?5", "角色建模")}
@@ -78,7 +78,7 @@ export const ModelingPhotos = () => {
         <PolaroidPhoto3D
           src="https://www.dmoe.cc/random.php?6"
           alt="场景渲染"
-          className="absolute top-16 right-4 w-52 md:w-38 sm:w-34"
+          className="absolute top-20 right-8 w-68 md:w-50 sm:w-42"
           style={{ transform: 'rotate(-12deg)' }}
           delay={400}
           onClick={() => openLightbox("https://www.dmoe.cc/random.php?6", "场景渲染")}
@@ -88,7 +88,7 @@ export const ModelingPhotos = () => {
         <PolaroidPhoto3D
           src="https://www.dmoe.cc/random.php?7"
           alt="材质贴图"
-          className="absolute top-56 left-4 w-44 md:w-34 sm:w-30"
+          className="absolute top-64 left-8 w-60 md:w-44 sm:w-38"
           style={{ transform: 'rotate(-5deg)' }}
           delay={600}
           onClick={() => openLightbox("https://www.dmoe.cc/random.php?7", "材质贴图")}
@@ -98,7 +98,7 @@ export const ModelingPhotos = () => {
         <PolaroidPhoto3D
           src="https://www.dmoe.cc/random.php?8"
           alt="动画绑定"
-          className="absolute bottom-12 left-1/2 transform -translate-x-1/2 w-56 md:w-40 sm:w-36"
+          className="absolute bottom-16 left-1/2 transform -translate-x-1/2 w-72 md:w-52 sm:w-44"
           style={{ transform: 'translateX(-50%) rotate(15deg)' }}
           delay={800}
           onClick={() => openLightbox("https://www.dmoe.cc/random.php?8", "动画绑定")}
@@ -108,7 +108,7 @@ export const ModelingPhotos = () => {
         <PolaroidPhoto3D
           src="https://www.dmoe.cc/random.php?12"
           alt="环境设计"
-          className="absolute top-40 left-1/3 w-36 md:w-28 sm:w-24 opacity-70"
+          className="absolute top-44 left-1/3 w-52 md:w-38 sm:w-32 opacity-70"
           style={{ transform: 'rotate(2deg)', zIndex: -1 }}
           delay={1000}
           onClick={() => openLightbox("https://www.dmoe.cc/random.php?12", "环境设计")}
