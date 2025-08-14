@@ -1,24 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { getAssetPath } from "../utils/assetPath";
 
 export default function VideoBackground() {
-  const [videoSources, setVideoSources] = useState({
-    mp4: getAssetPath("/videos/hero-background.mp4"),
-    webm: getAssetPath("/videos/hero-background.webm")
-  });
+  // Get video source - only MP4 since webm doesn't exist
+  const videoSrc = getAssetPath("/videos/hero-background.mp4");
   
-  useEffect(() => {
-    const sources = {
-      mp4: getAssetPath("/videos/hero-background.mp4"),
-      webm: getAssetPath("/videos/hero-background.webm")
-    };
-    
-    console.log('VideoBackground - Final sources:', sources);
-    
-    setVideoSources(sources);
-  }, []); // Only run once on mount
+  console.log('VideoBackground - Source:', videoSrc);
 
   return (
     <>
@@ -28,20 +16,16 @@ export default function VideoBackground() {
         muted
         loop
         playsInline
-        preload="auto"
+        preload="metadata"
         onError={(e) => {
-          console.error('Video failed to load:', e);
-          console.error('Video sources:', videoSources);
+          console.error('Video failed to load:', e.currentTarget.error);
         }}
-        onLoadStart={() => {
-          console.log('Video loading started:', videoSources);
-        }}
-        onLoadedData={() => {
-          console.log('Video loaded successfully!');
+        onCanPlay={() => {
+          console.log('Video can play');
         }}
       >
-        <source src={videoSources.mp4} type="video/mp4" />
-        <source src={videoSources.webm} type="video/webm" />
+        <source src={videoSrc} type="video/mp4" />
+        Your browser does not support the video tag.
       </video>
       
       {/* Debug info will be in console */}

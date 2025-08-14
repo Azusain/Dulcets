@@ -1,5 +1,6 @@
 import ConditionalNavigation from "@/components/ConditionalNavigation";
 import { LoadingProvider } from "@/contexts/LoadingContext";
+import { getAssetPath } from "@/utils/assetPath";
 import "./global.css";
 import "./loading.css";
 
@@ -17,7 +18,7 @@ export default function RootLayout({
           name="viewport"
           content="width=device-width, initial-scale=1.0"
         ></meta>
-        <link rel="icon" type="image/png" href="/images/logo_black.png" />
+        <link rel="icon" type="image/png" href={getAssetPath("/images/logo_black.png")} />
         <link
           href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap"
           rel="stylesheet"
