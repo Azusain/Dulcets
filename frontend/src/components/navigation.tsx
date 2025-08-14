@@ -11,6 +11,7 @@ const DsNavigation = () => {
   const init_t = GetLanguageDict(GetLanguageFromPath());
   const [t, setTranslator] = useState<(key: string) => string>(() => init_t);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [faviconPath, setFaviconPath] = useState("/images/favicon.png");
 
   useEffect(() => {
     const handleScroll = () => {

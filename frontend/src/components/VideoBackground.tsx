@@ -29,9 +29,10 @@ export default function VideoBackground() {
     console.log('VideoBackground sources comparison:');
     console.log('Hook method:', sources);
     console.log('Direct method:', backupSources);
-    console.log('Using hook method');
     
-    setVideoSources(sources);
+    // Use direct method for now to ensure it works
+    console.log('Using DIRECT method for guaranteed GitHub Pages compatibility');
+    setVideoSources(backupSources);
   }, [getAssetPath]);
 
   return (
