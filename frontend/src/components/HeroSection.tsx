@@ -1,4 +1,5 @@
 import { ComponentWithTranslation } from "@/components/MainPage";
+import VideoBackground from "@/components/VideoBackground";
 
 // Pre-generated particles for static rendering
 const staticParticles = Array.from({ length: 50 }, (_, i) => ({
@@ -9,27 +10,12 @@ const staticParticles = Array.from({ length: 50 }, (_, i) => ({
 }));
 
 export default function HeroSection({ t }: ComponentWithTranslation) {
-  // The basePath and assetPrefix in next.config.ts should automatically handle this
-  const videoSources = {
-    mp4: "/videos/hero-background.mp4",
-    webm: "/videos/hero-background.webm"
-  };
   return (
     <section id="hero" className="relative h-screen overflow-hidden">
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
         {/* Main video background */}
-        <video
-          className="absolute inset-0 w-full h-full object-cover z-10"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-        >
-          <source src={videoSources.mp4} type="video/mp4" />
-          <source src={videoSources.webm} type="video/webm" />
-        </video>
+        <VideoBackground />
 
         {/* CSS Fallback Background - shows when video fails */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-purple-900 to-pink-900 z-0">
