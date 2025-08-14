@@ -1,8 +1,6 @@
-"use client";
 import { ComponentWithTranslation } from "@/components/MainPage";
-import { useState } from "react";
 
-// Polaroid component with interactive effects
+// Polaroid component with interactive effects (CSS-only)
 const PolaroidPhoto = ({ src, alt, className, style, delay = 0 }: {
   src: string;
   alt: string;
@@ -10,8 +8,6 @@ const PolaroidPhoto = ({ src, alt, className, style, delay = 0 }: {
   style?: React.CSSProperties;
   delay?: number;
 }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-
   return (
     <div 
       className={`polaroid-photo group ${className}`} 
@@ -26,8 +22,7 @@ const PolaroidPhoto = ({ src, alt, className, style, delay = 0 }: {
             src={src}
             alt={alt}
             loading="lazy"
-            className={`w-full h-full object-cover transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-            onLoad={() => setIsLoaded(true)}
+            className="w-full h-full object-cover"
           />
         </div>
         <div className="absolute bottom-3 left-3 right-3 text-center">

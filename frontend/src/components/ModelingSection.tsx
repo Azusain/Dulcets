@@ -1,8 +1,6 @@
-"use client";
 import { ComponentWithTranslation } from "@/components/MainPage";
-import { useState } from "react";
 
-// Polaroid component with interactive effects for dark theme
+// Polaroid component with interactive effects for dark theme (CSS-only)
 const PolaroidPhoto3D = ({ src, alt, className, style, delay = 0 }: {
   src: string;
   alt: string;
@@ -10,8 +8,6 @@ const PolaroidPhoto3D = ({ src, alt, className, style, delay = 0 }: {
   style?: React.CSSProperties;
   delay?: number;
 }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-
   return (
     <div 
       className={`polaroid-photo-3d group ${className}`} 
@@ -26,8 +22,7 @@ const PolaroidPhoto3D = ({ src, alt, className, style, delay = 0 }: {
             src={src}
             alt={alt}
             loading="lazy"
-            className={`w-full h-full object-cover transition-all duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'} group-hover:brightness-110`}
-            onLoad={() => setIsLoaded(true)}
+            className="w-full h-full object-cover transition-all duration-500 group-hover:brightness-110"
           />
         </div>
         <div className="absolute bottom-3 left-3 right-3 text-center">
