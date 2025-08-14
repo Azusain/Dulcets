@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import LanguageSwitcher, {
   GetLanguageDict,
   GetLanguageFromPath,
@@ -8,9 +8,45 @@ import LanguageSwitcher, {
 const DsNavigation = () => {
   const init_t = GetLanguageDict(GetLanguageFromPath());
   const [t, setTranslator] = useState<(key: string) => string>(() => init_t);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // 检查是否滚动超过视频英雄区域的高度（大约100vh）
+      const heroHeight = window.innerHeight;
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > heroHeight * 0.8); // 80%的视窗高度后开始变黑
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navStyle: React.CSSProperties = {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    width: '100%',
+    height: 'auto',
+    zIndex: 999,
+    backgroundColor: isScrolled ? 'rgba(0, 0, 0, 0.95)' : 'transparent',
+    backdropFilter: isScrolled ? 'blur(10px)' : 'none',
+    WebkitBackdropFilter: isScrolled ? 'blur(10px)' : 'none', // Safari support
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: '16px 24px',
+    color: 'white',
+    boxShadow: isScrolled 
+      ? '0 4px 32px rgba(0, 0, 0, 0.3), 0 8px 64px rgba(0, 0, 0, 0.2)' 
+      : 'none',
+    borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.3)' : 'none',
+    transition: 'all 0.3s ease-in-out'
+  };
 
   return (
-    <nav className="flex items-center justify-between px-6 py-3 bg-black text-white">
+    <nav style={navStyle}>
       <div className="cursor-pointer">
         <img
           src="/images/favicon.png"
@@ -33,21 +69,42 @@ const DsNavigation = () => {
         </div>
 
         {/* Search Bar */}
-        <div className="hidden md:flex items-center bg-gray-800 rounded-full px-4 py-2 min-w-[200px]">
-          <svg className="w-4 h-4 text-gray-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div 
+          className="hidden md:flex items-center rounded-full px-4 py-2 min-w-[200px]"
+          style={{
+            backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
+            backdropFilter: isScrolled ? 'blur(10px)' : 'none',
+            border: isScrolled ? '1px solid rgba(255, 255, 255, 0.2)' : 'none',
+            transition: 'all 0.3s ease-in-out'
+          }}
+        >
+          <svg className="w-4 h-4 text-gray-300 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
           </svg>
           <input 
             type="text" 
             placeholder="Search..."
-            className="bg-transparent text-white text-sm placeholder-gray-400 focus:outline-none flex-1"
+            className="bg-transparent text-white text-sm placeholder-gray-300 focus:outline-none flex-1"
           />
         </div>
 
         <LanguageSwitcher setTranslator={setTranslator} />
 
         {/* Sidebar Button */}
-        <button className="flex flex-col space-y-1.5 p-2 hover:bg-gray-800 rounded transition-colors">
+        <button 
+          className="flex flex-col space-y-1.5 p-2 rounded transition-colors"
+          style={{
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+            e.currentTarget.style.backdropFilter = 'blur(10px)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'transparent';
+            e.currentTarget.style.backdropFilter = 'none';
+          }}
+        >
           <span className="block w-6 h-0.5 bg-white"></span>
           <span className="block w-6 h-0.5 bg-white"></span>
           <span className="block w-6 h-0.5 bg-white"></span>

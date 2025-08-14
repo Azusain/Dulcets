@@ -96,7 +96,7 @@ export function AnimatedServiceWrapper({ translations }: AnimatedServiceWrapperP
       title: t("services.production.title"),
       description: t("services.production.description"),
       icon: "🎧",
-      color: "#10B981" // Green
+      color: "#000000" // Pure Black - Sharp Edge Mode
     },
     {
       title: t("services.distribution.title"),

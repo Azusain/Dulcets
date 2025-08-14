@@ -21,12 +21,22 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap"
           rel="stylesheet"
         />
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            nav {
+              position: fixed !important;
+              top: 0 !important;
+              left: 0 !important;
+              right: 0 !important;
+              z-index: 9999 !important;
+              width: 100% !important;
+            }
+          `
+        }} />
         <title>Dulcets</title>
       </head>
-      <body className="bg-black">
-        <header>
-          <DsNavigation />
-        </header>
+      <body>
+        <DsNavigation />
         {children}
       </body>
     </html>

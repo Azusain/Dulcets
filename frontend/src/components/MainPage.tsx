@@ -30,9 +30,9 @@ export function MainPage({ translations }: HomePageInterface) {
   // Create a local t function for this component
   const t = (key: string) => getTranslation(translations, key);
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen text-white" style={{ background: 'transparent' }}>
       {/* CSS-Only Loading Animation */}
-      <div className="loading-screen fixed inset-0 z-50 flex items-center justify-center bg-gray-900">
+      <div className="loading-screen fixed inset-0 z-[90] flex items-center justify-center bg-gray-900">
         <div className="text-center">
           <div className="text-6xl font-bold text-white mb-4">
             <span className="text-gray-300">D</span>
@@ -67,11 +67,20 @@ export function MainPage({ translations }: HomePageInterface) {
         {/* About Us Section */}
         <section id="about" className="py-24 bg-gray-50 text-black">
           <div className="max-w-6xl mx-auto px-6">
-            <div className="mb-16">
-              <h2 className="text-4xl font-light mb-12 text-center">
-                {t("about.title")}
-              </h2>
-            </div>
+            {/* G-angle inspired section header */}
+            <header className="mb-16 text-center">
+              <div className="mb-8">
+                <h2 className="text-5xl font-light mb-2 text-black">
+                  {t("about.title")}
+                </h2>
+                <p className="text-lg font-medium uppercase tracking-wider text-gray-500">
+                  ABOUT US
+                </p>
+              </div>
+              <p className="text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed">
+                {t("about.lead_description") || "Dulcetsは音楽制作を中心に、動画・イラスト・3Dモデリングなど幅広いクリエイティブ制作を手がけるチームです。お客様の想いを形にし、心に響く作品をお届けします。"}
+              </p>
+            </header>
 
             {/* Main Content Area: Text on left, Genres on right */}
             <div className="grid lg:grid-cols-2 gap-12 mb-16">
@@ -124,11 +133,20 @@ export function MainPage({ translations }: HomePageInterface) {
         {/* Our Works Section */}
         <section id="works" className="py-24 bg-gray-50 text-black">
           <div className="max-w-6xl mx-auto px-6">
-            <div className="mb-16">
-              <h2 className="text-4xl font-normal mb-12 text-center">
-                {t("works.title")}
-              </h2>
-            </div>
+            {/* G-angle inspired section header */}
+            <header className="mb-16 text-center">
+              <div className="mb-8">
+                <h2 className="text-5xl font-light mb-2 text-black">
+                  {t("works.title")}
+                </h2>
+                <p className="text-lg font-medium uppercase tracking-wider text-gray-500">
+                  OUR WORKS
+                </p>
+              </div>
+              <p className="text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed">
+                {t("works.lead_description") || "私たちがこれまでに手がけた音楽作品・映像コンテンツをご紹介します。オリジナル楽曲からカバー作品まで、多様なジャンルの作品をお楽しみください。"}
+              </p>
+            </header>
 
             {/* Works Grid Layout */}
             <div className="grid md:grid-cols-3 gap-12">

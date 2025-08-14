@@ -9,6 +9,7 @@
   },
   "about": {
     "title": "About Us",
+    "lead_description": "Dulcets is a creative team specializing in music production, video creation, illustration, and 3D modeling. We bring your ideas to life and deliver works that resonate with hearts.",
     "content": "We are dedicated to crafting unique and captivating Japanese anime songs, J-pop, J-Rock, and background music (BGM). Whether it's an exhilarating theme song or a heart-touching insert track, our team meticulously refines every note. Our composers, arrangers, and mixing engineers are not only experts in these musical styles but also have a keen eye for detail. We believe that each client has distinct musical needs, so we tailor each piece to perfectly fit your project and exceed your expectations. Let's bring your musical vision to life together.",
     "genres": {
       "anime_song": {
@@ -74,6 +75,7 @@
   },
   "works": {
     "title": "Our Works",
+    "lead_description": "Explore our collection of music works and video content. From original compositions to cover songs, enjoy our diverse range of creative works.",
     "read_more": "Read More"
   },
   "pricing": {
