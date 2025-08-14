@@ -11,22 +11,9 @@ const staticParticles = Array.from({ length: 50 }, (_, i) => ({
 export default function HeroSection({ t }: ComponentWithTranslation) {
   return (
     <section id="hero" className="relative h-screen overflow-hidden">
-      {/* Video Background */}
+      {/* Background */}
       <div className="absolute inset-0 z-0">
-        {/* Main video background */}
-        <video
-          className="absolute inset-0 w-full h-full object-cover z-10"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-        >
-          <source src="/videos/hero-background.mp4" type="video/mp4" />
-          <source src="/videos/hero-background.webm" type="video/webm" />
-        </video>
-
-        {/* CSS Fallback Background - shows when video fails */}
+        {/* Primary gradient background */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-purple-900 to-pink-900 z-0">
           {/* Static particles/stars effect */}
           <div className="absolute inset-0 opacity-30">

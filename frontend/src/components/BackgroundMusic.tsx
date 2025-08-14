@@ -66,21 +66,8 @@ const BackgroundMusic: React.FC<BackgroundMusicProps> = ({ section, isActive }) 
     }
   }, [isActive, userHasInteracted, isPlaying]);
 
-  return (
-    <audio
-      ref={audioRef}
-      loop
-      preload="none"
-      style={{ display: 'none' }}
-      onEnded={() => setIsPlaying(false)}
-      onPause={() => setIsPlaying(false)}
-      onPlay={() => setIsPlaying(true)}
-    >
-      <source src={musicSources[section]} type="audio/mpeg" />
-      {/* Fallback for different formats */}
-      <source src={musicSources[section].replace('.mp3', '.ogg')} type="audio/ogg" />
-    </audio>
-  );
+  // Temporarily disabled - missing audio files
+  return null;
 };
 
 export default BackgroundMusic;
