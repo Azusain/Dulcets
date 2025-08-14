@@ -6,6 +6,10 @@ import 'yet-another-react-lightbox/styles.css';
 import '../styles/lightbox.css';
 import { getAssetPath } from '../utils/assetPath';
 
+interface ArtworksSectionProps {
+  t?: (key: string) => string;
+}
+
 interface Artwork {
   id: number;
   title: string;
@@ -49,7 +53,7 @@ const PolaroidPhoto = ({ artwork, onClick, index }: { artwork: Artwork; onClick:
   );
 };
 
-export default function ArtworksSectionWithLightbox() {
+export default function ArtworksSectionWithLightbox({ t }: ArtworksSectionProps = {}) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 

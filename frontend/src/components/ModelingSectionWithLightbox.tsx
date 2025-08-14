@@ -6,6 +6,10 @@ import 'yet-another-react-lightbox/styles.css';
 import '../styles/lightbox.css';
 import { getAssetPath } from '../utils/assetPath';
 
+interface ModelingSectionProps {
+  t?: (key: string) => string;
+}
+
 interface Model {
   id: number;
   title: string;
@@ -49,7 +53,7 @@ const PolaroidPhoto = ({ model, onClick, index }: { model: Model; onClick: () =>
   );
 };
 
-export default function ModelingSectionWithLightbox() {
+export default function ModelingSectionWithLightbox({ t }: ModelingSectionProps = {}) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -66,18 +70,18 @@ export default function ModelingSectionWithLightbox() {
   return (
     <section className="modeling-section">
       <div className="container max-w-7xl mx-auto px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 py-20">
-          {/* Left Side - Photo Wall (3 columns) */}
-          <div className="lg:col-span-3 relative">
+        <div className="grid grid-cols-1 lg:grid-cols-10 gap-12 py-20">
+          {/* Left Side - Photo Wall (shifted left, 5 columns) */}
+          <div className="lg:col-span-5 relative lg:-ml-8">
             <div className="scattered-photos relative w-full h-[800px]">
               {models.slice(0, 6).map((model, index) => {
                 const positions = [
-                  { left: '5%', top: '8%', rotation: 10, scale: 0.95 },
-                  { left: '35%', top: '2%', rotation: -8, scale: 1.05 },
-                  { left: '65%', top: '18%', rotation: 12, scale: 0.9 },
-                  { left: '8%', top: '45%', rotation: -12, scale: 1.1 },
-                  { left: '40%', top: '50%', rotation: 6, scale: 0.85 },
-                  { left: '68%', top: '65%', rotation: -9, scale: 1.0 },
+                  { left: '0%', top: '8%', rotation: 10, scale: 0.95 },
+                  { left: '28%', top: '2%', rotation: -8, scale: 1.05 },
+                  { left: '58%', top: '18%', rotation: 12, scale: 0.9 },
+                  { left: '3%', top: '45%', rotation: -12, scale: 1.1 },
+                  { left: '32%', top: '50%', rotation: 6, scale: 0.85 },
+                  { left: '60%', top: '65%', rotation: -9, scale: 1.0 },
                 ];
                 const pos = positions[index];
                 
@@ -114,8 +118,8 @@ export default function ModelingSectionWithLightbox() {
             </div>
           </div>
           
-          {/* Right Side - Title and Description (2 columns) */}
-          <div className="lg:col-span-2 flex flex-col justify-center space-y-8">
+          {/* Right Side - Title and Description (5 columns) */}
+          <div className="lg:col-span-5 flex flex-col justify-center space-y-8 lg:pl-8">
             <div>
               <div className="inline-block mb-4">
                 <span className="text-sm font-medium uppercase tracking-wider text-cyan-600 bg-cyan-50 px-4 py-2 rounded-full">

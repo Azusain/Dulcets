@@ -56,12 +56,27 @@ export function MainPage({ translations }: HomePageInterface) {
 
         {/* About Us Section */}
         <section id="about" className="py-24 bg-gray-50 text-black relative overflow-hidden">
-          {/* Subtle background decorative elements */}
-          <div className="absolute inset-0 opacity-30">
-            <div className="absolute top-20 left-10 w-1 h-32 bg-gray-300 transform rotate-12 animation-delay-100"></div>
-            <div className="absolute top-40 right-20 w-1 h-24 bg-gray-300 transform -rotate-12 animation-delay-200"></div>
-            <div className="absolute bottom-32 left-1/4 w-1 h-28 bg-gray-300 transform rotate-45 animation-delay-300"></div>
-            <div className="absolute bottom-20 right-1/3 w-1 h-20 bg-gray-300 transform -rotate-30 animation-delay-400"></div>
+          {/* Subtle Japanese-inspired background pattern */}
+          <div className="absolute inset-0 opacity-20">
+            {/* Geometric grid pattern */}
+            <div className="absolute inset-0" style={{
+              backgroundImage: `
+                linear-gradient(rgba(156, 163, 175, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(156, 163, 175, 0.1) 1px, transparent 1px)
+              `,
+              backgroundSize: '40px 40px'
+            }}></div>
+            
+            {/* Scattered minimal elements */}
+            <div className="absolute top-20 left-10 w-1 h-32 bg-gray-300 transform rotate-12"></div>
+            <div className="absolute top-40 right-20 w-1 h-24 bg-gray-300 transform -rotate-12"></div>
+            <div className="absolute bottom-32 left-1/4 w-1 h-28 bg-gray-300 transform rotate-45"></div>
+            <div className="absolute bottom-20 right-1/3 w-1 h-20 bg-gray-300 transform -rotate-30"></div>
+            
+            {/* Subtle circles for accent */}
+            <div className="absolute top-1/3 left-1/5 w-2 h-2 bg-gray-300 rounded-full opacity-40"></div>
+            <div className="absolute top-2/3 right-1/4 w-3 h-3 bg-gray-300 rounded-full opacity-30"></div>
+            <div className="absolute bottom-1/4 left-2/3 w-1.5 h-1.5 bg-gray-400 rounded-full opacity-50"></div>
           </div>
           
           <div className="max-w-6xl mx-auto px-6 relative z-10">
