@@ -5,63 +5,31 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import "../styles/lightbox.css";
 import { getAssetPath } from "../utils/assetPath";
-
+import artworksJson from "../../public/service/artworks.json";
 interface ArtworksSectionProps {
   translations?: Record<string, any>;
+}
+
+export interface PolaroidPosition {
+  left: string;
+  top: string;
+  rotation: number;
+  scale: number;
+  zindex: number;
 }
 
 interface Artwork {
   id: number;
   title: string;
   image: string;
+  pos: PolaroidPosition;
 }
 
-const artworksData = [
-  { id: 1, title: "绘画作品 1", imagePath: "/images/artworks/artwork1.jpg" },
-  { id: 2, title: "绘画作品 2", imagePath: "/images/artworks/artwork2.jpg" },
-  { id: 3, title: "绘画作品 3", imagePath: "/images/artworks/artwork3.jpg" },
-  { id: 4, title: "绘画作品 4", imagePath: "/images/artworks/artwork4.jpg" },
-  { id: 5, title: "绘画作品 5", imagePath: "/images/artworks/artwork5.jpg" },
-  { id: 6, title: "绘画作品 6", imagePath: "/images/artworks/artwork6.jpg" },
-  { id: 7, title: "绘画作品 7", imagePath: "/images/artworks/artwork7.jpg" },
-  { id: 8, title: "绘画作品 8", imagePath: "/images/artworks/artwork8.jpg" },
-];
-
-// Generate artworks with proper paths
-const artworks: Artwork[] = artworksData.map((item) => ({
+const artworks: Artwork[] = artworksJson.map((item) => ({
   ...item,
-  image: getAssetPath(item.imagePath),
+  // TODO: "hard coded image path."
+  image: getAssetPath("/images/artworks/" + item.imagePath),
 }));
-
-const PolaroidPhoto = ({
-  artwork,
-  onClick,
-  index,
-}: {
-  artwork: Artwork;
-  onClick: () => void;
-  index: number;
-}) => {
-  const rotations = [-8, 5, -3, 12, -5, 8, -10, 3];
-
-  return (
-    <div
-      className="polaroid-photo"
-      style={
-        {
-          "--initial-rotation": `${rotations[index % rotations.length]}deg`,
-          transform: `rotate(${rotations[index % rotations.length]}deg)`,
-          animationDelay: `${index * 0.1}s`,
-        } as React.CSSProperties
-      }
-      onClick={onClick}
-    >
-      <div className="polaroid-frame">
-        <img src={artwork.image} alt={artwork.title} />
-      </div>
-    </div>
-  );
-};
 
 // Helper function to get translation value from translations object
 function getTranslation(
@@ -213,16 +181,8 @@ export default function ArtworksSection({
           <div className="relative">
             <div className="scattered-photos relative w-full h-[800px]">
               {/* TODO: this is really hard coded. */}
-              {artworks.slice(0, 6).map((artwork, index) => {
-                const positions = [
-                  { left: "5%", top: "5%", rotation: -8, scale: 0.9 },
-                  { left: "40%", top: "0%", rotation: 12, scale: 1.0 },
-                  { left: "70%", top: "15%", rotation: -5, scale: 0.85 },
-                  { left: "10%", top: "40%", rotation: 15, scale: 1.1 },
-                  { left: "45%", top: "45%", rotation: -10, scale: 0.95 },
-                  { left: "75%", top: "60%", rotation: 8, scale: 1.0 },
-                ];
-                const pos = positions[index];
+              {artworks.map((artwork, index) => {
+                const pos = artwork.pos;
 
                 return (
                   <div
@@ -234,6 +194,7 @@ export default function ArtworksSection({
                       top: pos.top,
                       transform: `rotate(${pos.rotation}deg) scale(${pos.scale})`,
                       animationDelay: `${index * 0.15}s`,
+                      zIndex: pos.zindex,
                     }}
                     onClick={() => openLightbox(index)}
                   >

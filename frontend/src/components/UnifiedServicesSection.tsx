@@ -2,8 +2,8 @@
 
 import React from "react";
 import MusicProductionSection from "./PricingEntry";
-import ArtworksSection from "./ArtworksSectionWithLightbox";
-import ModelingSectionWithLightbox from "./ModelingSectionWithLightbox";
+import ArtworksSection from "./ArtworksSection";
+import ModelingSectionWithLightbox from "./ModelingSection";
 
 interface UnifiedServicesSectionProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
