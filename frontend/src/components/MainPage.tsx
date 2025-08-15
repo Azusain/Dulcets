@@ -265,7 +265,7 @@ export function MainPage({ translations }: HomePageInterface) {
         </div>
       </section>
 
-      {/* Unified Services Section */}
+      {/* 3 main services */}
       <UnifiedServicesSection translations={translations} />
 
       {/* Contact Section */}
