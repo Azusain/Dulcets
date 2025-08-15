@@ -1,16 +1,18 @@
-'use client';
+"use client";
 
-import React from 'react';
-import PricingEntry from './PricingEntry';
-import ArtworksSectionWithLightbox from './ArtworksSectionWithLightbox';
-import ModelingSectionWithLightbox from './ModelingSectionWithLightbox';
+import React from "react";
+import MusicProductionSection from "./PricingEntry";
+import ArtworksSection from "./ArtworksSectionWithLightbox";
+import ModelingSectionWithLightbox from "./ModelingSectionWithLightbox";
 
 interface UnifiedServicesSectionProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   translations?: Record<string, any>;
 }
 
-export default function UnifiedServicesSection({ translations }: UnifiedServicesSectionProps) {
+export default function UnifiedServicesSection({
+  translations,
+}: UnifiedServicesSectionProps) {
   return (
     <div className="unified-services-container relative bg-gray-50">
       {/* Simple Corner L-shaped Design */}
@@ -19,7 +21,7 @@ export default function UnifiedServicesSection({ translations }: UnifiedServices
         <div className="absolute top-0 left-0 w-20 h-3 bg-purple-400"></div>
         <div className="absolute top-0 left-0 w-3 h-20 bg-purple-400"></div>
       </div>
-      
+
       <div className="absolute bottom-0 right-0 w-24 h-24 overflow-hidden pointer-events-none z-30">
         {/* Bottom-right L-shape */}
         <div className="absolute bottom-0 right-0 w-20 h-3 bg-pink-400"></div>
@@ -34,10 +36,10 @@ export default function UnifiedServicesSection({ translations }: UnifiedServices
           </h1>
           <div className="w-24 h-1 bg-gray-400 mb-6"></div>
           <p className="text-lg text-gray-600 max-w-2xl">
-            {translations ? 
-              (translations.services?.subtitle || "私たちが提供する3つの主要サービス：音楽制作、アートワーク、3Dモデリング") :
-              "私たちが提供する3つの主要サービス：音楽制作、アートワーク、3Dモデリング"
-            }
+            {translations
+              ? translations.services?.subtitle ||
+                "私たちが提供する3つの主要サービス：音楽制作、アートワーク、3Dモデリング"
+              : "私たちが提供する3つの主要サービス：音楽制作、アートワーク、3Dモデリング"}
           </p>
         </div>
       </div>
@@ -45,10 +47,10 @@ export default function UnifiedServicesSection({ translations }: UnifiedServices
       {/* Service Sections */}
       <div className="relative z-10">
         {/* Music Production Service */}
-        <PricingEntry />
+        <MusicProductionSection />
 
         {/* Artworks Section */}
-        <ArtworksSectionWithLightbox translations={translations} />
+        <ArtworksSection translations={translations} />
 
         {/* 3D Modeling Section */}
         <ModelingSectionWithLightbox translations={translations} />
@@ -59,23 +61,29 @@ export default function UnifiedServicesSection({ translations }: UnifiedServices
           position: relative;
           min-height: 100vh;
         }
-        
+
         .japanese-spacing {
           letter-spacing: 0.2em;
-          font-family: 'Noto Sans JP', sans-serif;
+          font-family: "Noto Sans JP", sans-serif;
         }
-        
+
         /* Subtle background pattern for the entire container */
         .unified-services-container::before {
-          content: '';
+          content: "";
           position: absolute;
           top: 0;
           left: 0;
           right: 0;
           bottom: 0;
-          background-image: 
-            linear-gradient(rgba(156, 163, 175, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(156, 163, 175, 0.03) 1px, transparent 1px);
+          background-image: linear-gradient(
+              rgba(156, 163, 175, 0.03) 1px,
+              transparent 1px
+            ),
+            linear-gradient(
+              90deg,
+              rgba(156, 163, 175, 0.03) 1px,
+              transparent 1px
+            );
           background-size: 60px 60px;
           pointer-events: none;
           z-index: 1;

@@ -5,13 +5,13 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 // Import service images
-import vocalMixingImg from "../img/services/vocal-mixing.jpg";
-import mixingMasteringImg from "../img/services/mixing-mastering.jpg";
-import musicProductionImg from "../img/services/music-production.jpg";
+import vocalMixingImg from "../../public/images/music_production/vocal-mixing.jpg";
+import mixingMasteringImg from "../../public/images/music_production/mixing-mastering.jpg";
+import musicProductionImg from "../../public/images/music_production/music-production.jpg";
 
-const PricingEntry: React.FC = () => {
+const MusicProductionSection: React.FC = () => {
   const router = useRouter();
-  
+
   // Service cards data - 3 main services from pricing table
   const services = [
     {
@@ -20,15 +20,15 @@ const PricingEntry: React.FC = () => {
       subtitle: "Vocal Mix & Mastering",
       price: "¥8,000~",
       description: "歌ってみた音源のミックス・マスタリング",
-      image: vocalMixingImg
+      image: vocalMixingImg,
     },
     {
       id: 1,
       title: "Mix & Mastering",
-      subtitle: "Instrumental Mix & Mastering", 
+      subtitle: "Instrumental Mix & Mastering",
       price: "¥30,000~",
       description: "楽器トラックのミックス・マスタリング",
-      image: mixingMasteringImg
+      image: mixingMasteringImg,
     },
     {
       id: 2,
@@ -36,40 +36,46 @@ const PricingEntry: React.FC = () => {
       subtitle: "Music Production",
       price: "¥50,000~",
       description: "オリジナル楽曲・BGM・アレンジ制作",
-      image: musicProductionImg
-    }
+      image: musicProductionImg,
+    },
   ];
 
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const handleViewDetails = () => {
     // Get current language from URL path
-    const currentPath = window?.location?.pathname || '/';
-    let targetPath = '/pricing';
-    
-    if (currentPath.startsWith('/en')) {
-      targetPath = '/en/pricing';
-    } else if (currentPath.startsWith('/jp')) {
-      targetPath = '/jp/pricing';
-    } else if (currentPath.startsWith('/zh')) {
-      targetPath = '/zh/pricing';
+    const currentPath = window?.location?.pathname || "/";
+    let targetPath = "/pricing";
+
+    if (currentPath.startsWith("/en")) {
+      targetPath = "/en/pricing";
+    } else if (currentPath.startsWith("/jp")) {
+      targetPath = "/jp/pricing";
+    } else if (currentPath.startsWith("/zh")) {
+      targetPath = "/zh/pricing";
     }
-    
+
     router.push(targetPath);
   };
 
   return (
-    <div className="w-full py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" style={{ minHeight: '900px' }}>
+    <div
+      className="w-full py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
+      style={{ minHeight: "900px" }}
+    >
       <div className="max-w-7xl mx-auto px-8 h-full flex flex-col justify-center">
         {/* Title and Description Section */}
         <div className="mb-16">
-          <h2 className="text-5xl font-bold text-white mb-6 drop-shadow-lg">音楽制作サービス</h2>
+          <h2 className="text-5xl font-bold text-white mb-6 drop-shadow-lg">
+            音楽制作サービス
+          </h2>
           <p className="text-xl text-gray-300 leading-relaxed max-w-2xl drop-shadow">
-            プロフェッショナルな音楽制作から歌ってみたまで、<br />
+            プロフェッショナルな音楽制作から歌ってみたまで、
+            <br />
             あらゆるニーズにお応えします。ホバーして詳細をご確認ください。
           </p>
         </div>
-        
+
         {/* Japanese-inspired Service Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {services.map((service, index) => (
@@ -83,11 +89,11 @@ const PricingEntry: React.FC = () => {
               {/* Service Number Badge */}
               <div className="flex items-center mb-4">
                 <div className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center text-white/60 text-sm font-mono mr-3">
-                  {String(index + 1).padStart(2, '0')}
+                  {String(index + 1).padStart(2, "0")}
                 </div>
                 <div className="h-px bg-white/20 flex-1 group-hover:bg-white/40 transition-colors duration-500"></div>
               </div>
-              
+
               {/* Service Content */}
               <div className="space-y-6">
                 {/* Title Section */}
@@ -99,7 +105,7 @@ const PricingEntry: React.FC = () => {
                     {service.subtitle}
                   </p>
                 </div>
-                
+
                 {/* Image Section */}
                 <div className="relative h-48 overflow-hidden">
                   <div className="absolute inset-0 bg-white/5 group-hover:bg-white/10 transition-colors duration-500"></div>
@@ -109,14 +115,14 @@ const PricingEntry: React.FC = () => {
                     fill
                     className="object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 grayscale group-hover:grayscale-0"
                   />
-                  
+
                   {/* Subtle frame */}
                   <div className="absolute inset-0 border border-white/10 group-hover:border-white/20 transition-colors duration-500"></div>
-                  
+
                   {/* Corner accent */}
                   <div className="absolute top-0 right-0 w-6 h-6 border-t border-r border-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
-                
+
                 {/* Price and Description */}
                 <div className="space-y-3">
                   <div className="flex items-baseline justify-between">
@@ -132,7 +138,7 @@ const PricingEntry: React.FC = () => {
                   </p>
                 </div>
               </div>
-              
+
               {/* Subtle bottom line animation */}
               <div className="mt-6 h-px bg-white/10">
                 <div className="h-full bg-white/30 w-0 group-hover:w-full transition-all duration-700 ease-out"></div>
@@ -140,7 +146,7 @@ const PricingEntry: React.FC = () => {
             </div>
           ))}
         </div>
-        
+
         {/* Simple Transparent Button */}
         <div className="flex justify-center">
           <button
@@ -155,4 +161,4 @@ const PricingEntry: React.FC = () => {
   );
 };
 
-export default PricingEntry;
+export default MusicProductionSection;

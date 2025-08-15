@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Lightbox from 'yet-another-react-lightbox';
-import 'yet-another-react-lightbox/styles.css';
-import '../styles/lightbox.css';
-import { getAssetPath } from '../utils/assetPath';
+import React, { useState } from "react";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import "../styles/lightbox.css";
+import { getAssetPath } from "../utils/assetPath";
 
 interface ArtworksSectionProps {
   translations?: Record<string, any>;
@@ -17,33 +17,43 @@ interface Artwork {
 }
 
 const artworksData = [
-  { id: 1, title: '绘画作品 1', imagePath: '/images/artworks/artwork1.jpg' },
-  { id: 2, title: '绘画作品 2', imagePath: '/images/artworks/artwork2.jpg' },
-  { id: 3, title: '绘画作品 3', imagePath: '/images/artworks/artwork3.jpg' },
-  { id: 4, title: '绘画作品 4', imagePath: '/images/artworks/artwork4.jpg' },
-  { id: 5, title: '绘画作品 5', imagePath: '/images/artworks/artwork5.jpg' },
-  { id: 6, title: '绘画作品 6', imagePath: '/images/artworks/artwork6.jpg' },
-  { id: 7, title: '绘画作品 7', imagePath: '/images/artworks/artwork7.jpg' },
-  { id: 8, title: '绘画作品 8', imagePath: '/images/artworks/artwork8.jpg' },
+  { id: 1, title: "绘画作品 1", imagePath: "/images/artworks/artwork1.jpg" },
+  { id: 2, title: "绘画作品 2", imagePath: "/images/artworks/artwork2.jpg" },
+  { id: 3, title: "绘画作品 3", imagePath: "/images/artworks/artwork3.jpg" },
+  { id: 4, title: "绘画作品 4", imagePath: "/images/artworks/artwork4.jpg" },
+  { id: 5, title: "绘画作品 5", imagePath: "/images/artworks/artwork5.jpg" },
+  { id: 6, title: "绘画作品 6", imagePath: "/images/artworks/artwork6.jpg" },
+  { id: 7, title: "绘画作品 7", imagePath: "/images/artworks/artwork7.jpg" },
+  { id: 8, title: "绘画作品 8", imagePath: "/images/artworks/artwork8.jpg" },
 ];
 
 // Generate artworks with proper paths
-const artworks: Artwork[] = artworksData.map(item => ({
+const artworks: Artwork[] = artworksData.map((item) => ({
   ...item,
-  image: getAssetPath(item.imagePath)
+  image: getAssetPath(item.imagePath),
 }));
 
-const PolaroidPhoto = ({ artwork, onClick, index }: { artwork: Artwork; onClick: () => void; index: number }) => {
+const PolaroidPhoto = ({
+  artwork,
+  onClick,
+  index,
+}: {
+  artwork: Artwork;
+  onClick: () => void;
+  index: number;
+}) => {
   const rotations = [-8, 5, -3, 12, -5, 8, -10, 3];
-  
+
   return (
     <div
       className="polaroid-photo"
-      style={{
-        '--initial-rotation': `${rotations[index % rotations.length]}deg`,
-        transform: `rotate(${rotations[index % rotations.length]}deg)`,
-        animationDelay: `${index * 0.1}s`,
-      } as React.CSSProperties}
+      style={
+        {
+          "--initial-rotation": `${rotations[index % rotations.length]}deg`,
+          transform: `rotate(${rotations[index % rotations.length]}deg)`,
+          animationDelay: `${index * 0.1}s`,
+        } as React.CSSProperties
+      }
       onClick={onClick}
     >
       <div className="polaroid-frame">
@@ -54,63 +64,71 @@ const PolaroidPhoto = ({ artwork, onClick, index }: { artwork: Artwork; onClick:
 };
 
 // Helper function to get translation value from translations object
-function getTranslation(translations: Record<string, any> | undefined, key: string): string {
+function getTranslation(
+  translations: Record<string, any> | undefined,
+  key: string
+): string {
   if (!translations) return key;
-  
-  const keys = key.split('.');
+
+  const keys = key.split(".");
   let value: any = translations;
-  
+
   for (const k of keys) {
-    if (value && typeof value === 'object' && k in value) {
+    if (value && typeof value === "object" && k in value) {
       value = value[k];
     } else {
       return key; // Return the key if path doesn't exist
     }
   }
-  
-  return typeof value === 'string' ? value : key;
+
+  return typeof value === "string" ? value : key;
 }
 
-export default function ArtworksSectionWithLightbox({ translations }: ArtworksSectionProps = {}) {
+export default function ArtworksSection({
+  translations,
+}: ArtworksSectionProps = {}) {
   const t = (key: string) => getTranslation(translations, key);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  
+
   // Determine language for shadow positioning
   const getCurrentLanguage = () => {
-    if (!translations) return 'zh';
-    
+    if (!translations) return "zh";
+
     // Check translation content directly
-    const titleMain = getTranslation(translations, 'artworks.title_main');
-    const homeText = getTranslation(translations, 'nav.home');
-    
+    const titleMain = getTranslation(translations, "artworks.title_main");
+    const homeText = getTranslation(translations, "nav.home");
+
     // Japanese: アートワーク
-    if (titleMain === 'アートワーク' || homeText === 'ホーム') {
-      return 'jp';
+    if (titleMain === "アートワーク" || homeText === "ホーム") {
+      return "jp";
     }
     // English would contain "Artwork" or similar
-    if ((titleMain && titleMain.toLowerCase().includes('artwork')) || homeText === 'Home') {
-      return 'en';
+    if (
+      (titleMain && titleMain.toLowerCase().includes("artwork")) ||
+      homeText === "Home"
+    ) {
+      return "en";
     }
     // Default to Chinese
-    return 'zh';
+    return "zh";
   };
-  
+
   const currentLang = getCurrentLanguage();
-  
+
   // Dynamic shadow offset based on language - use NO shadow for Japanese
   const getShadowOffset = () => {
     switch (currentLang) {
-      case 'jp': // Japanese text is longer, hide shadow completely
-        return 'opacity-0';
-      case 'en': // English text is medium length, increase offset for better visibility
-        return 'translate-x-4 translate-y-4 opacity-30';
+      case "jp": // Japanese text is longer, hide shadow completely
+        return "opacity-0";
+      case "en": // English text is medium length, increase offset for better visibility
+        return "translate-x-4 translate-y-4 opacity-30";
       default: // Chinese is short
-        return 'translate-x-3 translate-y-3 opacity-30';
+        return "translate-x-3 translate-y-3 opacity-30";
     }
   };
 
-  const lightboxImages = artworks.map(artwork => ({
+  const lightboxImages = artworks.map((artwork) => ({
     src: artwork.image,
     alt: artwork.title,
   }));
@@ -132,57 +150,86 @@ export default function ArtworksSectionWithLightbox({ translations }: ArtworksSe
                   {translations ? t("footer.artworks") : "✨ Artwork Gallery"}
                 </span>
               </div>
-              
+
               <h2 className="text-7xl lg:text-8xl font-black leading-tight text-black mb-6">
                 <span className="relative">
                   {translations ? t("artworks.title_main") : "绘画作品"}
-                  <span className={`absolute inset-0 text-blue-400 -z-10 ${getShadowOffset()}`}>{translations ? t("artworks.title_main") : "绘画作品"}</span>
+                  <span
+                    className={`absolute inset-0 text-blue-400 -z-10 ${getShadowOffset()}`}
+                  >
+                    {translations ? t("artworks.title_main") : "绘画作品"}
+                  </span>
                 </span>
                 <br />
-                <span className="text-6xl lg:text-7xl text-gray-600">{translations ? t("artworks.title_sub") : "展示"}</span>
+                <span className="text-6xl lg:text-7xl text-gray-600">
+                  {translations ? t("artworks.title_sub") : "展示"}
+                </span>
               </h2>
             </div>
-            
+
             <div className="space-y-6 text-lg leading-relaxed text-gray-700">
               <p>
-                {translations ? t("artworks.description") : "精选二次元风格绘画作品，融合传统艺术与现代数字创作技术，展现独特的艺术视觉魅力和创意表达。"}
+                {translations
+                  ? t("artworks.description")
+                  : "精选二次元风格绘画作品，融合传统艺术与现代数字创作技术，展现独特的艺术视觉魅力和创意表达。"}
               </p>
-              
+
               <p>
-                {translations ? t("artworks.team_description") : "我们专业的绘画团队致力于"}<span className="text-blue-600 font-medium">{translations ? t("artworks.specialties") : "角色设计、场景插画和数字艺术创作"}</span>{translations ? t("artworks.story_description") : "，每一幅作品都蕴含着丰富的情感和故事。"}
+                {translations
+                  ? t("artworks.team_description")
+                  : "我们专业的绘画团队致力于"}
+                <span className="text-blue-600 font-medium">
+                  {translations
+                    ? t("artworks.specialties")
+                    : "角色设计、场景插画和数字艺术创作"}
+                </span>
+                {translations
+                  ? t("artworks.story_description")
+                  : "，每一幅作品都蕴含着丰富的情感和故事。"}
               </p>
-              
+
               <p>
-                {translations ? t("artworks.detail_description") : "从概念草图到最终渲染，我们用心雕琢每一个细节，为您带来"}<span className="text-purple-600 font-medium">{translations ? t("artworks.visual_feast") : "视觉盛宴"}</span>。
+                {translations
+                  ? t("artworks.detail_description")
+                  : "从概念草图到最终渲染，我们用心雕琢每一个细节，为您带来"}
+                <span className="text-purple-600 font-medium">
+                  {translations ? t("artworks.visual_feast") : "视觉盛宴"}
+                </span>
+                。
               </p>
             </div>
-            
+
             <div className="flex items-center space-x-4 pt-6">
               <div className="w-12 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500"></div>
-              <span className="text-sm text-gray-500 font-medium">{translations ? t("artworks.click_to_view") : "点击照片查看大图"}</span>
+              <span className="text-sm text-gray-500 font-medium">
+                {translations
+                  ? t("artworks.click_to_view")
+                  : "点击照片查看大图"}
+              </span>
             </div>
           </div>
-          
+
           {/* Right Side - Photo Wall */}
           <div className="relative">
             <div className="scattered-photos relative w-full h-[800px]">
+              {/* TODO: this is really hard coded. */}
               {artworks.slice(0, 6).map((artwork, index) => {
                 const positions = [
-                  { left: '5%', top: '5%', rotation: -8, scale: 0.9 },
-                  { left: '40%', top: '0%', rotation: 12, scale: 1.0 },
-                  { left: '70%', top: '15%', rotation: -5, scale: 0.85 },
-                  { left: '10%', top: '40%', rotation: 15, scale: 1.1 },
-                  { left: '45%', top: '45%', rotation: -10, scale: 0.95 },
-                  { left: '75%', top: '60%', rotation: 8, scale: 1.0 },
+                  { left: "5%", top: "5%", rotation: -8, scale: 0.9 },
+                  { left: "40%", top: "0%", rotation: 12, scale: 1.0 },
+                  { left: "70%", top: "15%", rotation: -5, scale: 0.85 },
+                  { left: "10%", top: "40%", rotation: 15, scale: 1.1 },
+                  { left: "45%", top: "45%", rotation: -10, scale: 0.95 },
+                  { left: "75%", top: "60%", rotation: 8, scale: 1.0 },
                 ];
                 const pos = positions[index];
-                
+
                 return (
                   <div
                     key={artwork.id}
                     className="polaroid-photo-large"
                     style={{
-                      position: 'absolute',
+                      position: "absolute",
                       left: pos.left,
                       top: pos.top,
                       transform: `rotate(${pos.rotation}deg) scale(${pos.scale})`,
@@ -194,16 +241,24 @@ export default function ArtworksSectionWithLightbox({ translations }: ArtworksSe
                       <img src={artwork.image} alt={artwork.title} />
                     </div>
                     <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
-                      <span className="text-white text-xs font-bold">{index + 1}</span>
+                      <span className="text-white text-xs font-bold">
+                        {index + 1}
+                      </span>
                     </div>
                   </div>
                 );
               })}
-              
+
               {/* Decorative elements */}
               <div className="absolute top-10 right-10 w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-              <div className="absolute bottom-20 left-5 w-1 h-1 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-              <div className="absolute top-1/2 right-5 w-1.5 h-1.5 bg-pink-400 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+              <div
+                className="absolute bottom-20 left-5 w-1 h-1 bg-purple-400 rounded-full animate-pulse"
+                style={{ animationDelay: "0.5s" }}
+              ></div>
+              <div
+                className="absolute top-1/2 right-5 w-1.5 h-1.5 bg-pink-400 rounded-full animate-pulse"
+                style={{ animationDelay: "1s" }}
+              ></div>
             </div>
           </div>
         </div>
@@ -216,7 +271,7 @@ export default function ArtworksSectionWithLightbox({ translations }: ArtworksSe
           slides={lightboxImages}
           index={currentImageIndex}
           styles={{
-            container: { backgroundColor: 'rgba(0, 0, 0, 0.9)' },
+            container: { backgroundColor: "rgba(0, 0, 0, 0.9)" },
           }}
         />
       )}
@@ -230,25 +285,33 @@ export default function ArtworksSectionWithLightbox({ translations }: ArtworksSe
         }
 
         .artworks-section::before {
-          content: '';
+          content: "";
           position: absolute;
           top: 10%;
           left: -5%;
           width: 300px;
           height: 300px;
-          background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+          background: radial-gradient(
+            circle,
+            rgba(59, 130, 246, 0.05) 0%,
+            transparent 70%
+          );
           border-radius: 50%;
           filter: blur(50px);
         }
 
         .artworks-section::after {
-          content: '';
+          content: "";
           position: absolute;
           bottom: 10%;
           right: -5%;
           width: 200px;
           height: 200px;
-          background: radial-gradient(circle, rgba(139, 69, 196, 0.05) 0%, transparent 70%);
+          background: radial-gradient(
+            circle,
+            rgba(139, 69, 196, 0.05) 0%,
+            transparent 70%
+          );
           border-radius: 50%;
           filter: blur(40px);
         }
@@ -267,9 +330,7 @@ export default function ArtworksSectionWithLightbox({ translations }: ArtworksSe
           text-align: center;
           margin-bottom: 30px;
           color: #000000;
-          text-shadow: 
-            8px 8px 0px #3b82f6,
-            16px 16px 0px #8b45c4;
+          text-shadow: 8px 8px 0px #3b82f6, 16px 16px 0px #8b45c4;
           letter-spacing: 2px;
         }
 
@@ -310,11 +371,9 @@ export default function ArtworksSectionWithLightbox({ translations }: ArtworksSe
         @media (max-width: 768px) {
           .section-title {
             font-size: 2.5rem;
-            text-shadow: 
-              4px 4px 0px #3b82f6,
-              8px 8px 0px #8b45c4;
+            text-shadow: 4px 4px 0px #3b82f6, 8px 8px 0px #8b45c4;
           }
-          
+
           .artworks-section {
             min-height: 35vh;
             padding: 30px 0;
