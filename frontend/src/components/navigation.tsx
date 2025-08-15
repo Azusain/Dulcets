@@ -72,7 +72,7 @@ const DsNavigation = () => {
         <img
           src={getAssetPath("/images/favicon.png")}
           alt="Dulcets Logo"
-          className="h-12 w-auto"
+          className="h-32 w-auto"
         />
       </div>
 
