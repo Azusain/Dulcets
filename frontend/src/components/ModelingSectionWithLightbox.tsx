@@ -7,7 +7,7 @@ import '../styles/lightbox.css';
 import { getAssetPath } from '../utils/assetPath';
 
 interface ModelingSectionProps {
-  t?: (key: string) => string;
+  translations?: Record<string, any>;
 }
 
 interface Model {
@@ -53,9 +53,62 @@ const PolaroidPhoto = ({ model, onClick, index }: { model: Model; onClick: () =>
   );
 };
 
-export default function ModelingSectionWithLightbox({ t }: ModelingSectionProps = {}) {
+// Helper function to get translation value from translations object
+function getTranslation(translations: Record<string, any> | undefined, key: string): string {
+  if (!translations) return key;
+  
+  const keys = key.split('.');
+  let value: any = translations;
+  
+  for (const k of keys) {
+    if (value && typeof value === 'object' && k in value) {
+      value = value[k];
+    } else {
+      return key; // Return the key if path doesn't exist
+    }
+  }
+  
+  return typeof value === 'string' ? value : key;
+}
+
+export default function ModelingSectionWithLightbox({ translations }: ModelingSectionProps = {}) {
+  const t = (key: string) => getTranslation(translations, key);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  // Determine language for shadow positioning
+  const getCurrentLanguage = () => {
+    if (!translations) return 'zh';
+    
+    // Check translation content directly
+    const titleMain = getTranslation(translations, 'modeling.title_main');
+    const homeText = getTranslation(translations, 'nav.home');
+    
+    // Japanese: 3Dモデリング
+    if (titleMain === '3Dモデリング' || homeText === 'ホーム') {
+      return 'jp';
+    }
+    // English would contain "3D Modeling" or similar
+    if ((titleMain && titleMain.toLowerCase().includes('modeling')) || homeText === 'Home') {
+      return 'en';
+    }
+    // Default to Chinese
+    return 'zh';
+  };
+  
+  const currentLang = getCurrentLanguage();
+  
+  // Dynamic shadow offset based on language - use NO shadow for Japanese
+  const getShadowOffset = () => {
+    switch (currentLang) {
+      case 'jp': // Japanese text is longer, hide shadow completely
+        return 'opacity-0';
+      case 'en': // English text is medium length, increase offset for better visibility
+        return 'translate-x-4 translate-y-4 opacity-30';
+      default: // Chinese is short
+        return 'translate-x-3 translate-y-3 opacity-30';
+    }
+  };
 
   const lightboxImages = models.map(model => ({
     src: model.image,
@@ -123,37 +176,37 @@ export default function ModelingSectionWithLightbox({ t }: ModelingSectionProps 
             <div>
               <div className="inline-block mb-4">
                 <span className="text-sm font-medium uppercase tracking-wider text-cyan-600 bg-cyan-50 px-4 py-2 rounded-full">
-                  🎯 3D Studio
+                  {translations ? t("footer.modeling") : "🎯 3D Studio"}
                 </span>
               </div>
               
-              <h2 className="text-7xl lg:text-8xl font-black leading-tight text-black mb-6">
+              <h2 className="text-7xl lg:text-8xl font-black leading-tight text-white mb-6">
                 <span className="relative">
-                  3D建模
-                  <span className="absolute inset-0 text-cyan-400 -z-10 translate-x-3 translate-y-3 opacity-30">3D建模</span>
+                  {translations ? t("modeling.title_main") : "3D建模"}
+                  <span className={`absolute inset-0 text-cyan-400 -z-10 ${getShadowOffset()}`}>{translations ? t("modeling.title_main") : "3D建模"}</span>
                 </span>
                 <br />
-                <span className="text-6xl lg:text-7xl text-gray-600">服务</span>
+                <span className="text-6xl lg:text-7xl text-gray-300">{translations ? t("modeling.title_sub") : "服务"}</span>
               </h2>
             </div>
             
-            <div className="space-y-6 text-lg leading-relaxed text-gray-700">
+            <div className="space-y-6 text-lg leading-relaxed text-gray-300">
               <p>
-                <span className="font-semibold text-gray-900">专业的3D建模团队</span>，从概念设计到游戏动画制作，为您提供全方位的三维内容创作解决方案。
+                {translations ? t("modeling.description") : "专业的3D建模团队，从概念设计到游戏动画制作，为您提供全方位的三维内容创作解决方案。"}
               </p>
               
               <p>
-                我们精通<span className="text-cyan-600 font-medium">角色建模、场景构建、材质渲染和动画制作</span>，无论是游戏资产、建筑可视化还是产品展示，都能为您带来震撼的视觉效果。
+                {translations ? t("modeling.expertise_description") : "我们精通"}<span className="text-cyan-400 font-medium">{translations ? t("modeling.specialties") : "角色建模、场景构建、材质渲染和动画制作"}</span>{translations ? t("modeling.applications_description") : "，无论是游戏资产、建筑可视化还是产品展示，都能为您带来震撼的视觉效果。"}
               </p>
               
               <p>
-                运用最新的3D技术和工具，我们将您的创意转化为<span className="text-purple-600 font-medium">栩栩如生的三维世界</span>。
+                {translations ? t("modeling.technology_description") : "运用最新的3D技术和工具，我们将您的创意转化为"}<span className="text-purple-400 font-medium">{translations ? t("modeling.lifelike_world") : "栩栩如生的三维世界"}</span>。
               </p>
             </div>
             
             <div className="flex items-center space-x-4 pt-6">
               <div className="w-12 h-0.5 bg-gradient-to-r from-cyan-500 to-purple-500"></div>
-              <span className="text-sm text-gray-500 font-medium">点击作品浏览详情</span>
+              <span className="text-sm text-gray-400 font-medium">{translations ? t("modeling.click_to_view") : "点击作品浏览详情"}</span>
             </div>
           </div>
         </div>
@@ -173,7 +226,7 @@ export default function ModelingSectionWithLightbox({ t }: ModelingSectionProps 
 
       <style jsx>{`
         .modeling-section {
-          background: #f8f9fa;
+          background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
           position: relative;
           overflow: hidden;
           padding: 80px 0;

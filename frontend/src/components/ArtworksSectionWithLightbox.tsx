@@ -7,7 +7,7 @@ import '../styles/lightbox.css';
 import { getAssetPath } from '../utils/assetPath';
 
 interface ArtworksSectionProps {
-  t?: (key: string) => string;
+  translations?: Record<string, any>;
 }
 
 interface Artwork {
@@ -53,9 +53,62 @@ const PolaroidPhoto = ({ artwork, onClick, index }: { artwork: Artwork; onClick:
   );
 };
 
-export default function ArtworksSectionWithLightbox({ t }: ArtworksSectionProps = {}) {
+// Helper function to get translation value from translations object
+function getTranslation(translations: Record<string, any> | undefined, key: string): string {
+  if (!translations) return key;
+  
+  const keys = key.split('.');
+  let value: any = translations;
+  
+  for (const k of keys) {
+    if (value && typeof value === 'object' && k in value) {
+      value = value[k];
+    } else {
+      return key; // Return the key if path doesn't exist
+    }
+  }
+  
+  return typeof value === 'string' ? value : key;
+}
+
+export default function ArtworksSectionWithLightbox({ translations }: ArtworksSectionProps = {}) {
+  const t = (key: string) => getTranslation(translations, key);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  // Determine language for shadow positioning
+  const getCurrentLanguage = () => {
+    if (!translations) return 'zh';
+    
+    // Check translation content directly
+    const titleMain = getTranslation(translations, 'artworks.title_main');
+    const homeText = getTranslation(translations, 'nav.home');
+    
+    // Japanese: アートワーク
+    if (titleMain === 'アートワーク' || homeText === 'ホーム') {
+      return 'jp';
+    }
+    // English would contain "Artwork" or similar
+    if ((titleMain && titleMain.toLowerCase().includes('artwork')) || homeText === 'Home') {
+      return 'en';
+    }
+    // Default to Chinese
+    return 'zh';
+  };
+  
+  const currentLang = getCurrentLanguage();
+  
+  // Dynamic shadow offset based on language - use NO shadow for Japanese
+  const getShadowOffset = () => {
+    switch (currentLang) {
+      case 'jp': // Japanese text is longer, hide shadow completely
+        return 'opacity-0';
+      case 'en': // English text is medium length, increase offset for better visibility
+        return 'translate-x-4 translate-y-4 opacity-30';
+      default: // Chinese is short
+        return 'translate-x-3 translate-y-3 opacity-30';
+    }
+  };
 
   const lightboxImages = artworks.map(artwork => ({
     src: artwork.image,
@@ -76,37 +129,37 @@ export default function ArtworksSectionWithLightbox({ t }: ArtworksSectionProps 
             <div>
               <div className="inline-block mb-4">
                 <span className="text-sm font-medium uppercase tracking-wider text-blue-600 bg-blue-50 px-4 py-2 rounded-full">
-                  ✨ Artwork Gallery
+                  {translations ? t("footer.artworks") : "✨ Artwork Gallery"}
                 </span>
               </div>
               
               <h2 className="text-7xl lg:text-8xl font-black leading-tight text-black mb-6">
                 <span className="relative">
-                  绘画作品
-                  <span className="absolute inset-0 text-blue-400 -z-10 translate-x-3 translate-y-3 opacity-30">绘画作品</span>
+                  {translations ? t("artworks.title_main") : "绘画作品"}
+                  <span className={`absolute inset-0 text-blue-400 -z-10 ${getShadowOffset()}`}>{translations ? t("artworks.title_main") : "绘画作品"}</span>
                 </span>
                 <br />
-                <span className="text-6xl lg:text-7xl text-gray-600">展示</span>
+                <span className="text-6xl lg:text-7xl text-gray-600">{translations ? t("artworks.title_sub") : "展示"}</span>
               </h2>
             </div>
             
             <div className="space-y-6 text-lg leading-relaxed text-gray-700">
               <p>
-                <span className="font-semibold text-gray-900">精选二次元风格绘画作品</span>，融合传统艺术与现代数字创作技术，展现独特的艺术视觉魅力和创意表达。
+                {translations ? t("artworks.description") : "精选二次元风格绘画作品，融合传统艺术与现代数字创作技术，展现独特的艺术视觉魅力和创意表达。"}
               </p>
               
               <p>
-                我们专业的绘画团队致力于<span className="text-blue-600 font-medium">角色设计、场景插画和数字艺术创作</span>，每一幅作品都蕴含着丰富的情感和故事。
+                {translations ? t("artworks.team_description") : "我们专业的绘画团队致力于"}<span className="text-blue-600 font-medium">{translations ? t("artworks.specialties") : "角色设计、场景插画和数字艺术创作"}</span>{translations ? t("artworks.story_description") : "，每一幅作品都蕴含着丰富的情感和故事。"}
               </p>
               
               <p>
-                从概念草图到最终渲染，我们用心雕琢每一个细节，为您带来<span className="text-purple-600 font-medium">视觉盛宴</span>。
+                {translations ? t("artworks.detail_description") : "从概念草图到最终渲染，我们用心雕琢每一个细节，为您带来"}<span className="text-purple-600 font-medium">{translations ? t("artworks.visual_feast") : "视觉盛宴"}</span>。
               </p>
             </div>
             
             <div className="flex items-center space-x-4 pt-6">
               <div className="w-12 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500"></div>
-              <span className="text-sm text-gray-500 font-medium">点击照片查看大图</span>
+              <span className="text-sm text-gray-500 font-medium">{translations ? t("artworks.click_to_view") : "点击照片查看大图"}</span>
             </div>
           </div>
           
@@ -170,7 +223,7 @@ export default function ArtworksSectionWithLightbox({ t }: ArtworksSectionProps 
 
       <style jsx>{`
         .artworks-section {
-          background: #ffffff;
+          background: #f8fafc;
           position: relative;
           overflow: hidden;
           padding: 80px 0;

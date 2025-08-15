@@ -1,14 +1,12 @@
 import HeroSection from '@/components/HeroSection';
-import PricingEntry from '@/components/PricingEntry';
-import ArtworksSectionWithLightbox from '@/components/ArtworksSectionWithLightbox';
-import ModelingSectionWithLightbox from '@/components/ModelingSectionWithLightbox';
+import UnifiedServicesSection from '@/components/UnifiedServicesSection';
 import ContactSection from '@/components/ContactSection';
 import { MainPageClient, AnimatedStatsWrapper } from '@/components/MainPageClient';
 import { ServiceCard } from '@/components/ServiceCard';
-import SlideCoverAnimation from '@/components/animations/SlideCoverAnimation';
 import LoadingManager from '@/components/LoadingManager';
 
 export interface HomePageInterface {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   translations: Record<string, any>;
 }
 
@@ -17,8 +15,10 @@ export interface ComponentWithTranslation {
 }
 
 // Helper function to get translation value from translations object
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getTranslation(translations: Record<string, any>, key: string): string {
   const keys = key.split('.');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let value: any = translations;
   
   for (const k of keys) {
@@ -347,14 +347,8 @@ export function MainPage({ translations }: HomePageInterface) {
           </div>
         </section>
 
-        {/* Our Services Section */}
-        <PricingEntry />
-
-        {/* Artworks Section */}
-        <ArtworksSectionWithLightbox />
-
-        {/* 3D Modeling Section */}
-        <ModelingSectionWithLightbox />
+        {/* Unified Services Section */}
+        <UnifiedServicesSection translations={translations} />
 
         {/* Contact Section */}
         <ContactSection t={t} />

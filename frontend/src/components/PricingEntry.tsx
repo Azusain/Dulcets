@@ -59,8 +59,8 @@ const PricingEntry: React.FC = () => {
   };
 
   return (
-    <div className="w-full py-16 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      <div className="max-w-7xl mx-auto px-8">
+    <div className="w-full py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" style={{ minHeight: '900px' }}>
+      <div className="max-w-7xl mx-auto px-8 h-full flex flex-col justify-center">
         {/* Title and Description Section */}
         <div className="mb-16">
           <h2 className="text-5xl font-bold text-white mb-6 drop-shadow-lg">音楽制作サービス</h2>
