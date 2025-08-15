@@ -13,7 +13,6 @@ const DsNavigation = () => {
   const [t, setTranslator] = useState<(key: string) => string>(() => init_t);
   const [isScrolled, setIsScrolled] = useState(false);
   const { isLoading } = useLoading();
-  const [faviconPath, setFaviconPath] = useState("/images/favicon.png");
   const [showNav, setShowNav] = useState(false);
 
   useEffect(() => {
@@ -73,7 +72,7 @@ const DsNavigation = () => {
         <img
           src={getAssetPath("/images/favicon.png")}
           alt="Dulcets Logo"
-          className="h-36 w-auto"
+          className="h-12 w-auto"
         />
       </div>
 

@@ -53,15 +53,6 @@ export default function SlideCoverAnimation({
     }
   }, [isInView, hasAnimated, controls]);
 
-  const containerVariants = {
-    hidden: { opacity: 1 },
-    visible: { 
-      opacity: 1,
-      transition: {
-        duration: 0.01 // Almost instant for container
-      }
-    }
-  };
 
   const coverVariants = {
     hidden: getCoverTransform('initial'),

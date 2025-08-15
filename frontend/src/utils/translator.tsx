@@ -1,7 +1,7 @@
-export function CreateTranslator(translations: Record<string, any>) {
+export function CreateTranslator(translations: Record<string, unknown>) {
   return (key: string) => {
     const keys = key.split('.');
-    let value: any = translations;
+    let value: unknown = translations;
     
     for (const k of keys) {
       if (value && typeof value === 'object' && k in value) {
