@@ -3,5 +3,6 @@
   "editor.quickSuggestions": {
     "strings": "on"
   },
-  "tailwindCSS.experimental.configFile": "src/app/global.css"
+  "tailwindCSS.experimental.configFile": "src/app/global.css",
+  "i18n-ally.keystyle": "nested"
 }
