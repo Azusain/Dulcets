@@ -88,7 +88,6 @@ export function MainPage({ translations }: HomePageInterface) {
         </div>
 
         <div className="max-w-6xl mx-auto px-6 relative z-10">
-          {/* Japanese-inspired section header */}
           <header className="mb-20 text-center">
             <div className="mb-12">
               {/* Decorative line with center accent */}
@@ -120,8 +119,7 @@ export function MainPage({ translations }: HomePageInterface) {
               <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-gray-300 opacity-40"></div>
 
               <p className="text-lg text-gray-700 leading-relaxed py-8 px-12">
-                {t("about.lead_description") ||
-                  "Dulcetsは音楽制作を中心に、動画・イラスト・3Dモデリングなど幅広いクリエイティブ制作を手がけるチームです。お客様の想いを形にし、心に響く作品をお届けします。"}
+                {t("about.lead_description")}
               </p>
             </div>
           </header>

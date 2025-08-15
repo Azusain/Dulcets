@@ -30,7 +30,12 @@ export const ServiceCard = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <a href={href} className="block relative w-full h-full">
+      <a
+        href={href}
+        className="block relative w-full h-full"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         {/* Image Container */}
         <div className="relative w-full aspect-[4/3] overflow-hidden">
           <img
@@ -39,7 +44,6 @@ export const ServiceCard = ({
             className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105"
           />
 
-          {/* Text Overlay - slides up from bottom (NO BLACK BACKGROUND) */}
           <div
             className={`absolute inset-0 flex flex-col justify-end p-6 transition-all duration-700 ease-out ${
               isHovered
