@@ -3,7 +3,11 @@
 import { useEffect, useState } from "react";
 
 function detectBasePath(): string {
-  if (typeof window === 'undefined') return '';
+  // For SSR/build time, check NODE_ENV first
+  if (typeof window === 'undefined') {
+    const isProd = process.env.NODE_ENV === 'production';
+    return isProd ? '/Dulcets' : '';
+  }
   
   const hostname = window.location.hostname;
   const pathname = window.location.pathname;
