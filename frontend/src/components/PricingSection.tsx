@@ -22,11 +22,29 @@ export default function PricingSection({ translations }: PricingSectionProps) {
   const router = useRouter();
 
   const handleBackToHome = () => {
+    // Detect current language from URL path
+    const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
+    let targetPath = '/';
+    
+    // Determine language from current path
+    if (currentPath.startsWith('/en/')) {
+      targetPath = '/en';
+    } else if (currentPath.startsWith('/jp/')) {
+      targetPath = '/jp';
+    } else if (currentPath.startsWith('/zh/')) {
+      targetPath = '/zh';
+    }
+    
     // For GitHub Pages, use window.location to ensure proper navigation
     if (typeof window !== 'undefined' && window.location.hostname.includes('github.io')) {
-      window.location.href = '/Dulcets/';
+      const basePath = '/Dulcets';
+      if (targetPath === '/') {
+        window.location.href = basePath + '/';
+      } else {
+        window.location.href = basePath + targetPath;
+      }
     } else {
-      router.push('/');
+      router.push(targetPath);
     }
   };
 
