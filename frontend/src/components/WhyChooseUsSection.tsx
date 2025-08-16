@@ -110,9 +110,6 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({ t }) => {
           </div>
         </div>
       </section>
-
-      {/* White spacer to avoid dark background showing through */}
-      <div className="bg-white py-10"></div>
     </>
   );
 };
