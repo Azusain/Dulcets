@@ -59,8 +59,11 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
   useEffect(() => {
     const loadAudioConfig = async () => {
       try {
-        console.log('Attempting to load audio config from:', '/audio/audio-config.json');
-        const response = await fetch('/audio/audio-config.json');
+        // 检查是否在生产环境中，如果是则需要加上 basePath
+        const basePath = process.env.NODE_ENV === 'production' ? '/Dulcets' : '';
+        const configUrl = `${basePath}/audio/audio-config.json`;
+        console.log('Attempting to load audio config from:', configUrl);
+        const response = await fetch(configUrl);
         console.log('Audio config response status:', response.status, response.statusText);
         
         if (response.ok) {
@@ -236,7 +239,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
                 <AudioPlayer
                   title={currentAudioConfig.displayName}
                   description={currentAudioConfig.artist}
-                  audioUrl={`/audio/${currentAudioConfig.fileName}`}
+                  audioUrl={`${process.env.NODE_ENV === 'production' ? '/Dulcets' : ''}/audio/${currentAudioConfig.fileName}`}
                   className="shadow-sm"
                   t={t} // 传递翻译函数给 AudioPlayer
                 />

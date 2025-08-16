@@ -40,24 +40,23 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
     let wavesurferInstance: WaveSurfer | null = null;
     let abortController = new AbortController();
 
-    const initializeWaveSurfer = async () => {
+    const initializeWaveSurfer = () => {
       if (!waveformRef.current || !isComponentMounted) return;
 
       try {
-        // 销毁之前的实例
+        // 立即销毁之前的实例，不等待
         if (wavesurfer.current) {
           try {
-            // 先停止播放再销毁
             if (typeof wavesurfer.current.pause === 'function') {
               try {
                 wavesurfer.current.pause();
               } catch (e) {}
             }
-            await new Promise(resolve => setTimeout(resolve, 20)); // 等待一下
-            wavesurfer.current.destroy();
+            wavesurfer.current.destroy(); // 移除延迟，立即销毁
           } catch (error) {
             // 静默处理
           }
+          wavesurfer.current = null;
         }
 
         if (!isComponentMounted) return;
