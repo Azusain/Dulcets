@@ -31,9 +31,7 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({ t }) => {
       </div>
 
       <section className="h-[30vh] bg-white relative overflow-hidden group">
-        {/* Add white spacer after the main content */}
-        {/* Five images covering full width and height - with max width constraint */}
-        <div className="max-w-7xl mx-auto px-6 h-full">
+        <div className="max-w-7xl mx-auto px-6 h-[80%]">
           <div className="grid grid-cols-5 h-full w-full">
             {[
               "custom_music",
@@ -112,9 +110,9 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({ t }) => {
           </div>
         </div>
       </section>
-      
+
       {/* White spacer to avoid dark background showing through */}
-      <div className="bg-white py-20"></div>
+      <div className="bg-white py-10"></div>
     </>
   );
 };

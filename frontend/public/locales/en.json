@@ -254,6 +254,32 @@
       "chat_consultation": "Chat Consultation"
     }
   },
+  "music_production_section": {
+    "title": "Music Production Services",
+    "subtitle": "From professional music production to vocal covers,\nwe meet all your needs. Hover for details.",
+    "services": {
+      "vocal_mixing": {
+        "title": "Vocal Mix & Mastering",
+        "subtitle": "Vocal Mix & Mastering",
+        "description": "Mixing and mastering for vocal cover tracks",
+        "price": "$60~"
+      },
+      "mixing_mastering": {
+        "title": "Mix & Mastering",
+        "subtitle": "Instrumental Mix & Mastering",
+        "description": "Professional mixing and mastering for instrumental tracks",
+        "price": "$225~"
+      },
+      "music_production": {
+        "title": "Music Production",
+        "subtitle": "Music Production",
+        "description": "Original music, BGM, and arrangement production",
+        "price": "$375~"
+      }
+    },
+    "view_details": "View Details →",
+    "view_pricing": "View Detailed Pricing"
+  },
   "pricing_section": {
     "title": "Pricing",
     "subtitle": "We provide detailed pricing information for various music production services",

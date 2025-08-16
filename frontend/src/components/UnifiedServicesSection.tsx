@@ -46,7 +46,7 @@ export default function UnifiedServicesSection({
         <div className="absolute inset-0 bg-gradient-to-b from-white to-gray-50"></div>
 
         <div className="relative z-10">
-          <MusicProductionSection />
+          <MusicProductionSection t={t} />
 
           <ArtworksSection translations={translations} />
 

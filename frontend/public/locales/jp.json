@@ -254,6 +254,32 @@
       "chat_consultation": "チャットで相談"
     }
   },
+  "music_production_section": {
+    "title": "音楽制作サービス",
+    "subtitle": "プロフェッショナルな音楽制作から歌ってみたまで、\nあらゆるニーズにお応えします。ホバーして詳細をご確認ください。",
+    "services": {
+      "vocal_mixing": {
+        "title": "歌ってみた Mix & Mastering",
+        "subtitle": "Vocal Mix & Mastering",
+        "description": "歌ってみた音源のミックス・マスタリング",
+        "price": "¥8,000~"
+      },
+      "mixing_mastering": {
+        "title": "Mix & Mastering",
+        "subtitle": "Instrumental Mix & Mastering",
+        "description": "楽器トラックのミックス・マスタリング",
+        "price": "¥30,000~"
+      },
+      "music_production": {
+        "title": "楽曲制作",
+        "subtitle": "Music Production",
+        "description": "オリジナル楽曲・BGM・アレンジ制作",
+        "price": "¥50,000~"
+      }
+    },
+    "view_details": "詳細を見る →",
+    "view_pricing": "詳細料金表を見る"
+  },
   "pricing_section": {
     "title": "料金表",
     "subtitle": "音楽制作の各種サービス料金をご案内いたします",

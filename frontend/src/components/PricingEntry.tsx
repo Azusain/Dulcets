@@ -9,33 +9,28 @@ import vocalMixingImg from "../../public/images/music_production/vocal-mixing.jp
 import mixingMasteringImg from "../../public/images/music_production/mixing-mastering.jpg";
 import musicProductionImg from "../../public/images/music_production/music-production.jpg";
 
-const MusicProductionSection: React.FC = () => {
+interface MusicProductionSectionProps {
+  t: (key: string) => string;
+}
+
+const MusicProductionSection: React.FC<MusicProductionSectionProps> = ({ t }) => {
   const router = useRouter();
 
   // Service cards data - 3 main services from pricing table
   const services = [
     {
       id: 0,
-      title: "歌ってみた Mix & Mastering",
-      subtitle: "Vocal Mix & Mastering",
-      price: "¥8,000~",
-      description: "歌ってみた音源のミックス・マスタリング",
+      key: "vocal_mixing",
       image: vocalMixingImg,
     },
     {
       id: 1,
-      title: "Mix & Mastering",
-      subtitle: "Instrumental Mix & Mastering",
-      price: "¥30,000~",
-      description: "楽器トラックのミックス・マスタリング",
+      key: "mixing_mastering",
       image: mixingMasteringImg,
     },
     {
       id: 2,
-      title: "楽曲制作",
-      subtitle: "Music Production",
-      price: "¥50,000~",
-      description: "オリジナル楽曲・BGM・アレンジ制作",
+      key: "music_production",
       image: musicProductionImg,
     },
   ];
@@ -66,13 +61,11 @@ const MusicProductionSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-8 h-full flex flex-col justify-center">
         {/* Title and Description Section - reduced since main title is above */}
         <div className="mb-12">
-          <h2 className="text-[80px] font-bold text-white mb-4 drop-shadow-lg">
-            音楽制作サービス
+          <h2 className="text-4xl font-bold text-white mb-4 drop-shadow-lg">
+            {t("music_production_section.title")}
           </h2>
-          <p className="text-lg text-gray-200 leading-relaxed max-w-2xl drop-shadow">
-            プロフェッショナルな音楽制作から歌ってみたまで、
-            <br />
-            あらゆるニーズにお応えします。ホバーして詳細をご確認ください。
+          <p className="text-lg text-gray-200 leading-relaxed max-w-2xl drop-shadow" style={{ whiteSpace: 'pre-line' }}>
+            {t("music_production_section.subtitle")}
           </p>
         </div>
 
@@ -99,10 +92,10 @@ const MusicProductionSection: React.FC = () => {
                 {/* Title Section */}
                 <div className="space-y-2">
                   <h3 className="text-2xl font-bold text-white leading-tight group-hover:text-white/90 transition-colors duration-300">
-                    {service.title}
+                    {t(`music_production_section.services.${service.key}.title`)}
                   </h3>
                   <p className="text-white/60 text-sm font-light tracking-wide">
-                    {service.subtitle}
+                    {t(`music_production_section.services.${service.key}.subtitle`)}
                   </p>
                 </div>
 
@@ -111,7 +104,7 @@ const MusicProductionSection: React.FC = () => {
                   <div className="absolute inset-0 bg-white/5 group-hover:bg-white/10 transition-colors duration-500"></div>
                   <Image
                     src={service.image}
-                    alt={service.title}
+                    alt={t(`music_production_section.services.${service.key}.title`)}
                     fill
                     className="object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 grayscale group-hover:grayscale-0"
                   />
@@ -127,14 +120,14 @@ const MusicProductionSection: React.FC = () => {
                 <div className="space-y-3">
                   <div className="flex items-baseline justify-between">
                     <span className="text-3xl font-light text-white tracking-tight">
-                      {service.price}
+                      {t(`music_production_section.services.${service.key}.price`)}
                     </span>
                     <div className="text-white/40 text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      詳細を見る →
+                      {t("music_production_section.view_details")}
                     </div>
                   </div>
                   <p className="text-white/50 text-sm leading-relaxed font-light">
-                    {service.description}
+                    {t(`music_production_section.services.${service.key}.description`)}
                   </p>
                 </div>
               </div>
@@ -153,7 +146,7 @@ const MusicProductionSection: React.FC = () => {
             onClick={handleViewDetails}
             className="px-8 py-3 border-2 border-white border-opacity-60 text-white bg-transparent hover:bg-white/10 hover:border-opacity-100 cursor-pointer transition-all duration-300 font-medium"
           >
-            詳細料金表を見る
+            {t("music_production_section.view_pricing")}
           </button>
         </div>
       </div>
