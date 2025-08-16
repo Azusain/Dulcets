@@ -101,8 +101,12 @@ export default function ModelingSectionWithLightbox({
   };
 
   return (
-    <section className="modeling-section">
-      <div className="container max-w-7xl mx-auto px-8">
+    <section className="modeling-section" style={{
+      clipPath: "polygon(0 60px, 100% 0, 100% 100%, 0 100%)",
+      marginTop: "-60px",
+      paddingTop: "100px"
+    }}>
+      <div className="container max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-10 gap-12 py-20">
           {/* Left Side - Photo Wall (shifted left, 5 columns) */}
           <div className="lg:col-span-5 relative lg:-ml-8">
@@ -225,7 +229,7 @@ export default function ModelingSectionWithLightbox({
           );
           position: relative;
           overflow: hidden;
-          padding: 80px 0;
+          padding: 40px 0;
         }
 
         .modeling-section::before {

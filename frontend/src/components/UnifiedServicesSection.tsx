@@ -4,6 +4,7 @@ import React from "react";
 import MusicProductionSection from "./PricingEntry";
 import ArtworksSection from "./ArtworksSection";
 import ModelingSectionWithLightbox from "./ModelingSection";
+import DiagonalDivider from "./DiagonalDivider";
 
 interface UnifiedServicesSectionProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -40,17 +41,36 @@ export default function UnifiedServicesSection({
 
   return (
     <>
-      {/* Services container with light background */}
-      <div className="unified-services-container relative">
-        {/* Clean light background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white to-gray-50"></div>
+      {/* Poster-style Services Container */}
+      <div className="w-full py-20 bg-gradient-to-b from-white to-gray-50">
+        <div className="w-[90%] mx-auto px-4">
+          {/* Poster Container with clean corner triangles */}
+          <div className="relative bg-gradient-to-br from-slate-50 via-white to-gray-100 shadow-2xl overflow-visible">
+            
+            {/* Solid Triangle - Top Left (extends beyond poster) - Discord Blue-Purple */}
+            <div className="absolute -top-8 -left-8 w-80 h-80 z-20">
+              <div className="w-0 h-0" style={{
+                borderLeft: '320px solid #5865f2',
+                borderBottom: '320px solid transparent'
+              }}></div>
+            </div>
 
-        <div className="relative z-10">
-          <MusicProductionSection t={t} />
+            {/* Solid Triangle - Bottom Right (extends beyond poster) - Discord Blue-Purple */}
+            <div className="absolute -bottom-8 -right-8 w-80 h-80 z-20">
+              <div className="w-0 h-0" style={{
+                borderRight: '320px solid #5865f2',
+                borderTop: '320px solid transparent'
+              }}></div>
+            </div>
 
-          <ArtworksSection translations={translations} />
-
-          <ModelingSectionWithLightbox translations={translations} />
+            
+            {/* Content sections with diagonal edges */}
+            <div className="relative z-5">
+              <MusicProductionSection t={t} />
+              <ArtworksSection translations={translations} />
+              <ModelingSectionWithLightbox translations={translations} />
+            </div>
+          </div>
         </div>
       </div>
 

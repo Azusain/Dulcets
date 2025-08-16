@@ -82,7 +82,16 @@ export default function ContactSection({ t }: ComponentWithTranslation) {
                   <a 
                     href="mailto:dulcets.info@gmail.com"
                     onClick={handleEmailClick}
-                    className="inline-block bg-black text-white px-8 py-3 hover:bg-gray-800 transition-colors font-medium rounded-lg relative cursor-pointer"
+                    className="inline-block text-white px-8 py-3 transition-colors font-medium rounded-lg relative cursor-pointer"
+                    style={{
+                      backgroundColor: '#5865f2'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#4752c4';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = '#5865f2';
+                    }}
                   >
                     {t("contact.send_email")}
                     {emailClickMessage && (

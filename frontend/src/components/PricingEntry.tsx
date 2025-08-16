@@ -55,8 +55,11 @@ const MusicProductionSection: React.FC<MusicProductionSectionProps> = ({ t }) =>
 
   return (
     <div
-      className="w-full py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
-      style={{ minHeight: "900px" }}
+      className="w-full py-10 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative"
+      style={{ 
+        minHeight: "900px",
+        clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 60px), 0 100%)"
+      }}
     >
       <div className="max-w-7xl mx-auto px-6 h-full flex flex-col justify-center">
         {/* Title and Description Section - reduced since main title is above */}

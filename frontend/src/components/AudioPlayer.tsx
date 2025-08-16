@@ -248,32 +248,32 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
     >
       {/* Title, author, time and play button - on the same row */}
       <div className="flex items-start gap-4 mb-4" style={{ minHeight: "48px" }}>
-        {/* Play/pause button - Discord purple theme */}
+        {/* Play/pause button - YouTube red theme */}
         <button
           onClick={togglePlayPause}
           disabled={isLoading}
           className="w-12 h-12 rounded-full text-white flex items-center justify-center transition-all duration-150 ease-in-out disabled:bg-gray-400 flex-shrink-0 cursor-pointer hover:scale-105 active:scale-95"
           style={{
-            backgroundColor: isLoading ? '#9CA3AF' : '#5865F2',
+            backgroundColor: isLoading ? '#9CA3AF' : '#5865f2',
           }}
           onMouseEnter={(e) => {
             if (!isLoading) {
-              e.currentTarget.style.backgroundColor = '#4752C4';
+              e.currentTarget.style.backgroundColor = '#4752c4';
             }
           }}
           onMouseLeave={(e) => {
             if (!isLoading) {
-              e.currentTarget.style.backgroundColor = '#5865F2';
+              e.currentTarget.style.backgroundColor = '#5865f2';
             }
           }}
           onMouseDown={(e) => {
             if (!isLoading) {
-              e.currentTarget.style.backgroundColor = '#3C4142';
+              e.currentTarget.style.backgroundColor = '#3c45a5';
             }
           }}
           onMouseUp={(e) => {
             if (!isLoading) {
-              e.currentTarget.style.backgroundColor = '#4752C4';
+              e.currentTarget.style.backgroundColor = '#4752c4';
             }
           }}
           aria-label={isPlaying ? "Pause" : "Play"}

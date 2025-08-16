@@ -126,7 +126,8 @@ const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
     >
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Section Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 relative">
+          
           <div className="inline-block mb-6">
             <span className="text-sm font-medium uppercase tracking-wider text-gray-500 bg-white px-6 py-2 rounded-full shadow-sm border border-gray-200">
               {t("works.title")}
@@ -249,7 +250,8 @@ const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
 
         {/* YouTube Video Links Grid */}
         <div className="border-t border-gray-200 pt-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="relative">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {works.map((post, index) => {
               // Get localized title and excerpt based on current language
               const getLocalizedContent = () => {
@@ -289,6 +291,7 @@ const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
                 />
               );
             })}
+            </div>
           </div>
         </div>
       </div>

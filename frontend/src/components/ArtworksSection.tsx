@@ -107,7 +107,12 @@ export default function ArtworksSection({
   };
 
   return (
-    <section className="artworks-section">
+    <section className="artworks-section" style={{
+      clipPath: "polygon(0 60px, 100% 0, 100% calc(100% - 60px), 0 100%)",
+      marginTop: "-60px",
+      marginBottom: "-60px",
+      paddingTop: "100px"
+    }}>
       <div className="container max-w-7xl mx-auto px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 py-20">
           {/* Left Side - Title and Description */}
@@ -165,6 +170,7 @@ export default function ArtworksSection({
 
           {/* Right Side - Photo Wall */}
           <div className="relative">
+            
             <div className="scattered-photos relative w-full h-[800px]">
               {/* Artwork gallery using position data from JSON */}
               {artworks.map((artwork, index) => {
@@ -223,7 +229,7 @@ export default function ArtworksSection({
           background: #f8fafc;
           position: relative;
           overflow: hidden;
-          padding: 80px 0;
+          padding: 40px 0;
         }
 
         .artworks-section::before {
