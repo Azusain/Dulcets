@@ -39,66 +39,21 @@ export default function UnifiedServicesSection({
 
   return (
     <div className="unified-services-container relative">
-      {/* DC-style dark background with gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 z-0"></div>
+      {/* Clean dark background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 to-slate-800"></div>
       
-      {/* Dark geometric overlays for depth */}
-      <div className="absolute inset-0 z-1">
-        <div className="absolute top-0 right-1/3 w-96 h-96 bg-black/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-slate-700/10 rounded-full blur-2xl"></div>
-      </div>
-      
-      {/* Sharp DC-style corner designs */}
-      <div className="absolute top-0 left-0 w-32 h-32 overflow-hidden pointer-events-none z-30">
-        {/* Top-left sharp corner */}
-        <div className="absolute top-0 left-0 w-24 h-2 bg-white shadow-lg shadow-white/20"></div>
-        <div className="absolute top-0 left-0 w-2 h-24 bg-white shadow-lg shadow-white/20"></div>
-        <div className="absolute top-6 left-6 w-16 h-1 bg-gray-400"></div>
-        <div className="absolute top-6 left-6 w-1 h-16 bg-gray-400"></div>
-      </div>
-
-      <div className="absolute bottom-0 right-0 w-32 h-32 overflow-hidden pointer-events-none z-30">
-        {/* Bottom-right sharp corner */}
-        <div className="absolute bottom-0 right-0 w-24 h-2 bg-gray-300 shadow-lg shadow-gray-300/20"></div>
-        <div className="absolute bottom-0 right-0 w-2 h-24 bg-gray-300 shadow-lg shadow-gray-300/20"></div>
-        <div className="absolute bottom-6 right-6 w-16 h-1 bg-gray-500"></div>
-        <div className="absolute bottom-6 right-6 w-1 h-16 bg-gray-500"></div>
-      </div>
-
-      {/* DC-style prominent title design */}
-      <div className="relative z-20 pt-20 pb-0">
-        <div className="relative pl-8">
-          {/* Title with DC comic book style */}
-          <div className="relative">
-            {/* Dark background plate for title */}
-            <div className="absolute -top-8 -left-4 w-full max-w-2xl h-40 bg-black/40 transform -skew-x-1 border border-gray-600/30"></div>
-            
-            {/* Sharp accent lines */}
-            <div className="absolute top-1/2 -left-12 w-20 h-1 bg-white transform -translate-y-1/2 shadow-lg shadow-white/30"></div>
-            <div className="absolute top-1/2 -left-12 w-16 h-0.5 bg-gray-300 transform -translate-y-1/2 translate-y-2"></div>
-            
-            {/* Main title - bold and prominent */}
-            <h1 className="relative text-6xl lg:text-8xl font-black text-white mb-4 transform translate-y-8 tracking-tight">
-              <span className="bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent drop-shadow-2xl">
-                {t('services.our_service')}
-              </span>
+      {/* Simple title section */}
+      <div className="relative z-20 pt-16 pb-8">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center">
+            <h1 className="text-5xl lg:text-6xl font-bold text-white mb-4">
+              {t('services.our_service')}
             </h1>
-            
-            {/* DC-style geometric accents */}
-            <div className="absolute -top-4 right-8 flex gap-3">
-              <div className="w-3 h-3 bg-white rotate-45 shadow-lg shadow-white/20"></div>
-              <div className="w-2 h-2 bg-gray-300 rotate-45"></div>
-              <div className="w-1 h-1 bg-gray-400 rotate-45"></div>
-            </div>
-            
-            {/* Additional sharp design elements */}
-            <div className="absolute top-0 right-0 w-24 h-1 bg-gradient-to-r from-transparent to-white/20"></div>
+            <div className="w-20 h-1 bg-white/30 mx-auto mb-6"></div>
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+              {t('services.subtitle')}
+            </p>
           </div>
-          
-          <div className="w-32 h-0.5 bg-white mb-6 ml-0 shadow-sm shadow-white/20"></div>
-          <p className="text-xl text-gray-300 max-w-3xl font-medium tracking-wide">
-            {t('services.subtitle')}
-          </p>
         </div>
       </div>
 
