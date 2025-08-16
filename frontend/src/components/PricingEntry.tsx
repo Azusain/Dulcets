@@ -64,12 +64,12 @@ const MusicProductionSection: React.FC = () => {
       style={{ minHeight: "900px" }}
     >
       <div className="max-w-7xl mx-auto px-8 h-full flex flex-col justify-center">
-        {/* Title and Description Section */}
-        <div className="mb-16">
-          <h2 className="text-5xl font-bold text-white mb-6 drop-shadow-lg">
+        {/* Title and Description Section - reduced since main title is above */}
+        <div className="mb-12">
+          <h2 className="text-4xl font-bold text-white mb-4 drop-shadow-lg">
             音楽制作サービス
           </h2>
-          <p className="text-xl text-gray-300 leading-relaxed max-w-2xl drop-shadow">
+          <p className="text-lg text-gray-200 leading-relaxed max-w-2xl drop-shadow">
             プロフェッショナルな音楽制作から歌ってみたまで、
             <br />
             あらゆるニーズにお応えします。ホバーして詳細をご確認ください。

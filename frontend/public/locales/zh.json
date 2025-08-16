@@ -49,7 +49,38 @@
       "artists": "艺术家",
       "releases": "发布",
       "fans": "粉丝"
+    },
+    "why_choose_us": {
+      "title": "我们的优势",
+      "subtitle": "为什么选择我们",
+      "features": {
+        "custom_music": {
+          "title": "定制音乐制作",
+          "description": "我们根据客户的品牌和故事从零开始创作原创音乐。"
+        },
+        "comprehensive_support": {
+          "title": "全方位支持",
+          "description": "从作曲编曲到混音母带处理，我们提供端到端的支持。"
+        },
+        "diverse_vocals": {
+          "title": "多样化声线阵容",
+          "description": "我们拥有众多英语和日语母语女歌手，满足各种不同需求的演唱。"
+        },
+        "multilingual": {
+          "title": "多语言支持",
+          "description": "支持中文、日语、英语的顺畅沟通。"
+        },
+        "cross_media": {
+          "title": "跨媒体支持",
+          "description": "不仅提供音乐制作，还可咨询视频和3D MV制作。"
+        }
+      }
     }
+  },
+  "services": {
+    "title": "我们的服务",
+    "our_service": "我们的服务",
+    "subtitle": "我们提供的三大主要服务：音乐制作、绘画作品、3D建模"
   },
   "releases": {
     "title": "最新发布",

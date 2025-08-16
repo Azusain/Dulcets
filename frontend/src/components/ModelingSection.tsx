@@ -107,7 +107,7 @@ export default function ModelingSectionWithLightbox({
           {/* Left Side - Photo Wall (shifted left, 5 columns) */}
           <div className="lg:col-span-5 relative lg:-ml-8">
             <div className="scattered-photos relative w-full h-[800px]">
-              {models.slice(0, 6).map((model, index) => {
+              {models.slice(0, 7).map((model, index) => {
                 const pos = model.pos;
 
                 return (

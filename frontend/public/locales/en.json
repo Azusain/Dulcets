@@ -79,7 +79,8 @@
   },
   "services": {
     "title": "Our Services",
-    "subtitle": "We provide a full range of music services, from production to marketing, to help you succeed.",
+    "our_service": "Our Service",
+    "subtitle": "Our three main services: Music Production, Artwork, and 3D Modeling",
     "music": {
       "title": "Music Production",
       "description": "High-quality music production, including composing, arranging, and recording."

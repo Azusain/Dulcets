@@ -3,6 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import UnifiedServicesSection from "@/components/UnifiedServicesSection";
 import ContactSection from "@/components/ContactSection";
 import AboutSection from "@/components/AboutSection";
+import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import { ServiceCard } from "@/components/ServiceCard";
 import LoadingManager from "@/components/LoadingManager";
 import works from "../../public/service/works.json";
@@ -61,22 +62,25 @@ export function MainPage({ translations }: HomePageInterface) {
       {/* About Us Section */}
       <AboutSection t={t} />
 
+      {/* Why Choose Us Section - Starry Night Theme */}
+      <WhyChooseUsSection t={t} />
+
       {/* Our Works Section */}
-      <section id="works" className="py-16 bg-gray-50">
-        <div className="container mx-auto px-6">
-          {/* Section Header */}
-          <div className="text-center mb-12">
-            <div className="inline-block mb-4">
-              <span className="text-sm font-medium uppercase tracking-wider text-gray-500 bg-white px-4 py-2 rounded-full">
-                Our Works
+      <section id="works" className="py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Section Header with better styling */}
+          <div className="text-center mb-16">
+            <div className="inline-block mb-6">
+              <span className="text-sm font-medium uppercase tracking-wider text-gray-500 bg-white px-6 py-2 rounded-full shadow-sm border border-gray-200">
+                {t("works.title")}
               </span>
             </div>
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">
+            <h2 className="text-4xl lg:text-5xl font-light text-gray-800 mb-6 tracking-wide">
               {t("works.title")}
             </h2>
+            <div className="mx-auto w-24 h-px bg-gray-400 mb-6"></div>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              {t("works.lead_description") ||
-                "私たちがこれまでに手がけた音楽作品・映像コンテンツをご紹介します。オリジナル楽曲からカバー作品まで、多様なジャンルの作品をお楽しみください。"}
+              {t("works.lead_description")}
             </p>
           </div>
 

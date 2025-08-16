@@ -4,7 +4,7 @@
     "title": "Modeling 1",
     "imagePath": "model1.png",
     "pos": {
-      "left": "0%",
+      "left": "-10%",
       "top": "8%",
       "rotation": 10,
       "scale": 0.95,
@@ -29,10 +29,10 @@
     "imagePath": "model3.png",
     "pos": {
       "left": "58%",
-      "top": "18%",
+      "top": "15%",
       "rotation": 12,
       "scale": 0.9,
-      "zindex": 4
+      "zindex": 10
     }
   },
   {
@@ -64,11 +64,23 @@
     "title": "Modeling 6",
     "imagePath": "model6.png",
     "pos": {
-      "left": "60%",
+      "left": "50%",
       "top": "65%",
       "rotation": -9,
       "scale": 1.0,
       "zindex": 6
+    }
+  },
+  {
+    "id": 7,
+    "title": "Modeling 7",
+    "imagePath": "model7.png",
+    "pos": {
+      "left": "-20%",
+      "top": "60%",
+      "rotation": -90,
+      "scale": 1.2,
+      "zindex": 7
     }
   }
 ]
