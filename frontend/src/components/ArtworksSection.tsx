@@ -201,11 +201,6 @@ export default function ArtworksSection({
                     <div className="polaroid-frame-large">
                       <img src={artwork.image} alt={artwork.title} />
                     </div>
-                    <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
-                      <span className="text-white text-xs font-bold">
-                        {index + 1}
-                      </span>
-                    </div>
                   </div>
                 );
               })}

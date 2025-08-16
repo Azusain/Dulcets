@@ -126,11 +126,6 @@ export default function ModelingSectionWithLightbox({
                     <div className="polaroid-frame-large">
                       <img src={model.image} alt={model.title} />
                     </div>
-                    <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-cyan-500 rounded-full flex items-center justify-center">
-                      <span className="text-white text-xs font-bold">
-                        {index + 1}
-                      </span>
-                    </div>
                   </div>
                 );
               })}

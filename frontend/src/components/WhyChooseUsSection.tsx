@@ -30,8 +30,8 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({ t }) => {
           <div className="mx-auto w-16 h-0.5 bg-white/30 mb-4"></div>
         </div>
 
-        {/* Image-based cards with diagonal separators */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-0">
+        {/* Manga-style diagonal panel layout */}
+        <div className="relative h-96 w-full overflow-hidden">
           {[
             'custom_music',
             'comprehensive_support', 
@@ -47,11 +47,21 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({ t }) => {
               'cross-media.jpg'
             ];
             
+            // Define manga-style panel shapes using clip-path
+            const panelShapes = [
+              'polygon(0% 0%, 25% 0%, 30% 100%, 0% 100%)', // Panel 1 - left trapezoid
+              'polygon(25% 0%, 45% 0%, 55% 100%, 30% 100%)', // Panel 2 - narrow middle
+              'polygon(45% 0%, 65% 0%, 70% 100%, 55% 100%)', // Panel 3 - center
+              'polygon(65% 0%, 85% 0%, 90% 100%, 70% 100%)', // Panel 4 - right middle
+              'polygon(85% 0%, 100% 0%, 100% 100%, 90% 100%)' // Panel 5 - right trapezoid
+            ];
+            
             return (
               <div 
                 key={feature}
-                className="group relative h-80 overflow-hidden transition-all duration-500 hover:scale-105 hover:z-10"
+                className="group absolute inset-0 transition-all duration-500 hover:z-10"
                 style={{
+                  clipPath: panelShapes[index],
                   animation: `fadeInUp 0.8s ease-out ${index * 0.1}s both`,
                 }}
               >
@@ -64,38 +74,36 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({ t }) => {
                 ></div>
                 
                 {/* Dark overlay */}
-                <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-500"></div>
+                <div className="absolute inset-0 bg-black/70 group-hover:bg-black/50 transition-colors duration-500"></div>
                 
-                {/* Diagonal separator (except for last item) */}
+                {/* White diagonal separators */}
                 {index < 4 && (
-                  <div className="absolute -right-6 top-0 bottom-0 w-12 bg-slate-900 transform skew-x-12 z-20"></div>
+                  <div 
+                    className="absolute top-0 bottom-0 w-0.5 bg-white/30 z-20"
+                    style={{
+                      right: index === 0 ? '75%' : index === 1 ? '55%' : index === 2 ? '35%' : '15%'
+                    }}
+                  ></div>
                 )}
                 
                 {/* Content */}
-                <div className="relative z-10 h-full flex flex-col justify-end p-6">
-                  {/* Number badge */}
-                  <div className="absolute top-6 left-6">
-                    <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white text-sm font-bold border border-white/30">
-                      {index + 1}
-                    </div>
-                  </div>
-                  
-                  <div className="transform transition-transform duration-500 group-hover:-translate-y-2">
-                    <h3 className="text-xl font-bold text-white mb-3 leading-tight drop-shadow-lg">
+                <div className="relative z-10 h-full flex flex-col justify-center items-center p-4 text-center">
+                  <div className="transform transition-all duration-500 group-hover:-translate-y-2 group-hover:scale-105">
+                    <h3 className="text-lg font-bold text-white mb-2 leading-tight drop-shadow-lg">
                       {t(`about.why_choose_us.features.${feature}.title`)}
                     </h3>
                     
-                    {/* Simple white line */}
-                    <div className="w-12 h-0.5 bg-white/60 mb-3"></div>
+                    {/* Simple white accent line */}
+                    <div className="w-8 h-0.5 bg-white/60 mb-2 mx-auto"></div>
                     
-                    <p className="text-white/90 text-sm leading-relaxed drop-shadow-md">
+                    <p className="text-white/90 text-xs leading-relaxed drop-shadow-md max-w-24">
                       {t(`about.why_choose_us.features.${feature}.description`)}
                     </p>
                   </div>
-                  
-                  {/* Bottom gradient fade */}
-                  <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
                 </div>
+                
+                {/* Hover glow effect */}
+                <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors duration-500 pointer-events-none"></div>
               </div>
             );
           })}
