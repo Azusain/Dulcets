@@ -220,40 +220,6 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
           <div className="relative">
             <div className="p-8 space-y-6">
               {MUSIC_GENRES.map((genre) => {
-                // Define icons for each genre
-                const genreIcons = {
-                  jrock: (
-                    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
-                      <path d="M4 9h3l3.5-3.5L9 4 4 9z"/>
-                      <path d="M20 15h-3l-3.5 3.5L15 20l5-5z"/>
-                    </svg>
-                  ),
-                  jpop: (
-                    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                      <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" strokeWidth="2"/>
-                    </svg>
-                  ),
-                  idol: (
-                    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                      <circle cx="12" cy="8" r="2" fill="none" stroke="white" strokeWidth="1"/>
-                    </svg>
-                  ),
-                  orchestra: (
-                    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M9 5v4H7V5c0-1.1.9-2 2-2s2 .9 2 2zM6.5 11.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5zM12 1l.94 3.06L16 5l-2.06.94L13 9l-.94-3.06L9 5l3.06-.94L12 1zm7 11.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5z"/>
-                      <path d="M12 19v-3.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5V19h-3zm4-8.5V7c0-1.1.9-2 2-2s2 .9 2 2v3.5h-4z"/>
-                    </svg>
-                  ),
-                  edm: (
-                    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-                      <polygon points="1,1 3,3 1,5" fill="none" stroke="currentColor" strokeWidth="1"/>
-                    </svg>
-                  )
-                };
                 
                 return (
                   <div 
@@ -274,14 +240,6 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
                     
                     {/* Content */}
                     <div className="flex items-center space-x-4">
-                      {/* Genre Icon with night sky colors */}
-                      <div className={`flex-shrink-0 p-3 rounded-lg transition-all duration-300 ${
-                        selectedGenre === genre.id 
-                          ? 'bg-gradient-to-br from-slate-800 to-slate-900 text-cyan-400 shadow-lg' 
-                          : 'bg-gradient-to-br from-slate-100 to-gray-200 text-slate-600 group-hover:from-slate-200 group-hover:to-gray-300'
-                      }`}>
-                        {genreIcons[genre.id as keyof typeof genreIcons]}
-                      </div>
                       
                       {/* Text Content - Crystal White Tokyo Theme */}
                       <div className="flex-1 text-left">
