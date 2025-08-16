@@ -31,7 +31,12 @@ export default function PricingSection({ translations }: PricingSectionProps) {
       <div className="max-w-4xl mx-auto px-8">
         {/* Simple Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-light mb-6 text-black tracking-wide">{t('pricing_section.title')}</h2>
+          <h2 className="text-5xl lg:text-6xl text-gray-900 mb-6 cursor-pointer" style={{ fontFamily: "'Brush Script MT', 'Lucida Handwriting', 'Snell Roundhand', cursive", fontWeight: 'normal' }}>
+            <span className="relative">
+              {t('pricing_section.title')}
+              <span className="absolute inset-0 text-blue-400 -z-10 translate-x-2 translate-y-2 opacity-20">{t('pricing_section.title')}</span>
+            </span>
+          </h2>
           <div className="w-20 h-px bg-gray-300 mx-auto mb-8"></div>
           <p className="text-base text-gray-600 leading-relaxed">
             {t('pricing_section.subtitle')}

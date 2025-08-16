@@ -24,8 +24,12 @@ export default function RootLayout({
           href={getAssetPath("/images/logo_black.png")}
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Shippori+Mincho+B1:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"
+        />
+        <link
+          rel="stylesheet"
+          href={getAssetPath("/fonts/fonts.css")}
         />
         <style
           dangerouslySetInnerHTML={{

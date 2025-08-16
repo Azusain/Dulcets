@@ -15,6 +15,20 @@
   font-family: 'Orbitron', monospace;
 }
 
+/* Soft Japanese font for hero section subtitle only */
+.font-japanese-soft {
+  font-family: 
+    'Hiragino Mincho Pro', 
+    'Yu Mincho', 
+    'YuMincho', 
+    'Shippori Mincho B1',
+    'Noto Serif CJK JP',
+    'Source Han Serif JP',
+    'Times New Roman',
+    serif;
+  font-weight: 400;
+}
+
 /* Loading animations */
 .loader-container {
   opacity: 1;

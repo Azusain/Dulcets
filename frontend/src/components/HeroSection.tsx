@@ -47,18 +47,25 @@ export default function HeroSection({ t }: ComponentWithTranslation) {
 
       {/* Hero Content - Repositioned to left-middle-upper with adjusted sizes */}
       <div className="container mx-auto px-6 h-full flex flex-col justify-center items-start relative z-20 text-left" style={{marginTop: '-8vh'}}>
-        <h1 className="text-[clamp(5rem,14vw,10rem)] font-bold font-orbitron text-white leading-tight mb-6 animate-float opacity-80">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-500 drop-shadow-2xl">
-            Dulcets
-          </span>
+        <h1 className="text-[clamp(6rem,16vw,12rem)] leading-tight mb-6 animate-float" style={{ fontFamily: "'Great Vibes', 'Alex Brush', 'Pinyon Script', cursive", fontWeight: 400, letterSpacing: '0.02em', color: 'white', textShadow: '2px 2px 8px rgba(0, 0, 0, 0.7)' }}>
+          Dulcets
         </h1>
-        <p className="text-[clamp(1.2rem,3.5vw,2rem)] text-gray-200 max-w-4xl mb-10 animate-fade-in opacity-75">
+        <p className="text-[clamp(1.2rem,3.5vw,2rem)] text-gray-200 max-w-4xl mb-10 animate-fade-in opacity-75 font-japanese-soft">
           {t("hero.subtitle")}
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
           <a
             href="#artists"
-            className="px-10 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium hover:opacity-90 transform hover:scale-105 transition-all duration-300 relative overflow-hidden group"
+            className="px-10 py-4 text-white font-medium transform hover:scale-105 transition-all duration-300 relative overflow-hidden group"
+            style={{
+              backgroundColor: '#5865F2',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#4752C4';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#5865F2';
+            }}
           >
             <span className="relative z-10">{t("hero.explore_artists")}</span>
             <svg className="w-5 h-5 ml-2 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -67,7 +74,18 @@ export default function HeroSection({ t }: ComponentWithTranslation) {
           </a>
           <a
             href="#releases"
-            className="px-10 py-4 bg-transparent border-2 border-white/50 text-white font-medium hover:bg-white/10 transform hover:scale-105 transition-all duration-300 relative overflow-hidden group"
+            className="px-10 py-4 bg-transparent text-white font-medium transform hover:scale-105 transition-all duration-300 relative overflow-hidden group"
+            style={{
+              border: '2px solid #5865F2',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgba(88, 101, 242, 0.2)';
+              e.currentTarget.style.borderColor = '#4752C4';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent';
+              e.currentTarget.style.borderColor = '#5865F2';
+            }}
           >
             <span className="relative z-10">{t("hero.latest_releases")}</span>
             <svg className="w-5 h-5 ml-2 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
