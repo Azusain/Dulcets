@@ -119,66 +119,65 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
   return (
     <section
       id="about"
-      className="py-24 bg-gray-50 text-black relative overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Subtle Japanese-inspired background pattern */}
-      <div className="absolute inset-0 opacity-20">
-        {/* Geometric grid pattern */}
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
-                linear-gradient(rgba(156, 163, 175, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(156, 163, 175, 0.1) 1px, transparent 1px)
-              `,
-            backgroundSize: "40px 40px",
-          }}
-        ></div>
-
-        {/* Scattered minimal elements */}
-        <div className="absolute top-20 left-10 w-1 h-32 bg-gray-300 transform rotate-12"></div>
-        <div className="absolute top-40 right-20 w-1 h-24 bg-gray-300 transform -rotate-12"></div>
-        <div className="absolute bottom-32 left-1/4 w-1 h-28 bg-gray-300 transform rotate-45"></div>
-        <div className="absolute bottom-20 right-1/3 w-1 h-20 bg-gray-300 transform -rotate-30"></div>
-
-        {/* Subtle circles for accent */}
-        <div className="absolute top-1/3 left-1/5 w-2 h-2 bg-gray-300 rounded-full opacity-40"></div>
-        <div className="absolute top-2/3 right-1/4 w-3 h-3 bg-gray-300 rounded-full opacity-30"></div>
-        <div className="absolute bottom-1/4 left-2/3 w-1.5 h-1.5 bg-gray-400 rounded-full opacity-50"></div>
+      {/* Tokyo Night Background - Full Screen */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url('/images/backgrounds/tokyo-fireworks-night.jpg')`,
+        }}
+      >
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black/60"></div>
+        
+        {/* Fireworks festival atmospheric effects */}
+        <div className="absolute inset-0">
+          {/* Floating light particles - simulating distant fireworks */}
+          <div className="absolute top-20 left-1/4 w-2 h-2 bg-yellow-400 rounded-full opacity-80 animate-pulse" style={{animationDelay: '0s'}}></div>
+          <div className="absolute top-32 right-1/3 w-1.5 h-1.5 bg-pink-400 rounded-full opacity-70 animate-pulse" style={{animationDelay: '1s'}}></div>
+          <div className="absolute top-48 left-1/2 w-1 h-1 bg-cyan-400 rounded-full opacity-90 animate-pulse" style={{animationDelay: '2s'}}></div>
+          <div className="absolute bottom-40 left-1/5 w-2.5 h-2.5 bg-orange-400 rounded-full opacity-60 animate-pulse" style={{animationDelay: '1.5s'}}></div>
+          <div className="absolute bottom-60 right-1/4 w-1.5 h-1.5 bg-purple-400 rounded-full opacity-75 animate-pulse" style={{animationDelay: '0.5s'}}></div>
+          
+          {/* Subtle gradient overlays for depth */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/10 via-transparent to-purple-900/10"></div>
+        </div>
       </div>
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <header className="mb-20 text-center">
           <div className="mb-12">
-            {/* Decorative line with center accent */}
+            {/* Decorative line with center accent - Festival Theme */}
             <div className="flex items-center justify-center mb-8">
-              <div className="h-px bg-gray-300 w-16 opacity-60"></div>
-              <div className="mx-4 w-2 h-2 bg-gray-400 rounded-full"></div>
-              <div className="h-px bg-gray-300 w-16 opacity-60"></div>
+              <div className="h-px bg-yellow-400/60 w-16 shadow-[0_0_4px_rgba(255,193,7,0.4)]"></div>
+              <div className="mx-4 w-2 h-2 bg-pink-400 rounded-full animate-pulse shadow-[0_0_8px_rgba(236,72,153,0.6)]"></div>
+              <div className="h-px bg-yellow-400/60 w-16 shadow-[0_0_4px_rgba(255,193,7,0.4)]"></div>
             </div>
 
-            <h2 className="text-5xl font-light mb-4 text-black tracking-wide">
+            <h2 className="text-5xl font-light mb-4 text-white tracking-wide drop-shadow-[0_0_12px_rgba(255,255,255,0.3)]">
               {t("about.title")}
             </h2>
 
-            {/* Subtle animated underline */}
-            <div className="mx-auto w-32 h-px bg-gray-400 relative overflow-hidden">
-              <div className="absolute inset-0 bg-black w-0 animate-pulse"></div>
+            {/* Fireworks-inspired animated underline */}
+            <div className="mx-auto w-32 h-0.5 bg-gradient-to-r from-pink-400 via-yellow-400 to-cyan-400 relative overflow-hidden shadow-[0_0_8px_rgba(255,193,7,0.4)]">
+              <div className="absolute inset-0 bg-white w-0 animate-pulse"></div>
             </div>
 
-            <p className="text-sm font-medium uppercase tracking-[0.3em] text-gray-500 mt-6">
-              ABOUT US
+            <p className="text-sm font-medium uppercase tracking-[0.3em] text-gray-300 mt-6">
+              花火大会 • FIREWORKS FESTIVAL
             </p>
           </div>
 
-          {/* Description with subtle border frame */}
+          {/* Description with festival border frame */}
           <div className="relative max-w-4xl mx-auto">
-            <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-gray-300 opacity-40"></div>
-            <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-gray-300 opacity-40"></div>
-            <div className="absolute bottom-0 left-0 w-8 h-8 border-l-2 border-b-2 border-gray-300 opacity-40"></div>
-            <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-gray-300 opacity-40"></div>
+            <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-yellow-400/40"></div>
+            <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-pink-400/40"></div>
+            <div className="absolute bottom-0 left-0 w-8 h-8 border-l-2 border-b-2 border-cyan-400/40"></div>
+            <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-purple-400/40"></div>
 
-            <p className="text-lg text-gray-700 leading-relaxed py-8 px-12">
+            <p className="text-lg text-gray-200 leading-relaxed py-8 px-12 drop-shadow-[0_0_4px_rgba(0,0,0,0.5)]">
               {t("about.lead_description")}
             </p>
           </div>
@@ -188,14 +187,14 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
         <div className="grid lg:grid-cols-2 gap-16 mb-20">
           {/* Left: About Content with AudioPlayer */}
           <div className="relative flex flex-col h-full">
-            {/* Subtle decorative element */}
-            <div className="absolute -left-4 top-0 w-1 h-full bg-gray-200 opacity-50"></div>
+            {/* Festival decorative element */}
+            <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-yellow-400/60 via-pink-400/60 to-cyan-400/60 shadow-[0_0_4px_rgba(255,193,7,0.3)]"></div>
             
             {/* Content text */}
             <div className="prose prose-lg max-w-none relative flex-1 pl-8">
               <div 
                 key={contentKey}
-                className="animate-fadeIn text-lg leading-relaxed text-gray-700"
+                className="animate-fadeIn text-lg leading-relaxed text-gray-200 drop-shadow-[0_0_4px_rgba(0,0,0,0.5)] backdrop-blur-sm bg-black/20 rounded-lg p-6"
                 style={{
                   animation: "fadeIn 0.5s ease-in-out"
                 }}
@@ -218,66 +217,15 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
             </div>
           </div>
 
-          {/* Right: Interactive Music Genres - Tokyo Night Cityscape */}
+          {/* Right: Interactive Music Genres - Festival Style */}
           <div className="relative">
-            {/* Tokyo night cityscape background */}
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-800 to-black rounded-2xl overflow-hidden">
-              {/* City lights simulation */}
-              <div className="absolute inset-0">
-                {/* Building silhouettes */}
-                <div className="absolute bottom-0 left-0 w-12 h-32 bg-slate-700 opacity-60"></div>
-                <div className="absolute bottom-0 left-10 w-8 h-40 bg-slate-600 opacity-70"></div>
-                <div className="absolute bottom-0 left-16 w-10 h-28 bg-slate-700 opacity-65"></div>
-                <div className="absolute bottom-0 left-24 w-14 h-44 bg-slate-600 opacity-75"></div>
-                <div className="absolute bottom-0 right-20 w-16 h-36 bg-slate-700 opacity-65"></div>
-                <div className="absolute bottom-0 right-8 w-12 h-32 bg-slate-600 opacity-70"></div>
-                <div className="absolute bottom-0 right-0 w-10 h-28 bg-slate-700 opacity-60"></div>
-                
-                {/* Window lights */}
-                <div className="absolute bottom-16 left-2 w-1 h-1 bg-cyan-300 opacity-80 animate-pulse"></div>
-                <div className="absolute bottom-20 left-4 w-1 h-1 bg-blue-200 opacity-70"></div>
-                <div className="absolute bottom-24 left-6 w-1 h-1 bg-cyan-400 opacity-90 animate-pulse delay-500"></div>
-                <div className="absolute bottom-28 left-12 w-1 h-1 bg-blue-300 opacity-75"></div>
-                <div className="absolute bottom-32 left-14 w-1 h-1 bg-cyan-200 opacity-80 animate-pulse delay-1000"></div>
-                <div className="absolute bottom-18 left-18 w-1 h-1 bg-blue-400 opacity-85"></div>
-                <div className="absolute bottom-22 left-20 w-1 h-1 bg-cyan-300 opacity-75 animate-pulse delay-700"></div>
-                <div className="absolute bottom-26 left-22 w-1 h-1 bg-blue-200 opacity-70"></div>
-                
-                <div className="absolute bottom-14 right-16 w-1 h-1 bg-cyan-400 opacity-90 animate-pulse"></div>
-                <div className="absolute bottom-18 right-12 w-1 h-1 bg-blue-300 opacity-80"></div>
-                <div className="absolute bottom-22 right-10 w-1 h-1 bg-cyan-200 opacity-75 animate-pulse delay-300"></div>
-                <div className="absolute bottom-26 right-6 w-1 h-1 bg-blue-400 opacity-85"></div>
-                <div className="absolute bottom-30 right-4 w-1 h-1 bg-cyan-300 opacity-80 animate-pulse delay-800"></div>
-                
-                {/* Neon glow effects */}
-                <div className="absolute top-10 left-1/4 w-32 h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent"></div>
-                <div className="absolute top-20 right-1/4 w-24 h-px bg-gradient-to-r from-transparent via-blue-400/30 to-transparent"></div>
-                
-                {/* Distant city lights blur */}
-                <div className="absolute top-1/3 left-1/3 w-2 h-2 bg-cyan-300 opacity-20 blur-sm"></div>
-                <div className="absolute top-1/2 right-1/3 w-1.5 h-1.5 bg-blue-300 opacity-25 blur-sm"></div>
-                <div className="absolute top-2/3 left-1/2 w-1 h-1 bg-cyan-400 opacity-30 blur-sm"></div>
-                
-                {/* Traffic flow simulation - moving lights */}
-                <div className="absolute bottom-8 left-0 w-full h-1 overflow-hidden">
-                  {/* Moving car lights */}
-                  <div className="absolute w-2 h-px bg-white opacity-60 animate-[moveRight_8s_linear_infinite]" style={{animationDelay: '0s'}}></div>
-                  <div className="absolute w-1.5 h-px bg-red-400 opacity-50 animate-[moveLeft_10s_linear_infinite]" style={{animationDelay: '2s'}}></div>
-                  <div className="absolute w-2 h-px bg-yellow-200 opacity-70 animate-[moveRight_12s_linear_infinite]" style={{animationDelay: '4s'}}></div>
-                  <div className="absolute w-1 h-px bg-blue-200 opacity-40 animate-[moveLeft_15s_linear_infinite]" style={{animationDelay: '6s'}}></div>
-                </div>
-                
-                <div className="absolute bottom-12 left-0 w-full h-1 overflow-hidden">
-                  <div className="absolute w-1.5 h-px bg-cyan-300 opacity-50 animate-[moveRight_14s_linear_infinite]" style={{animationDelay: '1s'}}></div>
-                  <div className="absolute w-2 h-px bg-white opacity-40 animate-[moveLeft_9s_linear_infinite]" style={{animationDelay: '3s'}}></div>
-                </div>
-              </div>
-              
-              {/* Fog/haze overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-slate-900/40"></div>
+            {/* Elegant glass panel background */}
+            <div className="absolute inset-0 bg-black/30 backdrop-blur-md rounded-2xl border border-white/10 shadow-[0_0_20px_rgba(0,0,0,0.3)]">
+              {/* Subtle festival glow */}
+              <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/5 via-pink-400/5 to-cyan-400/5 rounded-2xl"></div>
             </div>
 
-            <div className="relative z-10 p-8 space-y-8">
+            <div className="relative z-10 p-8 space-y-6">
               {MUSIC_GENRES.map((genre) => {
                 // Define icons for each genre
                 const genreIcons = {
@@ -322,12 +270,12 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
                     }`}
                     onClick={() => setSelectedGenre(genre.id)}
                   >
-                    {/* Dot indicator */}
+                    {/* Festival dot indicator */}
                     <div 
-                      className={`absolute -left-12 top-4 w-3 h-3 rounded-full transition-all duration-300 ${
+                      className={`absolute -left-12 top-4 w-3 h-3 rounded-full transition-all duration-300 shadow-[0_0_6px_rgba(255,193,7,0.4)] ${
                         selectedGenre === genre.id 
-                          ? 'bg-black scale-125' 
-                          : 'bg-gray-400 opacity-60 group-hover:opacity-100'
+                          ? 'bg-yellow-400 scale-125 animate-pulse' 
+                          : 'bg-pink-400/60 opacity-60 group-hover:opacity-100 group-hover:bg-pink-400'
                       }`}
                     ></div>
                     
