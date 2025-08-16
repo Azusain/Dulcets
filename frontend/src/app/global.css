@@ -8,6 +8,18 @@
   --pink-secondary: #db2777;
   --purple-primary: #8b5cf6;
   --purple-secondary: #7c3aed;
+  
+  /* Discord color palette */
+  --discord-blurple: #5865f2;
+  --discord-dark-blurple: #4752c4;
+  --discord-green: #57f287;
+  --discord-yellow: #fee75c;
+  --discord-fuchsia: #eb459e;
+  --discord-red: #ed4245;
+  --discord-dark: #2c2f33;
+  --discord-darker: #23272a;
+  --discord-light-gray: #99aab5;
+  --discord-gray: #7289da;
 }
 
 /* Font families */
@@ -486,12 +498,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--blue-primary), var(--pink-primary));
+  background: var(--discord-light-gray);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--blue-secondary), var(--pink-secondary));
+  background: var(--discord-gray);
 }
 
 /* Responsive adjustments */

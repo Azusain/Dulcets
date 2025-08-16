@@ -39,17 +39,32 @@ export default function UnifiedServicesSection({
 
   return (
     <>
-      {/* Title section with light background */}
-      <div className="bg-gray-50 py-16">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center">
-            <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">
-              {t('services.our_service')}
-            </h1>
-            <div className="w-20 h-1 bg-gray-400 mx-auto mb-6"></div>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              {t('services.subtitle')}
-            </p>
+      {/* Subtle modern title section */}
+      <div className="relative bg-white">
+        <div className="max-w-6xl mx-auto px-8 py-20">
+          {/* Simple header layout */}
+          <div className="relative">
+            {/* Minimal accent line */}
+            <div className="absolute left-0 top-0 w-1 h-16 bg-gray-800"></div>
+            
+            <div className="pl-6">
+              {/* Main title */}
+              <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
+                {t('services.our_service')}
+              </h1>
+              
+              {/* Simple divider */}
+              <div className="flex items-center space-x-4 mb-8">
+                <div className="w-12 h-px bg-gray-400"></div>
+                <div className="w-2 h-2 bg-gray-800"></div>
+                <div className="w-24 h-px bg-gray-400"></div>
+              </div>
+              
+              {/* Subtitle */}
+              <p className="text-xl text-gray-600 max-w-3xl leading-relaxed">
+                {t('services.subtitle')}
+              </p>
+            </div>
           </div>
         </div>
       </div>
