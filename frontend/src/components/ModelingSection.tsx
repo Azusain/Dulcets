@@ -161,7 +161,7 @@ export default function ModelingSectionWithLightbox({
               </div>
 
               <h2 className="text-7xl lg:text-8xl font-black leading-tight text-white mb-6">
-                <span className="relative">
+                <span className="relative whitespace-nowrap">
                   {translations ? t("modeling.title_main") : "3D建模"}
                   <span
                     className={`absolute inset-0 text-cyan-400 -z-10 ${getShadowOffset()}`}
@@ -170,7 +170,7 @@ export default function ModelingSectionWithLightbox({
                   </span>
                 </span>
                 <br />
-                <span className="text-6xl lg:text-7xl text-gray-300">
+                <span className="text-6xl lg:text-7xl text-gray-300 whitespace-nowrap">
                   {translations ? t("modeling.title_sub") : "服务"}
                 </span>
               </h2>

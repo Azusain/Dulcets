@@ -120,7 +120,7 @@ export default function ArtworksSection({
               </div>
 
               <h2 className="text-7xl lg:text-8xl font-black leading-tight text-black mb-6">
-                <span className="relative">
+                <span className="relative whitespace-nowrap">
                   {translations ? t("artworks.title_main") : "绘画作品"}
                   <span
                     className={`absolute inset-0 text-blue-400 -z-10 ${getShadowOffset()}`}
@@ -129,7 +129,7 @@ export default function ArtworksSection({
                   </span>
                 </span>
                 <br />
-                <span className="text-6xl lg:text-7xl text-gray-600">
+                <span className="text-6xl lg:text-7xl text-gray-600 whitespace-nowrap">
                   {translations ? t("artworks.title_sub") : "展示"}
                 </span>
               </h2>
