@@ -61,7 +61,7 @@ const MusicProductionSection: React.FC<MusicProductionSectionProps> = ({ t }) =>
       <div className="max-w-7xl mx-auto px-8 h-full flex flex-col justify-center">
         {/* Title and Description Section - reduced since main title is above */}
         <div className="mb-12">
-          <h2 className="text-4xl font-bold text-white mb-4 drop-shadow-lg">
+          <h2 className="text-[80px] font-bold text-white mb-4 drop-shadow-lg">
             {t("music_production_section.title")}
           </h2>
           <p className="text-lg text-gray-200 leading-relaxed max-w-2xl drop-shadow" style={{ whiteSpace: 'pre-line' }}>
