@@ -139,25 +139,17 @@ export default function ArtworksSection({
               <p>{t("artworks.description")}</p>
 
               <p>
-                {translations
-                  ? t("artworks.team_description")
-                  : "我们专业的绘画团队致力于"}
+                {t("artworks.team_description")}
                 <span className="text-blue-600 font-medium">
-                  {translations
-                    ? t("artworks.specialties")
-                    : "角色设计、场景插画和数字艺术创作"}
+                  {t("artworks.specialties")}
                 </span>
-                {translations
-                  ? t("artworks.story_description")
-                  : "，每一幅作品都蕴含着丰富的情感和故事。"}
+                {t("artworks.story_description")}
               </p>
 
               <p>
-                {translations
-                  ? t("artworks.detail_description")
-                  : "从概念草图到最终渲染，我们用心雕琢每一个细节，为您带来"}
+                {t("artworks.detail_description")}
                 <span className="text-purple-600 font-medium">
-                  {translations ? t("artworks.visual_feast") : "视觉盛宴"}
+                  {t("artworks.visual_feast")}
                 </span>
                 。
               </p>
@@ -166,9 +158,7 @@ export default function ArtworksSection({
             <div className="flex items-center space-x-4 pt-6">
               <div className="w-12 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500"></div>
               <span className="text-sm text-gray-500 font-medium">
-                {translations
-                  ? t("artworks.click_to_view")
-                  : "点击照片查看大图"}
+                {t("artworks.click_to_view")}
               </span>
             </div>
           </div>

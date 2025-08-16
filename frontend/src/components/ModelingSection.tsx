@@ -151,55 +151,43 @@ export default function ModelingSectionWithLightbox({
             <div>
               <div className="inline-block mb-4">
                 <span className="text-sm font-medium uppercase tracking-wider text-cyan-600 bg-cyan-50 px-4 py-2 rounded-full">
-                  {translations ? t("footer.modeling") : "🎯 3D Studio"}
+                  {t("footer.modeling")}
                 </span>
               </div>
 
               <h2 className="text-7xl lg:text-8xl font-black leading-tight text-white mb-6">
                 <span className="relative whitespace-nowrap">
-                  {translations ? t("modeling.title_main") : "3D建模"}
+                  {t("modeling.title_main")}
                   <span
                     className={`absolute inset-0 text-cyan-400 -z-10 ${getShadowOffset()}`}
                   >
-                    {translations ? t("modeling.title_main") : "3D建模"}
+                    {t("modeling.title_main")}
                   </span>
                 </span>
                 <br />
                 <span className="text-6xl lg:text-7xl text-gray-300 whitespace-nowrap">
-                  {translations ? t("modeling.title_sub") : "服务"}
+                  {t("modeling.title_sub")}
                 </span>
               </h2>
             </div>
 
             <div className="space-y-6 text-lg leading-relaxed text-gray-300">
               <p>
-                {translations
-                  ? t("modeling.description")
-                  : "专业的3D建模团队，从概念设计到游戏动画制作，为您提供全方位的三维内容创作解决方案。"}
+                {t("modeling.description")}
               </p>
 
               <p>
-                {translations
-                  ? t("modeling.expertise_description")
-                  : "我们精通"}
+                {t("modeling.expertise_description")}
                 <span className="text-cyan-400 font-medium">
-                  {translations
-                    ? t("modeling.specialties")
-                    : "角色建模、场景构建、材质渲染和动画制作"}
+                  {t("modeling.specialties")}
                 </span>
-                {translations
-                  ? t("modeling.applications_description")
-                  : "，无论是游戏资产、建筑可视化还是产品展示，都能为您带来震撼的视觉效果。"}
+                {t("modeling.applications_description")}
               </p>
 
               <p>
-                {translations
-                  ? t("modeling.technology_description")
-                  : "运用最新的3D技术和工具，我们将您的创意转化为"}
+                {t("modeling.technology_description")}
                 <span className="text-purple-400 font-medium">
-                  {translations
-                    ? t("modeling.lifelike_world")
-                    : "栩栩如生的三维世界"}
+                  {t("modeling.lifelike_world")}
                 </span>
                 。
               </p>
@@ -208,9 +196,7 @@ export default function ModelingSectionWithLightbox({
             <div className="flex items-center space-x-4 pt-6">
               <div className="w-12 h-0.5 bg-gradient-to-r from-cyan-500 to-purple-500"></div>
               <span className="text-sm text-gray-400 font-medium">
-                {translations
-                  ? t("modeling.click_to_view")
-                  : "点击作品浏览详情"}
+                {t("modeling.click_to_view")}
               </span>
             </div>
           </div>
