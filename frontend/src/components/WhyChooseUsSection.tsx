@@ -76,14 +76,48 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({ t }) => {
                 {/* Dark overlay */}
                 <div className="absolute inset-0 bg-black/70 group-hover:bg-black/50 transition-colors duration-500"></div>
                 
-                {/* White diagonal separators */}
+                {/* Thick diagonal separators */}
                 {index < 4 && (
                   <div 
-                    className="absolute top-0 bottom-0 w-0.5 bg-white/30 z-20"
+                    className="absolute z-20"
                     style={{
-                      right: index === 0 ? '75%' : index === 1 ? '55%' : index === 2 ? '35%' : '15%'
+                      right: index === 0 ? '75%' : index === 1 ? '55%' : index === 2 ? '35%' : '15%',
+                      top: '0%',
+                      bottom: '0%',
+                      width: '3px',
+                      background: 'linear-gradient(to bottom, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0.8) 100%)',
+                      transform: 'skewX(-15deg)',
+                      boxShadow: '0 0 10px rgba(255,255,255,0.3), inset 0 0 2px rgba(255,255,255,0.5)'
                     }}
                   ></div>
+                )}
+                
+                {/* Additional diagonal accent lines for manga effect */}
+                {index < 4 && (
+                  <>
+                    <div 
+                      className="absolute z-10"
+                      style={{
+                        right: index === 0 ? '74.5%' : index === 1 ? '54.5%' : index === 2 ? '34.5%' : '14.5%',
+                        top: '10%',
+                        bottom: '10%',
+                        width: '1px',
+                        background: 'rgba(255,255,255,0.4)',
+                        transform: 'skewX(-15deg)'
+                      }}
+                    ></div>
+                    <div 
+                      className="absolute z-10"
+                      style={{
+                        right: index === 0 ? '75.5%' : index === 1 ? '55.5%' : index === 2 ? '35.5%' : '15.5%',
+                        top: '10%',
+                        bottom: '10%',
+                        width: '1px',
+                        background: 'rgba(255,255,255,0.4)',
+                        transform: 'skewX(-15deg)'
+                      }}
+                    ></div>
+                  </>
                 )}
                 
                 {/* Content */}
