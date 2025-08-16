@@ -210,6 +210,47 @@
       "chat_consultation": "Chat Consultation"
     }
   },
+  "pricing_section": {
+    "title": "Pricing",
+    "subtitle": "We provide detailed pricing information for various music production services",
+    "vocal_mix_mastering": {
+      "title": "Vocal Mix & Mastering",
+      "one_chorus": "One Chorus",
+      "one_chorus_price": "$60",
+      "full_chorus": "Full Chorus",
+      "full_chorus_price": "$90",
+      "options": "Options: Vocal Tuning & Timing",
+      "one_chorus_option_price": "+$37",
+      "full_chorus_option_price": "+$52"
+    },
+    "mix_mastering": {
+      "title": "Mix & Mastering",
+      "tracks_1_20": "1-20 tracks",
+      "tracks_1_20_price": "$225",
+      "tracks_21_40": "21-40 tracks",
+      "tracks_21_40_price": "$262",
+      "tracks_40_plus": "40+ tracks",
+      "tracks_40_plus_price": "+$3.75 / track",
+      "vocal_tuning": "Vocal Tuning & Timing",
+      "vocal_tuning_price": "+$52",
+      "mastering_only": "Mastering only",
+      "mastering_only_price": "$45 / track"
+    },
+    "music_production": {
+      "title": "Music Production",
+      "intro_bgm": "Intro/BGM Arrangement",
+      "intro_bgm_price": "$375 - $900",
+      "intro_bgm_desc": "1:30 BGM track, including Mix & Mastering",
+      "original_arrangement": "Original Arrangement",
+      "original_arrangement_price": "$525+",
+      "original_arrangement_desc": "TV size custom cover instrumental",
+      "original_song": "Original Song",
+      "original_song_price": "$1,125+",
+      "original_song_desc": "Including melody and lyrics creation"
+    },
+    "genres": "Supported genres: J-Pop, J-Rock, Anime Songs, BGM, etc.",
+    "quote_request": "Request Quote"
+  },
   "footer": {
     "company_desc": "Explore the fusion of 2D and technology in the music world, feel the infinite possibilities of future music",
     "quick_links": "Quick Links",

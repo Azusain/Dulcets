@@ -1,6 +1,8 @@
+"use client";
 import HeroSection from "@/components/HeroSection";
 import UnifiedServicesSection from "@/components/UnifiedServicesSection";
 import ContactSection from "@/components/ContactSection";
+import AboutSection from "@/components/AboutSection";
 import { ServiceCard } from "@/components/ServiceCard";
 import LoadingManager from "@/components/LoadingManager";
 import works from "../../public/service/works.json";
@@ -57,147 +59,7 @@ export function MainPage({ translations }: HomePageInterface) {
       </div>
 
       {/* About Us Section */}
-      <section
-        id="about"
-        className="py-24 bg-gray-50 text-black relative overflow-hidden"
-      >
-        {/* Subtle Japanese-inspired background pattern */}
-        <div className="absolute inset-0 opacity-20">
-          {/* Geometric grid pattern */}
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `
-                linear-gradient(rgba(156, 163, 175, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(156, 163, 175, 0.1) 1px, transparent 1px)
-              `,
-              backgroundSize: "40px 40px",
-            }}
-          ></div>
-
-          {/* Scattered minimal elements */}
-          <div className="absolute top-20 left-10 w-1 h-32 bg-gray-300 transform rotate-12"></div>
-          <div className="absolute top-40 right-20 w-1 h-24 bg-gray-300 transform -rotate-12"></div>
-          <div className="absolute bottom-32 left-1/4 w-1 h-28 bg-gray-300 transform rotate-45"></div>
-          <div className="absolute bottom-20 right-1/3 w-1 h-20 bg-gray-300 transform -rotate-30"></div>
-
-          {/* Subtle circles for accent */}
-          <div className="absolute top-1/3 left-1/5 w-2 h-2 bg-gray-300 rounded-full opacity-40"></div>
-          <div className="absolute top-2/3 right-1/4 w-3 h-3 bg-gray-300 rounded-full opacity-30"></div>
-          <div className="absolute bottom-1/4 left-2/3 w-1.5 h-1.5 bg-gray-400 rounded-full opacity-50"></div>
-        </div>
-
-        <div className="max-w-6xl mx-auto px-6 relative z-10">
-          <header className="mb-20 text-center">
-            <div className="mb-12">
-              {/* Decorative line with center accent */}
-              <div className="flex items-center justify-center mb-8">
-                <div className="h-px bg-gray-300 w-16 opacity-60"></div>
-                <div className="mx-4 w-2 h-2 bg-gray-400 rounded-full"></div>
-                <div className="h-px bg-gray-300 w-16 opacity-60"></div>
-              </div>
-
-              <h2 className="text-5xl font-light mb-4 text-black tracking-wide">
-                {t("about.title")}
-              </h2>
-
-              {/* Subtle animated underline */}
-              <div className="mx-auto w-32 h-px bg-gray-400 relative overflow-hidden">
-                <div className="absolute inset-0 bg-black w-0 animate-pulse"></div>
-              </div>
-
-              <p className="text-sm font-medium uppercase tracking-[0.3em] text-gray-500 mt-6">
-                ABOUT US
-              </p>
-            </div>
-
-            {/* Description with subtle border frame */}
-            <div className="relative max-w-4xl mx-auto">
-              <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-gray-300 opacity-40"></div>
-              <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-gray-300 opacity-40"></div>
-              <div className="absolute bottom-0 left-0 w-8 h-8 border-l-2 border-b-2 border-gray-300 opacity-40"></div>
-              <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-gray-300 opacity-40"></div>
-
-              <p className="text-lg text-gray-700 leading-relaxed py-8 px-12">
-                {t("about.lead_description")}
-              </p>
-            </div>
-          </header>
-
-          {/* Main Content Area: Text on left, Genres on right */}
-          <div className="grid lg:grid-cols-2 gap-16 mb-20">
-            {/* Left: About Content */}
-            <div className="prose prose-lg max-w-none relative">
-              {/* Subtle decorative element */}
-              <div className="absolute -left-4 top-0 w-1 h-full bg-gray-200 opacity-50"></div>
-              <p className="text-lg leading-relaxed text-gray-700 pl-8">
-                {t("about.content")}
-              </p>
-            </div>
-
-            {/* Right: Music Genres with Japanese-inspired design */}
-            <div className="relative">
-              {/* Vertical accent line */}
-              <div className="absolute left-0 top-0 bottom-0 w-px bg-gray-300"></div>
-
-              <div className="pl-12 space-y-10">
-                {/* Genre entries with hover animations */}
-                <div className="group relative">
-                  <div className="absolute -left-12 top-4 w-2 h-2 bg-gray-400 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="text-center transform group-hover:translate-x-2 transition-transform duration-300">
-                    <h3 className="text-2xl font-light mb-2 text-gray-800 tracking-wide">
-                      {t("about.genres.anime_song.title")}
-                    </h3>
-                    <div className="w-16 h-px bg-gray-300 mx-auto mb-3 group-hover:w-24 transition-all duration-500"></div>
-                    <p className="text-gray-600 text-sm font-light">
-                      {t("about.genres.anime_song.subtitle")}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="group relative">
-                  <div className="absolute -left-12 top-4 w-2 h-2 bg-gray-400 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="text-center transform group-hover:translate-x-2 transition-transform duration-300">
-                    <h3 className="text-2xl font-light mb-2 text-gray-800 tracking-wide">
-                      {t("about.genres.jrock.title")}
-                    </h3>
-                    <div className="w-16 h-px bg-gray-300 mx-auto mb-3 group-hover:w-24 transition-all duration-500"></div>
-                    <p className="text-gray-600 text-sm font-light">
-                      Japanese Rock
-                    </p>
-                  </div>
-                </div>
-
-                <div className="group relative">
-                  <div className="absolute -left-12 top-4 w-2 h-2 bg-gray-400 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="text-center transform group-hover:translate-x-2 transition-transform duration-300">
-                    <h3 className="text-2xl font-light mb-2 text-gray-800 tracking-wide">
-                      {t("about.genres.jpop.title")}
-                    </h3>
-                    <div className="w-16 h-px bg-gray-300 mx-auto mb-3 group-hover:w-24 transition-all duration-500"></div>
-                    <p className="text-gray-600 text-sm font-light">
-                      Japanese Pop
-                    </p>
-                  </div>
-                </div>
-
-                <div className="group relative">
-                  <div className="absolute -left-12 top-4 w-2 h-2 bg-gray-400 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="text-center transform group-hover:translate-x-2 transition-transform duration-300">
-                    <h3 className="text-2xl font-light mb-2 text-gray-800 tracking-wide">
-                      {t("about.genres.bgm.title")}
-                    </h3>
-                    <div className="w-16 h-px bg-gray-300 mx-auto mb-3 group-hover:w-24 transition-all duration-500"></div>
-                    <p className="text-gray-600 text-sm font-light">
-                      Background Music
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <AboutSection t={t} />
 
       {/* Our Works Section */}
       <section id="works" className="py-16 bg-gray-50">

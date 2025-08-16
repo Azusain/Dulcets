@@ -1,0 +1,42 @@
+{
+  "jrock": {
+    "id": "jrock",
+    "fileName": "yumehanabi_demo_03.mp3",
+    "displayName": "夢花火",
+    "artist": "Shintou",
+    "duration": "2:15",
+    "genre": "J-Rock"
+  },
+  "jpop": {
+    "id": "jpop",
+    "fileName": "夏の音がした_Demo_01.mp3",
+    "displayName": "夏の音がした",
+    "artist": "Shintou",
+    "duration": "3:20",
+    "genre": "J-Pop"
+  },
+  "idol": {
+    "id": "idol",
+    "fileName": "星空のプレッジ_Kuri_Full_4.mp3",
+    "displayName": "星空のプレッジ",
+    "artist": "Shintou",
+    "duration": "3:45",
+    "genre": "Idol"
+  },
+  "orchestra": {
+    "id": "orchestra",
+    "fileName": "船に託して.mp3",
+    "displayName": "船に託して",
+    "artist": "Sakuma遙",
+    "duration": "4:12",
+    "genre": "Orchestra"
+  },
+  "edm": {
+    "id": "edm",
+    "fileName": "星奈こやかの曲.mp3",
+    "displayName": "星奈こやかの曲",
+    "artist": "星奈",
+    "duration": "3:30",
+    "genre": "EDM"
+  }
+}

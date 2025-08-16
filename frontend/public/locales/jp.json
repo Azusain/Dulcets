@@ -210,6 +210,47 @@
       "chat_consultation": "チャットで相談"
     }
   },
+  "pricing_section": {
+    "title": "料金表",
+    "subtitle": "音楽制作の各種サービス料金をご案内いたします",
+    "vocal_mix_mastering": {
+      "title": "歌ってみた Mix & Mastering",
+      "one_chorus": "ワンコーラス",
+      "one_chorus_price": "￥8,000",
+      "full_chorus": "フルコーラス",
+      "full_chorus_price": "￥12,000",
+      "options": "オプション: Vocal Tuning & Timing",
+      "one_chorus_option_price": "+￥5,000",
+      "full_chorus_option_price": "+￥7,000"
+    },
+    "mix_mastering": {
+      "title": "Mix & Mastering",
+      "tracks_1_20": "1～20 tracks",
+      "tracks_1_20_price": "￥30,000",
+      "tracks_21_40": "21～40 tracks",
+      "tracks_21_40_price": "￥35,000",
+      "tracks_40_plus": "40 tracks 以上",
+      "tracks_40_plus_price": "+￥500 / track",
+      "vocal_tuning": "Vocal Tuning & Timing",
+      "vocal_tuning_price": "+￥7,000",
+      "mastering_only": "Mastering のみ",
+      "mastering_only_price": "￥6,000 / track"
+    },
+    "music_production": {
+      "title": "楽曲制作",
+      "intro_bgm": "Intro/BGM アレンジ",
+      "intro_bgm_price": "￥50,000 - ￥120,000",
+      "intro_bgm_desc": "1:30 BGM トラック、Mix、Mastering 込み",
+      "original_arrangement": "オリジナルアレンジ",
+      "original_arrangement_price": "￥70,000～",
+      "original_arrangement_desc": "TV サイズ カスタムカバー楽曲インスト",
+      "original_song": "オリジナル楽曲",
+      "original_song_price": "￥150,000～",
+      "original_song_desc": "メロディ・歌詞制作込み"
+    },
+    "genres": "対応ジャンル: J-Pop・J-Rock・アニメソング・BGM など",
+    "quote_request": "お見積もり依頼"
+  },
   "footer": {
     "company_desc": "二次元と技術の融合した音楽世界を探索し、未来音楽の無限の可能性を感じる",
     "quick_links": "クイックリンク",
