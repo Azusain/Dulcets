@@ -488,7 +488,7 @@ body {
   transform: translateX(5px);
 }
 
-/* Scrollbar styles */
+/* Scrollbar styles with scroll-active state */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -500,10 +500,29 @@ body {
 ::-webkit-scrollbar-thumb {
   background: var(--discord-light-gray);
   border-radius: 4px;
+  transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--discord-gray);
+}
+
+/* Active scrolling state - with higher specificity */
+body.scrolling ::-webkit-scrollbar-thumb {
+  background: var(--discord-blurple) !important;
+}
+
+body.scrolling ::-webkit-scrollbar-thumb:hover {
+  background: var(--discord-dark-blurple) !important;
+}
+
+/* Alternative fallback using different colors for testing */
+body.scrolling ::-webkit-scrollbar-thumb {
+  background: #5865f2 !important;
+}
+
+body.scrolling ::-webkit-scrollbar-thumb:hover {
+  background: #4752c4 !important;
 }
 
 /* Responsive adjustments */

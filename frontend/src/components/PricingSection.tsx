@@ -22,8 +22,12 @@ export default function PricingSection({ translations }: PricingSectionProps) {
   const router = useRouter();
 
   const handleBackToHome = () => {
-    const homePath = getAssetPath('/');
-    router.push(homePath);
+    // For GitHub Pages, use window.location to ensure proper navigation
+    if (typeof window !== 'undefined' && window.location.hostname.includes('github.io')) {
+      window.location.href = '/Dulcets/';
+    } else {
+      router.push('/');
+    }
   };
 
   return (

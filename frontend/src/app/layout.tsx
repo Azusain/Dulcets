@@ -46,6 +46,24 @@ export default function RootLayout({
           }}
         />
         <title>Dulcets</title>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Dynamic scrollbar color change
+              let scrollTimeout;
+              
+              function handleScroll() {
+                document.body.classList.add('scrolling');
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                  document.body.classList.remove('scrolling');
+                }, 150);
+              }
+              
+              window.addEventListener('scroll', handleScroll, { passive: true });
+            `,
+          }}
+        />
       </head>
       <body>
         <LoadingProvider>

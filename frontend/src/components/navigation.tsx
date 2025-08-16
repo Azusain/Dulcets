@@ -93,11 +93,21 @@ const DsNavigation = () => {
 
   return (
     <nav style={navStyle}>
-      <div className="cursor-pointer">
+      <div 
+        className="cursor-pointer" 
+        onClick={() => {
+          // Handle home navigation for GitHub Pages
+          if (typeof window !== 'undefined' && window.location.hostname.includes('github.io')) {
+            window.location.href = '/Dulcets/';
+          } else {
+            window.location.href = '/';
+          }
+        }}
+      >
         <img
           src={getAssetPath("/images/favicon.png")}
           alt="Dulcets Logo"
-          className="h-20 w-auto"
+          className="h-20 w-auto hover:opacity-80 transition-opacity duration-200"
         />
       </div>
 
