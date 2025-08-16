@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import AudioPlayer from "./AudioPlayer";
+import { useAssetPath } from "@/hooks/useAssetPath";
 
 interface AboutSectionProps {
   t: (key: string) => string;
@@ -25,6 +26,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
   const [selectedGenre, setSelectedGenre] = useState<string>("jrock");
   const [audioConfig, setAudioConfig] = useState<Record<string, GenreConfig>>({});
   const [contentKey, setContentKey] = useState(0); // 用于强制重新渲染以触发动画
+  const { getAssetPath } = useAssetPath();
 
   // Define genre content for each music type
   const genreContents: Record<string, GenreContent> = {
@@ -59,9 +61,8 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
   useEffect(() => {
     const loadAudioConfig = async () => {
       try {
-        // 检查是否在生产环境中，如果是则需要加上 basePath
-        const basePath = process.env.NODE_ENV === 'production' ? '/Dulcets' : '';
-        const configUrl = `${basePath}/audio/audio-config.json`;
+        // 使用 getAssetPath 来处理路径
+        const configUrl = getAssetPath('/audio/audio-config.json');
         console.log('Attempting to load audio config from:', configUrl);
         const response = await fetch(configUrl);
         console.log('Audio config response status:', response.status, response.statusText);
@@ -127,7 +128,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
       }
     };
     loadAudioConfig();
-  }, []);
+  }, [getAssetPath]);
 
   const genres = [
     { id: "jrock", name: "J-ROCK", subtitle: "Japanese Rock" },
@@ -239,7 +240,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
                 <AudioPlayer
                   title={currentAudioConfig.displayName}
                   description={currentAudioConfig.artist}
-                  audioUrl={`${process.env.NODE_ENV === 'production' ? '/Dulcets' : ''}/audio/${currentAudioConfig.fileName}`}
+                  audioUrl={getAssetPath(`/audio/${currentAudioConfig.fileName}`)}
                   className="shadow-sm"
                   t={t} // 传递翻译函数给 AudioPlayer
                 />
