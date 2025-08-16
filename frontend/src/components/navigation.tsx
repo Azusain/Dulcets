@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { useAssetPath } from "@/hooks/useAssetPath";
 import { useLoading } from "@/contexts/LoadingContext";
 import LanguageSwitcher, {
@@ -14,19 +15,32 @@ const DsNavigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { isLoading } = useLoading();
   const [showNav, setShowNav] = useState(false);
+  const pathname = usePathname();
+
+  // 检查是否在子页面（非主页）
+  const isSubPage = pathname.includes('/pricing') || 
+                   (pathname !== '/' && pathname !== '/en' && pathname !== '/jp' && pathname !== '/zh');
 
   useEffect(() => {
     const handleScroll = () => {
-      // 检查是否滚动超过视频英雄区域的高度（大约100vh）
-      const heroHeight = window.innerHeight;
-      const scrollPosition = window.scrollY;
-      // 80%的视窗高度后开始变黑
-      setIsScrolled(scrollPosition > heroHeight * 0.8);
+      if (isSubPage) {
+        // 在子页面中始终显示黑色背景
+        setIsScrolled(true);
+      } else {
+        // 在主页中检查是否滚动超过视频英雄区域的高度（大约100vh）
+        const heroHeight = window.innerHeight;
+        const scrollPosition = window.scrollY;
+        // 80%的视窗高度后开始变黑
+        setIsScrolled(scrollPosition > heroHeight * 0.8);
+      }
     };
+
+    // 初始化时检查一次
+    handleScroll();
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isSubPage]);
 
   // Handle navigation visibility based on loading state
   useEffect(() => {

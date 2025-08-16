@@ -24,6 +24,7 @@ interface GenreConfig {
 const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
   const [selectedGenre, setSelectedGenre] = useState<string>("jrock");
   const [audioConfig, setAudioConfig] = useState<Record<string, GenreConfig>>({});
+  const [contentKey, setContentKey] = useState(0); // 用于强制重新渲染以触发动画
 
   // Define genre content for each music type
   const genreContents: Record<string, GenreContent> = {
@@ -58,13 +59,68 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
   useEffect(() => {
     const loadAudioConfig = async () => {
       try {
+        console.log('Attempting to load audio config from:', '/audio/audio-config.json');
         const response = await fetch('/audio/audio-config.json');
+        console.log('Audio config response status:', response.status, response.statusText);
+        
         if (response.ok) {
           const config = await response.json();
+          console.log('Audio config loaded successfully:', config);
           setAudioConfig(config);
+        } else {
+          console.error('Failed to fetch audio config. Response:', {
+            status: response.status,
+            statusText: response.statusText,
+            url: response.url
+          });
         }
       } catch (error) {
         console.error('Failed to load audio config:', error);
+        // 临时回退方案 - 使用硬编码配置
+        const fallbackConfig = {
+          "jrock": {
+            "id": "jrock",
+            "fileName": "yumehanabi_demo_03.mp3",
+            "displayName": "夢花火",
+            "artist": "Shintou",
+            "duration": "2:15",
+            "genre": "J-Rock"
+          },
+          "jpop": {
+            "id": "jpop",
+            "fileName": "夏の音がした_Demo_01.mp3",
+            "displayName": "夏の音がした",
+            "artist": "Shintou",
+            "duration": "3:20",
+            "genre": "J-Pop"
+          },
+          "idol": {
+            "id": "idol",
+            "fileName": "星空のプレッジ_Kuri_Full_4.mp3",
+            "displayName": "星空のプレッジ",
+            "artist": "Shintou",
+            "duration": "3:45",
+            "genre": "Idol"
+          },
+          "orchestra": {
+            "id": "orchestra",
+            "fileName": "船に託して.mp3",
+            "displayName": "船に託して",
+            "artist": "Sakuma遙",
+            "duration": "4:12",
+            "genre": "Orchestra"
+          },
+          "edm": {
+            "id": "edm",
+            "fileName": "星奈こやかの曲.mp3",
+            "displayName": "星奈こやかの曲",
+            "artist": "星奈",
+            "duration": "3:30",
+            "genre": "EDM"
+          }
+        };
+        console.log('Using fallback audio config');
+        setAudioConfig(fallbackConfig);
       }
     };
     loadAudioConfig();
@@ -80,6 +136,11 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
 
   const currentContent = genreContents[selectedGenre];
   const currentAudioConfig = audioConfig[selectedGenre as keyof typeof audioConfig] as GenreConfig;
+
+  // 切换内容时触发重新渲染动画
+  useEffect(() => {
+    setContentKey(prev => prev + 1);
+  }, [selectedGenre]);
 
   return (
     <section
@@ -158,9 +219,15 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
             
             {/* Content text */}
             <div className="prose prose-lg max-w-none relative flex-1 pl-8">
-              <p className="text-lg leading-relaxed text-gray-700">
+              <div 
+                key={contentKey}
+                className="animate-fadeIn text-lg leading-relaxed text-gray-700"
+                style={{
+                  animation: "fadeIn 0.5s ease-in-out"
+                }}
+              >
                 {currentContent.content}
-              </p>
+              </div>
             </div>
             
             {/* AudioPlayer at the bottom */}
@@ -171,6 +238,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
                   description={currentAudioConfig.artist}
                   audioUrl={`/audio/${currentAudioConfig.fileName}`}
                   className="shadow-sm"
+                  t={t} // 传递翻译函数给 AudioPlayer
                 />
               )}
             </div>
