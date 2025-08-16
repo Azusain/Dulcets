@@ -149,35 +149,34 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <header className="mb-20 text-center">
           <div className="mb-12">
-            {/* Decorative line with center accent - Festival Theme */}
+            {/* Simple white decorative line */}
             <div className="flex items-center justify-center mb-8">
-              <div className="h-px bg-yellow-400/60 w-16 shadow-[0_0_4px_rgba(255,193,7,0.4)]"></div>
-              <div className="mx-4 w-2 h-2 bg-pink-400 rounded-full animate-pulse shadow-[0_0_8px_rgba(236,72,153,0.6)]"></div>
-              <div className="h-px bg-yellow-400/60 w-16 shadow-[0_0_4px_rgba(255,193,7,0.4)]"></div>
+              <div className="h-px bg-white/60 w-16"></div>
+              <div className="mx-4 w-2 h-2 bg-white/80 rounded-full"></div>
+              <div className="h-px bg-white/60 w-16"></div>
             </div>
 
-            <h2 className="text-5xl font-light mb-4 text-white tracking-wide drop-shadow-[0_0_12px_rgba(255,255,255,0.3)]">
+            <h2 className="text-5xl font-light mb-4 text-white tracking-wide">
               {t("about.title")}
             </h2>
 
-            {/* Fireworks-inspired animated underline */}
-            <div className="mx-auto w-32 h-0.5 bg-gradient-to-r from-pink-400 via-yellow-400 to-cyan-400 relative overflow-hidden shadow-[0_0_8px_rgba(255,193,7,0.4)]">
-              <div className="absolute inset-0 bg-white w-0 animate-pulse"></div>
+            {/* Simple white underline */}
+            <div className="mx-auto w-32 h-px bg-white/60">
             </div>
 
             <p className="text-sm font-medium uppercase tracking-[0.3em] text-gray-300 mt-6">
-              花火大会 • FIREWORKS FESTIVAL
+              ABOUT US
             </p>
           </div>
 
-          {/* Description with festival border frame */}
+          {/* Description with simple white border frame */}
           <div className="relative max-w-4xl mx-auto">
-            <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-yellow-400/40"></div>
-            <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-pink-400/40"></div>
-            <div className="absolute bottom-0 left-0 w-8 h-8 border-l-2 border-b-2 border-cyan-400/40"></div>
-            <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-purple-400/40"></div>
+            <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-white/30"></div>
+            <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-white/30"></div>
+            <div className="absolute bottom-0 left-0 w-8 h-8 border-l-2 border-b-2 border-white/30"></div>
+            <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-white/30"></div>
 
-            <p className="text-lg text-gray-200 leading-relaxed py-8 px-12 drop-shadow-[0_0_4px_rgba(0,0,0,0.5)]">
+            <p className="text-lg text-gray-200 leading-relaxed py-8 px-12">
               {t("about.lead_description")}
             </p>
           </div>
@@ -187,14 +186,14 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
         <div className="grid lg:grid-cols-2 gap-16 mb-20">
           {/* Left: About Content with AudioPlayer */}
           <div className="relative flex flex-col h-full">
-            {/* Festival decorative element */}
-            <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-yellow-400/60 via-pink-400/60 to-cyan-400/60 shadow-[0_0_4px_rgba(255,193,7,0.3)]"></div>
+            {/* Simple white decorative line */}
+            <div className="absolute -left-4 top-0 w-px h-full bg-white/30"></div>
             
             {/* Content text */}
             <div className="prose prose-lg max-w-none relative flex-1 pl-8">
               <div 
                 key={contentKey}
-                className="animate-fadeIn text-lg leading-relaxed text-gray-200 drop-shadow-[0_0_4px_rgba(0,0,0,0.5)] backdrop-blur-sm bg-black/20 rounded-lg p-6"
+                className="animate-fadeIn text-lg leading-relaxed text-gray-200"
                 style={{
                   animation: "fadeIn 0.5s ease-in-out"
                 }}
@@ -217,15 +216,9 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
             </div>
           </div>
 
-          {/* Right: Interactive Music Genres - Festival Style */}
+          {/* Right: Interactive Music Genres - Clean Style */}
           <div className="relative">
-            {/* Elegant glass panel background */}
-            <div className="absolute inset-0 bg-black/30 backdrop-blur-md rounded-2xl border border-white/10 shadow-[0_0_20px_rgba(0,0,0,0.3)]">
-              {/* Subtle festival glow */}
-              <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/5 via-pink-400/5 to-cyan-400/5 rounded-2xl"></div>
-            </div>
-
-            <div className="relative z-10 p-8 space-y-6">
+            <div className="p-8 space-y-6">
               {MUSIC_GENRES.map((genre) => {
                 // Define icons for each genre
                 const genreIcons = {
@@ -270,12 +263,12 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
                     }`}
                     onClick={() => setSelectedGenre(genre.id)}
                   >
-                    {/* Festival dot indicator */}
+                    {/* Simple white dot indicator */}
                     <div 
-                      className={`absolute -left-12 top-4 w-3 h-3 rounded-full transition-all duration-300 shadow-[0_0_6px_rgba(255,193,7,0.4)] ${
+                      className={`absolute -left-12 top-4 w-3 h-3 rounded-full transition-all duration-300 ${
                         selectedGenre === genre.id 
-                          ? 'bg-yellow-400 scale-125 animate-pulse' 
-                          : 'bg-pink-400/60 opacity-60 group-hover:opacity-100 group-hover:bg-pink-400'
+                          ? 'bg-white scale-125' 
+                          : 'bg-white/40 opacity-60 group-hover:opacity-100 group-hover:bg-white/60'
                       }`}
                     ></div>
                     
