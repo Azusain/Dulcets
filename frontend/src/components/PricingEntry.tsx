@@ -151,7 +151,7 @@ const MusicProductionSection: React.FC = () => {
         <div className="flex justify-center">
           <button
             onClick={handleViewDetails}
-            className="px-8 py-3 border-2 border-white border-opacity-60 text-white bg-transparent hover:bg-white hover:bg-opacity-10 hover:border-opacity-100 transition-all duration-300 font-medium"
+            className="px-8 py-3 border-2 border-white border-opacity-60 text-white bg-transparent hover:bg-white/10 hover:border-opacity-100 transition-all duration-300 font-medium"
           >
             詳細料金表を見る
           </button>

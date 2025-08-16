@@ -1,6 +1,31 @@
-import { ComponentWithTranslation } from "@/components/MainPage";
+"use client";
 
-export default function PricingSection({ t }: ComponentWithTranslation) {
+import { useAssetPath } from "@/hooks/useAssetPath";
+import { useRouter } from "next/navigation";
+
+interface PricingSectionProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  translations: Record<string, any>;
+}
+
+export default function PricingSection({ translations }: PricingSectionProps) {
+  // Create a local t function from the translations object
+  const t = (key: string) => {
+    const keys = key.split('.');
+    let value: any = translations;
+    for (const k of keys) {
+      value = value?.[k];
+    }
+    return value || key;
+  };
+  const { getAssetPath } = useAssetPath();
+  const router = useRouter();
+
+  const handleBackToHome = () => {
+    const homePath = getAssetPath('/');
+    router.push(homePath);
+  };
+
   return (
     <section id="pricing" className="bg-white py-20">
       <div className="max-w-4xl mx-auto px-8">
@@ -18,7 +43,7 @@ export default function PricingSection({ t }: ComponentWithTranslation) {
           
           {/* Vocal Mix & Mastering */}
           <div className="">
-            <h3 className="text-2xl font-light text-black mb-6 pb-2 border-b border-gray-200">{t('pricing_section.vocal_mix_mastering.title')}</h3>
+            <h3 className="text-3xl font-bold text-black mb-6 pb-2 border-b border-gray-200">{t('pricing_section.vocal_mix_mastering.title')}</h3>
             <div className="space-y-4">
               <div className="flex justify-between items-center py-3">
                 <span className="text-gray-700">{t('pricing_section.vocal_mix_mastering.one_chorus')}</span>
@@ -46,7 +71,7 @@ export default function PricingSection({ t }: ComponentWithTranslation) {
 
           {/* Mix & Mastering */}
           <div className="">
-            <h3 className="text-2xl font-light text-black mb-6 pb-2 border-b border-gray-200">{t('pricing_section.mix_mastering.title')}</h3>
+            <h3 className="text-3xl font-bold text-black mb-6 pb-2 border-b border-gray-200">{t('pricing_section.mix_mastering.title')}</h3>
             <div className="space-y-4">
               <div className="flex justify-between items-center py-3">
                 <span className="text-gray-700">{t('pricing_section.mix_mastering.tracks_1_20')}</span>
@@ -77,7 +102,7 @@ export default function PricingSection({ t }: ComponentWithTranslation) {
 
           {/* BGM & Original */}
           <div className="">
-            <h3 className="text-2xl font-light text-black mb-6 pb-2 border-b border-gray-200">{t('pricing_section.music_production.title')}</h3>
+            <h3 className="text-3xl font-bold text-black mb-6 pb-2 border-b border-gray-200">{t('pricing_section.music_production.title')}</h3>
             <div className="space-y-6">
               <div className="">
                 <div className="flex justify-between items-center py-3">
@@ -112,17 +137,17 @@ export default function PricingSection({ t }: ComponentWithTranslation) {
 
         </div>
 
-        {/* Simple Contact */}
+        {/* Back to Home Button */}
         <div className="text-center mt-16">
-          <a 
-            href="#contact" 
+          <button
+            onClick={handleBackToHome}
             className="inline-flex items-center px-8 py-3 text-black border border-gray-300 hover:bg-gray-50 transition-colors duration-200 font-light tracking-wide"
           >
-            {t('pricing_section.quote_request')}
-            <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 5l7 7-7 7"></path>
+            <svg className="mr-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
             </svg>
-          </a>
+            {t('pricing_page.back_to_home')}
+          </button>
         </div>
       </div>
     </section>

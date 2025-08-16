@@ -25,22 +25,11 @@ export default function ZhPricingPage() {
           <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
             {t('pricing_page.subtitle')}
           </p>
-          <div className="mt-8">
-            <a 
-              href="/zh"
-              className="inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors"
-            >
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
-              {t('pricing_page.back_to_home')}
-            </a>
-          </div>
         </div>
       </section>
 
       {/* Detailed Pricing Table */}
-      <PricingSection t={t} />
+      <PricingSection translations={zh} />
 
       {/* Contact Section */}
       <section className="bg-gray-900 py-16">
