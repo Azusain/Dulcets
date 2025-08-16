@@ -14,7 +14,7 @@ export default function EnPricingPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-50 via-white to-purple-50 py-20">
+      <section className="bg-gradient-to-br from-blue-50 via-white to-purple-50 py-20 pt-32">
         <div className="max-w-4xl mx-auto px-8 text-center">
           <h1 className="text-5xl lg:text-6xl font-black text-gray-900 mb-6">
             <span className="relative">

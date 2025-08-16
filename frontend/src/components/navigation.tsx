@@ -17,25 +17,30 @@ const DsNavigation = () => {
   const [showNav, setShowNav] = useState(false);
   const pathname = usePathname();
 
-  // 检查是否在子页面（非主页）
+  // Check if on a sub-page (not the main page)
   const isSubPage = pathname.includes('/pricing') || 
                    (pathname !== '/' && pathname !== '/en' && pathname !== '/jp' && pathname !== '/zh');
 
   useEffect(() => {
     const handleScroll = () => {
       if (isSubPage) {
-        // 在子页面中始终显示黑色背景
+        // Always show black background on sub-pages
         setIsScrolled(true);
       } else {
-        // 在主页中检查是否滚动超过视频英雄区域的高度（大约100vh）
+        // On the main page, check if scrolled beyond the video hero area height (approximately 100vh)
         const heroHeight = window.innerHeight;
         const scrollPosition = window.scrollY;
-        // 80%的视窗高度后开始变黑
+        // Start turning black after 80% of the viewport height
         setIsScrolled(scrollPosition > heroHeight * 0.8);
       }
     };
 
-    // 初始化时检查一次
+    // Set initial state immediately for sub-pages
+    if (isSubPage) {
+      setIsScrolled(true);
+    }
+
+    // Check once on initialization
     handleScroll();
 
     window.addEventListener("scroll", handleScroll);

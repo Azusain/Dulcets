@@ -27,7 +27,7 @@ interface Artwork {
 
 const artworks: Artwork[] = artworksJson.map((item) => ({
   ...item,
-  // TODO: "hard coded image path."
+  // Generate proper asset path for artwork image
   image: getAssetPath("/images/artworks/" + item.imagePath),
 }));
 
@@ -180,7 +180,7 @@ export default function ArtworksSection({
           {/* Right Side - Photo Wall */}
           <div className="relative">
             <div className="scattered-photos relative w-full h-[800px]">
-              {/* TODO: this is really hard coded. */}
+              {/* Artwork gallery using position data from JSON */}
               {artworks.map((artwork, index) => {
                 const pos = artwork.pos;
 

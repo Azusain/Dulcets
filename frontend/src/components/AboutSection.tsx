@@ -7,10 +7,10 @@ interface AboutSectionProps {
   t: (key: string) => string;
 }
 
-interface GenreContent {
-  title: string;
+interface GenreInfo {
+  id: string;
+  name: string;
   subtitle: string;
-  content: string;
 }
 
 interface GenreConfig {
@@ -22,46 +22,25 @@ interface GenreConfig {
   genre: string;
 }
 
+const MUSIC_GENRES: GenreInfo[] = [
+  { id: "jrock", name: "J-ROCK", subtitle: "Japanese Rock" },
+  { id: "jpop", name: "J-POP", subtitle: "Japanese Pop" },
+  { id: "idol", name: "IDOL", subtitle: "Idol Music" },
+  { id: "orchestra", name: "ORCHESTRA", subtitle: "Orchestral Music" },
+  { id: "edm", name: "EDM", subtitle: "Electronic Dance Music" }
+];
+
 const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
   const [selectedGenre, setSelectedGenre] = useState<string>("jrock");
   const [audioConfig, setAudioConfig] = useState<Record<string, GenreConfig>>({});
-  const [contentKey, setContentKey] = useState(0); // 用于强制重新渲染以触发动画
+  const [contentKey, setContentKey] = useState(0); // Force re-render to trigger animation
   const { getAssetPath } = useAssetPath();
-
-  // Define genre content for each music type
-  const genreContents: Record<string, GenreContent> = {
-    jrock: {
-      title: "J-ROCK",
-      subtitle: "Japanese Rock",
-      content: "私たちは、独自性があり、魅力的な日本のロック音楽制作を専門としています。エキサイティングなテーマソングから心に響く挿入歌まで、私たちのチームはすべての音符を丁寧に磨き上げます。私たちの作曲家、編曲家、そしてミキシングエンジニアは、これらの音楽スタイルに精通しているだけでなく、絶対にも非凡にこだわっています。"
-    },
-    jpop: {
-      title: "J-POP",
-      subtitle: "Japanese Pop",
-      content: "キャッチーなメロディーと現代的なサウンドを融合した日本のポップミュージック制作に特化しています。アイドル楽曲からアーティスト向けの楽曲まで、時代に合った魅力的な楽曲を制作します。ポップスの持つエネルギーと日本独特の美しさを組み合わせ、聴く人の心に残る作品を創り出します。"
-    },
-    idol: {
-      title: "IDOL",
-      subtitle: "Idol Music",
-      content: "アイドルグループやソロアーティスト向けの楽曲制作において豊富な経験を持ちます。可愛らしさとパフォーマンス性を兼ね備えた楽曲から、成長を表現する深みのある楽曲まで、アーティストの魅力を最大限に引き出す音楽を制作します。ダンサブルなビートと印象的なフックで、ファンの心を掴む楽曲を創造します。"
-    },
-    orchestra: {
-      title: "ORCHESTRA",
-      subtitle: "Orchestral Music",
-      content: "クラシックオーケストラの壮大さと現代音楽の革新性を融合させた楽曲制作を行います。映画音楽、ゲームサウンドトラック、アニメBGMなど、感情豊かで印象深いオーケストラ楽曲を制作します。各楽器の特性を活かした精密なアレンジで、聴く人の心に深く響く音楽体験を提供します。"
-    },
-    edm: {
-      title: "EDM",
-      subtitle: "Electronic Dance Music",
-      content: "最新のエレクトロニック・ダンス・ミュージックトレンドを取り入れた楽曲制作を専門としています。クラブシーンで映えるハードなビートから、リスニング用の洗練されたエレクトロニカまで幅広く対応します。革新的なサウンドデザインと日本独特の音楽性を組み合わせ、国際的にも通用する楽曲を制作します。"
-    }
-  };
 
   // Load audio configuration on component mount
   useEffect(() => {
     const loadAudioConfig = async () => {
       try {
-        // 使用 getAssetPath 来处理路径
+        // Use getAssetPath to handle different deployment paths
         const configUrl = getAssetPath('/audio/audio-config.json');
         console.log('Attempting to load audio config from:', configUrl);
         const response = await fetch(configUrl);
@@ -80,7 +59,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
         }
       } catch (error) {
         console.error('Failed to load audio config:', error);
-        // 临时回退方案 - 使用硬编码配置
+        // Fallback configuration with hardcoded values
         const fallbackConfig = {
           "jrock": {
             "id": "jrock",
@@ -130,18 +109,9 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
     loadAudioConfig();
   }, [getAssetPath]);
 
-  const genres = [
-    { id: "jrock", name: "J-ROCK", subtitle: "Japanese Rock" },
-    { id: "jpop", name: "J-POP", subtitle: "Japanese Pop" },
-    { id: "idol", name: "IDOL", subtitle: "Idol Music" },
-    { id: "orchestra", name: "ORCHESTRA", subtitle: "Orchestral Music" },
-    { id: "edm", name: "EDM", subtitle: "Electronic Dance Music" }
-  ];
-
-  const currentContent = genreContents[selectedGenre];
   const currentAudioConfig = audioConfig[selectedGenre as keyof typeof audioConfig] as GenreConfig;
 
-  // 切换内容时触发重新渲染动画
+  // Trigger re-render animation when content changes
   useEffect(() => {
     setContentKey(prev => prev + 1);
   }, [selectedGenre]);
@@ -214,6 +184,76 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
           </div>
         </header>
 
+        {/* Why Choose Us Section */}
+        <div className="mb-24">
+          <div className="text-center mb-16">
+            {/* Decorative elements */}
+            <div className="flex items-center justify-center mb-6">
+              <div className="h-px bg-gray-300 w-12 opacity-50"></div>
+              <div className="mx-3 w-1.5 h-1.5 bg-gray-400 rounded-full"></div>
+              <div className="h-px bg-gray-300 w-12 opacity-50"></div>
+            </div>
+            
+            <h3 className="text-3xl font-light text-black mb-2 tracking-wide">
+              {t("about.why_choose_us.title")}
+            </h3>
+            
+            <div className="mx-auto w-20 h-px bg-gray-400 opacity-60"></div>
+            
+            <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mt-4">
+              {t("about.why_choose_us.subtitle")}
+            </p>
+          </div>
+
+          {/* Features Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
+            {[
+              'custom_music',
+              'comprehensive_support', 
+              'diverse_vocals',
+              'multilingual',
+              'cross_media'
+            ].map((feature, index) => (
+              <div 
+                key={feature}
+                className="group relative bg-white p-6 border border-gray-200 hover:border-gray-300 transition-all duration-500 hover:shadow-lg hover:-translate-x-2 hover:scale-105 hover:skew-x-1 overflow-hidden"
+                style={{
+                  animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
+                  transformOrigin: 'left center'
+                }}
+              >
+                {/* Animated squeeze background */}
+                <div className="absolute inset-0 bg-gradient-to-r from-gray-100 to-transparent opacity-0 group-hover:opacity-60 transition-all duration-500 transform -translate-x-full group-hover:translate-x-0"></div>
+                
+                {/* Top accent line with squeeze effect */}
+                <div className="absolute top-0 left-0 w-full h-0.5 bg-gray-200 group-hover:bg-gray-400 group-hover:h-1 transition-all duration-300 transform group-hover:scale-x-110"></div>
+                
+                {/* Corner decorative elements with squeeze animation */}
+                <div className="absolute top-2 left-2 w-3 h-3 border-l border-t border-gray-300 opacity-30 group-hover:opacity-80 transition-all duration-300 group-hover:scale-125 group-hover:-translate-x-1"></div>
+                <div className="absolute bottom-2 right-2 w-3 h-3 border-r border-b border-gray-300 opacity-30 group-hover:opacity-80 transition-all duration-300 group-hover:scale-125 group-hover:translate-x-1"></div>
+                
+                <div className="relative z-10 transform group-hover:-translate-x-1 transition-transform duration-500">
+                  <h4 className="text-lg font-medium text-black mb-3 tracking-wide group-hover:text-gray-800 group-hover:tracking-wider transition-all duration-300 group-hover:scale-105">
+                    {t(`about.why_choose_us.features.${feature}.title`)}
+                  </h4>
+                  
+                  <div className="w-8 h-px bg-gray-300 mb-4 group-hover:w-16 group-hover:h-0.5 transition-all duration-300 transform group-hover:translate-x-2"></div>
+                  
+                  <p className="text-gray-600 text-sm leading-relaxed group-hover:text-gray-700 transform group-hover:scale-102 transition-all duration-300">
+                    {t(`about.why_choose_us.features.${feature}.description`)}
+                  </p>
+                </div>
+                
+                {/* Side squeeze indicator */}
+                <div className="absolute right-0 top-0 bottom-0 w-1 bg-gray-300 transform translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
+                
+                {/* Enhanced hover background effect with squeeze */}
+                <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-40 transition-opacity duration-500 transform skew-x-2 group-hover:skew-x-0"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Main Content Area: Text on left, Genres on right */}
         <div className="grid lg:grid-cols-2 gap-16 mb-20">
           {/* Left: About Content with AudioPlayer */}
@@ -230,7 +270,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
                   animation: "fadeIn 0.5s ease-in-out"
                 }}
               >
-                {currentContent.content}
+                {t(`about.genres.${selectedGenre}.content`)}
               </div>
             </div>
             
@@ -242,7 +282,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
                   description={currentAudioConfig.artist}
                   audioUrl={getAssetPath(`/audio/${currentAudioConfig.fileName}`)}
                   className="shadow-sm"
-                  t={t} // 传递翻译函数给 AudioPlayer
+                  t={t} // Pass translation function to AudioPlayer
                 />
               )}
             </div>
@@ -254,7 +294,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
             <div className="absolute left-0 top-0 bottom-0 w-px bg-gray-300"></div>
 
             <div className="pl-12 space-y-8">
-              {genres.map((genre) => (
+              {MUSIC_GENRES.map((genre) => (
                 <div 
                   key={genre.id}
                   className={`group relative cursor-pointer transition-all duration-300 ${
@@ -276,7 +316,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
                     <h3 className={`text-2xl font-light mb-2 tracking-wide transition-colors duration-300 ${
                       selectedGenre === genre.id ? 'text-black' : 'text-gray-800'
                     }`}>
-                      {genre.name}
+                      {t(`about.genres.${genre.id}.title`)}
                     </h3>
                     
                     {/* Animated underline */}
@@ -289,7 +329,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
                     ></div>
                     
                     <p className="text-gray-600 text-sm font-light">
-                      {genre.subtitle}
+                      {t(`about.genres.${genre.id}.subtitle`)}
                     </p>
                     
                     {/* Selected background effect */}

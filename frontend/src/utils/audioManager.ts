@@ -1,4 +1,4 @@
-// 全局音频管理器，用于确保同一时间只有一个音频在播放
+// Global audio manager to ensure only one audio plays at a time
 class AudioManager {
   private static instance: AudioManager;
   private currentPlayer: any = null;
@@ -12,7 +12,7 @@ class AudioManager {
   }
 
   setCurrentPlayer(player: any, audioUrl: string) {
-    // 如果有其他播放器在播放，先停止它
+    // If another player is playing, stop it first
     if (this.currentPlayer && this.currentPlayer !== player) {
       try {
         if (this.currentPlayer.isPlaying && this.currentPlayer.isPlaying()) {

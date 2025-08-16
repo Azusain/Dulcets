@@ -10,6 +10,7 @@
     "export": "next build"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
     "framer-motion": "^12.23.12",
     "i18next": "^25.3.4",
     "next": "15.4.6",
@@ -17,6 +18,7 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-i18next": "^15.6.1",
+    "tailwind-merge": "^3.3.1",
     "wavesurfer.js": "^7.10.1",
     "yet-another-react-lightbox": "^3.25.0"
   },

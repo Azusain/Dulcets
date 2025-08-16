@@ -2,7 +2,7 @@
   {
     "id": 1,
     "title": "Modeling 1",
-    "imagePath": "model1.jpg",
+    "imagePath": "model1.png",
     "pos": {
       "left": "0%",
       "top": "8%",
@@ -14,7 +14,7 @@
   {
     "id": 2,
     "title": "Modeling 2",
-    "imagePath": "model2.jpg",
+    "imagePath": "model2.png",
     "pos": {
       "left": "28%",
       "top": "2%",
@@ -26,7 +26,7 @@
   {
     "id": 3,
     "title": "Modeling 3",
-    "imagePath": "model3.jpg",
+    "imagePath": "model3.png",
     "pos": {
       "left": "58%",
       "top": "18%",
@@ -38,7 +38,7 @@
   {
     "id": 4,
     "title": "Modeling 4",
-    "imagePath": "model4.jpg",
+    "imagePath": "model4.png",
     "pos": {
       "left": "3%",
       "top": "45%",
@@ -50,7 +50,7 @@
   {
     "id": 5,
     "title": "Modeling 5",
-    "imagePath": "model5.jpg",
+    "imagePath": "model5.png",
     "pos": {
       "left": "32%",
       "top": "50%",
@@ -62,7 +62,7 @@
   {
     "id": 6,
     "title": "Modeling 6",
-    "imagePath": "model6.jpg",
+    "imagePath": "model6.png",
     "pos": {
       "left": "60%",
       "top": "65%",

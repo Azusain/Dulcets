@@ -7,15 +7,15 @@ interface AudioPlayerProps {
   description?: string;
   audioUrl: string;
   className?: string;
-  t?: (key: string) => string; // 添加 i18n 翻译函数
+  t?: (key: string) => string; // Add i18n translation function
 }
 
 const AudioPlayer: React.FC<AudioPlayerProps> = ({
-  title = "音频播放器",
-  description = "点击播放按钮开始播放",
+  title = "Audio Player",
+  description = "Click play button to start",
   audioUrl,
   className = "",
-  t, // 传入的翻译函数
+  t, // Translation function passed in
 }) => {
   const waveformRef = useRef<HTMLDivElement>(null);
   const wavesurfer = useRef<WaveSurfer | null>(null);
@@ -26,13 +26,13 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   const [waveformReady, setWaveformReady] = useState(false);
   const audioManager = AudioManager.getInstance();
 
-  // 重置状态当 audioUrl 改变时
+  // Reset state when audioUrl changes
   useEffect(() => {
     setIsLoading(true);
     setIsPlaying(false);
     setDuration(0);
     setCurrentTime(0);
-    setWaveformReady(false); // 立即隐藏波形，不需要淡出动画
+    setWaveformReady(false); // Hide waveform immediately, no fade-out animation needed
   }, [audioUrl]);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
       if (!waveformRef.current || !isComponentMounted) return;
 
       try {
-        // 立即销毁之前的实例，不等待
+        // Immediately destroy previous instance without waiting
         if (wavesurfer.current) {
           try {
             if (typeof wavesurfer.current.pause === 'function') {
@@ -52,16 +52,16 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
                 wavesurfer.current.pause();
               } catch (e) {}
             }
-            wavesurfer.current.destroy(); // 移除延迟，立即销毁
+            wavesurfer.current.destroy(); // Remove delay, destroy immediately
           } catch (error) {
-            // 静默处理
+            // Handle silently
           }
           wavesurfer.current = null;
         }
 
         if (!isComponentMounted) return;
 
-        // 创建新实例
+        // Create new instance
         wavesurferInstance = WaveSurfer.create({
           container: waveformRef.current,
           waveColor: "#666666",
@@ -84,17 +84,17 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
 
         wavesurfer.current = wavesurferInstance;
 
-        // 事件监听
+        // Event listeners
         const handleReady = () => {
           if (!isComponentMounted) return;
-          setIsLoading(false); // 立即设置加载完成，让按钮变为可点击状态
+          setIsLoading(false); // Set loading complete immediately, make button clickable
           setDuration(wavesurferInstance?.getDuration() || 0);
-          // 加载完成后立即显示波形并触发淡入动画
+          // Show waveform immediately after loading and trigger fade-in animation
           setTimeout(() => {
             if (isComponentMounted) {
               setWaveformReady(true);
             }
-          }, 10); // 进一步减少延迟时间
+          }, 10); // Further reduce delay time
         };
 
         const handlePlay = () => {
@@ -127,7 +127,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
         const handleError = (error: any) => {
           if (!isComponentMounted) return;
           console.warn('WaveSurfer error:', error);
-          setIsLoading(false); // 即使出错也要让按钮可点击
+          setIsLoading(false); // Make button clickable even if error occurs
         };
 
         wavesurferInstance.on("ready", handleReady);
@@ -138,7 +138,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
         wavesurferInstance.on("finish", handleFinish);
         wavesurferInstance.on("error", handleError);
 
-        // 加载音频文件 - 使用 AbortController
+        // Load audio file - using AbortController
         if (isComponentMounted) {
           try {
             wavesurferInstance.load(audioUrl);
@@ -161,34 +161,34 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
 
     return () => {
       isComponentMounted = false;
-      abortController.abort(); // 终止所有请求
+      abortController.abort(); // Abort all requests
       
       if (wavesurferInstance) {
         try {
-          // 先停止播放
+          // Stop playback first
           if (typeof wavesurferInstance.pause === 'function') {
             try {
               wavesurferInstance.pause();
             } catch (e) {}
           }
           
-          // 清理管理器状态
+          // Clean up manager state
           if (audioManager.isCurrentPlayer(wavesurferInstance)) {
             audioManager.stopCurrentPlayer();
           }
           
-          // 延迟销毁，给足够时间让正在进行的请求结束
+          // Delay destruction to give enough time for ongoing requests to complete
           setTimeout(() => {
             try {
               if (wavesurferInstance && typeof wavesurferInstance.destroy === 'function') {
                 wavesurferInstance.destroy();
               }
             } catch (destroyError) {
-              // 静默处理
+              // Handle silently
             }
-          }, 200); // 增加延迟时间
+          }, 200); // Increase delay time
         } catch (error) {
-          // 静默处理
+          // Handle silently
         }
       }
       
@@ -197,7 +197,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
     };
   }, [audioUrl]);
 
-  // 监听其他播放器的状态 - 简化逻辑减少错误
+  // Listen to other player status - simplified logic to reduce errors
   useEffect(() => {
     if (!isPlaying) return;
 
@@ -208,9 +208,9 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
           setIsPlaying(false);
         }
       } catch (error) {
-        // 静默处理错误
+        // Handle errors silently
       }
-    }, 500); // 进一步增加间隔时间
+    }, 500); // Further increase interval time
 
     return () => {
       clearInterval(checkInterval);
@@ -225,7 +225,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
       if (isPlaying) {
         currentWavesurfer.pause();
       } else {
-        // 停止其他正在播放的音频
+        // Stop other playing audio
         audioManager.stopCurrentPlayer();
         currentWavesurfer.play();
       }
@@ -244,16 +244,16 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   return (
     <div
       className={`bg-white border border-gray-200 rounded-lg p-6 shadow-sm ${className}`}
-      style={{ minHeight: "180px" }} // 固定最小高度防止尺寸变化
+      style={{ minHeight: "180px" }} // Fixed minimum height to prevent size changes
     >
-      {/* 标题、作者、时间和播放按钮 - 在同一行 */}
+      {/* Title, author, time and play button - on the same row */}
       <div className="flex items-start gap-4 mb-4" style={{ minHeight: "48px" }}>
-        {/* 播放/暂停按钮 - 优化动画和鼠标样式 */}
+        {/* Play/pause button - optimized animation and mouse styles */}
         <button
           onClick={togglePlayPause}
           disabled={isLoading}
           className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center transition-all duration-150 ease-in-out disabled:bg-gray-400 flex-shrink-0 cursor-pointer hover:scale-105 hover:bg-gray-800 active:scale-95 active:bg-gray-700"
-          aria-label={isPlaying ? "暂停" : "播放"}
+          aria-label={isPlaying ? "Pause" : "Play"}
         >
           {isPlaying ? (
             <div className="flex gap-1.5">
@@ -261,12 +261,12 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
               <div className="w-1.5 h-6 bg-white rounded-sm"></div>
             </div>
           ) : (
-            // 播放图标 - 增大到 70-80% 的空间
+            // Play icon - enlarged to 70-80% of space
             <div className="w-0 h-0 border-l-[10px] border-l-white border-t-[8px] border-b-[8px] border-t-transparent border-b-transparent ml-1"></div>
           )}
         </button>
 
-        {/* 标题和作者 */}
+        {/* Title and author */}
         <div className="flex-1">
           <h3 className="text-lg font-semibold text-black leading-tight">
             {title}
@@ -274,26 +274,26 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
           <p className="text-gray-600 text-sm leading-tight">{description}</p>
         </div>
 
-        {/* 时间显示 - 与播放按钮上沿对齐 */}
+        {/* Time display - aligned with play button top edge */}
         <div className="text-sm text-gray-500 font-mono min-w-[80px] text-right">
           {formatTime(currentTime)} / {formatTime(duration)}
         </div>
       </div>
 
-      {/* 波形显示区域 - 固定高度 */}
+      {/* Waveform display area - fixed height */}
       <div className="w-full relative" style={{ height: "80px" }}>
         <div
           ref={waveformRef}
           className={`w-full h-full rounded ${
             waveformReady 
-              ? 'opacity-100 transition-opacity duration-500 ease-in' // 淡入动画
-              : 'opacity-0' // 立即隐藏，无过渡
+              ? 'opacity-100 transition-opacity duration-500 ease-in' // Fade in animation
+              : 'opacity-0' // Hide immediately, no transition
           }`}
           style={{ height: "60px", margin: "10px 0" }}
         />
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center text-gray-500">
-            <div className="mr-2">{t ? t("loading") : "加载中..."}</div>
+            <div className="mr-2">{t ? t("loading") : "Loading..."}</div>
             <div className="w-4 h-4 border-2 border-gray-500 border-t-transparent rounded-full animate-spin" />
           </div>
         )}

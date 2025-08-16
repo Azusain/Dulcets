@@ -14,22 +14,67 @@
     "genres": {
       "anime_song": {
         "title": "ANIME SONG",
-        "subtitle": "アニメソング"
+        "subtitle": "Anime Music"
       },
       "jrock": {
-        "title": "J-ROCK"
+        "title": "J-ROCK",
+        "subtitle": "Japanese Rock",
+        "content": "We specialize in creating unique and captivating Japanese rock music. From exciting theme songs to heart-touching insert tracks, our team meticulously refines every note. Our composers, arrangers, and mixing engineers are not only experts in these musical styles but also have an absolute commitment to excellence."
       },
       "jpop": {
-        "title": "J-POP"
+        "title": "J-POP",
+        "subtitle": "Japanese Pop",
+        "content": "We specialize in Japanese pop music production that combines catchy melodies with modern sounds. From idol songs to artist tracks, we create appealing music that fits the times. We combine the energy of pop music with Japan's unique beauty to create works that remain in listeners' hearts."
+      },
+      "idol": {
+        "title": "IDOL",
+        "subtitle": "Idol Music",
+        "content": "We have extensive experience in music production for idol groups and solo artists. From songs that combine cuteness and performance to deep songs that express growth, we create music that maximally brings out the artist's charm. We create songs that capture fans' hearts with danceable beats and memorable hooks."
+      },
+      "orchestra": {
+        "title": "ORCHESTRA",
+        "subtitle": "Orchestral Music",
+        "content": "We create music that fuses the grandeur of classical orchestras with the innovation of modern music. We produce emotionally rich and impressive orchestral music including film music, game soundtracks, and anime BGM. With precise arrangements that utilize the characteristics of each instrument, we provide musical experiences that deeply resonate in listeners' hearts."
+      },
+      "edm": {
+        "title": "EDM",
+        "subtitle": "Electronic Dance Music",
+        "content": "We specialize in music production incorporating the latest electronic dance music trends. We handle a wide range from hard beats that shine in club scenes to sophisticated electronica for listening. We combine innovative sound design with Japan's unique musicality to create internationally viable music."
       },
       "bgm": {
         "title": "BGM"
       }
     },
     "stats": {
-      "artists": "アーティスト",
-      "releases": "リリース",
-      "fans": "ファン"
+      "artists": "Artists",
+      "releases": "Releases",
+      "fans": "Fans"
+    },
+    "why_choose_us": {
+      "title": "Why Choose Us",
+      "subtitle": "Our Strengths",
+      "features": {
+        "custom_music": {
+          "title": "Custom Music Production",
+          "description": "We create original music from scratch tailored to our clients' brands and stories."
+        },
+        "comprehensive_support": {
+          "title": "Comprehensive Support",
+          "description": "We provide end-to-end support from composition and arrangement to mixing and mastering."
+        },
+        "diverse_vocals": {
+          "title": "Diverse Vocal Lineup",
+          "description": "We have many female singers who are native speakers of English and Japanese, providing vocals for various needs."
+        },
+        "multilingual": {
+          "title": "Multilingual Support",
+          "description": "Smooth communication is possible in Japanese, English, and Chinese."
+        },
+        "cross_media": {
+          "title": "Cross-Media Support",
+          "description": "We handle not only music production but also consultations for video and 3D MV production."
+        }
+      }
     }
   },
   "services": {
@@ -269,5 +314,17 @@
     "email_placeholder": "Enter your email address",
     "subscribe_button": "Subscribe",
     "copyright": "© 2025 Dulcets Music Company. All rights reserved."
+  },
+  "contact": {
+    "title": "Contact",
+    "visit_us": "Visit Us",
+    "get_quote": "Get a Quote",
+    "quote_description": "Ready to start your project? Reach out to us for a personalized quote and consultation.",
+    "send_email": "Send us an Email",
+    "copy_email": "Copy Email Address",
+    "follow_us": "Follow Us",
+    "follow_description": "Stay connected and check out our latest work across our social platforms.",
+    "email_copied": "Email address copied!",
+    "description": "Get in touch with us for your next project. We're here to help bring your musical vision to life."
   }
 }
