@@ -66,7 +66,7 @@ const MusicProductionSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-8 h-full flex flex-col justify-center">
         {/* Title and Description Section - reduced since main title is above */}
         <div className="mb-12">
-          <h2 className="text-4xl font-bold text-white mb-4 drop-shadow-lg">
+          <h2 className="text-[80px] font-bold text-white mb-4 drop-shadow-lg">
             音楽制作サービス
           </h2>
           <p className="text-lg text-gray-200 leading-relaxed max-w-2xl drop-shadow">
@@ -151,7 +151,7 @@ const MusicProductionSection: React.FC = () => {
         <div className="flex justify-center">
           <button
             onClick={handleViewDetails}
-            className="px-8 py-3 border-2 border-white border-opacity-60 text-white bg-transparent hover:bg-white/10 hover:border-opacity-100 transition-all duration-300 font-medium"
+            className="px-8 py-3 border-2 border-white border-opacity-60 text-white bg-transparent hover:bg-white/10 hover:border-opacity-100 cursor-pointer transition-all duration-300 font-medium"
           >
             詳細料金表を見る
           </button>

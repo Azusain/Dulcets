@@ -115,32 +115,28 @@ export default function ArtworksSection({
             <div>
               <div className="inline-block mb-4">
                 <span className="text-sm font-medium uppercase tracking-wider text-blue-600 bg-blue-50 px-4 py-2 rounded-full">
-                  {translations ? t("footer.artworks") : "✨ Artwork Gallery"}
+                  {t("footer.artworks")}
                 </span>
               </div>
 
               <h2 className="text-7xl lg:text-8xl font-black leading-tight text-black mb-6">
                 <span className="relative whitespace-nowrap">
-                  {translations ? t("artworks.title_main") : "绘画作品"}
+                  {t("artworks.title_main")}
                   <span
                     className={`absolute inset-0 text-blue-400 -z-10 ${getShadowOffset()}`}
                   >
-                    {translations ? t("artworks.title_main") : "绘画作品"}
+                    {t("artworks.title_main")}
                   </span>
                 </span>
                 <br />
                 <span className="text-6xl lg:text-7xl text-gray-600 whitespace-nowrap">
-                  {translations ? t("artworks.title_sub") : "展示"}
+                  {t("artworks.title_sub")}
                 </span>
               </h2>
             </div>
 
             <div className="space-y-6 text-lg leading-relaxed text-gray-700">
-              <p>
-                {translations
-                  ? t("artworks.description")
-                  : "精选二次元风格绘画作品，融合传统艺术与现代数字创作技术，展现独特的艺术视觉魅力和创意表达。"}
-              </p>
+              <p>{t("artworks.description")}</p>
 
               <p>
                 {translations

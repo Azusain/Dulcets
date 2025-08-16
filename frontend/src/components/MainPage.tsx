@@ -41,24 +41,20 @@ export function MainPage({ translations }: HomePageInterface) {
   const t = (key: string) => getTranslation(translations, key);
   return (
     <LoadingManager loadingText={t("loading")}>
-      {/* Hero Section with Video Background */}
       <HeroSection t={t} />
 
-      {/* About Us Section with Tokyo background - no white space */}
       <div className="-mt-12">
         <AboutSection t={t} />
       </div>
 
-      {/* Our Works Section with Audio Player - starts immediately after Tokyo background */}
       <OurWorksSection t={t} />
 
-      {/* Why Choose Us Section - after Our Works */}
       <WhyChooseUsSection t={t} />
 
-      {/* 3 main services */}
-      <UnifiedServicesSection translations={translations} />
+      <div className="z-0">
+        <UnifiedServicesSection translations={translations} />
+      </div>
 
-      {/* Contact Section */}
       <ContactSection t={t} />
 
       {/* Footer with Follow Us section */}
