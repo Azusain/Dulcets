@@ -193,10 +193,12 @@ body {
   padding: 0;
   scroll-behavior: smooth;
   background: #111827; /* 与加载屏幕背景色一致 */
+  overflow-x: hidden; /* Prevent horizontal scrolling and edge artifacts */
 }
 
 #main-content {
   min-height: 100vh;
+  overflow-x: hidden; /* Ensure no horizontal overflow */
 }
 
 /* Animation classes */
@@ -625,6 +627,9 @@ nav {
   right: 0 !important;
   z-index: 999 !important;
   width: 100% !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* Navigation Gradient Shadow */

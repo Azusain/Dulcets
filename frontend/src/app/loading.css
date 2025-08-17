@@ -76,32 +76,10 @@
 
 @keyframes logoPortalLeft {
   0% {
-    opacity: 1;
-    transform: translateY(-50%) translateX(50px);
-  } /* Start from right side, hidden by mask */
-  30% {
-    opacity: 1;
-    transform: translateY(-50%) translateX(50px);
-  }
-  35% {
-    opacity: 1;
-    transform: translateY(-50%) translateX(20px);
-  } /* Begin emerging from portal */
-  50% {
-    opacity: 1;
-    transform: translateY(-50%) translateX(-10px);
-  } /* Halfway out */
-  70% {
-    opacity: 1;
-    transform: translateY(-50%) translateX(-150px);
-  } /* Fully out to the left */
-  80% {
-    opacity: 1;
-    transform: translateY(-50%) translateX(-150px);
-  }
+    transform: translateX(-20px);
+  } /* Start from right side of mask */
   100% {
-    opacity: 1;
-    transform: translateY(-50%) translateX(-150px);
+    transform: translateX(-160px);
   }
 }
 
@@ -234,16 +212,24 @@
   z-index: 5;
 }
 
-/* Portal mask container - MASKING DISABLED FOR LAYOUT */
-.portal-mask {
+/* Portal mask container for left logo - no clipping needed */
+.portal-mask-left {
   position: absolute;
   top: 50%;
-  left: -120px;
-  width: 10px;
-  height: 192px;
+  left: calc(50% + 2px); /* Start just right of the vertical line */
+  width: 300px; /* Normal width */
+  height: 160px; /* Height to contain logo */
   transform: translateY(-50%);
-  /* overflow: hidden; */ /* DISABLED - Remove masking effect */
+  /* overflow: hidden; */ /* DISABLED - no clipping needed */
   z-index: 4;
+  border: none; /* Ensure no borders */
+  outline: none; /* Ensure no outlines */
+  background-color: rgba(
+    255,
+    165,
+    0,
+    0.5
+  ); /* Orange background for debugging */
 }
 
 /* Logo containers - positioned to emerge from the line */
@@ -258,12 +244,17 @@
   transform: translateY(-50%); /* Center vertically */
 }
 
+/* Left logo - positioned inside portal mask container */
 .logo-left {
   position: absolute;
-  top: 50%;
-  left: -170px; /* Center - offset */
-  transform: translateY(-50%);
-  /* animation: logoPortalLeft 2.5s ease-in-out forwards; */ /* DISABLED FOR LAYOUT */
+  top: 0; /* Relative to portal mask container */
+  left: 0; /* Start at the container's left edge */
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: logoPortalLeft 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; /* Smooth easing */
 }
 
 .logo-right {
