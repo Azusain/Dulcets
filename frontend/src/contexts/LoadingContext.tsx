@@ -29,7 +29,7 @@ export function LoadingProvider({ children }: { children: ReactNode }) {
     // Hide loading after animation duration
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+    }, 2500);
 
     return () => clearTimeout(timer);
   }, [pathname]);
