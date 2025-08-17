@@ -40,7 +40,7 @@ const MusicProductionSection: React.FC<MusicProductionSectionProps> = ({ t }) =>
   const handleViewDetails = () => {
     // Get current language from URL path
     const currentPath = window?.location?.pathname || "/";
-    let targetPath = "/pricing";
+    let targetPath = "/jp/pricing"; // Default to Japanese version
 
     if (currentPath.startsWith("/en")) {
       targetPath = "/en/pricing";
@@ -50,7 +50,13 @@ const MusicProductionSection: React.FC<MusicProductionSectionProps> = ({ t }) =>
       targetPath = "/zh/pricing";
     }
 
-    router.push(targetPath);
+    // For GitHub Pages, use window.location to ensure proper navigation
+    if (typeof window !== 'undefined' && window.location.hostname.includes('github.io')) {
+      const basePath = '/Dulcets';
+      window.location.href = basePath + targetPath;
+    } else {
+      router.push(targetPath);
+    }
   };
 
   return (

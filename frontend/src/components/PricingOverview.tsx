@@ -6,7 +6,25 @@ export default function PricingOverview() {
   const router = useRouter();
 
   const handleViewDetails = () => {
-    router.push('/pricing');
+    // Get current language from URL path
+    const currentPath = typeof window !== 'undefined' ? window.location.pathname : '/';
+    let targetPath = '/jp/pricing'; // Default to Japanese version
+
+    if (currentPath.startsWith('/en')) {
+      targetPath = '/en/pricing';
+    } else if (currentPath.startsWith('/jp')) {
+      targetPath = '/jp/pricing';
+    } else if (currentPath.startsWith('/zh')) {
+      targetPath = '/zh/pricing';
+    }
+
+    // For GitHub Pages, use window.location to ensure proper navigation
+    if (typeof window !== 'undefined' && window.location.hostname.includes('github.io')) {
+      const basePath = '/Dulcets';
+      window.location.href = basePath + targetPath;
+    } else {
+      router.push(targetPath);
+    }
   };
 
   return (
