@@ -42,7 +42,9 @@
         "content": "We specialize in music production incorporating the latest electronic dance music trends. We handle a wide range from hard beats that shine in club scenes to sophisticated electronica for listening. We combine innovative sound design with Japan's unique musicality to create internationally viable music."
       },
       "bgm": {
-        "title": "BGM"
+        "title": "BGM",
+        "subtitle": "Background Music",
+        "content": "We specialize in background music production for games, anime, films, and streaming content. Creating music that seamlessly blends with the environment while being memorable, we craft soundscapes that enhance the world-building of your projects. From dramatic scores that elevate emotional scenes to relaxing ambient tracks, we produce high-quality BGM tailored to various applications."
       }
     },
     "stats": {

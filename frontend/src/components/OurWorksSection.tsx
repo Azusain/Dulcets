@@ -14,7 +14,6 @@ interface GenreConfig {
   fileName: string;
   displayName: string;
   artist: string;
-  duration: string;
   genre: string;
 }
 
@@ -25,15 +24,16 @@ interface GenreInfo {
 }
 
 const MUSIC_GENRES: GenreInfo[] = [
+  { id: "idol", name: "IDOL", subtitle: "Idol Music" },
   { id: "jrock", name: "J-ROCK", subtitle: "Japanese Rock" },
   { id: "jpop", name: "J-POP", subtitle: "Japanese Pop" },
-  { id: "idol", name: "IDOL", subtitle: "Idol Music" },
   { id: "orchestra", name: "ORCHESTRA", subtitle: "Orchestral Music" },
   { id: "edm", name: "EDM", subtitle: "Electronic Dance Music" },
+  { id: "bgm", name: "BGM", subtitle: "Background Music" },
 ];
 
 const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
-  const [selectedGenre, setSelectedGenre] = useState<string>("jrock");
+  const [selectedGenre, setSelectedGenre] = useState<string>("idol");
   const [audioConfig, setAudioConfig] = useState<Record<string, GenreConfig>>(
     {}
   );
@@ -73,7 +73,6 @@ const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
             fileName: "yumehanabi_demo_03.mp3",
             displayName: "夢花火",
             artist: "Shintou",
-            duration: "2:15",
             genre: "J-Rock",
           },
           jpop: {
@@ -81,7 +80,6 @@ const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
             fileName: "夏の音がした_Demo_01.mp3",
             displayName: "夏の音がした",
             artist: "Shintou",
-            duration: "3:20",
             genre: "J-Pop",
           },
           idol: {
@@ -89,7 +87,6 @@ const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
             fileName: "星空のプレッジ_Kuri_Full_4.mp3",
             displayName: "星空のプレッジ",
             artist: "Shintou",
-            duration: "3:45",
             genre: "Idol",
           },
           orchestra: {
@@ -97,16 +94,21 @@ const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
             fileName: "船に託して.mp3",
             displayName: "船に託して",
             artist: "Sakuma遙",
-            duration: "4:12",
             genre: "Orchestra",
           },
           edm: {
             id: "edm",
             fileName: "星奈こやかの曲.mp3",
             displayName: "星奈こやかの曲",
-            artist: "星奈",
-            duration: "3:30",
+            artist: "星奈こやか",
             genre: "EDM",
+          },
+          bgm: {
+            id: "bgm",
+            fileName: "実験基地.mp3",
+            displayName: "実験基地",
+            artist: "アンナ",
+            genre: "BGM",
           },
         };
         setAudioConfig(fallbackConfig);
