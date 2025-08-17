@@ -50,7 +50,7 @@ export default function HeroSection({ t }: ComponentWithTranslation) {
         <h1 className="text-[clamp(6rem,16vw,12rem)] leading-tight mb-6 animate-float" style={{ fontFamily: "'Great Vibes', 'Alex Brush', 'Pinyon Script', cursive", fontWeight: 400, letterSpacing: '0.02em', color: 'white', textShadow: '2px 2px 8px rgba(0, 0, 0, 0.7)' }}>
           Dulcets
         </h1>
-        <p className="text-[clamp(1.2rem,3.5vw,2rem)] text-gray-100 max-w-4xl mb-10 animate-fade-in opacity-90 font-modern-sharp" style={{ fontFamily: "'Inter', 'Noto Sans JP', 'Segoe UI', system-ui, sans-serif", fontWeight: 500, letterSpacing: '0.01em', lineHeight: 1.6, textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)' }}>
+        <p className="text-[clamp(1.2rem,3.5vw,2rem)] text-gray-100 max-w-4xl mb-10 animate-fade-in opacity-85 font-classical" style={{ fontFamily: "'Crimson Text', 'EB Garamond', 'Libre Baskerville', 'Times New Roman', 'Noto Serif JP', serif", fontWeight: 300, letterSpacing: '0.02em', lineHeight: 1.7, fontStyle: 'normal' }}>
           {t("hero.subtitle")}
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
