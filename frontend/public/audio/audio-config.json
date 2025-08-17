@@ -1,42 +1,42 @@
 {
   "jrock": {
     "id": "jrock",
-    "fileName": "yumehanabi_demo_03.mp3",
+    "fileName": "normalized_yumehanabi_demo_03.flac",
     "displayName": "夢花火",
     "artist": "Shintou",
     "genre": "J-Rock"
   },
   "jpop": {
     "id": "jpop",
-    "fileName": "夏の音がした_Demo_01.mp3",
+    "fileName": "normalized_夏の音がした_Demo_01.flac",
     "displayName": "夏の音がした",
     "artist": "Shintou",
     "genre": "J-Pop"
   },
   "idol": {
     "id": "idol",
-    "fileName": "星空のプレッジ_Kuri_Full_4.mp3",
+    "fileName": "normalized_星空のプレッジ_Kuri_Full_4.flac",
     "displayName": "星空のプレッジ",
     "artist": "Shintou",
     "genre": "Idol"
   },
   "orchestra": {
     "id": "orchestra",
-    "fileName": "船に託して.mp3",
+    "fileName": "normalized_船に託して.flac",
     "displayName": "船に託して",
     "artist": "Sakuma遙",
     "genre": "Orchestra"
   },
   "edm": {
     "id": "edm",
-    "fileName": "星奈こやかの曲.mp3",
+    "fileName": "normalized_星奈こやかの曲.flac",
     "displayName": "星奈こやかの曲",
     "artist": "星奈こやか",
     "genre": "EDM"
   },
   "bgm": {
     "id": "bgm",
-    "fileName": "実験基地.mp3",
+    "fileName": "normalized_実験基地.flac",
     "displayName": "実験基地",
     "artist": "アンナ",
     "genre": "BGM"
