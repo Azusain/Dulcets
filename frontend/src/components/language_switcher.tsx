@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 
-import { CreateTranslator } from "@/utils/translator";
 import jp from "../../public/locales/jp.json";
 import en from "../../public/locales/en.json";
 import zh from "../../public/locales/zh.json";
@@ -13,6 +12,23 @@ const languages = [
   { code: "en", label: "EN" },
   { code: "zh", label: "ZH" },
 ];
+
+function createTranslator(translations: Record<string, unknown>) {
+  return (key: string) => {
+    const keys = key.split('.');
+    let value: unknown = translations;
+    
+    for (const k of keys) {
+      if (value && typeof value === 'object' && value !== null && k in value) {
+        value = (value as Record<string, unknown>)[k];
+      } else {
+        return key; // Return the key if path doesn't exist
+      }
+    }
+    
+    return typeof value === 'string' ? value : key;
+  };
+}
 
 export function GetLanguageFromPath() {
   const pathname = usePathname();
@@ -27,11 +43,11 @@ export function GetLanguageFromPath() {
 export function GetLanguageDict(key: string | undefined) {
   switch (key) {
     case "en":
-      return CreateTranslator(en);
+      return createTranslator(en);
     case "zh":
-      return CreateTranslator(zh);
+      return createTranslator(zh);
     default:
-      return CreateTranslator(jp);
+      return createTranslator(jp);
   }
 }
 
