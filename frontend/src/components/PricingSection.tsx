@@ -49,7 +49,7 @@ export default function PricingSection({ translations }: PricingSectionProps) {
   };
 
   return (
-    <section id="pricing" className="bg-white py-20">
+    <section id="pricing" className="bg-white py-20 pt-32">
       <div className="max-w-4xl mx-auto px-8">
         {/* Simple Header */}
         <div className="text-center mb-16">
