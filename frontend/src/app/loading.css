@@ -85,32 +85,10 @@
 
 @keyframes logoPortalRight {
   0% {
-    opacity: 1;
-    transform: translateY(-50%) translateX(-50px);
-  } /* Start from left side, hidden by mask */
-  30% {
-    opacity: 1;
-    transform: translateY(-50%) translateX(-50px);
-  }
-  35% {
-    opacity: 1;
-    transform: translateY(-50%) translateX(-20px);
-  } /* Begin emerging from portal */
-  50% {
-    opacity: 1;
-    transform: translateY(-50%) translateX(10px);
-  } /* Halfway out */
-  70% {
-    opacity: 1;
-    transform: translateY(-50%) translateX(150px);
-  } /* Fully out to the right */
-  80% {
-    opacity: 1;
-    transform: translateY(-50%) translateX(150px);
-  }
+    transform: translateX(-100px);
+  } /* Start from left side of mask, hidden */
   100% {
-    opacity: 1;
-    transform: translateY(-50%) translateX(150px);
+    transform: translateX(310px);
   }
 }
 
@@ -212,7 +190,7 @@
   z-index: 5;
 }
 
-/* Portal mask container for left logo - no clipping needed */
+/* Portal mask container for left logo */
 .portal-mask-left {
   position: absolute;
   top: 50%;
@@ -220,16 +198,26 @@
   width: 300px; /* Normal width */
   height: 160px; /* Height to contain logo */
   transform: translateY(-50%);
-  /* overflow: hidden; */ /* DISABLED - no clipping needed */
-  z-index: 4;
+  /* overflow: hidden; */ /* DISABLED - no clipping */
+  z-index: -2; /* Background layer - won't cover anything */
   border: none; /* Ensure no borders */
   outline: none; /* Ensure no outlines */
-  background-color: rgba(
-    255,
-    165,
-    0,
-    0.5
-  ); /* Orange background for debugging */
+  background-color: rgba(255, 165, 0, 0.5); /* Orange for left mask debugging */
+}
+
+/* Portal mask container for right logo */
+.portal-mask-right {
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 302px); /* Start left of the vertical line */
+  width: 300px; /* Normal width */
+  height: 420px; /* Larger height for right logo */
+  transform: translateY(-50%);
+  /* overflow: hidden; */ /* DISABLED - no clipping */
+  z-index: -1; /* Background layer - won't cover anything */
+  border: none; /* Ensure no borders */
+  outline: none; /* Ensure no outlines */
+  background-color: rgba(0, 255, 0, 0.5); /* Green for right mask debugging */
 }
 
 /* Logo containers - positioned to emerge from the line */
@@ -257,14 +245,18 @@
   animation: logoPortalLeft 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; /* Smooth easing */
 }
 
+/* Right logo - positioned inside right portal mask container */
 .logo-right {
   position: absolute;
-  top: 50%;
-  left: calc(30px); /* Center + offset */
+  top: 0; /* Relative to portal mask container */
+  left: 0; /* Start at the container's left edge */
   width: 420px; /* Even larger container for the bigger right logo */
   height: 420px;
-  transform: translateY(-50%);
-  /* animation: logoPortalRight 2.5s ease-in-out forwards; */ /* DISABLED FOR LAYOUT */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: logoPortalRight 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; /* Enabled */
+  z-index: 2; /* Higher than mask, lower than left logo mask */
 }
 
 .logo-image {
