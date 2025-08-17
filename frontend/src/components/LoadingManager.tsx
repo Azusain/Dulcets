@@ -14,16 +14,21 @@ export default function LoadingManager({ children, loadingText }: LoadingManager
     <div className="min-h-screen text-white" style={{ background: 'transparent' }}>
       {/* Loading Animation - Below Navigation */}
       {isLoading && (
-        <div className="loading-screen fixed inset-0 z-[998] flex items-center justify-center">
+        <div className="loading-screen fixed inset-0 z-[99999] flex items-center justify-center">
           <div className="text-center relative z-10">
             <div className="loading-animation">
               <div className="vertical-line"></div>
-              <div className="square square-left"></div>
-              <div className="square square-right"></div>
+              <div className="portal-mask">
+                <div className="logo-container logo-left">
+                  <img src="/images/logo_left.png" alt="Logo Left" className="logo-image" />
+                </div>
+                <div className="logo-container logo-right">
+                  <img src="/images/logo_right.png" alt="Logo Right" className="logo-image" />
+                </div>
+              </div>
             </div>
-            <div className="text-xl text-gray-300 mt-6">
-              {loadingText}
-              <span className="loading-dots"></span>
+            <div className="text-xl text-gray-300 mt-8">
+              {loadingText}<span className="loading-dots"></span>
             </div>
           </div>
         </div>
