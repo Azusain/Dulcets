@@ -12,18 +12,31 @@
 }
 
 @keyframes verticalLineFadeIn {
-  0% { opacity: 0; height: 0; transform: scaleY(0); }
-  20% { opacity: 1; height: 60px; transform: scaleY(1); }
-  80% { opacity: 1; height: 60px; transform: scaleY(1); }
-  100% { opacity: 1; height: 60px; transform: scaleY(1); }
+  0% { opacity: 1; height: 0; width: 0; border-radius: 50%; }
+  15% { opacity: 1; height: 0; width: 0; border-radius: 50%; }
+  30% { opacity: 1; height: 192px; width: 3px; border-radius: 1.5px; }
+  80% { opacity: 1; height: 192px; width: 3px; border-radius: 1.5px; }
+  100% { opacity: 1; height: 192px; width: 3px; border-radius: 1.5px; }
 }
 
-@keyframes squareSlideIn {
-  0% { opacity: 0; transform: translateY(-50%) scaleX(0); }
-  20% { opacity: 0; transform: translateY(-50%) scaleX(0); }
-  40% { opacity: 1; transform: translateY(-50%) scaleX(1); }
-  80% { opacity: 1; transform: translateY(-50%) scaleX(1); }
-  100% { opacity: 1; transform: translateY(-50%) scaleX(1); }
+@keyframes logoPortalLeft {
+  0% { opacity: 1; transform: translateY(-50%) translateX(50px); } /* Start from right side, hidden by mask */
+  30% { opacity: 1; transform: translateY(-50%) translateX(50px); }
+  35% { opacity: 1; transform: translateY(-50%) translateX(20px); } /* Begin emerging from portal */
+  50% { opacity: 1; transform: translateY(-50%) translateX(-10px); } /* Halfway out */
+  70% { opacity: 1; transform: translateY(-50%) translateX(-150px); } /* Fully out to the left */
+  80% { opacity: 1; transform: translateY(-50%) translateX(-150px); }
+  100% { opacity: 1; transform: translateY(-50%) translateX(-150px); }
+}
+
+@keyframes logoPortalRight {
+  0% { opacity: 1; transform: translateY(-50%) translateX(-50px); } /* Start from left side, hidden by mask */
+  30% { opacity: 1; transform: translateY(-50%) translateX(-50px); }
+  35% { opacity: 1; transform: translateY(-50%) translateX(-20px); } /* Begin emerging from portal */
+  50% { opacity: 1; transform: translateY(-50%) translateX(10px); } /* Halfway out */
+  70% { opacity: 1; transform: translateY(-50%) translateX(150px); } /* Fully out to the right */
+  80% { opacity: 1; transform: translateY(-50%) translateX(150px); }
+  100% { opacity: 1; transform: translateY(-50%) translateX(150px); }
 }
 
 @keyframes logoScaleAndFade {
@@ -47,7 +60,7 @@
 
 .loading-screen {
   animation: fadeOut 2.5s ease-in-out forwards;
-  background: linear-gradient(135deg, #1f2937, #111827);
+  background: #000000;
 }
 
 .loading-screen::before {
@@ -68,19 +81,61 @@
   justify-content: center;
   position: relative;
   animation: logoScaleAndFade 2.5s ease-in-out forwards;
+  transform: scale(2); /* Make the whole animation even bigger */
 }
 
 .vertical-line {
   width: 3px;
-  height: 60px;
-  background: linear-gradient(to bottom, #3b82f6, #06b6d4);
-  border-radius: 2px;
+  height: 192px; /* 60% longer than 120px */
+  background: #ffffff; /* White line */
+  border-radius: 1.5px;
   animation: verticalLineFadeIn 2.5s ease-in-out forwards;
   position: relative;
-  z-index: 2;
+  z-index: 5;
   transform-origin: center center;
 }
 
+/* Portal mask container - creates the clipping effect */
+.portal-mask {
+  position: absolute;
+  top: 50%;
+  left: -5px; /* Center on the 3px line with small margin */
+  width: 10px; /* Narrow mask for portal effect */
+  height: 192px; /* Same as line height */
+  transform: translateY(-50%);
+  overflow: hidden; /* This creates the portal clipping */
+  z-index: 4;
+}
+
+/* Logo containers - positioned to emerge from the line */
+.logo-container {
+  position: absolute;
+  top: 50%;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-left {
+  left: -55px; /* Position so it starts hidden in the mask */
+  animation: logoPortalLeft 2.5s ease-in-out forwards;
+}
+
+.logo-right {
+  left: -55px; /* Position so it starts hidden in the mask */
+  animation: logoPortalRight 2.5s ease-in-out forwards;
+}
+
+.logo-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.3));
+}
+
+/* Legacy square styles (keeping for backward compatibility) */
 .square {
   width: 40px;
   height: 40px;
@@ -89,7 +144,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  animation: squareSlideIn 2.5s ease-in-out forwards;
+  animation: logoSlideIn 2.5s ease-in-out forwards;
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
@@ -103,10 +158,16 @@
   transform-origin: left center;
 }
 
+.loading-dots {
+  display: inline-block;
+  min-width: 20px;
+}
+
 .loading-dots::after {
   content: '.';
   animation: loadingDots 1.5s infinite;
   color: #9ca3af;
+  font-weight: normal;
 }
 
 /* Ensure the loading screen disappears after animation */

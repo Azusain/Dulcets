@@ -21,8 +21,12 @@ const DsNavigation = () => {
   const pathname = usePathname();
 
   // Check if on a sub-page (not the main page)
-  const isSubPage = pathname.includes('/pricing') || 
-                   (pathname !== '/' && pathname !== '/en' && pathname !== '/jp' && pathname !== '/zh');
+  const isSubPage =
+    pathname.includes("/pricing") ||
+    (pathname !== "/" &&
+      pathname !== "/en" &&
+      pathname !== "/jp" &&
+      pathname !== "/zh");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,13 +71,13 @@ const DsNavigation = () => {
   // Handle ESC key to close sidebar
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isMenuOpen) {
+      if (e.key === "Escape" && isMenuOpen) {
         closeSidebar();
       }
     };
 
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isMenuOpen]);
 
   // Function to handle sidebar closing with animation
@@ -96,7 +100,6 @@ const DsNavigation = () => {
     }
   }, [isMenuOpen, isClosing]);
 
-
   const navStyle: React.CSSProperties = {
     position: "fixed",
     top: 0,
@@ -107,7 +110,8 @@ const DsNavigation = () => {
     justifyContent: "space-between",
     padding: "10px 16px",
     color: "white",
-    backgroundColor: isScrolled || isMenuOpen ? "rgba(0, 0, 0, 0.95)" : "transparent",
+    backgroundColor:
+      isScrolled || isMenuOpen ? "rgba(0, 0, 0, 0.95)" : "transparent",
     backdropFilter: isScrolled ? "blur(10px)" : "blur(5px)",
     WebkitBackdropFilter: isScrolled ? "blur(10px)" : "blur(5px)",
     boxShadow: isScrolled
@@ -130,14 +134,17 @@ const DsNavigation = () => {
     <>
       {/* Navigation Bar */}
       <nav style={navStyle}>
-        <div 
-          className="cursor-pointer" 
+        <div
+          className="cursor-pointer"
           onClick={() => {
             // Handle home navigation for GitHub Pages
-            if (typeof window !== 'undefined' && window.location.hostname.includes('github.io')) {
-              window.location.href = '/Dulcets/';
+            if (
+              typeof window !== "undefined" &&
+              window.location.hostname.includes("github.io")
+            ) {
+              window.location.href = "/Dulcets/";
             } else {
-              window.location.href = '/';
+              window.location.href = "/";
             }
           }}
         >
@@ -164,17 +171,17 @@ const DsNavigation = () => {
           <LanguageSwitcher setTranslator={setTranslator} />
 
           {/* Contact Us Button */}
-          <a 
+          <a
             href="#contact"
             className="hidden md:block text-white px-4 py-2 transition-colors duration-300 font-medium ml-4"
             style={{
-              backgroundColor: '#5865F2',
+              backgroundColor: "#5865F2",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#4752C4';
+              e.currentTarget.style.backgroundColor = "#4752C4";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#5865F2';
+              e.currentTarget.style.backgroundColor = "#5865F2";
             }}
           >
             Contact Us
@@ -184,9 +191,9 @@ const DsNavigation = () => {
           <div className="w-10 h-10" />
         </div>
       </nav>
-      
+
       {/* Hamburger Menu Button - Always on absolute top */}
-      <button 
+      <button
         onClick={() => {
           if (isMenuOpen) {
             closeSidebar();
@@ -199,78 +206,86 @@ const DsNavigation = () => {
       >
         <div className="relative w-6 h-6 flex flex-col justify-center">
           {/* Top line */}
-          <div 
+          <div
             className="absolute w-6 h-0.5 bg-white transition-all duration-300 ease-in-out"
             style={{
-              top: '25%',
-              transform: showHamburger ? 'translateY(-50%) translateY(6px) rotate(45deg)' : 'translateY(-50%) rotate(0deg)'
+              top: "25%",
+              transform: showHamburger
+                ? "translateY(-50%) translateY(6px) rotate(45deg)"
+                : "translateY(-50%) rotate(0deg)",
             }}
           />
           {/* Middle line */}
-          <div 
+          <div
             className="absolute w-6 h-0.5 bg-white transition-all duration-300 ease-in-out"
             style={{
-              top: '50%',
-              transform: 'translateY(-50%)',
-              opacity: showHamburger ? 0 : 1
+              top: "50%",
+              transform: "translateY(-50%)",
+              opacity: showHamburger ? 0 : 1,
             }}
           />
           {/* Bottom line */}
-          <div 
+          <div
             className="absolute w-6 h-0.5 bg-white transition-all duration-300 ease-in-out"
             style={{
-              top: '75%',
-              transform: showHamburger ? 'translateY(-50%) translateY(-6px) rotate(-45deg)' : 'translateY(-50%) rotate(0deg)'
+              top: "75%",
+              transform: showHamburger
+                ? "translateY(-50%) translateY(-6px) rotate(-45deg)"
+                : "translateY(-50%) rotate(0deg)",
             }}
           />
         </div>
       </button>
-      
+
       {/* Custom Sidebar - No DaisyUI */}
       {(isMenuOpen || isClosing) && (
         <>
           {/* Overlay */}
-          <div 
+          <div
             className={`fixed inset-0 bg-black bg-opacity-50 ${
-              isClosing ? 'animate-fade-out' : 'animate-fade-in'
+              isClosing ? "animate-fade-out" : "animate-fade-in"
             }`}
             style={{ zIndex: 9000 }}
             onClick={() => closeSidebar()}
           />
           {/* Sidebar */}
-          <div 
+          <div
             className={`fixed inset-0 bg-black text-white ${
-              isClosing ? 'animate-slide-out-right' : 'animate-slide-in-right'
+              isClosing ? "animate-slide-out-right" : "animate-slide-in-right"
             }`}
             style={{ zIndex: 9500 }}
           >
             {/* Centered Search Box */}
             <div className="flex items-center justify-center h-full">
-              <div className="w-3/5" style={{ transform: 'translateY(-16.67vh)' }}>
+              <div
+                className="w-3/5"
+                style={{ transform: "translateY(-16.67vh)" }}
+              >
                 <div className="relative">
                   <input
                     type="text"
                     placeholder="Search..."
                     className="w-full bg-transparent border-0 border-b border-gray-600 text-white placeholder-gray-400 px-0 py-6 focus:outline-none focus:border-gray-400 transition-all duration-200"
                     style={{
-                      borderRadius: '0px',
-                      fontSize: '48px',
-                      letterSpacing: '0.05em',
-                      fontFamily: '"Inter", "Helvetica Neue", "Arial", sans-serif',
-                      fontWeight: '100',
+                      borderRadius: "0px",
+                      fontSize: "48px",
+                      letterSpacing: "0.05em",
+                      fontFamily:
+                        '"Inter", "Helvetica Neue", "Arial", sans-serif',
+                      fontWeight: "100",
                     }}
                     onChange={(e) => {
                       // TODO: Implement search functionality
-                      console.log('Search:', e.target.value);
+                      console.log("Search:", e.target.value);
                     }}
                     onKeyDown={(e) => {
-                      if (e.key === 'Escape') {
+                      if (e.key === "Escape") {
                         closeSidebar();
                       }
                     }}
                     autoFocus={!isClosing}
                   />
-                  
+
                   {/* Search Results Area */}
                   <div className="mt-6">
                     {/* This will show search results when typing */}
@@ -285,7 +300,11 @@ const DsNavigation = () => {
             {/* Simple bottom hint */}
             <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center">
               <div className="text-xs text-gray-500">
-                Press <kbd className="px-1 py-0.5 text-xs bg-gray-700 border border-gray-600 rounded text-gray-400">ESC</kbd> to close
+                Press{" "}
+                <kbd className="px-1 py-0.5 text-xs bg-gray-700 border border-gray-600 rounded text-gray-400">
+                  ESC
+                </kbd>{" "}
+                to close
               </div>
             </div>
           </div>
