@@ -22,21 +22,21 @@ export default function LoadingManager({
       {isLoading && (
         <div className="loading-screen fixed inset-0 z-[99999] flex items-center justify-center">
           <div className="text-center relative z-10">
-            <div className="loading-animation">
-              <div className="portal-mask">
-                {/* LOGO Left */}
-                <div className="logo-container logo-left">
+            <div className="loading-animation -translate-28">
+              {/* Portal mask for left logo */}
+              <div className="portal-mask-left">
+                <div className="logo-left">
                   <img
                     src="/images/logo_left.png"
                     alt="Logo Left"
                     className="logo-image"
                   />
                 </div>
-                {/* Two Lines - extending upward and downward */}
-                <div className="vertical-line-up"></div>
-                <div className="vertical-line-down"></div>
-                {/* LOGO Right */}
-                <div className="logo-container logo-right">
+              </div>
+
+              {/* Portal mask for right logo */}
+              <div className="portal-mask-right">
+                <div className="logo-right">
                   <img
                     src="/images/logo_right.png"
                     alt="Logo Right"
@@ -44,6 +44,10 @@ export default function LoadingManager({
                   />
                 </div>
               </div>
+
+              {/* Two Lines - extending upward and downward */}
+              <div className="vertical-line-up"></div>
+              <div className="vertical-line-down"></div>
             </div>
             {/* <div className="text-xl text-gray-300 mt-8">
               {loadingText}
