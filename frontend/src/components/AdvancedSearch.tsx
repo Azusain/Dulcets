@@ -8,6 +8,7 @@ import {
   SearchItem 
 } from '@/utils/searchIndex';
 import ImageModal from './ImageModal';
+import { useAssetPath } from '@/hooks/useAssetPath';
 
 // SVG Icon Component
 function CategoryIcon({ iconType }: { iconType: string }) {
@@ -89,6 +90,7 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
   const inputRef = useRef<HTMLInputElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
+  const { getAssetPath } = useAssetPath();
   
   // Fallback translator function if not provided with template support
   const translate = t || ((key: string) => key);
@@ -137,15 +139,16 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
         inputRef.current?.focus();
       }, 100);
     }
-  }, [isOpen]);
+  }, [isOpen, loadDynamicData]);
 
   // Load dynamic content from JSON files
   const loadDynamicData = useCallback(async () => {
     try {
+      // Use getAssetPath hook to get correct paths for both local and GitHub Pages
       const [worksRes, artworksRes, modelingRes] = await Promise.all([
-        fetch('/service/works.json').catch(() => ({ json: () => [] })),
-        fetch('/service/artworks.json').catch(() => ({ json: () => [] })),
-        fetch('/service/3d_modeling.json').catch(() => ({ json: () => [] }))
+        fetch(getAssetPath('/service/works.json')).catch(() => ({ json: () => [] })),
+        fetch(getAssetPath('/service/artworks.json')).catch(() => ({ json: () => [] })),
+        fetch(getAssetPath('/service/3d_modeling.json')).catch(() => ({ json: () => [] }))
       ]);
 
       const [works, artworks, modeling] = await Promise.all([
@@ -160,7 +163,7 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
     } catch (error) {
       console.warn('Failed to load dynamic search data:', error);
     }
-  }, [currentLanguage, translate]);
+  }, [currentLanguage, translate, getAssetPath]);
 
   // Perform search
   const performSearch = useCallback((searchQuery: string) => {
