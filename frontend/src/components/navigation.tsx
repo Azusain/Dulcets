@@ -201,7 +201,7 @@ const DsNavigation = () => {
             setIsMenuOpen(true);
           }
         }}
-        className="fixed top-[26px] right-[16px] w-10 h-10 flex items-center justify-center cursor-pointer"
+        className="fixed top-[34px] right-[16px] w-10 h-10 flex items-center justify-center cursor-pointer"
         style={{ zIndex: 99999 }}
       >
         <div className="relative w-6 h-6 flex flex-col justify-center">
