@@ -7,6 +7,8 @@ import LanguageSwitcher, {
   GetLanguageDict,
   GetLanguageFromPath,
 } from "./language_switcher";
+import AdvancedSearch from "@/components/AdvancedSearch";
+import { useSearchHotkey } from "@/hooks/useGlobalHotkeys";
 
 const DsNavigation = () => {
   const { getAssetPath } = useAssetPath();
@@ -18,6 +20,7 @@ const DsNavigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [showHamburger, setShowHamburger] = useState(false);
+  const [isAdvancedSearchOpen, setIsAdvancedSearchOpen] = useState(false);
   const pathname = usePathname();
 
   // Check if on a sub-page (not the main page)
@@ -99,6 +102,35 @@ const DsNavigation = () => {
       setShowHamburger(false);
     }
   }, [isMenuOpen, isClosing]);
+
+  // Search functionality
+  const handleSearchOpen = () => {
+    // Close menu if open
+    if (isMenuOpen) {
+      closeSidebar();
+    }
+    setIsAdvancedSearchOpen(true);
+  };
+
+  const handleSearchClose = () => {
+    setIsAdvancedSearchOpen(false);
+  };
+
+  const handleSearchNavigate = (url: string) => {
+    if (url.startsWith('#')) {
+      // Smooth scroll to section
+      const element = document.querySelector(url);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // External navigation
+      window.location.href = url;
+    }
+  };
+
+  // Setup search hotkeys
+  useSearchHotkey(handleSearchOpen);
 
   const navStyle: React.CSSProperties = {
     position: "fixed",
@@ -237,7 +269,7 @@ const DsNavigation = () => {
         </div>
       </button>
 
-      {/* Custom Sidebar - No DaisyUI */}
+      {/* Legacy Search Menu - Now opens Advanced Search */}
       {(isMenuOpen || isClosing) && (
         <>
           {/* Overlay */}
@@ -255,7 +287,7 @@ const DsNavigation = () => {
             }`}
             style={{ zIndex: 9500 }}
           >
-            {/* Centered Search Box */}
+            {/* Centered Search Box - Now opens Advanced Search */}
             <div className="flex items-center justify-center h-full">
               <div
                 className="w-3/5"
@@ -264,8 +296,8 @@ const DsNavigation = () => {
                 <div className="relative">
                   <input
                     type="text"
-                    placeholder="Search..."
-                    className="w-full bg-transparent border-0 border-b border-gray-600 text-white placeholder-gray-400 px-0 py-6 focus:outline-none focus:border-gray-400 transition-all duration-200"
+                    placeholder="Search music, services, artworks..."
+                    className="w-full bg-transparent border-0 border-b border-gray-600 text-white placeholder-gray-400 px-0 py-6 focus:outline-none focus:border-gray-400 transition-all duration-200 cursor-pointer"
                     style={{
                       borderRadius: "0px",
                       fontSize: "48px",
@@ -274,34 +306,44 @@ const DsNavigation = () => {
                         '"Inter", "Helvetica Neue", "Arial", sans-serif',
                       fontWeight: "100",
                     }}
-                    onChange={(e) => {
-                      // TODO: Implement search functionality
-                      console.log("Search:", e.target.value);
+                    onClick={() => {
+                      closeSidebar();
+                      setTimeout(() => handleSearchOpen(), 100);
+                    }}
+                    onFocus={() => {
+                      closeSidebar();
+                      setTimeout(() => handleSearchOpen(), 100);
                     }}
                     onKeyDown={(e) => {
                       if (e.key === "Escape") {
                         closeSidebar();
+                      } else if (e.key === "Enter" || e.key === " ") {
+                        closeSidebar();
+                        setTimeout(() => handleSearchOpen(), 100);
                       }
                     }}
                     autoFocus={!isClosing}
+                    readOnly
                   />
 
-                  {/* Search Results Area */}
+                  {/* Search Hint */}
                   <div className="mt-6">
-                    {/* This will show search results when typing */}
-                    <div className="text-sm text-gray-500 px-0 py-2">
-                      Start typing to search...
+                    <div className="text-sm text-gray-400 px-0 py-2 text-center">
+                      Click or press Enter to open advanced search
+                    </div>
+                    <div className="text-xs text-gray-500 px-0 py-1 text-center">
+                      Or use <kbd className="px-1.5 py-0.5 bg-gray-700 border border-gray-600 rounded text-gray-400">Ctrl+Q</kbd> anywhere
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Simple bottom hint */}
+            {/* Bottom hint */}
             <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center">
               <div className="text-xs text-gray-500">
                 Press{" "}
-                <kbd className="px-1 py-0.5 text-xs bg-gray-700 border border-gray-600 rounded text-gray-400">
+                <kbd className="px-1.5 py-0.5 bg-gray-700 border border-gray-600 rounded text-gray-400">
                   ESC
                 </kbd>{" "}
                 to close
@@ -310,6 +352,13 @@ const DsNavigation = () => {
           </div>
         </>
       )}
+
+      {/* Advanced Search Component */}
+      <AdvancedSearch 
+        isOpen={isAdvancedSearchOpen}
+        onClose={handleSearchClose}
+        onNavigate={handleSearchNavigate}
+      />
     </>
   );
 };
