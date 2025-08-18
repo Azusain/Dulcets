@@ -35,8 +35,12 @@ async function main() {
       description: 'Checking for unused TSX components'
     },
     {
-      script: 'check-i18n.js', 
+      script: 'professional-i18n-check.js', 
       description: 'Checking i18n translations'
+    },
+    {
+      script: 'check-unused-dependencies.js',
+      description: 'Checking unused dependencies'
     }
   ];
   

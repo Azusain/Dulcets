@@ -50,10 +50,10 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
             if (typeof wavesurfer.current.pause === 'function') {
               try {
                 wavesurfer.current.pause();
-              } catch (e) {}
+              } catch (_e) {}
             }
             wavesurfer.current.destroy(); // Remove delay, destroy immediately
-          } catch (error) {
+          } catch (_error) {
             // Handle silently
           }
           wavesurfer.current = null;
@@ -78,7 +78,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
         if (!isComponentMounted) {
           try {
             wavesurferInstance.destroy();
-          } catch (e) {}
+          } catch (_e) {}
           return;
         }
 
@@ -169,7 +169,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
           if (typeof wavesurferInstance.pause === 'function') {
             try {
               wavesurferInstance.pause();
-            } catch (e) {}
+            } catch (_e) {}
           }
           
           // Clean up manager state
@@ -183,11 +183,11 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
               if (wavesurferInstance && typeof wavesurferInstance.destroy === 'function') {
                 wavesurferInstance.destroy();
               }
-            } catch (destroyError) {
+            } catch (_destroyError) {
               // Handle silently
             }
           }, 200); // Increase delay time
-        } catch (error) {
+        } catch (_error) {
           // Handle silently
         }
       }
