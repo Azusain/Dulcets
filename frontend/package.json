@@ -24,8 +24,8 @@
   },
   "deployment": {
     "production": {
-      "domain": "https://dulcetsinfo.wixsite.com",
-      "basePath": ""
+      "domain": "https://azusain.github.io",
+      "basePath": "/Dulcets"
     },
     "github": {
       "domain": "https://azusain.github.io",
