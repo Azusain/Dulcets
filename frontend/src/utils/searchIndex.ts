@@ -162,35 +162,62 @@ export const staticContentIndex: SearchItem[] = [
   }
 ];
 
-// Improved search implementation with better precision
+// Improved search implementation with better precision and bracket handling
 export function fuzzySearch(query: string, text: string): number {
   query = query.toLowerCase();
   text = text.toLowerCase();
   
-  // Exact match gets highest score
-  if (text.includes(query)) {
-    const position = text.indexOf(query);
-    return 100 - position; // Earlier matches get higher scores
+  // Remove common brackets and symbols for better matching
+  const cleanText = text.replace(/[【】\[\]（）()｛｝{}]/g, ' ');
+  const cleanQuery = query.replace(/[【】\[\]（）()｛｝{}]/g, ' ');
+  
+  // Exact match gets highest score (check both original and cleaned versions)
+  if (text.includes(query) || cleanText.includes(cleanQuery)) {
+    const position = Math.min(
+      text.indexOf(query) >= 0 ? text.indexOf(query) : Infinity,
+      cleanText.indexOf(cleanQuery) >= 0 ? cleanText.indexOf(cleanQuery) : Infinity
+    );
+    return 100 - Math.min(position, 50); // Cap position penalty at 50
   }
   
-  // Word boundary matching (higher priority)
-  const words = text.split(/\s+/);
-  for (const word of words) {
-    if (word.startsWith(query)) {
-      return 80 - query.length; // Prefix match gets high score
+  // Word boundary matching (higher priority) - check both versions
+  const words = cleanText.split(/\s+/).filter(w => w.length > 0);
+  const queryWords = cleanQuery.split(/\s+/).filter(w => w.length > 0);
+  
+  // Check if all query words are found as prefixes in text words
+  let wordMatches = 0;
+  for (const queryWord of queryWords) {
+    for (const word of words) {
+      if (word.startsWith(queryWord) && queryWord.length > 1) {
+        wordMatches++;
+        break;
+      }
     }
+  }
+  
+  if (wordMatches === queryWords.length && queryWords.length > 0) {
+    return 85 - query.length; // High score for complete word prefix match
+  }
+  
+  // Partial word matching
+  if (wordMatches > 0) {
+    return 60 + (wordMatches * 10) - query.length;
   }
   
   // For queries longer than 3 characters, require more strict matching
   if (query.length > 3) {
+    // Use cleaned text for better matching
+    const targetText = cleanText.replace(/\s+/g, ' ').trim();
+    const searchQuery = cleanQuery.replace(/\s+/g, ' ').trim();
+    
     // Require at least 70% of characters to match in sequence
-    const requiredMatches = Math.ceil(query.length * 0.7);
+    const requiredMatches = Math.ceil(searchQuery.length * 0.7);
     let consecutiveMatches = 0;
     let maxConsecutive = 0;
     let queryIndex = 0;
     
-    for (let i = 0; i < text.length && queryIndex < query.length; i++) {
-      if (text[i] === query[queryIndex]) {
+    for (let i = 0; i < targetText.length && queryIndex < searchQuery.length; i++) {
+      if (targetText[i] === searchQuery[queryIndex]) {
         consecutiveMatches++;
         queryIndex++;
         maxConsecutive = Math.max(maxConsecutive, consecutiveMatches);
@@ -203,22 +230,24 @@ export function fuzzySearch(query: string, text: string): number {
       return 0; // Not enough consecutive matches
     }
     
-    return maxConsecutive * 2;
+    return Math.min(maxConsecutive * 2, 50);
   }
   
-  // For short queries (3 chars or less), use character matching
+  // For short queries (3 chars or less), use character matching on cleaned text
   let score = 0;
   let queryIndex = 0;
+  const searchTarget = cleanText.replace(/\s+/g, '');
+  const searchQuery = cleanQuery.replace(/\s+/g, '');
   
-  for (let i = 0; i < text.length && queryIndex < query.length; i++) {
-    if (text[i] === query[queryIndex]) {
+  for (let i = 0; i < searchTarget.length && queryIndex < searchQuery.length; i++) {
+    if (searchTarget[i] === searchQuery[queryIndex]) {
       score += 2;
       queryIndex++;
     }
   }
   
   // Bonus for matching all characters
-  if (queryIndex === query.length) {
+  if (queryIndex === searchQuery.length && searchQuery.length > 0) {
     score += 20;
   }
   
@@ -335,19 +364,45 @@ export function buildDynamicSearchIndex(
       description = work.excerptJp || work.excerpt || 'Dulcetsによる音楽制作';
     }
     
+    // Create enhanced keywords for better searchability
+    const enhancedKeywords = [
+      ...(work.title?.split(/\s+/) || []),
+      ...(work.titleEn?.split(/\s+/) || []),
+      ...(work.titleJp?.split(/\s+/) || []),
+      'music', 'song', 'dulcets'
+    ];
+    
+    // Add specific keywords for original songs
+    if (work.title?.includes('オリジナル曲') || work.titleEn?.includes('Original Song') || work.titleJp?.includes('オリジナル曲')) {
+      enhancedKeywords.push('original', 'original song', 'オリジナル曲', 'オリジナル', '原创', '原创歌曲');
+    }
+    
+    // Add collaboration keywords if present
+    if (work.title?.includes('feat.') || work.title?.includes('×') || work.title?.includes('x ')) {
+      enhancedKeywords.push('collaboration', 'feat', 'feature', 'コラボ', 'コラボレーション');
+    }
+    
+    // Enhanced content for better search matching
+    const enhancedContent = [
+      work.title || '',
+      work.titleEn || '',
+      work.titleJp || '',
+      work.excerpt || '',
+      work.excerptEn || '',
+      work.excerptJp || '',
+      // Add cleaned versions without brackets for better matching
+      (work.title || '').replace(/[【】\[\]（）()｛｝{}]/g, ' '),
+      (work.titleEn || '').replace(/[【】\[\]（）()｛｝{}]/g, ' ')
+    ].join(' ');
+    
     dynamicItems.push({
       id: `work-${work.title?.replace(/\s+/g, '-').toLowerCase() || 'unknown'}`,
       title,
       description,
       category: 'work',
       url: work.videoUrl || '#works',
-      keywords: [
-        ...(work.title?.split(/\s+/) || []),
-        ...(work.titleEn?.split(/\s+/) || []),
-        ...(work.titleJp?.split(/\s+/) || []),
-        'music', 'song', 'original', 'dulcets'
-      ],
-      content: `${work.title || ''} ${work.titleEn || ''} ${work.excerpt || ''} ${work.excerptEn || ''}`,
+      keywords: enhancedKeywords,
+      content: enhancedContent,
       metadata: {
         duration: work.duration,
         date: work.date,
