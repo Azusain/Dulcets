@@ -18,7 +18,9 @@
     "translate:missing:execute": "node scripts/auto-translate-i18n.js --execute",
     "translate:inconsistent": "node scripts/auto-translate-i18n.js --inconsistent",
     "translate:inconsistent:execute": "node scripts/auto-translate-i18n.js --inconsistent --execute",
-    "generate-seo": "node scripts/generate-sitemap.js"
+    "generate-seo": "node scripts/generate-sitemap.js",
+    "check:deps": "node scripts/check-unused-dependencies.js",
+    "fix:lint": "node scripts/fix-lint-issues.js"
   },
   "dependencies": {
     "clsx": "^2.1.1",
