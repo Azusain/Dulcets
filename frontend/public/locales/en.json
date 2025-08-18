@@ -14,7 +14,8 @@
     "genres": {
       "anime_song": {
         "title": "ANIME SONG",
-        "subtitle": "Anime Music"
+        "subtitle": "Anime Music",
+        "content": "We specialize in music production tailored to anime works. We create memorable tracks including opening themes, ending themes, and insert songs that express the world view of the work. With music that matches character emotions and story development, we create works that deeply resonate with viewers' hearts."
       },
       "jrock": {
         "title": "J-ROCK",
@@ -366,6 +367,21 @@
     "show_less": "Show less",
     "total_results": "Found {{count}} results",
     "categories_count": "{{count}} categories",
+    "duration": "Duration",
+    "untitled_work": "Untitled Work",
+    "music_production_by_dulcets": "Music production by Dulcets",
+    "artwork_description": "Digital artwork piece by Dulcets - Click to view image",
+    "artwork_fallback_title": "Artwork {{id}}",
+    "modeling_description": "3D modeling work by Dulcets - Click to view image",
+    "modeling_fallback_title": "Modeling {{id}}",
+    "category": {
+      "music_works": "Music Works",
+      "artworks": "Artworks",
+      "models": "3D Models",
+      "services": "Services",
+      "navigation": "Navigation",
+      "pages": "Pages"
+    },
     "keyboard_shortcuts": {
       "navigate": "Navigate",
       "select": "Select",

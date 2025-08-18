@@ -14,7 +14,8 @@
     "genres": {
       "anime_song": {
         "title": "ANIME SONG",
-        "subtitle": "アニメソング"
+        "subtitle": "アニメソング",
+        "content": "アニメ作品に特化した楽曲制作を専門としています。オープニング、エンディング、挿入歌など、作品の世界観を表現する印象的な楽曲を制作します。キャラクターの感情や物語の展開に合わせた音楽で、視聴者の心に深く響く作品を創り出します。"
       },
       "jrock": {
         "title": "J-ROCK",
@@ -366,6 +367,21 @@
     "show_less": "表示を減らす",
     "total_results": "{{count}}件の結果が見つかりました",
     "categories_count": "{{count}}カテゴリ",
+    "duration": "再生時間",
+    "untitled_work": "無題の作品",
+    "music_production_by_dulcets": "Dulcetsによる音楽制作",
+    "artwork_description": "Dulcetsによるデジタルアートワーク - クリックして画像を表示",
+    "artwork_fallback_title": "アートワーク {{id}}",
+    "modeling_description": "Dulcetsによる3Dモデリング作品 - クリックして画像を表示",
+    "modeling_fallback_title": "モデリング {{id}}",
+    "category": {
+      "music_works": "音楽作品",
+      "artworks": "アートワーク",
+      "models": "3Dモデル",
+      "services": "サービス",
+      "navigation": "ナビゲーション",
+      "pages": "ページ"
+    },
     "keyboard_shortcuts": {
       "navigate": "移動",
       "select": "選択",

@@ -9,6 +9,67 @@ import {
 } from '@/utils/searchIndex';
 import ImageModal from './ImageModal';
 
+// SVG Icon Component
+function CategoryIcon({ iconType }: { iconType: string }) {
+  const iconProps = {
+    className: "w-4 h-4",
+    fill: "none",
+    stroke: "currentColor",
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.5,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const
+  };
+
+  switch (iconType) {
+    case 'music':
+      return (
+        <svg {...iconProps}>
+          <path d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+        </svg>
+      );
+    case 'palette':
+      return (
+        <svg {...iconProps}>
+          <path d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM7 3H5a2 2 0 00-2 2v12a4 4 0 004 4h2a2 2 0 002-2V5a2 2 0 00-2-2z" />
+          <path d="M16 3.13a4 4 0 010 7.75" />
+          <path d="M16 8.13a2 2 0 010 2.75" />
+        </svg>
+      );
+    case 'cube':
+      return (
+        <svg {...iconProps}>
+          <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+      );
+    case 'cog':
+      return (
+        <svg {...iconProps}>
+          <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+          <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      );
+    case 'map':
+      return (
+        <svg {...iconProps}>
+          <path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+        </svg>
+      );
+    case 'document':
+      return (
+        <svg {...iconProps}>
+          <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+      );
+    default:
+      return (
+        <svg {...iconProps}>
+          <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+      );
+  }
+}
+
 interface AdvancedSearchProps {
   isOpen: boolean;
   onClose: () => void;
@@ -94,12 +155,12 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
       ]);
 
       // Pass current language to build language-specific index
-      const dynamicItems = buildDynamicSearchIndex(works, artworks, modeling, currentLanguage || 'ja');
+      const dynamicItems = buildDynamicSearchIndex(works, artworks, modeling, currentLanguage || 'ja', translate);
       setDynamicIndex(dynamicItems);
     } catch (error) {
       console.warn('Failed to load dynamic search data:', error);
     }
-  }, [currentLanguage]);
+  }, [currentLanguage, translate]);
 
   // Perform search
   const performSearch = useCallback((searchQuery: string) => {
@@ -113,12 +174,12 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
     
     // Simulate slight delay for better UX
     setTimeout(() => {
-      const searchResults = searchContent(searchQuery, dynamicIndex);
+      const searchResults = searchContent(searchQuery, dynamicIndex, translate);
       setResults(searchResults);
       setSelectedIndex(-1);
       setIsLoading(false);
     }, 150);
-  }, [dynamicIndex]);
+  }, [dynamicIndex, translate]);
 
   // Handle input change
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -311,7 +372,7 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
           </div>
 
         {/* Search results - scrollable container */}
-        <div ref={resultsRef} className="mt-8 max-h-[60vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+        <div ref={resultsRef} className="mt-8 max-h-[60vh] overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
           {!query.trim() && searchHistory.length > 0 && (
             <div className="mb-8">
               <h3 className="text-gray-400 text-sm uppercase tracking-wide mb-3">{translate('search.recent_searches')}</h3>
@@ -340,7 +401,7 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
                 return (
                   <div key={category.name} className="space-y-2">
                     <h3 className="text-gray-400 text-sm uppercase tracking-wide flex items-center gap-2">
-                      {category.icon && <span>{category.icon}</span>}
+                      {category.icon && <CategoryIcon iconType={category.icon} />}
                       {category.name} ({totalItemsInCategory})
                     </h3>
                     
@@ -367,12 +428,12 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
                             <div className="flex items-start justify-between">
                               <div className="flex-1">
                                 <div className="font-medium text-sm mb-1">{item.title}</div>
-                                <div className="text-xs text-gray-400">
+                                <div className="text-xs text-gray-400 truncate">
                                   {item.description}
                                 </div>
                                 {item.metadata?.duration && (
                                   <div className="text-xs mt-1 text-gray-500">
-                                    Duration: {item.metadata.duration}
+                                    {translate('search.duration')}: {item.metadata.duration}
                                   </div>
                                 )}
                               </div>
@@ -390,7 +451,16 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
                       <div className="text-center pt-2">
                         <button
                           onClick={() => toggleCategoryExpansion(category.name)}
-                          className="text-blue-400 hover:text-blue-300 text-sm transition-colors flex items-center gap-1 mx-auto"
+                          className="text-sm transition-colors flex items-center gap-1 mx-auto cursor-pointer"
+                          style={{
+                            color: '#5865f2'
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.color = '#4752c4';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.color = '#5865f2';
+                          }}
                         >
                           {isExpanded ? (
                             <>

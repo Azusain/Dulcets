@@ -14,7 +14,8 @@
     "genres": {
       "anime_song": {
         "title": "ANIME SONG",
-        "subtitle": "动漫音乐"
+        "subtitle": "动漫音乐",
+        "content": "我们专门制作适合动漫作品的音乐。我们创作包括片头曲、片尾曲、插入歌等在内的令人印象深刻的音轨，表达作品的世界观。通过与角色情感和故事发展相匹配的音乐，我们创作出深深触动观众心灵的作品。"
       },
       "jrock": {
         "title": "J-ROCK",
@@ -366,6 +367,21 @@
     "show_less": "显示更少",
     "total_results": "共找到 {{count}} 个结果",
     "categories_count": "{{count}} 个类别",
+    "duration": "持续时间",
+    "untitled_work": "无标题作品",
+    "music_production_by_dulcets": "Dulcets音乐制作",
+    "artwork_description": "Dulcets数字艺术作品 - 点击查看图片",
+    "artwork_fallback_title": "绘画作品 {{id}}",
+    "modeling_description": "Dulcets三维建模作品 - 点击查看图片",
+    "modeling_fallback_title": "建模作品 {{id}}",
+    "category": {
+      "music_works": "音乐作品",
+      "artworks": "艺术作品",
+      "models": "3D模型",
+      "services": "服务",
+      "navigation": "导航",
+      "pages": "页面"
+    },
     "keyboard_shortcuts": {
       "navigate": "导航",
       "select": "选择",
