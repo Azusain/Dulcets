@@ -25,6 +25,7 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
   const [dynamicIndex, setDynamicIndex] = useState<any[]>([]);
   const [imageModalState, setImageModalState] = useState({ isOpen: false, imageUrl: '', title: '' });
+  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
   const inputRef = useRef<HTMLInputElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
   
@@ -245,6 +246,19 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
     setImageModalState({ isOpen: false, imageUrl: '', title: '' });
   };
 
+  // Handle expanding category to show more results
+  const toggleCategoryExpansion = (categoryName: string) => {
+    setExpandedCategories(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(categoryName)) {
+        newSet.delete(categoryName);
+      } else {
+        newSet.add(categoryName);
+      }
+      return newSet;
+    });
+  };
+
   // Handle history item click
   const handleHistoryClick = (historyQuery: string) => {
     setQuery(historyQuery);
@@ -308,61 +322,96 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
 
           {results && results.categories.length > 0 && (
             <div className="space-y-6">
-              {results.categories.map((category, categoryIndex) => (
-                <div key={category.name} className="space-y-2">
-                  <h3 className="text-gray-400 text-sm uppercase tracking-wide flex items-center gap-2">
-                    {category.icon && <span>{category.icon}</span>}
-                    {category.name} ({category.items.length})
-                  </h3>
-                  
-                  <div className="space-y-1">
-                    {category.items.map((item, itemIndex) => {
-                      // Calculate global index for keyboard navigation
-                      const globalIndex = results.categories
-                        .slice(0, categoryIndex)
-                        .reduce((acc, cat) => acc + cat.items.length, 0) + itemIndex;
-                      
-                      const isSelected = globalIndex === selectedIndex;
-                      
-                      return (
-                        <div
-                          key={item.id}
-                          data-result-index={globalIndex}
-                          onClick={() => handleResultClick(item)}
-                          className={`p-3 rounded-lg cursor-pointer transition-colors ${
-                            isSelected 
-                              ? 'bg-gray-800 text-gray-200' 
-                              : 'hover:bg-gray-800 text-gray-200'
-                          }`}
-                        >
-                          <div className="flex items-start justify-between">
-                            <div className="flex-1">
-                              <div className="font-medium text-sm mb-1">{item.title}</div>
-                              <div className="text-xs text-gray-400">
-                                {item.description}
-                              </div>
-                              {item.metadata?.duration && (
-                                <div className="text-xs mt-1 text-gray-500">
-                                  Duration: {item.metadata.duration}
+              {results.categories.map((category, categoryIndex) => {
+                const isExpanded = expandedCategories.has(category.name);
+                const totalItemsInCategory = category.totalItems || category.items.length;
+                const displayedItems = isExpanded ? category.items : category.items.slice(0, 5);
+                const hasMoreItems = totalItemsInCategory > 5;
+                
+                return (
+                  <div key={category.name} className="space-y-2">
+                    <h3 className="text-gray-400 text-sm uppercase tracking-wide flex items-center gap-2">
+                      {category.icon && <span>{category.icon}</span>}
+                      {category.name} ({totalItemsInCategory})
+                    </h3>
+                    
+                    <div className="space-y-1">
+                      {displayedItems.map((item, itemIndex) => {
+                        // Calculate global index for keyboard navigation
+                        const globalIndex = results.categories
+                          .slice(0, categoryIndex)
+                          .reduce((acc, cat) => acc + cat.items.length, 0) + itemIndex;
+                        
+                        const isSelected = globalIndex === selectedIndex;
+                        
+                        return (
+                          <div
+                            key={item.id}
+                            data-result-index={globalIndex}
+                            onClick={() => handleResultClick(item)}
+                            className={`p-3 rounded-lg cursor-pointer transition-colors ${
+                              isSelected 
+                                ? 'bg-gray-800 text-gray-200' 
+                                : 'hover:bg-gray-800 text-gray-200'
+                            }`}
+                          >
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <div className="font-medium text-sm mb-1">{item.title}</div>
+                                <div className="text-xs text-gray-400">
+                                  {item.description}
                                 </div>
-                              )}
-                            </div>
-                            <div className="text-xs text-gray-500">
-                              {item.category}
+                                {item.metadata?.duration && (
+                                  <div className="text-xs mt-1 text-gray-500">
+                                    Duration: {item.metadata.duration}
+                                  </div>
+                                )}
+                              </div>
+                              <div className="text-xs text-gray-500">
+                                {item.category}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                    </div>
+                    
+                    {/* Show more/less button */}
+                    {hasMoreItems && (
+                      <div className="text-center pt-2">
+                        <button
+                          onClick={() => toggleCategoryExpansion(category.name)}
+                          className="text-blue-400 hover:text-blue-300 text-sm transition-colors flex items-center gap-1 mx-auto"
+                        >
+                          {isExpanded ? (
+                            <>
+                              <span>显示更少</span>
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                              </svg>
+                            </>
+                          ) : (
+                            <>
+                              <span>显示更多 ({totalItemsInCategory - displayedItems.length} 个)</span>
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                              </svg>
+                            </>
+                          )}
+                        </button>
+                      </div>
+                    )}
                   </div>
-                </div>
-              ))}
+                );
+              })}
               
-              {results.totalResults > results.categories.reduce((sum, cat) => sum + cat.items.length, 0) && (
-                <div className="text-center text-gray-400 text-sm">
-                  ... and {results.totalResults - results.categories.reduce((sum, cat) => sum + cat.items.length, 0)} more results
-                </div>
-              )}
+              {/* Total results summary */}
+              <div className="text-center text-gray-400 text-sm pt-4 border-t border-gray-700">
+                <span>共找到 {results.totalResults} 个结果</span>
+                {results.categories.length > 1 && (
+                  <span className="ml-2">• {results.categories.length} 个类别</span>
+                )}
+              </div>
             </div>
           )}
 

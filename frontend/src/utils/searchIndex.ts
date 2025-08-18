@@ -16,6 +16,7 @@ export interface SearchCategory {
   name: string;
   items: SearchItem[];
   icon?: string;
+  totalItems?: number; // Total items in this category before limiting
 }
 
 export interface SearchResult {
@@ -327,7 +328,8 @@ export function searchContent(query: string, customItems: SearchItem[] = []): Se
       categories.push({
         name,
         icon,
-        items: items.slice(0, 3) // Reduce results per category to 3
+        items: items.slice(0, 8), // Show up to 8 results per category initially
+        totalItems: items.length
       });
     }
   }
