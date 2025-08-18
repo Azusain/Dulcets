@@ -54,6 +54,7 @@ export default function LoadingManager({
               style={{ 
                 zIndex: 999999999, 
                 position: 'relative',
+                transform: 'translateY(400px)', /* Move down 400px */
                 marginTop: '32px',
                 display: 'flex',
                 alignItems: 'center',
@@ -67,13 +68,18 @@ export default function LoadingManager({
                   width: '80px',
                   height: '1px',
                   backgroundColor: '#ffffff',
-                  opacity: 0.6
+                  opacity: 0.6,
+                  alignSelf: 'center' /* Ensure line aligns with text center */
                 }}
               ></div>
               
               {/* Text and dots */}
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                {loadingText}
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'baseline', /* Align text and dots properly */
+                whiteSpace: 'nowrap'
+              }}>
+                <span>{loadingText}</span>
                 <span 
                   className="loading-dots"
                   style={{ zIndex: 999999999, position: 'relative' }}
@@ -86,7 +92,8 @@ export default function LoadingManager({
                   width: '80px',
                   height: '1px',
                   backgroundColor: '#ffffff',
-                  opacity: 0.6
+                  opacity: 0.6,
+                  alignSelf: 'center' /* Ensure line aligns with text center */
                 }}
               ></div>
             </div>
