@@ -327,8 +327,8 @@ export function buildDynamicSearchIndex(
       description: `Digital artwork piece by Dulcets`,
       category: 'artwork',
       url: '#artworks',
-      keywords: ['artwork', 'illustration', 'digital art', 'design'],
-      content: `${artwork.title || ''} artwork illustration digital art`,
+      keywords: ['artwork', 'illustration', 'digital art', 'design', '绘画', '艺术作品'],
+      content: `${artwork.title || ''} artwork illustration digital art 绘画作品 艺术`,
       metadata: {
         imagePath: artwork.imagePath,
         pos: artwork.pos
