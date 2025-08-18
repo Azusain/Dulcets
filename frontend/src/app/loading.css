@@ -86,22 +86,14 @@
     transform: translateY(-50%) translateX(280px);
     opacity: 0;
   } /* Start from right side of green mask, hidden */
-  15% {
+  20% {
     opacity: 1;
-    transform: translateY(-50%) translateX(260px);
-  } /* Gentle fade in with slow start */
-  50% {
-    transform: translateY(-50%) translateX(205px);
-    opacity: 1;
-  } /* Halfway point - steady motion */
-  85% {
-    transform: translateY(-50%) translateX(155px);
-    opacity: 1;
-  } /* Near end - maintain speed */
+    transform: translateY(-50%) translateX(240px);
+  } /* Gentle fade in with slower start */
   100% {
     transform: translateY(-50%) translateX(150px);
     opacity: 1;
-  } /* Final position - gentle stop */
+  } /* End visible in green mask */
 }
 
 @keyframes logoPortalRight {
@@ -109,22 +101,14 @@
     transform: translateY(-50%) translateX(-350px);
     opacity: 0;
   } /* Start from left side of orange mask, hidden */
-  15% {
+  20% {
     opacity: 1;
-    transform: translateY(-50%) translateX(-320px);
-  } /* Gentle fade in with slow start */
-  50% {
-    transform: translateY(-50%) translateX(-130px);
-    opacity: 1;
-  } /* Halfway point - steady motion */
-  85% {
-    transform: translateY(-50%) translateX(50px);
-    opacity: 1;
-  } /* Near end - maintain speed */
+    transform: translateY(-50%) translateX(-280px);
+  } /* Gentle fade in with slower start */
   100% {
     transform: translateY(-50%) translateX(60px);
     opacity: 1;
-  } /* Final position - gentle stop */
+  } /* End visible in orange mask */
 }
 
 @keyframes logoScaleAndFade {
@@ -280,8 +264,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: logoPortalLeft 1s cubic-bezier(0.25, 0.25, 0.75, 0.75) 0.75s
-    forwards; /* Linear-like motion with gentle acceleration/deceleration */
+  animation: logoPortalLeft 1s cubic-bezier(0.4, 0.0, 0.2, 1) 0.75s
+    forwards; /* Gentle ease-out with slower initial acceleration */
   z-index: 2; /* Below mask, above background */
 }
 
@@ -297,8 +281,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: logoPortalRight 1s cubic-bezier(0.25, 0.25, 0.75, 0.75) 0.75s
-    forwards; /* Linear-like motion with gentle acceleration/deceleration */
+  animation: logoPortalRight 1s cubic-bezier(0.4, 0.0, 0.2, 1) 0.75s
+    forwards; /* Gentle ease-out with slower initial acceleration */
   z-index: 2; /* Below mask, above background */
 }
 
