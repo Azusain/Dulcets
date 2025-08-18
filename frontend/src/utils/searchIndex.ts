@@ -86,11 +86,12 @@ export const staticContentIndex: SearchItem[] = [
   {
     id: 'service-jpop',
     title: 'J-Pop Music',
-    description: 'Japanese pop music production and arrangement',
+    description: 'Japanese pop music production and arrangement - Listen to samples',
     category: 'service',
-    url: '#services',
+    url: '#works?genre=jpop',
     keywords: ['jpop', 'j-pop', 'japanese pop', '日本流行音乐', 'ジェイポップ', 'pop music'],
-    content: 'Japanese pop music J-Pop production arrangement modern catchy melodies'
+    content: 'Japanese pop music J-Pop production arrangement modern catchy melodies',
+    metadata: { isGenre: true, genreId: 'jpop' }
   },
   {
     id: 'service-anime-song',
@@ -104,38 +105,42 @@ export const staticContentIndex: SearchItem[] = [
   {
     id: 'service-jrock',
     title: 'J-Rock Music',
-    description: 'Japanese rock music production with modern sound',
+    description: 'Japanese rock music production with modern sound - Listen to samples',
     category: 'service',
-    url: '#services',
+    url: '#works?genre=jrock',
     keywords: ['jrock', 'j-rock', 'japanese rock', '日本摇滚', 'ジェイロック', 'rock'],
-    content: 'Japanese rock music J-Rock production heavy guitars modern sound'
+    content: 'Japanese rock music J-Rock production heavy guitars modern sound',
+    metadata: { isGenre: true, genreId: 'jrock' }
   },
   {
     id: 'service-orchestral',
     title: 'Orchestral Music',
-    description: 'Classical orchestral arrangements and compositions',
+    description: 'Classical orchestral arrangements and compositions - Listen to samples',
     category: 'service',
-    url: '#services',
+    url: '#works?genre=orchestra',
     keywords: ['orchestral', 'orchestra', '管弦乐', 'オーケストラ', 'classical', 'symphonic'],
-    content: 'Orchestral music classical arrangements symphonic compositions'
+    content: 'Orchestral music classical arrangements symphonic compositions',
+    metadata: { isGenre: true, genreId: 'orchestra' }
   },
   {
     id: 'service-edm',
     title: 'Electronic Dance Music',
-    description: 'Modern EDM production and electronic arrangements',
+    description: 'Modern EDM production and electronic arrangements - Listen to samples',
     category: 'service',
-    url: '#services',
+    url: '#works?genre=edm',
     keywords: ['edm', 'electronic', 'dance', '电子音乐', '電子ダンス', 'techno', 'house'],
-    content: 'Electronic dance music EDM production techno house electronic arrangements'
+    content: 'Electronic dance music EDM production techno house electronic arrangements',
+    metadata: { isGenre: true, genreId: 'edm' }
   },
   {
     id: 'service-bgm',
     title: 'Background Music',
-    description: 'Background music for games, videos, and media',
+    description: 'Background music for games, videos, and media - Listen to samples',
     category: 'service',
-    url: '#services',
+    url: '#works?genre=bgm',
     keywords: ['bgm', 'background music', '背景音乐', 'バックグラウンド', 'game music', 'media'],
-    content: 'Background music BGM game music video music media soundtrack ambient'
+    content: 'Background music BGM game music video music media soundtrack ambient',
+    metadata: { isGenre: true, genreId: 'bgm' }
   },
   {
     id: 'service-artwork',
@@ -157,7 +162,7 @@ export const staticContentIndex: SearchItem[] = [
   }
 ];
 
-// Simple fuzzy search implementation
+// Improved search implementation with better precision
 export function fuzzySearch(query: string, text: string): number {
   query = query.toLowerCase();
   text = text.toLowerCase();
@@ -168,7 +173,40 @@ export function fuzzySearch(query: string, text: string): number {
     return 100 - position; // Earlier matches get higher scores
   }
   
-  // Character-by-character fuzzy matching
+  // Word boundary matching (higher priority)
+  const words = text.split(/\s+/);
+  for (const word of words) {
+    if (word.startsWith(query)) {
+      return 80 - query.length; // Prefix match gets high score
+    }
+  }
+  
+  // For queries longer than 3 characters, require more strict matching
+  if (query.length > 3) {
+    // Require at least 70% of characters to match in sequence
+    const requiredMatches = Math.ceil(query.length * 0.7);
+    let consecutiveMatches = 0;
+    let maxConsecutive = 0;
+    let queryIndex = 0;
+    
+    for (let i = 0; i < text.length && queryIndex < query.length; i++) {
+      if (text[i] === query[queryIndex]) {
+        consecutiveMatches++;
+        queryIndex++;
+        maxConsecutive = Math.max(maxConsecutive, consecutiveMatches);
+      } else {
+        consecutiveMatches = 0;
+      }
+    }
+    
+    if (maxConsecutive < requiredMatches) {
+      return 0; // Not enough consecutive matches
+    }
+    
+    return maxConsecutive * 2;
+  }
+  
+  // For short queries (3 chars or less), use character matching
   let score = 0;
   let queryIndex = 0;
   
@@ -200,6 +238,9 @@ export function searchContent(query: string, customItems: SearchItem[] = []): Se
   const allItems = [...staticContentIndex, ...customItems];
   const results: SearchItem[] = [];
   
+  // Set minimum score threshold to filter out weak matches
+  const MIN_SCORE_THRESHOLD = 15;
+  
   for (const item of allItems) {
     let maxScore = 0;
     
@@ -217,7 +258,8 @@ export function searchContent(query: string, customItems: SearchItem[] = []): Se
     // Search in content
     maxScore = Math.max(maxScore, fuzzySearch(query, item.content) * 1.5);
     
-    if (maxScore > 0) {
+    // Only include results above threshold
+    if (maxScore > MIN_SCORE_THRESHOLD) {
       results.push({
         ...item,
         score: maxScore
@@ -242,12 +284,12 @@ export function searchContent(query: string, customItems: SearchItem[] = []): Se
   
   // Define category order and names
   const categoryOrder = [
-    { key: 'navigation', name: 'Navigation', icon: '🧭' },
-    { key: 'page', name: 'Pages', icon: '📄' },
     { key: 'work', name: 'Music Works', icon: '🎵' },
-    { key: 'service', name: 'Services', icon: '🛠️' },
     { key: 'artwork', name: 'Artworks', icon: '🎨' },
-    { key: 'modeling', name: '3D Models', icon: '🎭' }
+    { key: 'modeling', name: '3D Models', icon: '🎭' },
+    { key: 'service', name: 'Services', icon: '🛠️' },
+    { key: 'navigation', name: 'Navigation', icon: '🧭' },
+    { key: 'page', name: 'Pages', icon: '📄' }
   ];
   
   for (const { key, name, icon } of categoryOrder) {
@@ -256,7 +298,7 @@ export function searchContent(query: string, customItems: SearchItem[] = []): Se
       categories.push({
         name,
         icon,
-        items: items.slice(0, 5) // Limit results per category
+        items: items.slice(0, 3) // Reduce results per category to 3
       });
     }
   }
@@ -324,14 +366,24 @@ export function buildDynamicSearchIndex(
     // Construct full image URL
     const imageUrl = artwork.imagePath ? `/images/artworks/${artwork.imagePath}` : '#artworks';
     
+    // Get localized description
+    let description;
+    if (currentLanguage === 'en') {
+      description = 'Digital artwork piece by Dulcets - Click to view image';
+    } else if (currentLanguage === 'zh') {
+      description = 'Dulcets数字艺术作品 - 点击查看图片';
+    } else { // Japanese
+      description = 'Dulcetsによるデジタルアートワーク - クリックして画像を表示';
+    }
+    
     dynamicItems.push({
       id: `artwork-${artwork.id}`,
-      title: artwork.title || `Artwork ${artwork.id}`,
-      description: `Digital artwork piece by Dulcets - Click to view image`,
+      title: artwork.title || `绘画作品 ${artwork.id}`,
+      description,
       category: 'artwork',
       url: imageUrl,
-      keywords: ['artwork', 'illustration', 'digital art', 'design', '绘画', '艺术作品'],
-      content: `${artwork.title || ''} artwork illustration digital art 绘画作品 艺术`,
+      keywords: ['artwork', 'illustration', 'digital art', 'design', '绘画', '艺术作品', 'アートワーク', 'イラスト'],
+      content: `${artwork.title || ''} artwork illustration digital art 绘画作品 艺术 アートワーク イラスト`,
       metadata: {
         imagePath: artwork.imagePath,
         pos: artwork.pos,
@@ -345,14 +397,24 @@ export function buildDynamicSearchIndex(
     // Construct full image URL
     const imageUrl = model.imagePath ? `/images/modeling/${model.imagePath}` : '#modeling';
     
+    // Get localized description
+    let description;
+    if (currentLanguage === 'en') {
+      description = '3D modeling work by Dulcets - Click to view image';
+    } else if (currentLanguage === 'zh') {
+      description = 'Dulcets三维建模作品 - 点击查看图片';
+    } else { // Japanese
+      description = 'Dulcetsによる3Dモデリング作品 - クリックして画像を表示';
+    }
+    
     dynamicItems.push({
       id: `modeling-${model.id}`,
-      title: model.title || `3D Model ${model.id}`,
-      description: `3D modeling work by Dulcets - Click to view image`,
+      title: model.title || `Modeling ${model.id}`,
+      description,
       category: 'modeling',
       url: imageUrl,
-      keywords: ['3d', 'modeling', 'model', 'animation', '3d modeling', '三维建模', '3D模型'],
-      content: `${model.title || ''} 3d modeling animation 三维建模 3D模型`,
+      keywords: ['3d', 'modeling', 'model', 'animation', '3d modeling', '三维建模', '3D模型', '3Dモデリング', 'モデリング'],
+      content: `${model.title || ''} 3d modeling animation 三维建模 3D模型 3Dモデリング モデリング`,
       metadata: {
         imagePath: model.imagePath,
         pos: model.pos,

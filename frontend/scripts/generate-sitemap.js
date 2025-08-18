@@ -1,8 +1,65 @@
 const fs = require('fs');
 const path = require('path');
 
+// Load deployment configuration from package.json
+function loadPackageConfig() {
+  try {
+    const packagePath = path.join(__dirname, '..', 'package.json');
+    const packageJson = require(packagePath);
+    return packageJson.deployment || null;
+  } catch (error) {
+    console.warn('Could not load package.json deployment config, using defaults');
+    return null;
+  }
+}
+
+// Simple deployment configuration for build scripts
+function getDeploymentConfig() {
+  const isDevelopment = process.env.NODE_ENV === 'development';
+  const packageConfig = loadPackageConfig();
+  
+  let baseUrl, basePath;
+  
+  if (isDevelopment) {
+    // Use development config from package.json or defaults
+    if (packageConfig?.development) {
+      baseUrl = packageConfig.development.domain;
+      basePath = packageConfig.development.basePath || '';
+    } else {
+      baseUrl = 'http://localhost:3000';
+      basePath = '';
+    }
+  } else {
+    // Production configuration - prioritize env vars, then package.json, then defaults
+    const customDomain = process.env.NEXT_PUBLIC_DOMAIN;
+    const customBasePath = process.env.NEXT_PUBLIC_BASE_PATH;
+    
+    if (customDomain) {
+      // Use environment variables if specified
+      baseUrl = customDomain.startsWith('http') ? customDomain : `https://${customDomain}`;
+      basePath = customBasePath || '';
+    } else if (packageConfig?.production) {
+      // Use production config from package.json
+      baseUrl = packageConfig.production.domain;
+      basePath = packageConfig.production.basePath || '';
+    } else {
+      // Default fallback (GitHub Pages)
+      baseUrl = 'https://azusain.github.io';
+      basePath = '/Dulcets';
+    }
+  }
+  
+  return { baseUrl, basePath };
+}
+
+function generateCanonicalUrl(path = '') {
+  const config = getDeploymentConfig();
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  return `${config.baseUrl}${config.basePath}${cleanPath}`;
+}
+
 // Site configuration
-const siteUrl = 'https://azusain.github.io/Dulcets';
+const siteUrl = generateCanonicalUrl().replace(/\/$/, ''); // Remove trailing slash
 const currentDate = new Date().toISOString().split('T')[0];
 
 // Static pages configuration

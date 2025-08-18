@@ -71,10 +71,11 @@ const DsNavigation = () => {
     }
   }, [isLoading]);
 
-  // Handle ESC key to close sidebar
+  // Handle Ctrl+Q/Cmd+Q key to close sidebar (ESC is handled by AdvancedSearch component)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isMenuOpen) {
+      if (e.key === "q" && (e.ctrlKey || e.metaKey) && isMenuOpen) {
+        e.preventDefault();
         closeSidebar();
       }
     };
@@ -261,7 +262,7 @@ const DsNavigation = () => {
           />
           {/* Sidebar */}
           <div
-            className={`fixed inset-0 bg-black text-white ${
+            className={`fixed inset-0 bg-black bg-opacity-50 text-white ${
               isClosing ? "animate-slide-out-right" : "animate-slide-in-right"
             }`}
             style={{ zIndex: 9500 }}
@@ -304,7 +305,7 @@ const DsNavigation = () => {
                 </span>
                 <span className="flex items-center gap-1">
                   <kbd className="px-1.5 py-0.5 bg-gray-700 border border-gray-600 rounded text-gray-400">
-                    ESC
+                    Ctrl+Q
                   </kbd>
                   {t('search.keyboard_shortcuts.close')}
                 </span>

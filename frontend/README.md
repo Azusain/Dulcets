@@ -1,12 +1,6 @@
-# 🎵 Dulcets Frontend
+# 🎵 Dulcets - Music Production Website
 
-[![CI/CD Pipeline](https://github.com/your-username/dulcets/actions/workflows/ci.yml/badge.svg)](https://github.com/your-username/dulcets/actions/workflows/ci.yml)
-[![Code Quality](https://github.com/your-username/dulcets/actions/workflows/code-quality.yml/badge.svg)](https://github.com/your-username/dulcets/actions/workflows/code-quality.yml)
-[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat&logo=next.js&logoColor=white)](https://nextjs.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-
-现代化的多语言音乐应用前端，基于 Next.js 和 TypeScript 构建，集成专业级 i18n 管理系统和企业级 CI/CD 流水线。
+专业音乐制作网站，支持多语言(日语/英语/中文)和智能搜索功能。
 
 ## ✨ 特性
 
@@ -208,13 +202,63 @@ frontend/
 
 ## 🚀 部署
 
-### GitHub Pages（自动）
-推送到 `main` 分支会自动触发部署到 GitHub Pages。
+### 配置域名
 
-### 手动部署
+在 `package.json` 中的 `deployment` 部分配置部署域名：
+
+```json
+{
+  "deployment": {
+    "production": {
+      "domain": "https://dulcetsinfo.wixsite.com",
+      "basePath": ""
+    },
+    "github": {
+      "domain": "https://azusain.github.io",
+      "basePath": "/Dulcets"
+    }
+  }
+}
+```
+
+### 切换部署目标
+
+1. **Wix 部署**（当前配置）:
+   ```json
+   "production": {
+     "domain": "https://dulcetsinfo.wixsite.com",
+     "basePath": ""
+   }
+   ```
+
+2. **GitHub Pages 部署**:
+   ```json
+   "production": {
+     "domain": "https://azusain.github.io",
+     "basePath": "/Dulcets"
+   }
+   ```
+
+3. **自定义域名**:
+   ```json
+   "production": {
+     "domain": "https://yourdomain.com",
+     "basePath": ""
+   }
+   ```
+
+### 构建和部署
+
 ```bash
-npm run build    # 构建生产版本
+npm run build    # 构建生产版本（使用 package.json 配置）
 npm run export   # 导出静态文件
+```
+
+### 环境变量覆盖（可选）
+
+```bash
+# 临时使用不同域名
+NEXT_PUBLIC_DOMAIN="https://other-domain.com" npm run build
 ```
 
 ## 📄 许可证
