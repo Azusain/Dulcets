@@ -101,14 +101,16 @@ export const pageSEO = {
   }
 };
 
+import { generateCanonicalUrl, getAssetUrl } from './deployment';
+
 // Structured data schemas
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Dulcets",
   "description": "Professional music production and creative services specializing in Japanese music",
-  "url": "https://azusain.github.io/Dulcets",
-  "logo": "https://azusain.github.io/Dulcets/images/logo_black.png",
+  "url": generateCanonicalUrl(),
+  "logo": getAssetUrl("/images/logo_black.png"),
   "sameAs": [
     "https://www.youtube.com/@Dulcets",
     "https://x.com/Dulcets_staff", 
@@ -129,7 +131,7 @@ export const musicGroupSchema = {
   "name": "Dulcets",
   "description": "Music production team specializing in anime songs, J-Pop, J-Rock, and orchestral music",
   "genre": ["J-Pop", "J-Rock", "Anime Music", "Instrumental", "Electronic"],
-  "url": "https://azusain.github.io/Dulcets"
+  "url": generateCanonicalUrl()
 };
 
 export const localBusinessSchema = {
@@ -137,7 +139,7 @@ export const localBusinessSchema = {
   "@type": "LocalBusiness",
   "name": "Dulcets",
   "description": "Music production and creative services studio",
-  "url": "https://azusain.github.io/Dulcets",
+  "url": generateCanonicalUrl(),
   "serviceArea": {
     "@type": "Place",
     "name": "Global"
@@ -148,15 +150,9 @@ export const localBusinessSchema = {
   }
 };
 
-// Generate canonical URL
-export function generateCanonicalUrl(path: string = ""): string {
-  const baseUrl = "https://azusain.github.io/Dulcets";
-  return `${baseUrl}${path}`;
-}
-
 // Generate hreflang URLs for multilingual support
 export function generateHreflangUrls(path: string = ""): { [key: string]: string } {
-  const baseUrl = "https://azusain.github.io/Dulcets";
+  const baseUrl = generateCanonicalUrl();
   return {
     "ja": `${baseUrl}${path}?lang=ja`,
     "en": `${baseUrl}${path}?lang=en`, 

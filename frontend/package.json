@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "npm run generate-seo && next build",
+    "build": "node scripts/sync-deployment-config.js && npm run generate-seo && next build",
     "start": "next start",
     "lint": "next lint",
     "export": "npm run generate-seo && next build",
@@ -21,6 +21,20 @@
     "generate-seo": "node scripts/generate-sitemap.js",
     "check:deps": "node scripts/check-unused-dependencies.js",
     "fix:lint": "node scripts/fix-lint-issues.js"
+  },
+  "deployment": {
+    "production": {
+      "domain": "https://dulcetsinfo.wixsite.com",
+      "basePath": ""
+    },
+    "github": {
+      "domain": "https://azusain.github.io",
+      "basePath": "/Dulcets"
+    },
+    "development": {
+      "domain": "http://localhost:3000",
+      "basePath": ""
+    }
   },
   "dependencies": {
     "clsx": "^2.1.1",

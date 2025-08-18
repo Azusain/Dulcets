@@ -101,7 +101,7 @@ export default function ModelingSectionWithLightbox({
   };
 
   return (
-    <section className="modeling-section">
+    <section id="modeling" className="modeling-section">
       <div className="container max-w-7xl mx-auto px-8">
         <div className="grid grid-cols-1 lg:grid-cols-10 gap-12 py-20">
           {/* Left Side - Photo Wall (shifted left, 5 columns) */}

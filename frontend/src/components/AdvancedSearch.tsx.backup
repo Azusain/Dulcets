@@ -7,7 +7,6 @@ import {
   SearchResult,
   SearchItem 
 } from '@/utils/searchIndex';
-import ImageModal from './ImageModal';
 
 interface AdvancedSearchProps {
   isOpen: boolean;
@@ -24,17 +23,16 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
   const [dynamicIndex, setDynamicIndex] = useState<any[]>([]);
-  const [imageModalState, setImageModalState] = useState({ isOpen: false, imageUrl: '', title: '' });
   const inputRef = useRef<HTMLInputElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
   
   // Fallback translator function if not provided
   const translate = t || ((key: string) => key);
 
-  // Global Ctrl+Q/Cmd+Q key listener
+  // Global ESC key listener
   useEffect(() => {
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
-      if (isOpen && e.key === 'q' && (e.ctrlKey || e.metaKey)) {
+      if (e.key === 'Escape' && isOpen) {
         e.preventDefault();
         e.stopPropagation();
         onClose();
@@ -157,7 +155,10 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
     const allItems = getAllResultItems();
 
     switch (e.key) {
-      // ESC key disabled - use Ctrl+Q/Cmd+Q to close
+      case 'Escape':
+        e.preventDefault();
+        onClose();
+        break;
         
       case 'ArrowDown':
         e.preventDefault();
@@ -197,52 +198,18 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
     setSearchHistory(getSearchHistory());
     
     if (item.url.startsWith('#')) {
-      // Check if it's a genre URL with parameters
-      if (item.url.includes('?genre=') && item.metadata?.isGenre) {
-        // Extract genre ID and navigate to works section with genre selection
-        const genreId = item.metadata.genreId;
-        
-        // First navigate to works section
-        const worksElement = document.querySelector('#works');
-        if (worksElement) {
-          worksElement.scrollIntoView({ behavior: 'smooth' });
-          
-          // Then trigger genre selection after a short delay
-          setTimeout(() => {
-            // Dispatch a custom event to set the genre
-            window.dispatchEvent(new CustomEvent('setGenre', { 
-              detail: { genreId } 
-            }));
-          }, 500);
-        }
-        onClose();
-      } else {
-        // Regular internal navigation
-        onNavigate(item.url);
-        onClose();
-      }
+      // Internal navigation
+      onNavigate(item.url);
+      onClose();
     } else if (item.url.startsWith('http')) {
-      // External link (YouTube videos, etc.)
+      // External link
       window.open(item.url, '_blank');
       onClose();
-    } else if (item.metadata?.isImage) {
-      // Image files - open in modal
-      setImageModalState({
-        isOpen: true,
-        imageUrl: item.url,
-        title: item.title
-      });
-      // Don't close search - let user keep browsing images
     } else {
       // Default navigation
       onNavigate(item.url);
       onClose();
     }
-  };
-
-  // Handle closing image modal
-  const closeImageModal = () => {
-    setImageModalState({ isOpen: false, imageUrl: '', title: '' });
   };
 
   // Handle history item click
@@ -255,37 +222,36 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
   if (!isOpen) return null;
 
   return (
-    <>
-      <div className="w-full h-full flex items-start justify-center pt-[10vh]">
-        {/* Main search container */}
-        <div className="w-full max-w-2xl mx-4">
-          {/* Search input */}
-          <div className="relative">
-            <div className="flex items-center">
-              <div className="w-full relative">
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={query}
-                  onChange={handleInputChange}
-                  onKeyDown={handleKeyDown}
-                  placeholder={translate('search.placeholder')}
-                  className="w-full bg-transparent border-0 border-b-2 border-gray-600 text-white placeholder-gray-400 px-0 py-4 focus:outline-none focus:border-white transition-all duration-200"
-                  style={{
-                    fontSize: '36px',
-                    letterSpacing: '0.02em',
-                    fontFamily: '"Inter", "Helvetica Neue", "Arial", sans-serif',
-                    fontWeight: '300',
-                  }}
-                />
-                {isLoading && (
-                  <div className="absolute right-0 top-1/2 transform -translate-y-1/2">
-                    <div className="w-6 h-6 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
-                  </div>
-                )}
-              </div>
+    <div className="w-full h-full flex items-start justify-center pt-[10vh]">
+      {/* Main search container */}
+      <div className="w-full max-w-2xl mx-4">
+        {/* Search input */}
+        <div className="relative">
+          <div className="flex items-center">
+            <div className="w-full relative">
+              <input
+                ref={inputRef}
+                type="text"
+                value={query}
+                onChange={handleInputChange}
+                onKeyDown={handleKeyDown}
+                placeholder={translate('search.placeholder')}
+                className="w-full bg-transparent border-0 border-b-2 border-gray-600 text-white placeholder-gray-400 px-0 py-4 focus:outline-none focus:border-white transition-all duration-200"
+                style={{
+                  fontSize: '36px',
+                  letterSpacing: '0.02em',
+                  fontFamily: '"Inter", "Helvetica Neue", "Arial", sans-serif',
+                  fontWeight: '300',
+                }}
+              />
+              {isLoading && (
+                <div className="absolute right-0 top-1/2 transform -translate-y-1/2">
+                  <div className="w-6 h-6 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+                </div>
+              )}
             </div>
           </div>
+        </div>
 
         {/* Search results - scrollable container */}
         <div ref={resultsRef} className="mt-8 max-h-[60vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
@@ -385,16 +351,7 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
           )}
         </div>
 
-        </div>
       </div>
-      
-      {/* Image Modal */}
-      <ImageModal
-        isOpen={imageModalState.isOpen}
-        imageUrl={imageModalState.imageUrl}
-        title={imageModalState.title}
-        onClose={closeImageModal}
-      />
-    </>
+    </div>
   );
 }

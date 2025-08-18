@@ -355,5 +355,18 @@
     "opening_email_app": "Opening your default email application...",
     "description": "Get in touch with us for your next project. We're here to help bring your musical vision to life."
   },
+  "search": {
+    "placeholder": "Search music, services, artworks...",
+    "recent_searches": "Recent Searches",
+    "start_typing": "Start typing to search",
+    "search_description": "Search through our music works, services, artworks, and more",
+    "no_results": "No results found",
+    "no_results_suggestion": "Try searching for \"music\", \"jpop\", \"artwork\", or \"3d\"",
+    "keyboard_shortcuts": {
+      "navigate": "Navigate",
+      "select": "Select",
+      "close": "Close"
+    }
+  },
   "button": "button"
 }

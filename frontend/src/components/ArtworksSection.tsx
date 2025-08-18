@@ -107,7 +107,7 @@ export default function ArtworksSection({
   };
 
   return (
-    <section className="artworks-section">
+    <section id="artworks" className="artworks-section">
       <div className="container max-w-7xl mx-auto px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 py-20">
           {/* Left Side - Title and Description */}

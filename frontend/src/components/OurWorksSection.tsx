@@ -39,6 +39,22 @@ const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
   );
   const { getAssetPath } = useAssetPath();
 
+  // Listen for genre selection events from search
+  useEffect(() => {
+    const handleSetGenre = (event: CustomEvent) => {
+      const { genreId } = event.detail;
+      if (genreId && MUSIC_GENRES.some(g => g.id === genreId)) {
+        setSelectedGenre(genreId);
+      }
+    };
+
+    window.addEventListener('setGenre', handleSetGenre as EventListener);
+    
+    return () => {
+      window.removeEventListener('setGenre', handleSetGenre as EventListener);
+    };
+  }, []);
+
   // Load audio configuration on component mount
   useEffect(() => {
     let isMounted = true;

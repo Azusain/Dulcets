@@ -355,5 +355,18 @@
     "opening_email_app": "デフォルトのメールアプリケーションを開いています...",
     "description": "次のプロジェクトについてお気軽にお問い合わせください。あなたの音楽ビジョンを実現するお手伝いをいたします。"
   },
+  "search": {
+    "placeholder": "音楽、サービス、アートワークを検索...",
+    "recent_searches": "最近の検索",
+    "start_typing": "入力して検索開始",
+    "search_description": "音楽作品、サービス、アートワークなどを検索できます",
+    "no_results": "検索結果が見つかりません",
+    "no_results_suggestion": "\"music\"、\"jpop\"、\"artwork\"、\"3d\" などで検索してみてください",
+    "keyboard_shortcuts": {
+      "navigate": "移動",
+      "select": "選択",
+      "close": "閉じる"
+    }
+  },
   "button": "ボタン"
 }

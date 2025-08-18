@@ -355,5 +355,18 @@
     "opening_email_app": "正在打开您的默认邮件应用程序...",
     "description": "请与我们联系您的下一个项目。我们在这里帮助您实现音乐感想。"
   },
+  "search": {
+    "placeholder": "搜索音乐、服务、艺术作品...",
+    "recent_searches": "最近搜索",
+    "start_typing": "开始输入进行搜索",
+    "search_description": "搜索我们的音乐作品、服务、艺术作品等内容",
+    "no_results": "未找到搜索结果",
+    "no_results_suggestion": "尝试搜索 \"music\"、\"jpop\"、\"artwork\" 或 \"3d\"",
+    "keyboard_shortcuts": {
+      "navigate": "导航",
+      "select": "选择",
+      "close": "关闭"
+    }
+  },
   "button": "按钮"
 }
