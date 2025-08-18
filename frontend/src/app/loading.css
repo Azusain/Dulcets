@@ -337,33 +337,31 @@
   display: inline-block;
   min-width: 3ch;
   position: relative;
-  z-index: 999999999 !important; /* Maximum z-index to ensure dots appear above everything */
-  background: rgba(255, 0, 0, 0.5) !important; /* RED BACKGROUND FOR DEBUGGING */
+  z-index: 999999999 !important;
+  background: transparent;
   overflow: visible;
-  margin-left: 4px; /* Space between text and dots */
-  border: 2px solid yellow !important; /* YELLOW BORDER FOR DEBUGGING */
+  margin-left: 4px;
 }
 
 .loading-dots::after {
   content: ".";
   animation: loadingDots 1.5s infinite;
-  color: #ffffff !important; /* Pure white for visibility */
-  font-weight: bold !important; /* Bold */
-  font-size: 3em !important; /* MUCH LARGER FOR DEBUGGING */
+  color: #ffffff !important;
+  font-weight: bold !important;
+  font-size: 1.5em !important;
   display: inline-block;
   text-align: left;
-  min-width: 3ch; /* Reserve space for up to 3 dots */
+  min-width: 3ch;
   position: relative;
-  top: -8px !important; /* Move dots up relative to text */
+  top: -4px !important; /* Slight upward adjustment */
   z-index: 999999999 !important;
-  background: rgba(0, 255, 0, 0.5) !important; /* GREEN BACKGROUND FOR DEBUGGING */
+  background: transparent;
   white-space: nowrap;
   letter-spacing: 0.1em;
   visibility: visible !important;
   opacity: 1 !important;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 1) !important; /* Stronger glow effect */
-  vertical-align: top !important; /* Align to top of text line */
-  border: 2px solid blue !important; /* BLUE BORDER FOR DEBUGGING */
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.8) !important;
+  vertical-align: baseline !important;
 }
 
 /* Ensure the loading screen disappears after animation */
