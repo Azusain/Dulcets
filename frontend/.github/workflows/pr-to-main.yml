@@ -1,0 +1,331 @@
+name: 🛡️ PR to Main - Strict Validation
+
+# 仅在 PR 到 main 分支时触发
+on:
+  pull_request:
+    branches: [ main ]
+    types: [opened, synchronize, reopened, ready_for_review]
+
+# 设置并发控制，确保同一 PR 只运行一个工作流
+concurrency:
+  group: pr-main-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  # 🏷️ 检查跳过验证标签
+  check-skip-label:
+    name: 🏷️ Check Skip Validation Label
+    runs-on: ubuntu-latest
+    outputs:
+      skip-validation: ${{ steps.check-label.outputs.skip-validation }}
+    
+    steps:
+    - name: 🏷️ Check for skip-validation label
+      id: check-label
+      run: |
+        if [[ "${{ contains(github.event.pull_request.labels.*.name, 'skip-validation') }}" == "true" ]]; then
+          echo "skip-validation=true" >> $GITHUB_OUTPUT
+          echo "🏷️ Found 'skip-validation' label - validation checks will be skipped"
+        else
+          echo "skip-validation=false" >> $GITHUB_OUTPUT
+          echo "🔍 No 'skip-validation' label found - proceeding with validation"
+        fi
+    
+    - name: 📋 Create skip validation notice
+      if: steps.check-label.outputs.skip-validation == 'true'
+      run: |
+        echo "## ⚠️ Validation Skipped" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "This PR has the \`skip-validation\` label, so strict validation checks have been bypassed." >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**⚠️ Important:**" >> $GITHUB_STEP_SUMMARY
+        echo "- Code quality checks have been skipped" >> $GITHUB_STEP_SUMMARY
+        echo "- Manual review is strongly recommended" >> $GITHUB_STEP_SUMMARY
+        echo "- This should only be used in exceptional circumstances" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Requested by:** @${{ github.event.pull_request.user.login }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Label added by:** Administrator" >> $GITHUB_STEP_SUMMARY
+
+  # 🔒 严格的代码质量检查
+  strict-validation:
+    name: 🛡️ Strict Code Quality Validation
+    runs-on: ubuntu-latest
+    # 跳过草稿 PR 和带有 skip-validation 标签的 PR
+    if: github.event.pull_request.draft == false && !contains(github.event.pull_request.labels.*.name, 'skip-validation')
+    
+    steps:
+    - name: 📦 Checkout code
+      uses: actions/checkout@v4
+      with:
+        # 获取完整历史记录用于比较
+        fetch-depth: 0
+        
+    - name: 📋 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        cache-dependency-path: 'frontend/package-lock.json'
+        
+    - name: 📥 Install dependencies
+      working-directory: ./frontend
+      run: npm ci
+      
+    # TypeScript 严格检查
+    - name: 🔷 TypeScript Strict Check
+      working-directory: ./frontend
+      run: |
+        echo "🔷 Running TypeScript strict validation..."
+        npx tsc --noEmit --strict
+        echo "✅ TypeScript validation passed"
+      
+    # ESLint 零容忍检查
+    - name: 🧹 ESLint Zero-Tolerance Check
+      working-directory: ./frontend
+      run: |
+        echo "🧹 Running ESLint with zero warnings tolerance..."
+        npm run lint -- --max-warnings 0
+        echo "✅ ESLint validation passed"
+    
+    # 组件使用检查 - 严格模式
+    - name: 🔍 Unused Components Check
+      working-directory: ./frontend
+      run: |
+        echo "🔍 Checking for unused components..."
+        npm run check:components
+        if [ $? -ne 0 ]; then
+          echo "❌ Found unused components - this will block the merge"
+          exit 1
+        fi
+        echo "✅ All components are being used"
+    
+    # 依赖检查 - 严格模式
+    - name: 📦 Dependencies Validation
+      working-directory: ./frontend
+      run: |
+        echo "📦 Validating dependencies..."
+        npm run check:deps
+        if [ $? -ne 0 ]; then
+          echo "❌ Dependency validation failed - this will block the merge"
+          exit 1
+        fi
+        echo "✅ Dependencies validation passed"
+    
+    # i18n 完整性检查 - 严格模式
+    - name: 🌍 i18n Integrity Check
+      working-directory: ./frontend
+      run: |
+        echo "🌍 Running comprehensive i18n validation..."
+        
+        # 运行 i18n 分析并捕获输出
+        npm run analyze:i18n > i18n_report.txt 2>&1
+        cat i18n_report.txt
+        
+        # 检查是否有缺失的键
+        if grep -q "missing in" i18n_report.txt; then
+          echo "❌ Found missing i18n keys - this will block the merge"
+          echo "Please run 'npm run translate:missing:execute' to fix missing translations"
+          exit 1
+        fi
+        
+        # 检查是否有不一致的键
+        if grep -q "inconsistent" i18n_report.txt; then
+          echo "❌ Found inconsistent i18n keys - this will block the merge"  
+          echo "Please run 'npm run translate:inconsistent:execute' to fix inconsistencies"
+          exit 1
+        fi
+        
+        echo "✅ i18n integrity check passed"
+        rm i18n_report.txt
+    
+    # 安全审计 - 严格模式
+    - name: 🔒 Security Audit
+      working-directory: ./frontend
+      run: |
+        echo "🔒 Running security audit..."
+        npm audit --audit-level=moderate
+        if [ $? -ne 0 ]; then
+          echo "❌ Security vulnerabilities found - this will block the merge"
+          echo "Please run 'npm audit fix' to resolve security issues"
+          exit 1
+        fi
+        echo "✅ Security audit passed"
+    
+    # 构建测试 - 生产模式
+    - name: 🏗️ Production Build Test
+      working-directory: ./frontend
+      run: |
+        echo "🏗️ Testing production build..."
+        npm run build
+        if [ $? -ne 0 ]; then
+          echo "❌ Production build failed - this will block the merge"
+          exit 1
+        fi
+        echo "✅ Production build successful"
+        
+        # 验证输出目录
+        if [ ! -d "out" ]; then
+          echo "❌ Build output directory not found"
+          exit 1
+        fi
+        
+        # 检查关键文件
+        if [ ! -f "out/index.html" ]; then
+          echo "❌ Main index.html not found in build output"
+          exit 1
+        fi
+        
+        echo "✅ Build output validation passed"
+    
+    # 生成详细报告
+    - name: 📊 Generate Validation Report
+      if: always()
+      working-directory: ./frontend
+      run: |
+        echo "## 🛡️ PR to Main - Validation Report" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Pull Request:** #${{ github.event.pull_request.number }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Source Branch:** \`${{ github.head_ref }}\`" >> $GITHUB_STEP_SUMMARY
+        echo "**Target Branch:** \`${{ github.base_ref }}\`" >> $GITHUB_STEP_SUMMARY
+        echo "**Author:** @${{ github.event.pull_request.user.login }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        echo "### ✅ Validation Checks Completed:" >> $GITHUB_STEP_SUMMARY
+        echo "- 🔷 TypeScript strict validation" >> $GITHUB_STEP_SUMMARY
+        echo "- 🧹 ESLint zero-tolerance check" >> $GITHUB_STEP_SUMMARY
+        echo "- 🔍 Unused components detection" >> $GITHUB_STEP_SUMMARY
+        echo "- 📦 Dependencies validation" >> $GITHUB_STEP_SUMMARY
+        echo "- 🌍 i18n integrity check" >> $GITHUB_STEP_SUMMARY
+        echo "- 🔒 Security audit" >> $GITHUB_STEP_SUMMARY
+        echo "- 🏗️ Production build test" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        if [ "${{ job.status }}" = "success" ]; then
+          echo "### 🎉 All Validations Passed!" >> $GITHUB_STEP_SUMMARY
+          echo "This PR is ready for review and can be safely merged to main." >> $GITHUB_STEP_SUMMARY
+        else
+          echo "### ❌ Validation Failed" >> $GITHUB_STEP_SUMMARY
+          echo "This PR has failed one or more validation checks." >> $GITHUB_STEP_SUMMARY
+          echo "Please fix the issues above before merging." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Note:** Repository administrators can override these checks if necessary." >> $GITHUB_STEP_SUMMARY
+        fi
+
+  # 🔍 变更影响分析
+  change-analysis:
+    name: 🔍 Change Impact Analysis
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    
+    steps:
+    - name: 📦 Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
+    - name: 📋 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        cache-dependency-path: 'frontend/package-lock.json'
+        
+    - name: 📥 Install dependencies
+      working-directory: ./frontend
+      run: npm ci
+    
+    - name: 🔍 Analyze changed files
+      run: |
+        echo "## 🔍 Change Impact Analysis" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        # 获取变更的文件
+        changed_files=$(git diff --name-only origin/main...HEAD)
+        
+        if [ -z "$changed_files" ]; then
+          echo "No files changed in this PR." >> $GITHUB_STEP_SUMMARY
+        else
+          echo "### 📁 Changed Files:" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "$changed_files" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # 分析文件类型
+          echo "### 📊 File Type Analysis:" >> $GITHUB_STEP_SUMMARY
+          echo "- **TypeScript/JavaScript:** $(echo "$changed_files" | grep -E '\.(ts|tsx|js|jsx)$' | wc -l) files" >> $GITHUB_STEP_SUMMARY
+          echo "- **Styles:** $(echo "$changed_files" | grep -E '\.(css|scss|sass)$' | wc -l) files" >> $GITHUB_STEP_SUMMARY
+          echo "- **Configuration:** $(echo "$changed_files" | grep -E '\.(json|yml|yaml|toml)$' | wc -l) files" >> $GITHUB_STEP_SUMMARY
+          echo "- **Documentation:** $(echo "$changed_files" | grep -E '\.(md|txt)$' | wc -l) files" >> $GITHUB_STEP_SUMMARY
+          echo "- **Other:** $(echo "$changed_files" | grep -vE '\.(ts|tsx|js|jsx|css|scss|sass|json|yml|yaml|toml|md|txt)$' | wc -l) files" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # 检查是否涉及关键文件
+          critical_files=$(echo "$changed_files" | grep -E "(package\.json|tsconfig\.json|next\.config\.|tailwind\.config\.|\.github/)")
+          if [ ! -z "$critical_files" ]; then
+            echo "### ⚠️ Critical Files Modified:" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            echo "$critical_files" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            echo "**Please ensure these changes are thoroughly reviewed.**" >> $GITHUB_STEP_SUMMARY
+          fi
+        fi
+    
+    - name: 📈 Calculate change statistics
+      run: |
+        echo "### 📈 Change Statistics:" >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+        git diff --stat origin/main...HEAD >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+
+  # 📋 最终状态检查
+  final-status:
+    name: 📋 Final Status Check
+    runs-on: ubuntu-latest
+    needs: [check-skip-label, strict-validation, change-analysis]
+    if: always()
+    
+    steps:
+    - name: 📋 Final validation summary
+      run: |
+        echo "## 📋 PR Validation Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        # 检查是否跳过验证
+        if [ "${{ needs.check-skip-label.outputs.skip-validation }}" = "true" ]; then
+          echo "**Status:** ⚠️ Validation Skipped" >> $GITHUB_STEP_SUMMARY
+          echo "**Reason:** skip-validation label present" >> $GITHUB_STEP_SUMMARY
+          echo "**Change Analysis:** ${{ needs.change-analysis.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🏷️ **Validation checks have been bypassed due to administrator override.**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**⚠️ Please ensure manual review has been completed before merging.**" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "**Validation Status:** ${{ needs.strict-validation.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Change Analysis:** ${{ needs.change-analysis.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ needs.strict-validation.result }}" = "success" ]; then
+            echo "✅ **This PR meets all quality standards and is ready for merge.**" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ **This PR has validation failures that must be addressed.**" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### 🔧 How to Fix:" >> $GITHUB_STEP_SUMMARY
+            echo "1. Review the failed checks above" >> $GITHUB_STEP_SUMMARY
+            echo "2. Fix the identified issues in your code" >> $GITHUB_STEP_SUMMARY
+            echo "3. Push the fixes to update this PR" >> $GITHUB_STEP_SUMMARY
+            echo "4. Wait for the checks to run again" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### 🚫 Override Options:" >> $GITHUB_STEP_SUMMARY
+            echo "Repository administrators can bypass these checks by:" >> $GITHUB_STEP_SUMMARY
+            echo "- Using the \"Merge without waiting for requirements\" option" >> $GITHUB_STEP_SUMMARY
+            echo "- Adding the \`skip-validation\` label to this PR" >> $GITHUB_STEP_SUMMARY
+          fi
+        fi
+    
+    # 如果验证失败且没有跳过标签，设置失败状态
+    - name: ❌ Fail if validation failed
+      if: needs.strict-validation.result != 'success' && needs.check-skip-label.outputs.skip-validation != 'true'
+      run: |
+        echo "Validation failed - blocking merge"
+        exit 1
