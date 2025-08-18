@@ -41,6 +41,8 @@ const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
 
   // Load audio configuration on component mount
   useEffect(() => {
+    let isMounted = true; // 防止组件卸载后设置状态
+    
     const loadAudioConfig = async () => {
       try {
         // Use getAssetPath to handle different deployment paths
@@ -53,11 +55,11 @@ const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
           response.statusText
         );
 
-        if (response.ok) {
+        if (response.ok && isMounted) {
           const config = await response.json();
           console.log("Audio config loaded successfully:", config);
           setAudioConfig(config);
-        } else {
+        } else if (!response.ok) {
           console.error("Failed to fetch audio config. Response:", {
             status: response.status,
             statusText: response.statusText,
@@ -111,11 +113,18 @@ const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
             genre: "BGM",
           },
         };
-        setAudioConfig(fallbackConfig);
+        if (isMounted) {
+          setAudioConfig(fallbackConfig);
+        }
       }
     };
+    
     loadAudioConfig();
-  }, [getAssetPath]);
+    
+    return () => {
+      isMounted = false; // 清理函数
+    };
+  }, []); // 移除getAssetPath依赖，只在组件挂载时运行一次
 
   const currentAudioConfig = audioConfig[
     selectedGenre as keyof typeof audioConfig

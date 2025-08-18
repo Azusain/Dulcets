@@ -149,9 +149,9 @@ const DsNavigation = () => {
           }}
         >
           <img
-            src={getAssetPath("/images/favicon.png")}
+            src={getAssetPath("/images/logo_no_background.png")}
             alt="Dulcets Logo"
-            className="h-20 w-auto hover:opacity-80 transition-opacity duration-200"
+            className="h-22 w-auto hover:opacity-80 transition-opacity duration-200"
           />
         </div>
 

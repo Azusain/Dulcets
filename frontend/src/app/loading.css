@@ -84,19 +84,37 @@
 @keyframes logoPortalLeft {
   0% {
     transform: translateY(-50%) translateX(280px);
+    opacity: 0;
   } /* Start from right side of green mask, hidden */
+  10% {
+    opacity: 1;
+  } /* Fade in quickly */
+  90% {
+    transform: translateY(-50%) translateX(150px);
+    opacity: 1;
+  } /* Almost at final position */
   100% {
     transform: translateY(-50%) translateX(150px);
-  } /* End visible in green mask */
+    opacity: 1;
+  } /* End visible in green mask, hold position */
 }
 
 @keyframes logoPortalRight {
   0% {
     transform: translateY(-50%) translateX(-350px);
+    opacity: 0;
   } /* Start from left side of orange mask, hidden */
+  10% {
+    opacity: 1;
+  } /* Fade in quickly */
+  90% {
+    transform: translateY(-50%) translateX(60px);
+    opacity: 1;
+  } /* Almost at final position */
   100% {
     transform: translateY(-50%) translateX(60px);
-  } /* End visible in orange mask */
+    opacity: 1;
+  } /* End visible in orange mask, hold position */
 }
 
 @keyframes logoScaleAndFade {
@@ -142,7 +160,7 @@
 }
 
 .loading-screen {
-  animation: fadeOut 2.5s ease-in-out forwards;
+  animation: fadeOut 1.8s ease-in-out forwards;
   background: #000000;
   /* 黑色背景会通过动画渐变到透明，让主页面显示出来 */
 }
@@ -152,7 +170,7 @@
   position: absolute;
   inset: 0;
   background: inherit;
-  animation: fadeOutBackground 2.5s ease-in-out forwards;
+  animation: fadeOutBackground 1.8s ease-in-out forwards;
 }
 
 .main-content-react {
@@ -164,7 +182,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  animation: logoScaleAndFade 2.5s ease-in-out forwards;
+  animation: logoScaleAndFade 1.8s ease-in-out forwards;
   /* Animation handles transform - removed static transform */
 }
 
@@ -174,7 +192,7 @@
   height: 75px;
   background: #ffffff;
   border-radius: 1.5px 1.5px 0 0; /* Rounded top, flat bottom */
-  animation: verticalLineUpFadeIn 2.5s ease-in-out forwards;
+  animation: verticalLineUpFadeIn 1.8s ease-in-out forwards;
   position: absolute;
   top: calc(50% - 75px); /* Position so bottom touches center point */
   left: 50%; /* Center horizontally */
@@ -189,7 +207,7 @@
   height: 75px;
   background: #ffffff;
   border-radius: 0 0 1.5px 1.5px; /* Flat top, rounded bottom */
-  animation: verticalLineDownFadeIn 2.5s ease-in-out forwards;
+  animation: verticalLineDownFadeIn 1.8s ease-in-out forwards;
   position: absolute;
   top: 50%;
   left: 50%; /* Center horizontally */
@@ -248,11 +266,12 @@
   width: 160px;
   height: 160px;
   transform: translateY(-50%) translateX(280px); /* Initial position - matches animation start */
+  opacity: 0; /* Start invisible */
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: logoPortalLeft 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.75s
-    forwards; /* Smooth easing, starts after vertical line completes */
+  animation: logoPortalLeft 1s cubic-bezier(0.23, 1, 0.32, 1) 0.75s
+    forwards; /* Ultra-smooth easing with ease-out-expo feel */
   z-index: 2; /* Below mask, above background */
 }
 
@@ -264,11 +283,12 @@
   width: 420px; /* Even larger container for the bigger right logo */
   height: 420px;
   transform: translateY(-50%) translateX(-350px); /* Initial position - matches animation start */
+  opacity: 0; /* Start invisible */
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: logoPortalRight 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.75s
-    forwards; /* Enabled, starts after vertical line completes */
+  animation: logoPortalRight 1s cubic-bezier(0.23, 1, 0.32, 1) 0.75s
+    forwards; /* Ultra-smooth easing with ease-out-expo feel */
   z-index: 2; /* Below mask, above background */
 }
 

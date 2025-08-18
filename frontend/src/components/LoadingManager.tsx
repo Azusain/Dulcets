@@ -1,6 +1,7 @@
 "use client";
 
 import { useLoading } from "@/contexts/LoadingContext";
+import { getAssetPath } from "@/utils/assetPath";
 
 interface LoadingManagerProps {
   children: React.ReactNode;
@@ -27,7 +28,7 @@ export default function LoadingManager({
               <div className="portal-mask-left">
                 <div className="logo-right">
                   <img
-                    src="/images/logo_right.png"
+                    src={getAssetPath("/images/logo_right.png")}
                     alt="Logo Right"
                     className="logo-image"
                   />
@@ -40,7 +41,7 @@ export default function LoadingManager({
               <div className="portal-mask-right">
                 <div className="logo-left">
                   <img
-                    src="/images/logo_left.png"
+                    src={getAssetPath("/images/logo_left.png")}
                     alt="Logo Left"
                     className="logo-image"
                   />
@@ -62,9 +63,7 @@ export default function LoadingManager({
         style={{
           opacity: isLoading ? 0 : 1,
           visibility: "visible", // 总是可见，让背景透过加载屏幕
-          transition: isLoading
-            ? "none"
-            : "opacity 0.8s ease-out 0.2s",
+          transition: isLoading ? "none" : "opacity 0.8s ease-out 0.2s",
           backgroundColor: "transparent",
           zIndex: isLoading ? 1 : "auto", // 在加载时保持在最底层
         }}
