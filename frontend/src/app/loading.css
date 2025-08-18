@@ -335,22 +335,23 @@
 
 .loading-dots {
   display: inline-block;
-  min-width: 2ch;
+  min-width: 3ch;
   position: relative;
   z-index: 999999999 !important; /* Maximum z-index to ensure dots appear above everything */
-  background: rgba(255, 0, 0, 0.2); /* Temporary red background for debugging */
+  background: transparent;
   overflow: visible;
-  border: 1px solid rgba(255, 0, 0, 0.5); /* Temporary red border for debugging */
+  margin-left: 4px; /* Space between text and dots */
 }
 
 .loading-dots::after {
   content: ".";
   animation: loadingDots 1.5s infinite;
-  color: #9ca3af !important;
-  font-weight: normal;
+  color: #ffffff !important; /* Bright white for visibility */
+  font-weight: bold !important; /* Make it bolder */
+  font-size: 1.2em !important; /* Slightly larger */
   display: inline-block;
   text-align: left;
-  min-width: 2ch; /* Reserve space for up to 3 dots */
+  min-width: 3ch; /* Reserve space for up to 3 dots */
   position: relative;
   z-index: 999999999 !important;
   background: transparent;
@@ -358,6 +359,7 @@
   letter-spacing: 0.1em;
   visibility: visible !important;
   opacity: 1 !important;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.8) !important; /* Add glow effect */
 }
 
 /* Ensure the loading screen disappears after animation */

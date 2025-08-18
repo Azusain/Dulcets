@@ -1,6 +1,7 @@
 "use client";
 
 import { useLoading } from "@/contexts/LoadingContext";
+import { useAssetPath } from "@/hooks/useAssetPath";
 
 interface LoadingManagerProps {
   children: React.ReactNode;
@@ -12,6 +13,7 @@ export default function LoadingManager({
   loadingText,
 }: LoadingManagerProps) {
   const { isLoading } = useLoading();
+  const { getAssetPath } = useAssetPath();
 
   return (
     <div
@@ -27,7 +29,7 @@ export default function LoadingManager({
               <div className="portal-mask-left">
                 <div className="logo-right">
                   <img
-                    src="/images/logo_right.png"
+                    src={getAssetPath("/images/logo_right.png")}
                     alt="Logo Right"
                     className="logo-image"
                   />
@@ -40,7 +42,7 @@ export default function LoadingManager({
               <div className="portal-mask-right">
                 <div className="logo-left">
                   <img
-                    src="/images/logo_left.png"
+                    src={getAssetPath("/images/logo_left.png")}
                     alt="Logo Left"
                     className="logo-image"
                   />
