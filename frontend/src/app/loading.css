@@ -4,8 +4,12 @@
     opacity: 1;
     visibility: visible;
   }
-  90% {
+  70% {
     opacity: 1;
+    visibility: visible;
+  }
+  90% {
+    opacity: 0.3;
     visibility: visible;
   }
   100% {
@@ -20,6 +24,9 @@
   }
   70% {
     opacity: 1;
+  }
+  90% {
+    opacity: 0.3;
   }
   100% {
     opacity: 0;
@@ -137,6 +144,7 @@
 .loading-screen {
   animation: fadeOut 2.5s ease-in-out forwards;
   background: #000000;
+  /* 黑色背景会通过动画渐变到透明，让主页面显示出来 */
 }
 
 .loading-screen::before {

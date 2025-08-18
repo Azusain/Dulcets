@@ -192,8 +192,13 @@ body {
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
-  background: #111827; /* 与加载屏幕背景色一致 */
+  background: #000000; /* 黑色背景作为默认背景 */
   overflow-x: hidden; /* Prevent horizontal scrolling and edge artifacts */
+}
+
+/* 主内容区域背景覆盖 */
+#main-content {
+  background: transparent;
 }
 
 #main-content {
