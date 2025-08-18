@@ -355,8 +355,7 @@
   display: inline-block;
   text-align: left;
   min-width: 3ch;
-  position: relative;
-  top: 5px !important; /* Move dots down 5px relative to text */
+  position: static; /* Remove any positioning that might cause issues */
   z-index: 999999999 !important;
   background: transparent;
   white-space: nowrap;
