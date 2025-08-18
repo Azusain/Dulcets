@@ -57,9 +57,10 @@ export default function LoadingManager({
                 transform: 'translateY(400px)', /* Move down 400px */
                 marginTop: '32px',
                 display: 'flex',
-                alignItems: 'center',
+                alignItems: 'center', /* This will center everything horizontally */
                 justifyContent: 'center',
-                gap: '16px'
+                gap: '16px',
+                height: 'auto' /* Let height adjust naturally */
               }}
             >
               {/* Left horizontal line */}
@@ -69,17 +70,18 @@ export default function LoadingManager({
                   height: '1px',
                   backgroundColor: '#ffffff',
                   opacity: 0.6,
-                  alignSelf: 'center' /* Ensure line aligns with text center */
+                  flexShrink: 0 /* Prevent line from shrinking */
                 }}
               ></div>
               
-              {/* Text and dots */}
+              {/* Text and dots container */}
               <div style={{ 
                 display: 'flex', 
-                alignItems: 'baseline', /* Align text and dots properly */
-                whiteSpace: 'nowrap'
+                alignItems: 'center', /* Center text and dots vertically within this container */
+                whiteSpace: 'nowrap',
+                flexShrink: 0 /* Prevent text from shrinking */
               }}>
-                <span>{loadingText}</span>
+                <span style={{ lineHeight: '1.2' }}>{loadingText}</span>
                 <span 
                   className="loading-dots"
                   style={{ zIndex: 999999999, position: 'relative' }}
@@ -93,7 +95,7 @@ export default function LoadingManager({
                   height: '1px',
                   backgroundColor: '#ffffff',
                   opacity: 0.6,
-                  alignSelf: 'center' /* Ensure line aligns with text center */
+                  flexShrink: 0 /* Prevent line from shrinking */
                 }}
               ></div>
             </div>
