@@ -50,21 +50,15 @@ export default function LoadingManager({
               </div>
             </div>
             <div 
-              className="text-2xl text-white mt-8 font-semibold" 
+              className="text-xl text-gray-300" 
               style={{ 
                 zIndex: 999999999, 
                 position: 'relative',
-                minHeight: '60px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: 'rgba(0, 0, 0, 0.3)',
-                padding: '16px 24px',
-                borderRadius: '8px',
-                border: '2px solid rgba(255, 255, 255, 0.1)'
+                transform: 'translateY(400px)', /* Move down 400px for testing */
+                marginTop: '32px'
               }}
             >
-              <span style={{ color: '#ffffff' }}>{loadingText}</span>
+              {loadingText}
               <span 
                 className="loading-dots"
                 style={{ zIndex: 999999999, position: 'relative' }}
