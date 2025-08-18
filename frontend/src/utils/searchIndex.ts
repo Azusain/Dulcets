@@ -333,9 +333,9 @@ export function searchContent(query: string, customItems: SearchItem[] = [], t?:
 // Get localized service description with truncation
 function getServiceDescription(serviceKey: string, t: (key: string) => string): string {
   const fullDescription = t(`about.genres.${serviceKey}.content`) || t(`services.${serviceKey}.description`) || '';
-  // Truncate to approximately one line (about 100 characters)
-  if (fullDescription.length > 100) {
-    return fullDescription.substring(0, 100).trim() + '...';
+  // Truncate to approximately one line (about 80 characters for better display)
+  if (fullDescription.length > 80) {
+    return fullDescription.substring(0, 80).trim() + '...';
   }
   return fullDescription;
 }
