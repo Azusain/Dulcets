@@ -1,6 +1,8 @@
 import ConditionalNavigation from "@/components/ConditionalNavigation";
+import SEOHead from "@/components/SEOHead";
 import { LoadingProvider } from "@/contexts/LoadingContext";
 import { getAssetPath } from "@/utils/assetPath";
+import { pageSEO, generateHreflangUrls } from "@/utils/seo";
 import "./global.css";
 import "./loading.css";
 
@@ -9,20 +11,36 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Use home page SEO as default for layout
+  const seoData = {
+    ...pageSEO.home,
+    hreflangUrls: generateHreflangUrls()
+  };
+
   return (
-    <html>
+    <html lang="ja">
       <head>
-        {/* TODO: icon */}
         <meta charSet="UTF-8" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0"
-        ></meta>
+        />
+        
+        {/* SEO Meta Tags and Structured Data */}
+        <SEOHead seoData={seoData} currentPath="" />
+        
+        {/* Favicon */}
         <link
           rel="icon"
           type="image/png"
           href={getAssetPath("/images/logo_black.png")}
         />
+        <link
+          rel="apple-touch-icon"
+          href={getAssetPath("/images/logo_black.png")}
+        />
+        
+        {/* Fonts */}
         <link
           href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Shippori+Mincho+B1:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"
@@ -31,6 +49,8 @@ export default function RootLayout({
           rel="stylesheet"
           href={getAssetPath("/fonts/fonts.css")}
         />
+        
+        {/* Custom Styles */}
         <style
           dangerouslySetInnerHTML={{
             __html: `
@@ -45,7 +65,8 @@ export default function RootLayout({
           `,
           }}
         />
-        <title>Dulcets</title>
+        
+        {/* JavaScript for scroll behavior */}
         <script
           dangerouslySetInnerHTML={{
             __html: `

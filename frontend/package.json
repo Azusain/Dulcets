@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "npm run generate-seo && next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next build",
+    "export": "npm run generate-seo && next build",
     "add-video": "node scripts/add-video.js",
-    "validate-works": "node scripts/validate-works.js"
+    "validate-works": "node scripts/validate-works.js",
+    "generate-seo": "node scripts/generate-sitemap.js"
   },
   "dependencies": {
     "clsx": "^2.1.1",
