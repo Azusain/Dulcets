@@ -49,65 +49,23 @@ export default function LoadingManager({
                 </div>
               </div>
             </div>
-            <div 
-              className="text-xl text-gray-300" 
-              style={{ 
-                zIndex: 999999999, 
-                position: 'relative',
-                transform: 'translateY(400px)', /* Move down 400px */
-                marginTop: '32px',
-                display: 'flex',
-                alignItems: 'center', /* This will center everything horizontally */
-                justifyContent: 'center',
-                gap: '32px', /* Increased gap to push lines further from text */
-                height: 'auto' /* Let height adjust naturally */
+            <div
+              className="text-xl text-gray-300"
+              style={{
+                position: "relative",
+                transform: "translateY(400px)",
+                marginTop: "32px",
+                display: "flex",
+                alignItems: "baseline",
+                justifyContent: "center",
+                whiteSpace: "nowrap",
+                zIndex: 999999999,
               }}
             >
-              {/* Left horizontal line */}
-              <div 
-                style={{
-                  width: '80px',
-                  height: '1px',
-                  backgroundColor: '#ffffff',
-                  opacity: 0.6,
-                  flexShrink: 0 /* Prevent line from shrinking */
-                }}
-              ></div>
-              
-              {/* Text and dots container */}
-              <div style={{ 
-                display: 'flex', 
-                alignItems: 'baseline', /* Use baseline alignment for better text/dots positioning */
-                whiteSpace: 'nowrap',
-                flexShrink: 0, /* Prevent text from shrinking */
-                position: 'relative' /* Create positioning context */
-              }}>
-                <span style={{ 
-                  lineHeight: '1.2',
-                  display: 'inline-block',
-                  position: 'relative'
-                }}>{loadingText}</span>
-                <span 
-                  className="loading-dots"
-                  style={{ 
-                    zIndex: 999999999, 
-                    position: 'relative',
-                    display: 'inline-block',
-                    overflow: 'visible'
-                  }}
-                ></span>
-              </div>
-              
-              {/* Right horizontal line */}
-              <div 
-                style={{
-                  width: '80px',
-                  height: '1px',
-                  backgroundColor: '#ffffff',
-                  opacity: 0.6,
-                  flexShrink: 0 /* Prevent line from shrinking */
-                }}
-              ></div>
+              <span>
+                {loadingText}
+                <span className="loading-dots"></span>
+              </span>
             </div>
           </div>
         </div>

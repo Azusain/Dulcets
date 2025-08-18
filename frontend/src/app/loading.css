@@ -270,8 +270,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: logoPortalLeft 1s cubic-bezier(0.23, 1, 0.32, 1) 0.75s
-    forwards; /* Ultra-smooth easing with ease-out-expo feel */
+  animation: logoPortalLeft 1s cubic-bezier(0.23, 1, 0.32, 1) 0.75s forwards; /* Ultra-smooth easing with ease-out-expo feel */
   z-index: 2; /* Below mask, above background */
 }
 
@@ -287,8 +286,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: logoPortalRight 1s cubic-bezier(0.23, 1, 0.32, 1) 0.75s
-    forwards; /* Ultra-smooth easing with ease-out-expo feel */
+  animation: logoPortalRight 1s cubic-bezier(0.23, 1, 0.32, 1) 0.75s forwards; /* Ultra-smooth easing with ease-out-expo feel */
   z-index: 2; /* Below mask, above background */
 }
 
@@ -337,17 +335,15 @@
   display: inline-block;
   min-width: 3ch;
   position: relative;
-  z-index: 999999999 !important;
-  background: transparent;
-  overflow: visible !important;
+  overflow: visible;
   margin-left: 4px;
-  pointer-events: none; /* Prevent any interaction issues */
-  height: auto; /* Allow natural height */
-  width: auto; /* Allow natural width */
+  pointer-events: none;
+  height: auto;
+  width: auto;
 }
 
 .loading-dots::after {
-  content: ".";
+  content: "...";
   animation: loadingDots 1.5s infinite;
   color: #ffffff !important;
   font-weight: bold !important;
@@ -355,15 +351,15 @@
   display: inline-block;
   text-align: left;
   min-width: 3ch;
-  position: static; /* Remove any positioning that might cause issues */
+  position: relative;
   z-index: 999999999 !important;
-  background: transparent;
   white-space: nowrap;
   letter-spacing: 0.1em;
   visibility: visible !important;
   opacity: 1 !important;
   text-shadow: 0 0 4px rgba(255, 255, 255, 0.8) !important;
-  vertical-align: baseline !important;
+  vertical-align: baseline;
+  transform: translateY(-3px);
 }
 
 /* Ensure the loading screen disappears after animation */
@@ -398,4 +394,65 @@
 .post-grid:hover {
   transform: translateY(-4px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Custom cursor effects */
+@keyframes cursor-scale {
+  0% { 
+    transform: scale(1); 
+    opacity: 0.8; 
+  }
+  50% { 
+    transform: scale(1.15); 
+    opacity: 1; 
+  }
+  100% { 
+    transform: scale(1); 
+    opacity: 0.8; 
+  }
+}
+
+.cursor-scale {
+  animation: cursor-scale 2s ease-in-out infinite;
+}
+
+/* Custom cursor with play button */
+.custom-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: transform 0.1s ease-out;
+}
+
+.custom-cursor-circle {
+  width: 60px;
+  height: 60px;
+  border: 2px solid white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: cursor-scale 2s ease-in-out infinite;
+}
+
+.custom-cursor-play {
+  width: 16px;
+  height: 16px;
+  color: white;
+  margin-left: 2px;
+}
+
+/* Hero section uses pointer cursor */
+#hero {
+  cursor: pointer !important;
+}
+
+#hero * {
+  cursor: inherit;
+}
+
+/* Modal backdrop blur */
+.modal-backdrop {
+  backdrop-filter: blur(8px);
 }

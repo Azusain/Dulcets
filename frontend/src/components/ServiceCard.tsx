@@ -63,14 +63,14 @@ export const ServiceCard = ({
 
           {/* Arrow Icon - appears on hover */}
           <div
-            className={`absolute top-4 right-4 w-8 h-8 bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm transition-all duration-500 ${
+            className={`absolute top-4 right-4 w-8 h-8 bg-none  flex items-center justify-center shadow-sm transition-all duration-500 ${
               isHovered
                 ? "opacity-100 transform scale-100"
                 : "opacity-0 transform scale-75"
             }`}
           >
             <svg
-              className="w-4 h-4 text-gray-700"
+              className="w-6 h-6 white"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
