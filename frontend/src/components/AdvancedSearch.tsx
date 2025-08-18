@@ -13,9 +13,10 @@ interface AdvancedSearchProps {
   onClose: () => void;
   onNavigate: (url: string) => void;
   currentLanguage?: string; // Add language support
+  t?: (key: string) => string; // Add translator function
 }
 
-export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLanguage }: AdvancedSearchProps) {
+export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLanguage, t }: AdvancedSearchProps) {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +25,9 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
   const [dynamicIndex, setDynamicIndex] = useState<any[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
+  
+  // Fallback translator function if not provided
+  const translate = t || ((key: string) => key);
 
   // Global ESC key listener
   useEffect(() => {
@@ -231,7 +235,7 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
                 value={query}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
-                placeholder="Search music, services, artworks..."
+                placeholder={translate('search.placeholder')}
                 className="w-full bg-transparent border-0 border-b-2 border-gray-600 text-white placeholder-gray-400 px-0 py-4 focus:outline-none focus:border-white transition-all duration-200"
                 style={{
                   fontSize: '36px',
@@ -253,7 +257,7 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
         <div ref={resultsRef} className="mt-8 max-h-[60vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
           {!query.trim() && searchHistory.length > 0 && (
             <div className="mb-8">
-              <h3 className="text-gray-400 text-sm uppercase tracking-wide mb-3">Recent Searches</h3>
+              <h3 className="text-gray-400 text-sm uppercase tracking-wide mb-3">{translate('search.recent_searches')}</h3>
               <div className="flex flex-wrap gap-2">
                 {searchHistory.map((historyItem, index) => (
                   <button
@@ -330,18 +334,18 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
 
           {results && results.categories.length === 0 && query.trim() && !isLoading && (
             <div className="text-center py-8">
-              <div className="text-gray-400 text-lg mb-2">No results found</div>
+              <div className="text-gray-400 text-lg mb-2">{translate('search.no_results')}</div>
               <div className="text-gray-500 text-sm">
-                Try searching for "music", "jpop", "artwork", or "3d"
+                {translate('search.no_results_suggestion')}
               </div>
             </div>
           )}
 
           {!query.trim() && searchHistory.length === 0 && (
             <div className="text-center py-8">
-              <div className="text-gray-400 text-lg mb-2">Start typing to search</div>
+              <div className="text-gray-400 text-lg mb-2">{translate('search.start_typing')}</div>
               <div className="text-gray-500 text-sm">
-                Search through our music works, services, artworks, and more
+                {translate('search.search_description')}
               </div>
             </div>
           )}

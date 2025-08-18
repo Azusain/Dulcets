@@ -284,6 +284,7 @@ const DsNavigation = () => {
                 closeSidebar();
               }}
               currentLanguage={currentLanguage}
+              t={t}
             />
 
             {/* Bottom hint with keyboard shortcuts */}
@@ -293,19 +294,19 @@ const DsNavigation = () => {
                   <kbd className="px-1.5 py-0.5 bg-gray-700 border border-gray-600 rounded text-gray-400">
                     ↑↓
                   </kbd>
-                  Navigate
+                  {t('search.keyboard_shortcuts.navigate')}
                 </span>
                 <span className="flex items-center gap-1">
                   <kbd className="px-1.5 py-0.5 bg-gray-700 border border-gray-600 rounded text-gray-400">
                     Enter
                   </kbd>
-                  Select
+                  {t('search.keyboard_shortcuts.select')}
                 </span>
                 <span className="flex items-center gap-1">
                   <kbd className="px-1.5 py-0.5 bg-gray-700 border border-gray-600 rounded text-gray-400">
                     ESC
                   </kbd>
-                  Close
+                  {t('search.keyboard_shortcuts.close')}
                 </span>
               </div>
             </div>
