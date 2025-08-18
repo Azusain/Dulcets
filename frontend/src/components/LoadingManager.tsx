@@ -59,7 +59,7 @@ export default function LoadingManager({
                 display: 'flex',
                 alignItems: 'center', /* This will center everything horizontally */
                 justifyContent: 'center',
-                gap: '16px',
+                gap: '32px', /* Increased gap to push lines further from text */
                 height: 'auto' /* Let height adjust naturally */
               }}
             >
