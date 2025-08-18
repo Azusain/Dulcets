@@ -336,6 +336,7 @@
 .loading-dots {
   display: inline-block;
   min-width: 20px;
+  position: relative;
 }
 
 .loading-dots::after {
@@ -343,6 +344,9 @@
   animation: loadingDots 1.5s infinite;
   color: #9ca3af;
   font-weight: normal;
+  display: inline-block;
+  text-align: left;
+  min-width: 2ch; /* Reserve space for up to 3 dots */
 }
 
 /* Ensure the loading screen disappears after animation */
