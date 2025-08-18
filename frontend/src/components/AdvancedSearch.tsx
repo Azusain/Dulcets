@@ -202,7 +202,11 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
       onNavigate(item.url);
       onClose();
     } else if (item.url.startsWith('http')) {
-      // External link
+      // External link (YouTube videos, etc.)
+      window.open(item.url, '_blank');
+      onClose();
+    } else if (item.metadata?.isImage) {
+      // Image files - open in new tab
       window.open(item.url, '_blank');
       onClose();
     } else {

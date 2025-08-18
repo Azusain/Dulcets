@@ -321,34 +321,42 @@ export function buildDynamicSearchIndex(
   
   // Add artworks
   for (const artwork of artworks) {
+    // Construct full image URL
+    const imageUrl = artwork.imagePath ? `/images/artworks/${artwork.imagePath}` : '#artworks';
+    
     dynamicItems.push({
       id: `artwork-${artwork.id}`,
       title: artwork.title || `Artwork ${artwork.id}`,
-      description: `Digital artwork piece by Dulcets`,
+      description: `Digital artwork piece by Dulcets - Click to view image`,
       category: 'artwork',
-      url: '#artworks',
+      url: imageUrl,
       keywords: ['artwork', 'illustration', 'digital art', 'design', '绘画', '艺术作品'],
       content: `${artwork.title || ''} artwork illustration digital art 绘画作品 艺术`,
       metadata: {
         imagePath: artwork.imagePath,
-        pos: artwork.pos
+        pos: artwork.pos,
+        isImage: true
       }
     });
   }
   
   // Add 3D models
   for (const model of modelings) {
+    // Construct full image URL
+    const imageUrl = model.imagePath ? `/images/modeling/${model.imagePath}` : '#modeling';
+    
     dynamicItems.push({
       id: `modeling-${model.id}`,
       title: model.title || `3D Model ${model.id}`,
-      description: `3D modeling work by Dulcets`,
+      description: `3D modeling work by Dulcets - Click to view image`,
       category: 'modeling',
-      url: '#modeling',
-      keywords: ['3d', 'modeling', 'model', 'animation', '3d modeling'],
-      content: `${model.title || ''} 3d modeling animation`,
+      url: imageUrl,
+      keywords: ['3d', 'modeling', 'model', 'animation', '3d modeling', '三维建模', '3D模型'],
+      content: `${model.title || ''} 3d modeling animation 三维建模 3D模型`,
       metadata: {
         imagePath: model.imagePath,
-        pos: model.pos
+        pos: model.pos,
+        isImage: true
       }
     });
   }
