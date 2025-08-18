@@ -76,20 +76,20 @@
 
 @keyframes logoPortalLeft {
   0% {
-    transform: translateX(-20px);
-  } /* Start from right side of mask */
+    transform: translateY(-50%) translateX(280px);
+  } /* Start from right side of green mask, hidden */
   100% {
-    transform: translateX(-160px);
-  }
+    transform: translateY(-50%) translateX(150px);
+  } /* End visible in green mask */
 }
 
 @keyframes logoPortalRight {
   0% {
-    transform: translateX(-100px);
-  } /* Start from left side of mask, hidden */
+    transform: translateY(-50%) translateX(-350px);
+  } /* Start from left side of orange mask, hidden */
   100% {
-    transform: translateX(310px);
-  }
+    transform: translateY(-50%) translateX(60px);
+  } /* End visible in orange mask */
 }
 
 @keyframes logoScaleAndFade {
@@ -195,7 +195,7 @@
   position: absolute;
   top: 50%;
   left: calc(50% + 2px); /* Start just right of the vertical line */
-  width: 300px; /* Normal width */
+  width: 700px; /* Much larger width for right side */
   height: 160px; /* Height to contain logo */
   transform: translateY(-50%);
   overflow: hidden; /* ENABLED - creates portal clipping effect */
@@ -232,13 +232,14 @@
   transform: translateY(-50%); /* Center vertically */
 }
 
-/* Left logo - positioned inside portal mask container */
+/* Left logo - positioned inside right portal mask container */
 .logo-left {
   position: absolute;
-  top: 0; /* Relative to portal mask container */
-  left: 0; /* Start at the container's left edge */
+  top: 50%; /* Center vertically in mask */
+  left: -5px; /* Start at the container's left edge */
   width: 160px;
   height: 160px;
+  /* transform: translateY(-50%); */ /* Handled in animation */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -246,13 +247,14 @@
   z-index: 2; /* Below mask, above background */
 }
 
-/* Right logo - positioned inside right portal mask container */
+/* Right logo - positioned inside left portal mask container */
 .logo-right {
   position: absolute;
-  top: 0; /* Relative to portal mask container */
-  left: 0; /* Start at the container's left edge */
+  top: 50%; /* Center vertically in mask */
+  left: -55px; /* Start at the container's left edge */
   width: 420px; /* Even larger container for the bigger right logo */
   height: 420px;
+  /* transform: translateY(-50%); */ /* Handled in animation */
   display: flex;
   align-items: center;
   justify-content: center;
