@@ -362,6 +362,10 @@
     "search_description": "搜索我们的音乐作品、服务、艺术作品等内容",
     "no_results": "未找到搜索结果",
     "no_results_suggestion": "尝试搜索 \"music\"、\"jpop\"、\"artwork\" 或 \"3d\"",
+    "show_more": "显示更多",
+    "show_less": "显示更少",
+    "total_results": "共找到 {{count}} 个结果",
+    "categories_count": "{{count}} 个类别",
     "keyboard_shortcuts": {
       "navigate": "导航",
       "select": "选择",

@@ -362,6 +362,10 @@
     "search_description": "音楽作品、サービス、アートワークなどを検索できます",
     "no_results": "検索結果が見つかりません",
     "no_results_suggestion": "\"music\"、\"jpop\"、\"artwork\"、\"3d\" などで検索してみてください",
+    "show_more": "さらに表示",
+    "show_less": "表示を減らす",
+    "total_results": "{{count}}件の結果が見つかりました",
+    "categories_count": "{{count}}カテゴリ",
     "keyboard_shortcuts": {
       "navigate": "移動",
       "select": "選択",

@@ -29,8 +29,17 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
   const inputRef = useRef<HTMLInputElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
   
-  // Fallback translator function if not provided
+  // Fallback translator function if not provided with template support
   const translate = t || ((key: string) => key);
+  
+  // Simple template replacer for translations with {{variable}} syntax
+  const translateWithVars = (key: string, vars: Record<string, any> = {}) => {
+    let translation = translate(key);
+    Object.keys(vars).forEach(varKey => {
+      translation = translation.replace(new RegExp(`\\{\\{${varKey}\\}\\}`, 'g'), vars[varKey]);
+    });
+    return translation;
+  };
 
   // Global Ctrl+Q/Cmd+Q key listener
   useEffect(() => {
@@ -385,14 +394,14 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
                         >
                           {isExpanded ? (
                             <>
-                              <span>显示更少</span>
+                              <span>{translate('search.show_less')}</span>
                               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
                               </svg>
                             </>
                           ) : (
                             <>
-                              <span>显示更多 ({totalItemsInCategory - displayedItems.length} 个)</span>
+                              <span>{translate('search.show_more')} ({totalItemsInCategory - displayedItems.length})</span>
                               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                               </svg>
@@ -407,9 +416,9 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
               
               {/* Total results summary */}
               <div className="text-center text-gray-400 text-sm pt-4 border-t border-gray-700">
-                <span>共找到 {results.totalResults} 个结果</span>
+                <span>{translateWithVars('search.total_results', { count: results.totalResults })}</span>
                 {results.categories.length > 1 && (
-                  <span className="ml-2">• {results.categories.length} 个类别</span>
+                  <span className="ml-2">• {translateWithVars('search.categories_count', { count: results.categories.length })}</span>
                 )}
               </div>
             </div>
