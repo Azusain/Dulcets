@@ -117,6 +117,35 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
     return results.categories.flatMap(category => category.items);
   };
 
+  // Scroll selected item into view
+  const scrollToSelectedItem = (index: number) => {
+    // Small delay to ensure DOM update
+    setTimeout(() => {
+      const container = resultsRef.current;
+      if (!container) return;
+      
+      // Find the selected element by data attribute or by calculating position
+      const resultItems = container.querySelectorAll('[data-result-index]');
+      const selectedElement = resultItems[index] as HTMLElement;
+      
+      if (selectedElement) {
+        const containerRect = container.getBoundingClientRect();
+        const elementRect = selectedElement.getBoundingClientRect();
+        
+        // Check if element is out of view
+        const isAbove = elementRect.top < containerRect.top;
+        const isBelow = elementRect.bottom > containerRect.bottom;
+        
+        if (isAbove || isBelow) {
+          selectedElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest'
+          });
+        }
+      }
+    }, 50);
+  };
+
   // Handle keyboard navigation
   const handleKeyDown = (e: React.KeyboardEvent) => {
     const allItems = getAllResultItems();
@@ -129,16 +158,20 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
         
       case 'ArrowDown':
         e.preventDefault();
-        setSelectedIndex(prev => 
-          prev < allItems.length - 1 ? prev + 1 : 0
-        );
+        setSelectedIndex(prev => {
+          const newIndex = prev < allItems.length - 1 ? prev + 1 : 0;
+          scrollToSelectedItem(newIndex);
+          return newIndex;
+        });
         break;
         
       case 'ArrowUp':
         e.preventDefault();
-        setSelectedIndex(prev => 
-          prev > 0 ? prev - 1 : allItems.length - 1
-        );
+        setSelectedIndex(prev => {
+          const newIndex = prev > 0 ? prev - 1 : allItems.length - 1;
+          scrollToSelectedItem(newIndex);
+          return newIndex;
+        });
         break;
         
       case 'Enter':
@@ -216,8 +249,8 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
           </div>
         </div>
 
-        {/* Search results */}
-        <div ref={resultsRef} className="mt-8">
+        {/* Search results - scrollable container */}
+        <div ref={resultsRef} className="mt-8 max-h-[60vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
           {!query.trim() && searchHistory.length > 0 && (
             <div className="mb-8">
               <h3 className="text-gray-400 text-sm uppercase tracking-wide mb-3">Recent Searches</h3>
@@ -256,32 +289,27 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
                       return (
                         <div
                           key={item.id}
+                          data-result-index={globalIndex}
                           onClick={() => handleResultClick(item)}
                           className={`p-3 rounded-lg cursor-pointer transition-colors ${
                             isSelected 
-                              ? 'bg-blue-600 text-white' 
+                              ? 'bg-gray-800 text-gray-200' 
                               : 'hover:bg-gray-800 text-gray-200'
                           }`}
                         >
                           <div className="flex items-start justify-between">
                             <div className="flex-1">
                               <div className="font-medium text-sm mb-1">{item.title}</div>
-                              <div className={`text-xs ${
-                                isSelected ? 'text-blue-100' : 'text-gray-400'
-                              }`}>
+                              <div className="text-xs text-gray-400">
                                 {item.description}
                               </div>
                               {item.metadata?.duration && (
-                                <div className={`text-xs mt-1 ${
-                                  isSelected ? 'text-blue-200' : 'text-gray-500'
-                                }`}>
+                                <div className="text-xs mt-1 text-gray-500">
                                   Duration: {item.metadata.duration}
                                 </div>
                               )}
                             </div>
-                            <div className={`text-xs ${
-                              isSelected ? 'text-blue-200' : 'text-gray-500'
-                            }`}>
+                            <div className="text-xs text-gray-500">
                               {item.category}
                             </div>
                           </div>
