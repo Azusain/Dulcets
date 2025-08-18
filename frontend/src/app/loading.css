@@ -236,14 +236,15 @@
 .logo-left {
   position: absolute;
   top: 50%; /* Center vertically in mask */
-  left: -5px; /* Start at the container's left edge */
+  left: 0px; /* Start at the container's left edge */
   width: 160px;
   height: 160px;
-  /* transform: translateY(-50%); */ /* Handled in animation */
+  transform: translateY(-50%) translateX(280px); /* Initial position - matches animation start */
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: logoPortalLeft 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; /* Smooth easing */
+  animation: logoPortalLeft 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.75s
+    forwards; /* Smooth easing, starts after vertical line completes */
   z-index: 2; /* Below mask, above background */
 }
 
@@ -254,11 +255,12 @@
   left: -55px; /* Start at the container's left edge */
   width: 420px; /* Even larger container for the bigger right logo */
   height: 420px;
-  /* transform: translateY(-50%); */ /* Handled in animation */
+  transform: translateY(-50%) translateX(-350px); /* Initial position - matches animation start */
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: logoPortalRight 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; /* Enabled */
+  animation: logoPortalRight 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.75s
+    forwards; /* Enabled, starts after vertical line completes */
   z-index: 2; /* Below mask, above background */
 }
 
