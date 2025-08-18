@@ -54,7 +54,6 @@ export default function LoadingManager({
               style={{ 
                 zIndex: 999999999, 
                 position: 'relative',
-                transform: 'translateY(400px)', /* Keep it visible at bottom */
                 marginTop: '32px',
                 display: 'flex',
                 alignItems: 'center',
