@@ -80,7 +80,31 @@
   "services": {
     "title": "我们的服务",
     "our_service": "我们的服务",
-    "subtitle": "我们提供的三大主要服务：音乐制作、绘画作品、3D建模"
+    "subtitle": "我们提供的三大主要服务：音乐制作、绘画作品、3D建模",
+    "music": {
+      "title": "[ZH] Music Production",
+      "description": "[ZH] High-quality music production, including composing, arranging, and recording."
+    },
+    "artist": {
+      "title": "[ZH] Artist Management",
+      "description": "[ZH] Comprehensive artist management services to help you grow your career."
+    },
+    "production": {
+      "title": "[ZH] Sound Production",
+      "description": "[ZH] Professional sound production, including mixing, mastering, and sound effects."
+    },
+    "distribution": {
+      "title": "[ZH] Music Distribution",
+      "description": "[ZH] Global music distribution to all major platforms, including Spotify, Apple Music, and more."
+    },
+    "marketing": {
+      "title": "[ZH] Music Marketing",
+      "description": "[ZH] Customized music marketing campaigns to help you reach your target audience."
+    },
+    "events": {
+      "title": "[ZH] Event Planning",
+      "description": "[ZH] Professional event planning services, including concerts, fan meetings, and more."
+    }
   },
   "releases": {
     "title": "最新发布",
@@ -97,7 +121,8 @@
   },
   "works": {
     "title": "我们的作品",
-    "read_more": "阅读更多"
+    "read_more": "阅读更多",
+    "lead_description": "[ZH] Explore our collection of music works and video content. From original compositions to cover songs, enjoy our diverse range of creative works."
   },
   "pricing": {
     "title": "服务价位",
@@ -342,5 +367,6 @@
       "select": "选择",
       "close": "关闭"
     }
-  }
+  },
+  "button": "按钮"
 }

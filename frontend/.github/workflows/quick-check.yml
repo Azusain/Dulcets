@@ -1,0 +1,60 @@
+name: ⚡ Quick Check
+
+on:
+  push:
+    branches: [ dev, feature/*, fix/*, chore/* ]
+  workflow_dispatch:
+
+jobs:
+  quick-validation:
+    name: ⚡ Quick Validation
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📦 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 📋 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        cache-dependency-path: 'frontend/package-lock.json'
+        
+    - name: 📥 Install dependencies
+      working-directory: ./frontend
+      run: npm ci
+      
+    - name: 🔷 TypeScript check
+      working-directory: ./frontend
+      run: npx tsc --noEmit
+      
+    - name: 🧹 Quick lint check
+      working-directory: ./frontend
+      run: npm run lint -- --max-warnings 10
+      
+    - name: 🔍 Essential health checks
+      working-directory: ./frontend
+      run: |
+        echo "Running essential health checks..."
+        npm run check:components
+        npm run check:deps
+        
+    - name: 🌍 i18n quick check
+      working-directory: ./frontend
+      run: npm run analyze:i18n || echo "i18n issues detected but not blocking"
+      
+    - name: 🏗️ Build check
+      working-directory: ./frontend
+      run: npm run build
+      
+    - name: 📊 Quick summary
+      run: |
+        echo "## ⚡ Quick Check Results" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ TypeScript compilation: OK" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ ESLint validation: OK" >> $GITHUB_STEP_SUMMARY  
+        echo "- ✅ Component usage: OK" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Dependencies: OK" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Build process: OK" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "🎉 All essential checks passed!" >> $GITHUB_STEP_SUMMARY
