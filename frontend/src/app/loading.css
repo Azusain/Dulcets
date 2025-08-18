@@ -84,19 +84,37 @@
 @keyframes logoPortalLeft {
   0% {
     transform: translateY(-50%) translateX(280px);
+    opacity: 0;
   } /* Start from right side of green mask, hidden */
+  10% {
+    opacity: 1;
+  } /* Fade in quickly */
+  90% {
+    transform: translateY(-50%) translateX(150px);
+    opacity: 1;
+  } /* Almost at final position */
   100% {
     transform: translateY(-50%) translateX(150px);
-  } /* End visible in green mask */
+    opacity: 1;
+  } /* End visible in green mask, hold position */
 }
 
 @keyframes logoPortalRight {
   0% {
     transform: translateY(-50%) translateX(-350px);
+    opacity: 0;
   } /* Start from left side of orange mask, hidden */
+  10% {
+    opacity: 1;
+  } /* Fade in quickly */
+  90% {
+    transform: translateY(-50%) translateX(60px);
+    opacity: 1;
+  } /* Almost at final position */
   100% {
     transform: translateY(-50%) translateX(60px);
-  } /* End visible in orange mask */
+    opacity: 1;
+  } /* End visible in orange mask, hold position */
 }
 
 @keyframes logoScaleAndFade {
@@ -248,11 +266,12 @@
   width: 160px;
   height: 160px;
   transform: translateY(-50%) translateX(280px); /* Initial position - matches animation start */
+  opacity: 0; /* Start invisible */
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: logoPortalLeft 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.75s
-    forwards; /* Smooth easing, starts after vertical line completes */
+  animation: logoPortalLeft 1s cubic-bezier(0.23, 1, 0.32, 1) 0.75s
+    forwards; /* Ultra-smooth easing with ease-out-expo feel */
   z-index: 2; /* Below mask, above background */
 }
 
@@ -264,11 +283,12 @@
   width: 420px; /* Even larger container for the bigger right logo */
   height: 420px;
   transform: translateY(-50%) translateX(-350px); /* Initial position - matches animation start */
+  opacity: 0; /* Start invisible */
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: logoPortalRight 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.75s
-    forwards; /* Enabled, starts after vertical line completes */
+  animation: logoPortalRight 1s cubic-bezier(0.23, 1, 0.32, 1) 0.75s
+    forwards; /* Ultra-smooth easing with ease-out-expo feel */
   z-index: 2; /* Below mask, above background */
 }
 
