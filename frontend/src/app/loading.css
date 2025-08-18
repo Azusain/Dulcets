@@ -86,14 +86,17 @@
     transform: translateY(-50%) translateX(280px);
     opacity: 0;
   } /* Start from right side of green mask, hidden */
-  20% {
+  10% {
     opacity: 1;
-    transform: translateY(-50%) translateX(240px);
-  } /* Gentle fade in with slower start */
+  } /* Fade in quickly */
+  90% {
+    transform: translateY(-50%) translateX(150px);
+    opacity: 1;
+  } /* Almost at final position */
   100% {
     transform: translateY(-50%) translateX(150px);
     opacity: 1;
-  } /* End visible in green mask */
+  } /* End visible in green mask, hold position */
 }
 
 @keyframes logoPortalRight {
@@ -101,14 +104,17 @@
     transform: translateY(-50%) translateX(-350px);
     opacity: 0;
   } /* Start from left side of orange mask, hidden */
-  20% {
+  10% {
     opacity: 1;
-    transform: translateY(-50%) translateX(-280px);
-  } /* Gentle fade in with slower start */
+  } /* Fade in quickly */
+  90% {
+    transform: translateY(-50%) translateX(60px);
+    opacity: 1;
+  } /* Almost at final position */
   100% {
     transform: translateY(-50%) translateX(60px);
     opacity: 1;
-  } /* End visible in orange mask */
+  } /* End visible in orange mask, hold position */
 }
 
 @keyframes logoScaleAndFade {
@@ -264,8 +270,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: logoPortalLeft 1s cubic-bezier(0.4, 0.0, 0.2, 1) 0.75s
-    forwards; /* Gentle ease-out with slower initial acceleration */
+  animation: logoPortalLeft 1s cubic-bezier(0.23, 1, 0.32, 1) 0.75s
+    forwards; /* Ultra-smooth easing with ease-out-expo feel */
   z-index: 2; /* Below mask, above background */
 }
 
@@ -281,8 +287,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: logoPortalRight 1s cubic-bezier(0.4, 0.0, 0.2, 1) 0.75s
-    forwards; /* Gentle ease-out with slower initial acceleration */
+  animation: logoPortalRight 1s cubic-bezier(0.23, 1, 0.32, 1) 0.75s
+    forwards; /* Ultra-smooth easing with ease-out-expo feel */
   z-index: 2; /* Below mask, above background */
 }
 
