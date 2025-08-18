@@ -4,7 +4,8 @@ on:
   push:
     branches: [ main, dev ]
   pull_request:
-    branches: [ main, dev ]
+    branches: [ dev ]
+    # PR 到 main 分支由专门的 pr-to-main.yml 工作流处理
 
 jobs:
   # 项目健康检查

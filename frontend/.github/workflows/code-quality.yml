@@ -2,7 +2,8 @@ name: 🔍 Code Quality Check
 
 on:
   pull_request:
-    branches: [ main, dev ]
+    branches: [ dev ]
+    # PR 到 main 分支由专门的 pr-to-main.yml 工作流处理
   schedule:
     # 每周一早上 8 点运行
     - cron: '0 8 * * 1'
