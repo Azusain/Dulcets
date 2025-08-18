@@ -54,14 +54,42 @@ export default function LoadingManager({
               style={{ 
                 zIndex: 999999999, 
                 position: 'relative',
-                marginTop: '32px'
+                transform: 'translateY(400px)', /* Keep it visible at bottom */
+                marginTop: '32px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '16px'
               }}
             >
-              {loadingText}
-              <span 
-                className="loading-dots"
-                style={{ zIndex: 999999999, position: 'relative' }}
-              ></span>
+              {/* Left horizontal line */}
+              <div 
+                style={{
+                  width: '80px',
+                  height: '1px',
+                  backgroundColor: '#ffffff',
+                  opacity: 0.6
+                }}
+              ></div>
+              
+              {/* Text and dots */}
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                {loadingText}
+                <span 
+                  className="loading-dots"
+                  style={{ zIndex: 999999999, position: 'relative' }}
+                ></span>
+              </div>
+              
+              {/* Right horizontal line */}
+              <div 
+                style={{
+                  width: '80px',
+                  height: '1px',
+                  backgroundColor: '#ffffff',
+                  opacity: 0.6
+                }}
+              ></div>
             </div>
           </div>
         </div>
