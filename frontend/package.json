@@ -10,6 +10,14 @@
     "export": "npm run generate-seo && next build",
     "add-video": "node scripts/add-video.js",
     "validate-works": "node scripts/validate-works.js",
+    "check:components": "node scripts/check-unused-components.js",
+    "analyze:i18n": "node scripts/professional-i18n-check.js",
+    "check:health": "node scripts/project-health-check.js",
+    "clean:components": "node scripts/delete-unused-components.js",
+    "translate:missing": "node scripts/auto-translate-i18n.js",
+    "translate:missing:execute": "node scripts/auto-translate-i18n.js --execute",
+    "translate:inconsistent": "node scripts/auto-translate-i18n.js --inconsistent",
+    "translate:inconsistent:execute": "node scripts/auto-translate-i18n.js --inconsistent --execute",
     "generate-seo": "node scripts/generate-sitemap.js"
   },
   "dependencies": {
