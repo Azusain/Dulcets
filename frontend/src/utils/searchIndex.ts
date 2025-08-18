@@ -272,16 +272,31 @@ export function searchContent(query: string, customItems: SearchItem[] = []): Se
 export function buildDynamicSearchIndex(
   works: any[] = [],
   artworks: any[] = [],
-  modelings: any[] = []
+  modelings: any[] = [],
+  currentLanguage: string = 'ja'
 ): SearchItem[] {
   const dynamicItems: SearchItem[] = [];
   
-  // Add music works
+  // Add music works with language-specific content
   for (const work of works) {
+    let title, description;
+    
+    // Select appropriate language version
+    if (currentLanguage === 'en') {
+      title = work.titleEn || work.title || 'Untitled Work';
+      description = work.excerptEn || work.excerpt || 'Music production by Dulcets';
+    } else if (currentLanguage === 'zh') {
+      title = work.titleZh || work.title || work.titleEn || 'Untitled Work';
+      description = work.excerptZh || work.excerpt || work.excerptEn || 'Music production by Dulcets';
+    } else { // Default to Japanese
+      title = work.titleJp || work.title || 'Untitled Work';
+      description = work.excerptJp || work.excerpt || 'Dulcetsによる音楽制作';
+    }
+    
     dynamicItems.push({
       id: `work-${work.title?.replace(/\s+/g, '-').toLowerCase() || 'unknown'}`,
-      title: work.titleEn || work.title || 'Untitled Work',
-      description: work.excerptEn || work.excerpt || 'Music production by Dulcets',
+      title,
+      description,
       category: 'work',
       url: work.videoUrl || '#works',
       keywords: [
@@ -294,7 +309,12 @@ export function buildDynamicSearchIndex(
       metadata: {
         duration: work.duration,
         date: work.date,
-        image: work.image
+        image: work.image,
+        originalTitles: {
+          ja: work.titleJp || work.title,
+          en: work.titleEn || work.title,
+          zh: work.titleZh || work.title
+        }
       }
     });
   }

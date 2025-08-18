@@ -12,9 +12,10 @@ interface AdvancedSearchProps {
   isOpen: boolean;
   onClose: () => void;
   onNavigate: (url: string) => void;
+  currentLanguage?: string; // Add language support
 }
 
-export default function AdvancedSearch({ isOpen, onClose, onNavigate }: AdvancedSearchProps) {
+export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLanguage }: AdvancedSearchProps) {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -24,11 +25,35 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate }: Advanced
   const inputRef = useRef<HTMLInputElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
 
+  // Global ESC key listener
+  useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        e.preventDefault();
+        e.stopPropagation();
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleGlobalKeyDown, true);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleGlobalKeyDown, true);
+    };
+  }, [isOpen, onClose]);
+
   // Load search history and dynamic data when component mounts
   useEffect(() => {
     if (isOpen) {
       setSearchHistory(getSearchHistory());
       loadDynamicData();
+      
+      // Reset search state when opening
+      setQuery('');
+      setResults(null);
+      setSelectedIndex(-1);
       
       // Focus input after a small delay to ensure it's rendered
       setTimeout(() => {
@@ -52,12 +77,13 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate }: Advanced
         modelingRes.json?.() || []
       ]);
 
-      const dynamicItems = buildDynamicSearchIndex(works, artworks, modeling);
+      // Pass current language to build language-specific index
+      const dynamicItems = buildDynamicSearchIndex(works, artworks, modeling, currentLanguage || 'ja');
       setDynamicIndex(dynamicItems);
     } catch (error) {
       console.warn('Failed to load dynamic search data:', error);
     }
-  }, []);
+  }, [currentLanguage]);
 
   // Perform search
   const performSearch = useCallback((searchQuery: string) => {

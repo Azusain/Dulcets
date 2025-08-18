@@ -12,7 +12,8 @@ import { useSearchHotkey } from "@/hooks/useGlobalHotkeys";
 
 const DsNavigation = () => {
   const { getAssetPath } = useAssetPath();
-  const init_t = GetLanguageDict(GetLanguageFromPath());
+  const currentLanguage = GetLanguageFromPath();
+  const init_t = GetLanguageDict(currentLanguage);
   const [t, setTranslator] = useState<(key: string) => string>(() => init_t);
   const [isScrolled, setIsScrolled] = useState(false);
   const { isLoading } = useLoading();
@@ -358,6 +359,7 @@ const DsNavigation = () => {
         isOpen={isAdvancedSearchOpen}
         onClose={handleSearchClose}
         onNavigate={handleSearchNavigate}
+        currentLanguage={currentLanguage}
       />
     </>
   );
