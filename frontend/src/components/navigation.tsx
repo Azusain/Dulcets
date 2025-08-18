@@ -286,14 +286,27 @@ const DsNavigation = () => {
               currentLanguage={currentLanguage}
             />
 
-            {/* Bottom hint */}
+            {/* Bottom hint with keyboard shortcuts */}
             <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center">
-              <div className="text-xs text-gray-500">
-                Press{" "}
-                <kbd className="px-1.5 py-0.5 bg-gray-700 border border-gray-600 rounded text-gray-400">
-                  ESC
-                </kbd>{" "}
-                to close
+              <div className="flex items-center gap-4 text-xs text-gray-500">
+                <span className="flex items-center gap-1">
+                  <kbd className="px-1.5 py-0.5 bg-gray-700 border border-gray-600 rounded text-gray-400">
+                    ↑↓
+                  </kbd>
+                  Navigate
+                </span>
+                <span className="flex items-center gap-1">
+                  <kbd className="px-1.5 py-0.5 bg-gray-700 border border-gray-600 rounded text-gray-400">
+                    Enter
+                  </kbd>
+                  Select
+                </span>
+                <span className="flex items-center gap-1">
+                  <kbd className="px-1.5 py-0.5 bg-gray-700 border border-gray-600 rounded text-gray-400">
+                    ESC
+                  </kbd>
+                  Close
+                </span>
               </div>
             </div>
           </div>

@@ -199,9 +199,9 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
                 placeholder="Search music, services, artworks..."
-                className="w-full bg-transparent border-0 border-b-2 border-gray-600 text-white placeholder-gray-400 px-0 py-4 focus:outline-none focus:border-blue-400 transition-all duration-200"
+                className="w-full bg-transparent border-0 border-b-2 border-gray-600 text-white placeholder-gray-400 px-0 py-4 focus:outline-none focus:border-white transition-all duration-200"
                 style={{
-                  fontSize: '28px',
+                  fontSize: '36px',
                   letterSpacing: '0.02em',
                   fontFamily: '"Inter", "Helvetica Neue", "Arial", sans-serif',
                   fontWeight: '300',
@@ -319,29 +319,6 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
           )}
         </div>
 
-        {/* Shortcuts hint */}
-        <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 text-center">
-          <div className="flex items-center gap-4 text-xs text-gray-500">
-            <span className="flex items-center gap-1">
-              <kbd className="px-1.5 py-0.5 bg-gray-700 border border-gray-600 rounded text-gray-400">
-                ↑↓
-              </kbd>
-              Navigate
-            </span>
-            <span className="flex items-center gap-1">
-              <kbd className="px-1.5 py-0.5 bg-gray-700 border border-gray-600 rounded text-gray-400">
-                Enter
-              </kbd>
-              Select
-            </span>
-            <span className="flex items-center gap-1">
-              <kbd className="px-1.5 py-0.5 bg-gray-700 border border-gray-600 rounded text-gray-400">
-                ESC
-              </kbd>
-              Close
-            </span>
-          </div>
-        </div>
       </div>
     </div>
   );
