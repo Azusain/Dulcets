@@ -25,17 +25,6 @@ export default function LoadingManager({
             <div className="loading-animation -translate-28">
               {/* Portal mask for left logo */}
               <div className="portal-mask-left">
-                <div className="logo-left">
-                  <img
-                    src="/images/logo_left.png"
-                    alt="Logo Left"
-                    className="logo-image"
-                  />
-                </div>
-              </div>
-
-              {/* Portal mask for right logo */}
-              <div className="portal-mask-right">
                 <div className="logo-right">
                   <img
                     src="/images/logo_right.png"
@@ -44,10 +33,19 @@ export default function LoadingManager({
                   />
                 </div>
               </div>
-
               {/* Two Lines - extending upward and downward */}
               <div className="vertical-line-up"></div>
               <div className="vertical-line-down"></div>
+              {/* Portal mask for right logo */}
+              <div className="portal-mask-right">
+                <div className="logo-left">
+                  <img
+                    src="/images/logo_left.png"
+                    alt="Logo Left"
+                    className="logo-image"
+                  />
+                </div>
+              </div>
             </div>
             {/* <div className="text-xl text-gray-300 mt-8">
               {loadingText}
