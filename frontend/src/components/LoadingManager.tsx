@@ -54,7 +54,6 @@ export default function LoadingManager({
               style={{ 
                 zIndex: 999999999, 
                 position: 'relative',
-                transform: 'translateY(400px)', /* Move down 400px for testing */
                 marginTop: '32px'
               }}
             >

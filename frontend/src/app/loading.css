@@ -353,6 +353,7 @@
   text-align: left;
   min-width: 3ch; /* Reserve space for up to 3 dots */
   position: relative;
+  top: -8px !important; /* Move dots up relative to text */
   z-index: 999999999 !important;
   background: transparent;
   white-space: nowrap;
@@ -360,6 +361,7 @@
   visibility: visible !important;
   opacity: 1 !important;
   text-shadow: 0 0 4px rgba(255, 255, 255, 0.8) !important; /* Glow effect */
+  vertical-align: top !important; /* Align to top of text line */
 }
 
 /* Ensure the loading screen disappears after animation */
