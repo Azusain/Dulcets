@@ -47,9 +47,15 @@ export default function LoadingManager({
                 </div>
               </div>
             </div>
-            <div className="text-xl text-gray-300 mt-8">
+            <div 
+              className="text-xl text-gray-300 mt-8" 
+              style={{ zIndex: 999999999, position: 'relative' }}
+            >
               {loadingText}
-              <span className="loading-dots"></span>
+              <span 
+                className="loading-dots"
+                style={{ zIndex: 999999999, position: 'relative' }}
+              ></span>
             </div>
           </div>
         </div>
