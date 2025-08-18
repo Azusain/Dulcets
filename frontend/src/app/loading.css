@@ -339,8 +339,11 @@
   position: relative;
   z-index: 999999999 !important;
   background: transparent;
-  overflow: visible;
+  overflow: visible !important;
   margin-left: 4px;
+  pointer-events: none; /* Prevent any interaction issues */
+  height: auto; /* Allow natural height */
+  width: auto; /* Allow natural width */
 }
 
 .loading-dots::after {

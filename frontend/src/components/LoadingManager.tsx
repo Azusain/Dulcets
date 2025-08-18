@@ -77,14 +77,24 @@ export default function LoadingManager({
               {/* Text and dots container */}
               <div style={{ 
                 display: 'flex', 
-                alignItems: 'center', /* Center text and dots vertically within this container */
+                alignItems: 'baseline', /* Use baseline alignment for better text/dots positioning */
                 whiteSpace: 'nowrap',
-                flexShrink: 0 /* Prevent text from shrinking */
+                flexShrink: 0, /* Prevent text from shrinking */
+                position: 'relative' /* Create positioning context */
               }}>
-                <span style={{ lineHeight: '1.2' }}>{loadingText}</span>
+                <span style={{ 
+                  lineHeight: '1.2',
+                  display: 'inline-block',
+                  position: 'relative'
+                }}>{loadingText}</span>
                 <span 
                   className="loading-dots"
-                  style={{ zIndex: 999999999, position: 'relative' }}
+                  style={{ 
+                    zIndex: 999999999, 
+                    position: 'relative',
+                    display: 'inline-block',
+                    overflow: 'visible'
+                  }}
                 ></span>
               </div>
               
