@@ -86,17 +86,22 @@
     transform: translateY(-50%) translateX(280px);
     opacity: 0;
   } /* Start from right side of green mask, hidden */
-  10% {
+  15% {
     opacity: 1;
-  } /* Fade in quickly */
-  90% {
-    transform: translateY(-50%) translateX(150px);
+    transform: translateY(-50%) translateX(260px);
+  } /* Gentle fade in with slow start */
+  50% {
+    transform: translateY(-50%) translateX(205px);
     opacity: 1;
-  } /* Almost at final position */
+  } /* Halfway point - steady motion */
+  85% {
+    transform: translateY(-50%) translateX(155px);
+    opacity: 1;
+  } /* Near end - maintain speed */
   100% {
     transform: translateY(-50%) translateX(150px);
     opacity: 1;
-  } /* End visible in green mask, hold position */
+  } /* Final position - gentle stop */
 }
 
 @keyframes logoPortalRight {
@@ -104,17 +109,22 @@
     transform: translateY(-50%) translateX(-350px);
     opacity: 0;
   } /* Start from left side of orange mask, hidden */
-  10% {
+  15% {
     opacity: 1;
-  } /* Fade in quickly */
-  90% {
-    transform: translateY(-50%) translateX(60px);
+    transform: translateY(-50%) translateX(-320px);
+  } /* Gentle fade in with slow start */
+  50% {
+    transform: translateY(-50%) translateX(-130px);
     opacity: 1;
-  } /* Almost at final position */
+  } /* Halfway point - steady motion */
+  85% {
+    transform: translateY(-50%) translateX(50px);
+    opacity: 1;
+  } /* Near end - maintain speed */
   100% {
     transform: translateY(-50%) translateX(60px);
     opacity: 1;
-  } /* End visible in orange mask, hold position */
+  } /* Final position - gentle stop */
 }
 
 @keyframes logoScaleAndFade {
@@ -270,8 +280,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: logoPortalLeft 1s cubic-bezier(0.23, 1, 0.32, 1) 0.75s
-    forwards; /* Ultra-smooth easing with ease-out-expo feel */
+  animation: logoPortalLeft 1s cubic-bezier(0.25, 0.25, 0.75, 0.75) 0.75s
+    forwards; /* Linear-like motion with gentle acceleration/deceleration */
   z-index: 2; /* Below mask, above background */
 }
 
@@ -287,8 +297,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: logoPortalRight 1s cubic-bezier(0.23, 1, 0.32, 1) 0.75s
-    forwards; /* Ultra-smooth easing with ease-out-expo feel */
+  animation: logoPortalRight 1s cubic-bezier(0.25, 0.25, 0.75, 0.75) 0.75s
+    forwards; /* Linear-like motion with gentle acceleration/deceleration */
   z-index: 2; /* Below mask, above background */
 }
 
