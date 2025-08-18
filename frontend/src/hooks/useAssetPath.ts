@@ -35,13 +35,11 @@ export function useAssetPath() {
   const [basePath, setBasePath] = useState(() => detectBasePath());
 
   useEffect(() => {
-    // Re-detect on mount to ensure accuracy
+    // Re-detect on mount to ensure accuracy (only run once)
     const detected = detectBasePath();
-    if (detected !== basePath) {
-      setBasePath(detected);
-      console.log('useAssetPath: basePath updated to:', detected);
-    }
-  }, [basePath]);
+    setBasePath(detected);
+    console.log('useAssetPath: basePath set to:', detected);
+  }, []); // Empty dependency array to run only once
 
   const getAssetPath = (path: string) => {
     // Ensure path starts with /

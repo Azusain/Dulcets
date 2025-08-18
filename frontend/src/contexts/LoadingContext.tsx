@@ -26,10 +26,10 @@ export function LoadingProvider({ children }: { children: ReactNode }) {
     // Show loading when pathname changes
     setIsLoading(true);
     
-    // Hide loading after animation duration
+    // Hide loading after animation duration (reduced from 2500ms to 2200ms)
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2500);
+    }, 2200);
 
     return () => clearTimeout(timer);
   }, [pathname]);
