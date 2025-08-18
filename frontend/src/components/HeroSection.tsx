@@ -1,5 +1,10 @@
+"use client";
+
+import { useState } from "react";
 import { ComponentWithTranslation } from "@/components/MainPage";
 import VideoBackground from "@/components/VideoBackground";
+import MouseCursor from "@/components/MouseCursor";
+import YouTubeModal from "@/components/YouTubeModal";
 
 // Pre-generated particles for static rendering
 const staticParticles = Array.from({ length: 50 }, (_, i) => ({
@@ -10,8 +15,24 @@ const staticParticles = Array.from({ length: 50 }, (_, i) => ({
 }));
 
 export default function HeroSection({ t }: ComponentWithTranslation) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const youtubeVideoId = "iuhEOhyqo8g"; // YouTube视频ID
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
-    <section id="hero" className="relative h-screen overflow-hidden">
+    <>
+      <MouseCursor />
+      <YouTubeModal 
+        isOpen={isModalOpen} 
+        onClose={closeModal} 
+        videoId={youtubeVideoId} 
+      />
+      <section 
+        id="hero" 
+        className="relative h-screen overflow-hidden cursor-pointer"
+      >
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
         {/* Main video background */}
@@ -45,8 +66,26 @@ export default function HeroSection({ t }: ComponentWithTranslation) {
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black z-10"></div>
 
+      {/* Clickable background layer */}
+      <div 
+        className="absolute inset-0 cursor-pointer"
+        style={{ 
+          zIndex: 15,
+          backgroundColor: 'transparent',
+          pointerEvents: 'auto'
+        }}
+        onClick={openModal}
+      ></div>
+
       {/* Hero Content - Repositioned to left-middle-upper with adjusted sizes */}
-      <div className="container mx-auto px-6 h-full flex flex-col justify-center items-start relative z-20 text-left" style={{marginTop: '-8vh'}}>
+      <div 
+        className="container mx-auto px-6 h-full flex flex-col justify-center items-start relative text-left" 
+        style={{
+          marginTop: '-8vh',
+          zIndex: 20,
+          pointerEvents: 'none'
+        }}
+      >
         <h1 className="text-[clamp(6rem,16vw,12rem)] leading-tight mb-6 animate-float" style={{ fontFamily: "'Great Vibes', 'Alex Brush', 'Pinyon Script', cursive", fontWeight: 400, letterSpacing: '0.02em', color: 'white', textShadow: '2px 2px 8px rgba(0, 0, 0, 0.7)' }}>
           Dulcets
         </h1>
@@ -56,9 +95,10 @@ export default function HeroSection({ t }: ComponentWithTranslation) {
         <div className="flex flex-col sm:flex-row gap-4">
           <a
             href="#artists"
-            className="px-10 py-4 text-white font-medium transform hover:scale-105 transition-all duration-300 relative overflow-hidden group"
+            className="px-10 py-4 text-white font-medium transform hover:scale-105 transition-all duration-300 relative overflow-hidden group cursor-pointer"
             style={{
               backgroundColor: '#5865F2',
+              pointerEvents: 'auto'
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = '#4752C4';
@@ -74,9 +114,10 @@ export default function HeroSection({ t }: ComponentWithTranslation) {
           </a>
           <a
             href="#releases"
-            className="px-10 py-4 bg-transparent text-white font-medium transform hover:scale-105 transition-all duration-300 relative overflow-hidden group"
+            className="px-10 py-4 bg-transparent text-white font-medium transform hover:scale-105 transition-all duration-300 relative overflow-hidden group cursor-pointer"
             style={{
               border: '2px solid #5865F2',
+              pointerEvents: 'auto'
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = 'rgba(88, 101, 242, 0.2)';
@@ -94,6 +135,7 @@ export default function HeroSection({ t }: ComponentWithTranslation) {
           </a>
         </div>
       </div>
-    </section>
+      </section>
+    </>
   );
 }

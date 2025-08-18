@@ -41,8 +41,8 @@ const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
 
   // Load audio configuration on component mount
   useEffect(() => {
-    let isMounted = true; // 防止组件卸载后设置状态
-    
+    let isMounted = true;
+
     const loadAudioConfig = async () => {
       try {
         // Use getAssetPath to handle different deployment paths
@@ -118,9 +118,9 @@ const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
         }
       }
     };
-    
+
     loadAudioConfig();
-    
+
     return () => {
       isMounted = false; // 清理函数
     };
