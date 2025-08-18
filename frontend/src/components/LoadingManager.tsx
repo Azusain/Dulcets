@@ -16,13 +16,13 @@ export default function LoadingManager({
   return (
     <div
       className="min-h-screen text-white"
-      style={{ background: "transparent" }}
+      style={{ background: "#000000", minHeight: "100vh" }}
     >
       {/* Loading Animation - Below Navigation */}
       {isLoading && (
         <div className="loading-screen fixed inset-0 z-[99999] flex items-center justify-center">
           <div className="text-center relative z-10">
-            <div className="loading-animation -translate-36">
+            <div className="loading-animation -translate-40">
               {/* Portal mask for left logo */}
               <div className="portal-mask-left">
                 <div className="logo-right">
@@ -47,10 +47,10 @@ export default function LoadingManager({
                 </div>
               </div>
             </div>
-            {/* <div className="text-xl text-gray-300 mt-8">
+            <div className="text-xl text-gray-300 mt-8">
               {loadingText}
               <span className="loading-dots"></span>
-            </div> */}
+            </div>
           </div>
         </div>
       )}
@@ -61,11 +61,12 @@ export default function LoadingManager({
         className="main-content-react"
         style={{
           opacity: isLoading ? 0 : 1,
-          visibility: isLoading ? "hidden" : "visible",
+          visibility: "visible", // 总是可见，让背景透过加载屏幕
           transition: isLoading
             ? "none"
-            : "opacity 0.8s ease-out 0.2s, visibility 0s 0.2s",
+            : "opacity 0.8s ease-out 0.2s",
           backgroundColor: "transparent",
+          zIndex: isLoading ? 1 : "auto", // 在加载时保持在最底层
         }}
       >
         {children}
