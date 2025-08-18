@@ -1,0 +1,26 @@
+{
+  "name": "Dulcets - Professional Music Production",
+  "short_name": "Dulcets",
+  "description": "Professional music production and creative services specializing in Japanese music",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#5865F2",
+  "orientation": "portrait-primary",
+  "categories": ["music", "entertainment", "business"],
+  "lang": "ja",
+  "icons": [
+    {
+      "src": "/images/logo_black.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/logo_white.png", 
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
