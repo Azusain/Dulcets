@@ -3,7 +3,7 @@
   "information": "会社概要",
   "loading": "読み込み中",
   "hero": {
-    "subtitle": "昔、夢の中だけに存在する旋律があり、それは Dulcets（ドルセッツ） と呼ばれた。星のように清らかな音色は、人々の心を癒し、美しい音を求める者たちを導いた。",
+    "subtitle": "昔、夢の中だけに存在する旋律があり、それは Dulcets（ダルセッツ） と呼ばれた。星のように清らかな音色は、人々の心を癒し、美しい音を求める者たちを導いた。",
     "explore_artists": "アーティストを探索",
     "latest_releases": "最新リリース"
   },
@@ -78,9 +78,9 @@
     }
   },
   "services": {
-    "title": "私たちのサービス",
-    "our_service": "私たちのサービス",
-    "subtitle": "私たちが提供する3つの主要サービス：音楽制作、アートワーク、3Dモデリング",
+    "title": "サービス",
+    "our_service": "サービス",
+    "subtitle": "音楽制作、アートワーク、3Dモデリング",
     "music": {
       "title": "音楽制作",
       "description": "作曲、編曲、録音を含む高品質な音楽制作サービス。"
@@ -340,7 +340,7 @@
     "subscribe_desc": "ニュースレターを購読して、最新の音楽と活動情報を入手してください",
     "email_placeholder": "メールアドレスを入力",
     "subscribe_button": "購読",
-    "copyright": "© 2025 Dulcets音楽会社. 全著作権所有."
+    "copyright": "© 2025 株式会社Dulcets. All rights reserved."
   },
   "contact": {
     "title": "お問い合わせ",
