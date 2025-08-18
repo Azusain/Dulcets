@@ -32,7 +32,17 @@ Simple scripts to maintain code quality and prevent redundant code in the projec
 
 **⚠️ WARNING:** This permanently deletes files. Use with caution!
 
-### 4. Delete Unused i18n Keys
+### 4. Analyze i18n Usage (Recommended)
+
+**Command:** `npm run analyze:i18n` or `node scripts/analyze-i18n-usage.js`
+
+**Purpose:** Analyze i18n key usage patterns without making changes. Shows used keys, potentially unused keys, and missing translations.
+
+**Output:** Detailed analysis of translation key usage with recommendations.
+
+**✅ SAFE:** This is read-only and makes no changes to your files.
+
+### 5. Delete Unused i18n Keys
 
 **Command:** `npm run clean:i18n` or `node scripts/delete-unused-i18n.js`
 
@@ -40,7 +50,12 @@ Simple scripts to maintain code quality and prevent redundant code in the projec
 
 **Output:** Shows progress and deletion summary for each language file.
 
-**⚠️ WARNING:** This permanently modifies translation files. Use with caution!
+**😨 DANGER:** This permanently modifies translation files and may delete keys that are used through:
+- Template literals: `t(\`about.genres.\${genre}.content\`)`  
+- Dynamic key construction
+- Complex object property access
+
+**Always run `npm run analyze:i18n` first to review what will be deleted!**
 
 ### 5. Complete Health Check
 
