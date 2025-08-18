@@ -425,10 +425,10 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
                                 : 'hover:bg-gray-800 text-gray-200'
                             }`}
                           >
-                            <div className="flex items-start justify-between">
-                              <div className="flex-1">
+                            <div className="flex items-start justify-between gap-3">
+                              <div className="flex-1 min-w-0">
                                 <div className="font-medium text-sm mb-1">{item.title}</div>
-                                <div className="text-xs text-gray-400 truncate">
+                                <div className="text-xs text-gray-400 truncate pr-2">
                                   {item.description}
                                 </div>
                                 {item.metadata?.duration && (
@@ -437,7 +437,7 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
                                   </div>
                                 )}
                               </div>
-                              <div className="text-xs text-gray-500">
+                              <div className="text-xs text-gray-500 flex-shrink-0 self-start">
                                 {item.category}
                               </div>
                             </div>
