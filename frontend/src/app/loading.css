@@ -353,7 +353,6 @@
   text-align: left;
   min-width: 3ch;
   position: relative;
-  top: -20px !important; /* Move dots up 20px relative to text */
   z-index: 999999999 !important;
   background: transparent;
   white-space: nowrap;
