@@ -17,7 +17,7 @@ export default function ContactSection({ t }: ComponentWithTranslation) {
   };
 
   const handleEmailClick = () => {
-    setEmailClickMessage('Opening your default email application...');
+    setEmailClickMessage(t("contact.opening_email_app"));
     setTimeout(() => setEmailClickMessage(''), 3000);
   };
   return (
@@ -82,7 +82,16 @@ export default function ContactSection({ t }: ComponentWithTranslation) {
                   <a 
                     href="mailto:dulcets.info@gmail.com"
                     onClick={handleEmailClick}
-                    className="inline-block bg-black text-white px-8 py-3 hover:bg-gray-800 transition-colors font-medium rounded-lg relative cursor-pointer"
+                    className="inline-block text-white px-8 py-3 transition-colors font-medium rounded-lg relative cursor-pointer"
+                    style={{
+                      backgroundColor: "#5865F2",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = "#4752C4";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = "#5865F2";
+                    }}
                   >
                     {t("contact.send_email")}
                     {emailClickMessage && (

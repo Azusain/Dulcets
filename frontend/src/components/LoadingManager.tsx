@@ -24,7 +24,7 @@ export default function LoadingManager({
       {isLoading && (
         <div className="loading-screen fixed inset-0 z-[99999] flex items-center justify-center">
           <div className="text-center relative z-10">
-            <div className="loading-animation -translate-40">
+            <div className="loading-animation -translate-56">
               {/* Portal mask for left logo */}
               <div className="portal-mask-left">
                 <div className="logo-right">

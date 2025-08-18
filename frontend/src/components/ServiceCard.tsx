@@ -41,7 +41,16 @@ export const ServiceCard = ({
           <img
             src={processedImage}
             alt={title}
-            className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105"
+            className={`w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 ${
+              isHovered ? "blur-[2px]" : "blur-none"
+            }`}
+          />
+
+          {/* Dark overlay for better text readability */}
+          <div
+            className={`absolute inset-0 bg-black transition-opacity duration-700 ease-out ${
+              isHovered ? "opacity-50" : "opacity-0"
+            }`}
           />
 
           <div
@@ -70,7 +79,7 @@ export const ServiceCard = ({
             }`}
           >
             <svg
-              className="w-6 h-6 white"
+              className="w-6 h-6 text-white"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
