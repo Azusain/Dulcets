@@ -123,24 +123,6 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
     };
   }, [isOpen, onClose]);
 
-  // Load search history and dynamic data when component mounts
-  useEffect(() => {
-    if (isOpen) {
-      setSearchHistory(getSearchHistory());
-      loadDynamicData();
-      
-      // Reset search state when opening
-      setQuery('');
-      setResults(null);
-      setSelectedIndex(-1);
-      
-      // Focus input after a small delay to ensure it's rendered
-      setTimeout(() => {
-        inputRef.current?.focus();
-      }, 100);
-    }
-  }, [isOpen, loadDynamicData]);
-
   // Load dynamic content from JSON files
   const loadDynamicData = useCallback(async () => {
     try {
@@ -164,6 +146,24 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
       console.warn('Failed to load dynamic search data:', error);
     }
   }, [currentLanguage, translate, getAssetPath]);
+
+  // Load search history and dynamic data when component mounts
+  useEffect(() => {
+    if (isOpen) {
+      setSearchHistory(getSearchHistory());
+      loadDynamicData();
+      
+      // Reset search state when opening
+      setQuery('');
+      setResults(null);
+      setSelectedIndex(-1);
+      
+      // Focus input after a small delay to ensure it's rendered
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 100);
+    }
+  }, [isOpen, loadDynamicData]);
 
   // Perform search
   const performSearch = useCallback((searchQuery: string) => {
