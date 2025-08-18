@@ -153,7 +153,7 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
       setSearchHistory(getSearchHistory());
       loadDynamicData();
       
-      // Reset search state when opening
+      // Reset search state when opening (only on first open, not on dependency changes)
       setQuery('');
       setResults(null);
       setSelectedIndex(-1);
@@ -163,7 +163,14 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
         inputRef.current?.focus();
       }, 100);
     }
-  }, [isOpen, loadDynamicData]);
+  }, [isOpen]); // Remove loadDynamicData from dependencies to prevent input clearing
+
+  // Separate effect for loading data when dependencies change
+  useEffect(() => {
+    if (isOpen && dynamicIndex.length === 0) {
+      loadDynamicData();
+    }
+  }, [isOpen, currentLanguage, translate, getAssetPath, loadDynamicData]);
 
   // Perform search
   const performSearch = useCallback((searchQuery: string) => {
