@@ -21,7 +21,6 @@ const DsNavigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [showHamburger, setShowHamburger] = useState(false);
-  const [isAdvancedSearchOpen, setIsAdvancedSearchOpen] = useState(false);
   const pathname = usePathname();
 
   // Check if on a sub-page (not the main page)
@@ -104,30 +103,9 @@ const DsNavigation = () => {
     }
   }, [isMenuOpen, isClosing]);
 
-  // Search functionality
+  // Search functionality - use hamburger menu state
   const handleSearchOpen = () => {
-    // Close menu if open
-    if (isMenuOpen) {
-      closeSidebar();
-    }
-    setIsAdvancedSearchOpen(true);
-  };
-
-  const handleSearchClose = () => {
-    setIsAdvancedSearchOpen(false);
-  };
-
-  const handleSearchNavigate = (url: string) => {
-    if (url.startsWith('#')) {
-      // Smooth scroll to section
-      const element = document.querySelector(url);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      // External navigation
-      window.location.href = url;
-    }
+    setIsMenuOpen(true);
   };
 
   // Setup search hotkeys
@@ -288,57 +266,25 @@ const DsNavigation = () => {
             }`}
             style={{ zIndex: 9500 }}
           >
-            {/* Centered Search Box - Now opens Advanced Search */}
-            <div className="flex items-center justify-center h-full">
-              <div
-                className="w-3/5"
-                style={{ transform: "translateY(-16.67vh)" }}
-              >
-                <div className="relative">
-                  <input
-                    type="text"
-                    placeholder="Search music, services, artworks..."
-                    className="w-full bg-transparent border-0 border-b border-gray-600 text-white placeholder-gray-400 px-0 py-6 focus:outline-none focus:border-gray-400 transition-all duration-200 cursor-pointer"
-                    style={{
-                      borderRadius: "0px",
-                      fontSize: "48px",
-                      letterSpacing: "0.05em",
-                      fontFamily:
-                        '"Inter", "Helvetica Neue", "Arial", sans-serif',
-                      fontWeight: "100",
-                    }}
-                    onClick={() => {
-                      closeSidebar();
-                      setTimeout(() => handleSearchOpen(), 100);
-                    }}
-                    onFocus={() => {
-                      closeSidebar();
-                      setTimeout(() => handleSearchOpen(), 100);
-                    }}
-                    onKeyDown={(e) => {
-                      if (e.key === "Escape") {
-                        closeSidebar();
-                      } else if (e.key === "Enter" || e.key === " ") {
-                        closeSidebar();
-                        setTimeout(() => handleSearchOpen(), 100);
-                      }
-                    }}
-                    autoFocus={!isClosing}
-                    readOnly
-                  />
-
-                  {/* Search Hint */}
-                  <div className="mt-6">
-                    <div className="text-sm text-gray-400 px-0 py-2 text-center">
-                      Click or press Enter to open advanced search
-                    </div>
-                    <div className="text-xs text-gray-500 px-0 py-1 text-center">
-                      Or use <kbd className="px-1.5 py-0.5 bg-gray-700 border border-gray-600 rounded text-gray-400">Ctrl+Q</kbd> anywhere
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* Advanced Search Component embedded */}
+            <AdvancedSearch 
+              isOpen={true}
+              onClose={closeSidebar}
+              onNavigate={(url) => {
+                if (url.startsWith('#')) {
+                  // Smooth scroll to section
+                  const element = document.querySelector(url);
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                } else {
+                  // External navigation
+                  window.location.href = url;
+                }
+                closeSidebar();
+              }}
+              currentLanguage={currentLanguage}
+            />
 
             {/* Bottom hint */}
             <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center">
@@ -354,13 +300,6 @@ const DsNavigation = () => {
         </>
       )}
 
-      {/* Advanced Search Component */}
-      <AdvancedSearch 
-        isOpen={isAdvancedSearchOpen}
-        onClose={handleSearchClose}
-        onNavigate={handleSearchNavigate}
-        currentLanguage={currentLanguage}
-      />
     </>
   );
 };

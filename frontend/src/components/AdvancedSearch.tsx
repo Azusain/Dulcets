@@ -185,7 +185,7 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-95 flex items-start justify-center pt-[10vh] z-50">
+    <div className="w-full h-full flex items-start justify-center pt-[10vh]">
       {/* Main search container */}
       <div className="w-full max-w-2xl mx-4">
         {/* Search input */}
