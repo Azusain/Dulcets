@@ -13,9 +13,37 @@ export interface SEOData {
   hreflangUrls?: { [key: string]: string };
 }
 
+// Multilingual titles configuration
+export const multilingualTitles = {
+  ja: {
+    base: "Dulcets - プロフェッショナル音楽制作&クリエイティブサービス",
+    home: "Dulcets - プロフェッショナル音楽制作スタジオ",
+    about: "Dulcetsについて - 音楽制作チーム",
+    services: "音楽制作サービス - Dulcets",
+    works: "私たちの作品 - Dulcets音楽ポートフォリオ",
+    contact: "お問い合わせ - Dulcets音楽制作依頼"
+  },
+  en: {
+    base: "Dulcets - Professional Music Production & Creative Services",
+    home: "Dulcets - Professional Music Production Studio",
+    about: "About Dulcets - Music Production Team",
+    services: "Music Production Services - Dulcets",
+    works: "Our Works - Dulcets Music Portfolio",
+    contact: "Contact Dulcets - Music Production Inquiry"
+  },
+  zh: {
+    base: "Dulcets - 专业音乐制作与创意服务",
+    home: "Dulcets - 专业音乐制作工作室",
+    about: "关于 Dulcets - 音乐制作团队",
+    services: "音乐制作服务 - Dulcets",
+    works: "我们的作品 - Dulcets 音乐作品集",
+    contact: "联系 Dulcets - 音乐制作咨询"
+  }
+};
+
 // Base SEO configuration
 export const baseSEO: SEOData = {
-  title: "Dulcets - Professional Music Production & Creative Services",
+  title: multilingualTitles.ja.base, // Default to Japanese
   description: "Dulcets specializes in Japanese Anime Songs, J-Pop, J-Rock, and BGM production. We offer comprehensive music production, artwork, and 3D modeling services with multilingual support.",
   keywords: [
     "music production",
@@ -134,5 +162,22 @@ export function generateHreflangUrls(path: string = ""): { [key: string]: string
     "en": `${baseUrl}${path}?lang=en`, 
     "zh": `${baseUrl}${path}?lang=zh`,
     "x-default": `${baseUrl}${path}`
+  };
+}
+
+// Get localized title based on language
+export function getLocalizedTitle(page: keyof typeof multilingualTitles.ja, language: 'ja' | 'en' | 'zh' = 'ja'): string {
+  return multilingualTitles[language][page] || multilingualTitles.ja[page];
+}
+
+// Update page SEO with localized titles
+export function getLocalizedPageSEO(page: 'home' | 'about' | 'services' | 'works' | 'contact', language: 'ja' | 'en' | 'zh' = 'ja') {
+  const localizedTitle = getLocalizedTitle(page, language);
+  const seoData = pageSEO[page];
+  
+  return {
+    ...seoData,
+    title: localizedTitle,
+    ogTitle: localizedTitle
   };
 }
