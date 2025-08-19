@@ -346,7 +346,8 @@ export function buildDynamicSearchIndex(
   artworks: any[] = [],
   modelings: any[] = [],
   currentLanguage: string = 'ja',
-  t?: (key: string) => string
+  t?: (key: string) => string,
+  getAssetPath?: (path: string) => string
 ): SearchItem[] {
   const dynamicItems: SearchItem[] = [];
   
@@ -421,8 +422,12 @@ export function buildDynamicSearchIndex(
   
   // Add artworks
   for (const artwork of artworks) {
-    // Construct full image URL
-    const imageUrl = artwork.imagePath ? `/images/artworks/${artwork.imagePath}` : '#artworks';
+    // Construct full image URL with proper basePath
+    let imageUrl = '#artworks';
+    if (artwork.imagePath) {
+      const rawPath = `/images/artworks/${artwork.imagePath}`;
+      imageUrl = getAssetPath ? getAssetPath(rawPath) : rawPath;
+    }
     
     // Get localized description
     const translate = t || ((key: string) => key);
@@ -446,8 +451,12 @@ export function buildDynamicSearchIndex(
   
   // Add 3D models
   for (const model of modelings) {
-    // Construct full image URL
-    const imageUrl = model.imagePath ? `/images/modeling/${model.imagePath}` : '#modeling';
+    // Construct full image URL with proper basePath
+    let imageUrl = '#modeling';
+    if (model.imagePath) {
+      const rawPath = `/images/modeling/${model.imagePath}`;
+      imageUrl = getAssetPath ? getAssetPath(rawPath) : rawPath;
+    }
     
     // Get localized description
     const translate = t || ((key: string) => key);

@@ -139,8 +139,8 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
         modelingRes.json?.() || []
       ]);
 
-      // Pass current language to build language-specific index
-      const dynamicItems = buildDynamicSearchIndex(works, artworks, modeling, currentLanguage || 'ja', translate);
+      // Pass current language to build language-specific index with getAssetPath for proper URLs
+      const dynamicItems = buildDynamicSearchIndex(works, artworks, modeling, currentLanguage || 'ja', translate, getAssetPath);
       setDynamicIndex(dynamicItems);
     } catch (error) {
       console.warn('Failed to load dynamic search data:', error);
