@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "title": "Modeling 1",
-    "imagePath": "model1.png",
+    "title": "Harumaki",
+    "imagePath": "2.png",
     "pos": {
       "left": "-10%",
       "top": "8%",
@@ -25,8 +25,8 @@
   },
   {
     "id": 3,
-    "title": "Modeling 3",
-    "imagePath": "model3.png",
+    "title": "kori",
+    "imagePath": "2025-08-18_131152.png",
     "pos": {
       "left": "58%",
       "top": "15%",
@@ -37,8 +37,8 @@
   },
   {
     "id": 4,
-    "title": "Modeling 4",
-    "imagePath": "model4.png",
+    "title": "Toko",
+    "imagePath": "2025-08-20_232906.png",
     "pos": {
       "left": "3%",
       "top": "45%",
@@ -73,8 +73,8 @@
   },
   {
     "id": 7,
-    "title": "Modeling 7",
-    "imagePath": "model7.png",
+    "title": "sono",
+    "imagePath": "image.png",
     "pos": {
       "left": "-20%",
       "top": "60%",
