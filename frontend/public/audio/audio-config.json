@@ -1,44 +1,87 @@
 {
+  "idol": {
+    "id": "idol",
+    "genreName": "IDOL",
+    "albumCover": "/images/music/idol-cover.svg",
+    "tracks": [
+      {
+        "id": "idol-1",
+        "fileName": "normalized_yumehanabi_demo_03.flac",
+        "displayName": "星空のプレッジ",
+        "artist": "Shintou",
+        "duration": "3:45"
+      }
+    ]
+  },
   "jrock": {
     "id": "jrock",
-    "fileName": "normalized_yumehanabi_demo_03.flac",
-    "displayName": "夢花火",
-    "artist": "Shintou",
-    "genre": "J-Rock"
+    "genreName": "J-ROCK",
+    "albumCover": "/images/music/jrock-cover.svg",
+    "tracks": [
+      {
+        "id": "jrock-1",
+        "fileName": "normalized_yumehanabi_demo_03.flac",
+        "displayName": "夢花火",
+        "artist": "Shintou",
+        "duration": "4:12",
+        "isHit": true
+      }
+    ]
   },
   "jpop": {
     "id": "jpop",
-    "fileName": "normalized_夏の音がした_Demo_01.flac",
-    "displayName": "夏の音がした",
-    "artist": "Shintou",
-    "genre": "J-Pop"
-  },
-  "idol": {
-    "id": "idol",
-    "fileName": "normalized_星空のプレッジ_Kuri_Full_4.flac",
-    "displayName": "星空のプレッジ",
-    "artist": "Shintou",
-    "genre": "Idol"
+    "genreName": "J-POP",
+    "albumCover": "/images/music/jpop-cover.svg",
+    "tracks": [
+      {
+        "id": "jpop-1",
+        "fileName": "normalized_yumehanabi_demo_03.flac",
+        "displayName": "夏の音がした",
+        "artist": "Shintou",
+        "duration": "3:28"
+      }
+    ]
   },
   "orchestra": {
     "id": "orchestra",
-    "fileName": "normalized_船に託して.flac",
-    "displayName": "船に託して",
-    "artist": "Sakuma遙",
-    "genre": "Orchestra"
+    "genreName": "ORCHESTRA",
+    "albumCover": "/images/music/orchestra-cover.svg",
+    "tracks": [
+      {
+        "id": "orchestra-1",
+        "fileName": "normalized_yumehanabi_demo_03.flac",
+        "displayName": "船に託して",
+        "artist": "Sakuma遙",
+        "duration": "5:20"
+      }
+    ]
   },
   "edm": {
     "id": "edm",
-    "fileName": "normalized_星奈こやかの曲.flac",
-    "displayName": "星奈こやかの曲",
-    "artist": "星奈こやか",
-    "genre": "EDM"
+    "genreName": "EDM",
+    "albumCover": "/images/music/edm-cover.svg",
+    "tracks": [
+      {
+        "id": "edm-1",
+        "fileName": "normalized_yumehanabi_demo_03.flac",
+        "displayName": "星奈こやかの曲",
+        "artist": "星奈こやか",
+        "duration": "3:55"
+      }
+    ]
   },
   "bgm": {
     "id": "bgm",
-    "fileName": "normalized_実験基地.flac",
-    "displayName": "実験基地",
-    "artist": "アンナ",
-    "genre": "BGM"
+    "genreName": "BGM",
+    "albumCover": "/images/music/bgm-cover.svg",
+    "tracks": [
+      {
+        "id": "bgm-1",
+        "fileName": "normalized_yumehanabi_demo_03.flac",
+        "displayName": "実験基地",
+        "artist": "アンナ",
+        "duration": "2:48"
+      }
+    ]
   }
 }
