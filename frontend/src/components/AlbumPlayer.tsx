@@ -10,6 +10,7 @@ interface Track {
   displayName: string;
   artist: string;
   duration: string;
+  isHit?: boolean;
 }
 
 interface Genre {
@@ -181,18 +182,18 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
   const currentGenre = genres[selectedGenre];
   
   return (
-    <div className={`bg-white rounded-lg shadow-lg overflow-hidden ${className}`}>
+    <div className={`bg-white ${className}`}>
       {/* Genre Selection Tabs */}
-      <div className="bg-gray-50 border-b border-gray-200 px-6 py-4">
-        <div className="flex flex-wrap gap-2">
+      <div className="border-b border-gray-200 mb-8">
+        <div className="flex gap-8">
           {GENRE_OPTIONS.map((genre) => (
             <button
               key={genre.id}
               onClick={() => handleGenreChange(genre.id)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+              className={`pb-3 text-sm font-medium border-b-2 transition-colors ${
                 selectedGenre === genre.id
-                  ? "bg-blue-600 text-white"
-                  : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200"
+                  ? "border-black text-black"
+                  : "border-transparent text-gray-500 hover:text-gray-900 hover:border-gray-300"
               }`}
             >
               {genre.name}
@@ -201,10 +202,10 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-5 gap-6 p-6">
+      <div className="grid md:grid-cols-3 gap-12">
         {/* Left: Album Cover */}
-        <div className="md:col-span-2">
-          <div className="aspect-square bg-gray-200 rounded-lg overflow-hidden mb-4">
+        <div className="md:col-span-1">
+          <div className="aspect-square bg-gray-100 mb-6">
             {currentGenre?.albumCover ? (
               <img
                 src={getAssetPath(currentGenre.albumCover)}
@@ -225,8 +226,8 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
           </div>
           
           {/* Album Info */}
-          <div className="text-center">
-            <h3 className="text-xl font-bold text-gray-900 mb-1">
+          <div>
+            <h3 className="text-2xl font-bold text-black mb-2">
               {currentGenre?.genreName || "ALTERNΔTE"}
             </h3>
             <p className="text-gray-600 mb-4">Naked Identity Created by King</p>
@@ -237,25 +238,27 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
         </div>
 
         {/* Right: Track List */}
-        <div className="md:col-span-3">
-          <div className="space-y-2 max-h-96 overflow-y-auto">
+        <div className="md:col-span-2">
+          <div className="space-y-1">
             {currentGenre?.tracks.map((track, index) => (
               <div
                 key={track.id}
                 onClick={() => handleTrackSelect(track)}
-                className={`flex items-center gap-4 p-3 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors ${
-                  currentTrack?.id === track.id ? "bg-blue-50 border border-blue-200" : ""
+                className={`flex items-center gap-4 py-3 px-2 cursor-pointer transition-colors ${
+                  currentTrack?.id === track.id 
+                    ? "bg-gray-100" 
+                    : "hover:bg-gray-50"
                 }`}
               >
                 {/* Track Number / Play Button */}
-                <div className="w-8 flex items-center justify-center">
+                <div className="w-8 flex items-center justify-center text-sm">
                   {currentTrack?.id === track.id && isPlaying ? (
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         togglePlayPause();
                       }}
-                      className="text-blue-600 hover:text-blue-800"
+                      className="w-6 h-6 bg-black text-white flex items-center justify-center text-xs"
                     >
                       ⏸
                     </button>
@@ -265,72 +268,60 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
                         e.stopPropagation();
                         togglePlayPause();
                       }}
-                      className="text-blue-600 hover:text-blue-800"
+                      className="w-6 h-6 bg-black text-white flex items-center justify-center text-xs"
                     >
                       ▶
                     </button>
                   ) : (
-                    <span className="text-gray-400 text-sm">{index + 1}</span>
+                    <span className="text-gray-400 font-medium">{index + 1}</span>
                   )}
                 </div>
 
                 {/* Track Info */}
                 <div className="flex-1 min-w-0">
-                  <h4 className={`font-medium truncate ${
-                    currentTrack?.id === track.id ? "text-blue-600" : "text-gray-900"
-                  }`}>
+                  <h4 className="font-medium truncate text-black">
                     {track.displayName}
+                    {track.isHit && <span className="ml-2 px-2 py-1 bg-gray-200 text-xs rounded font-medium">HIT</span>}
                   </h4>
-                  <p className="text-sm text-gray-600 truncate">
-                    {track.artist}
-                  </p>
+                </div>
+
+                {/* Artist */}
+                <div className="text-gray-500 text-sm min-w-0 flex-shrink-0">
+                  Naked Identity Created by King
                 </div>
 
                 {/* Duration */}
-                <div className="text-sm text-gray-500">
+                <div className="text-gray-400 text-sm font-mono w-12 text-right">
                   {track.duration}
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Current Track Waveform */}
+          {/* Current Track Player */}
           {currentTrack && (
-            <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-              <div className="mb-3">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-sm font-medium text-gray-900">
-                    {currentTrack.displayName}
-                  </span>
-                  <span className="text-sm text-gray-500">
-                    {formatTime(currentTime)} / {formatTime(duration)}
-                  </span>
+            <div className="mt-8 pt-6 border-t border-gray-200">
+              <div className="mb-4">
+                <div className="text-lg font-medium text-black mb-1">
+                  {currentTrack.displayName}
+                </div>
+                <div className="text-sm text-gray-500 mb-3">
+                  {formatTime(currentTime)} / {formatTime(duration)}
                 </div>
               </div>
               
               {/* Waveform */}
               <div 
                 ref={waveformRef}
-                className="w-full mb-3"
+                className="w-full mb-4 bg-gray-50"
                 style={{ height: "60px" }}
               />
               
               {isLoading && (
-                <div className="text-center text-sm text-gray-500">
-                  {t ? t("loading") : "Loading..."}
+                <div className="text-center text-sm text-gray-500 py-4">
+                  {t ? t("loading") : "読み込み中"}
                 </div>
               )}
-              
-              {/* Controls */}
-              <div className="flex justify-center">
-                <button
-                  onClick={togglePlayPause}
-                  disabled={isLoading}
-                  className="w-12 h-12 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white rounded-full flex items-center justify-center transition-colors"
-                >
-                  {isPlaying ? "⏸" : "▶"}
-                </button>
-              </div>
             </div>
           )}
         </div>

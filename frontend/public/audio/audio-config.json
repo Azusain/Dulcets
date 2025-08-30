@@ -7,9 +7,40 @@
       {
         "id": "idol-1",
         "fileName": "normalized_星空のプレッジ_Kuri_Full_4.flac",
-        "displayName": "星空のプレッジ",
+        "displayName": "Bloo : D",
         "artist": "Shintou",
-        "duration": "3:45"
+        "duration": "3:45",
+        "isHit": true
+      },
+      {
+        "id": "idol-2",
+        "fileName": "normalized_星空のプレッジ_Kuri_Full_4.flac",
+        "displayName": "Sweet Violence",
+        "artist": "Shintou",
+        "duration": "4:12",
+        "isHit": true
+      },
+      {
+        "id": "idol-3",
+        "fileName": "normalized_星空のプレッジ_Kuri_Full_4.flac",
+        "displayName": ": Dogma ?",
+        "artist": "Shintou",
+        "duration": "3:28"
+      },
+      {
+        "id": "idol-4",
+        "fileName": "normalized_星空のプレッジ_Kuri_Full_4.flac",
+        "displayName": "Hype Vrt",
+        "artist": "Shintou",
+        "duration": "3:55"
+      },
+      {
+        "id": "idol-5",
+        "fileName": "normalized_星空のプレッジ_Kuri_Full_4.flac",
+        "displayName": "Stupi : D",
+        "artist": "Shintou",
+        "duration": "2:48",
+        "isHit": true
       }
     ]
   },
@@ -23,7 +54,22 @@
         "fileName": "normalized_yumehanabi_demo_03.flac",
         "displayName": "夢花火",
         "artist": "Shintou",
-        "duration": "4:12"
+        "duration": "4:12",
+        "isHit": true
+      },
+      {
+        "id": "jrock-2",
+        "fileName": "normalized_yumehanabi_demo_03.flac",
+        "displayName": "Thunder Storm",
+        "artist": "Shintou",
+        "duration": "3:48"
+      },
+      {
+        "id": "jrock-3",
+        "fileName": "normalized_yumehanabi_demo_03.flac",
+        "displayName": "Midnight Drive",
+        "artist": "Shintou",
+        "duration": "4:35"
       }
     ]
   },
