@@ -77,70 +77,165 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
   useEffect(() => {
     if (!currentTrack || !waveformRef.current) return;
 
-    const initWaveSurfer = () => {
-      // Destroy previous instance
-      if (wavesurfer.current) {
-        try {
-          wavesurfer.current.destroy();
-        } catch (e) {}
-        wavesurfer.current = null;
+    let isComponentMounted = true;
+    let wavesurferInstance: WaveSurfer | null = null;
+
+    const initWaveSurfer = async () => {
+      try {
+        // Destroy previous instance
+        if (wavesurfer.current) {
+          try {
+            if (typeof wavesurfer.current.pause === 'function') {
+              wavesurfer.current.pause();
+            }
+            wavesurfer.current.destroy();
+          } catch (e) {
+            console.warn('Error destroying previous wavesurfer:', e);
+          }
+          wavesurfer.current = null;
+        }
+
+        if (!isComponentMounted || !waveformRef.current) return;
+
+        // Create new instance
+        wavesurferInstance = WaveSurfer.create({
+          container: waveformRef.current,
+          waveColor: "#94a3b8",
+          progressColor: "#5865f2",
+          cursorColor: "#5865f2",
+          barWidth: 2,
+          barRadius: 1,
+          height: 60,
+          normalize: true,
+          backend: "WebAudio",
+          mediaControls: false,
+        } as any);
+
+        if (!isComponentMounted) {
+          wavesurferInstance.destroy();
+          return;
+        }
+
+        wavesurfer.current = wavesurferInstance;
+
+        // Event listeners
+        const handleReady = () => {
+          if (!isComponentMounted) return;
+          console.log('WaveSurfer ready');
+          setIsLoading(false);
+          setDuration(wavesurferInstance?.getDuration() || 0);
+        };
+
+        const handlePlay = () => {
+          if (!isComponentMounted) return;
+          setIsPlaying(true);
+          const audioUrl = getAssetPath(`/audio/${currentTrack.fileName}`);
+          audioManager.setCurrentPlayer(wavesurferInstance, audioUrl);
+        };
+
+        const handlePause = () => {
+          if (!isComponentMounted) return;
+          setIsPlaying(false);
+        };
+
+        const handleAudioProcess = () => {
+          if (!isComponentMounted) return;
+          setCurrentTime(wavesurferInstance?.getCurrentTime() || 0);
+        };
+
+        const handleSeek = () => {
+          if (!isComponentMounted) return;
+          setCurrentTime(wavesurferInstance?.getCurrentTime() || 0);
+        };
+
+        const handleFinish = () => {
+          if (!isComponentMounted) return;
+          setIsPlaying(false);
+          setCurrentTime(0);
+        };
+
+        const handleError = (error: any) => {
+          if (!isComponentMounted) return;
+          console.error('WaveSurfer error:', error);
+          setIsLoading(false);
+        };
+
+        wavesurferInstance.on("ready", handleReady);
+        wavesurferInstance.on("play", handlePlay);
+        wavesurferInstance.on("pause", handlePause);
+        wavesurferInstance.on("audioprocess", handleAudioProcess);
+        wavesurferInstance.on("seek" as any, handleSeek);
+        wavesurferInstance.on("finish", handleFinish);
+        wavesurferInstance.on("error", handleError);
+
+        // Load audio
+        const audioUrl = getAssetPath(`/audio/${currentTrack.fileName}`);
+        console.log('Loading audio:', audioUrl);
+        setIsLoading(true);
+        
+        if (isComponentMounted) {
+          wavesurferInstance.load(audioUrl);
+        }
+      } catch (error) {
+        console.error('Error initializing WaveSurfer:', error);
+        if (isComponentMounted) {
+          setIsLoading(false);
+        }
       }
-
-      // Create new instance
-      const ws = WaveSurfer.create({
-        container: waveformRef.current!,
-        waveColor: "#94a3b8",
-        progressColor: "#5865f2",
-        cursorColor: "#5865f2",
-        barWidth: 2,
-        barRadius: 1,
-        height: 60,
-        normalize: true,
-        backend: "WebAudio",
-      });
-
-      wavesurfer.current = ws;
-
-      // Event listeners
-      ws.on("ready", () => {
-        setIsLoading(false);
-        setDuration(ws.getDuration());
-      });
-
-      ws.on("play", () => {
-        setIsPlaying(true);
-        audioManager.setCurrentPlayer(ws, getAssetPath(`/audio/${currentTrack.fileName}`));
-      });
-
-      ws.on("pause", () => {
-        setIsPlaying(false);
-      });
-
-      ws.on("audioprocess", () => {
-        setCurrentTime(ws.getCurrentTime());
-      });
-
-      ws.on("finish", () => {
-        setIsPlaying(false);
-        setCurrentTime(0);
-      });
-
-      // Load audio
-      const audioUrl = getAssetPath(`/audio/${currentTrack.fileName}`);
-      setIsLoading(true);
-      ws.load(audioUrl);
     };
 
     initWaveSurfer();
 
     return () => {
-      if (wavesurfer.current) {
+      isComponentMounted = false;
+      
+      if (wavesurferInstance) {
         try {
-          wavesurfer.current.destroy();
-        } catch (e) {}
+          if (typeof wavesurferInstance.pause === 'function') {
+            wavesurferInstance.pause();
+          }
+          
+          if (audioManager.isCurrentPlayer(wavesurferInstance)) {
+            audioManager.stopCurrentPlayer();
+          }
+          
+          setTimeout(() => {
+            try {
+              if (wavesurferInstance && typeof wavesurferInstance.destroy === 'function') {
+                wavesurferInstance.destroy();
+              }
+            } catch (e) {
+              console.warn('Error during cleanup:', e);
+            }
+          }, 100);
+        } catch (error) {
+          console.warn('Error during cleanup:', error);
+        }
       }
+      
+      wavesurfer.current = null;
     };
-  }, [currentTrack, getAssetPath]);
+  }, [currentTrack, getAssetPath, audioManager]);
+
+  // Listen to other player status
+  useEffect(() => {
+    if (!isPlaying) return;
+
+    const checkInterval = setInterval(() => {
+      try {
+        const currentWavesurfer = wavesurfer.current;
+        if (currentWavesurfer && !audioManager.isCurrentPlayer(currentWavesurfer)) {
+          setIsPlaying(false);
+        }
+      } catch (error) {
+        // Handle errors silently
+      }
+    }, 500);
+
+    return () => {
+      clearInterval(checkInterval);
+    };
+  }, [isPlaying, audioManager]);
 
   // Handle genre change
   const handleGenreChange = (genreId: string) => {
