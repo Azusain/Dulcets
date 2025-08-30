@@ -172,9 +172,7 @@ export default function ModelingSectionWithLightbox({
             </div>
 
             <div className="space-y-6 text-lg leading-relaxed text-gray-300">
-              <p>
-                {t("modeling.description")}
-              </p>
+              <p>{t("modeling.description")}</p>
 
               <p>
                 {t("modeling.expertise_description")}
@@ -217,12 +215,7 @@ export default function ModelingSectionWithLightbox({
 
       <style jsx>{`
         .modeling-section {
-          background: linear-gradient(
-            135deg,
-            #0f172a 0%,
-            #1e293b 50%,
-            #0f172a 100%
-          );
+          background: #f8fafc;
           position: relative;
           overflow: hidden;
           padding: 80px 0;
