@@ -6,7 +6,7 @@
     "tracks": [
       {
         "id": "idol-1",
-        "fileName": "normalized_星空のプレッジ_Kuri_Full_4.flac",
+        "fileName": "normalized_yumehanabi_demo_03.flac",
         "displayName": "星空のプレッジ",
         "artist": "Shintou",
         "duration": "3:45"
@@ -25,20 +25,6 @@
         "artist": "Shintou",
         "duration": "4:12",
         "isHit": true
-      },
-      {
-        "id": "jrock-2",
-        "fileName": "normalized_yumehanabi_demo_03.flac",
-        "displayName": "Thunder Storm",
-        "artist": "Shintou",
-        "duration": "3:48"
-      },
-      {
-        "id": "jrock-3",
-        "fileName": "normalized_yumehanabi_demo_03.flac",
-        "displayName": "Midnight Drive",
-        "artist": "Shintou",
-        "duration": "4:35"
       }
     ]
   },
@@ -49,7 +35,7 @@
     "tracks": [
       {
         "id": "jpop-1",
-        "fileName": "normalized_夏の音がした_Demo_01.flac",
+        "fileName": "normalized_yumehanabi_demo_03.flac",
         "displayName": "夏の音がした",
         "artist": "Shintou",
         "duration": "3:28"
@@ -63,7 +49,7 @@
     "tracks": [
       {
         "id": "orchestra-1",
-        "fileName": "normalized_船に託して.flac",
+        "fileName": "normalized_yumehanabi_demo_03.flac",
         "displayName": "船に託して",
         "artist": "Sakuma遙",
         "duration": "5:20"
@@ -77,7 +63,7 @@
     "tracks": [
       {
         "id": "edm-1",
-        "fileName": "normalized_星奈こやかの曲.flac",
+        "fileName": "normalized_yumehanabi_demo_03.flac",
         "displayName": "星奈こやかの曲",
         "artist": "星奈こやか",
         "duration": "3:55"
@@ -91,7 +77,7 @@
     "tracks": [
       {
         "id": "bgm-1",
-        "fileName": "normalized_実験基地.flac",
+        "fileName": "normalized_yumehanabi_demo_03.flac",
         "displayName": "実験基地",
         "artist": "アンナ",
         "duration": "2:48"

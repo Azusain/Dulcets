@@ -53,25 +53,34 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
     const loadAudioConfig = async () => {
       try {
         const configUrl = getAssetPath("/audio/audio-config.json");
+        console.log("Loading config from:", configUrl);
         const response = await fetch(configUrl);
         
         if (response.ok) {
           const config = await response.json();
+          console.log("Config loaded:", config);
           setGenres(config);
           
-          // Set first track of selected genre as current
-          const selectedGenreData = config[selectedGenre];
-          if (selectedGenreData && selectedGenreData.tracks.length > 0) {
-            setCurrentTrack(selectedGenreData.tracks[0]);
+          // Set first track of selected genre as current only if we don't have a current track
+          if (!currentTrack) {
+            const selectedGenreData = config[selectedGenre];
+            if (selectedGenreData && selectedGenreData.tracks.length > 0) {
+              setCurrentTrack(selectedGenreData.tracks[0]);
+            }
           }
+        } else {
+          console.error("Failed to load config, status:", response.status);
         }
       } catch (error) {
         console.error("Failed to load audio config:", error);
       }
     };
 
-    loadAudioConfig();
-  }, [getAssetPath, selectedGenre]);
+    // Only load config once on mount
+    if (Object.keys(genres).length === 0) {
+      loadAudioConfig();
+    }
+  }, [getAssetPath]); // Remove selectedGenre dependency to prevent infinite loop
 
   // Initialize WaveSurfer when current track changes
   useEffect(() => {
