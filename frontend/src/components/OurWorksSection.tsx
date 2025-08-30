@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import AudioPlayer from "./AudioPlayer";
+import AlbumPlayer from "./AlbumPlayer";
 import { ServiceCard } from "./ServiceCard";
 import { useAssetPath } from "@/hooks/useAssetPath";
 import works from "../../public/service/works.json";
@@ -168,110 +168,9 @@ const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
           </p>
         </div>
 
-        {/* Audio Player Section with Content */}
+        {/* Music Player Section */}
         <div className="mb-16">
-          <div className="grid lg:grid-cols-2 gap-16">
-            {/* Left: About Content with dynamic text */}
-            <div className="relative flex flex-col h-full">
-              {/* Simple dark decorative line */}
-              <div className="absolute -left-4 top-0 w-px h-full bg-gray-400"></div>
-
-              {/* Content text */}
-              <div className="prose prose-lg max-w-none relative flex-1 pl-8">
-                <div
-                  className="animate-fadeIn text-lg leading-relaxed text-gray-700"
-                  style={{
-                    animation: "fadeIn 0.5s ease-in-out",
-                  }}
-                >
-                  {t(`about.genres.${selectedGenre}.content`)}
-                </div>
-              </div>
-
-              {/* AudioPlayer at the bottom */}
-              <div className="mt-6 pl-8">
-                {currentAudioConfig && (
-                  <AudioPlayer
-                    title={currentAudioConfig.displayName}
-                    description={currentAudioConfig.artist}
-                    audioUrl={getAssetPath(
-                      `/audio/${currentAudioConfig.fileName}`
-                    )}
-                    className="shadow-sm"
-                    t={t}
-                  />
-                )}
-              </div>
-            </div>
-
-            {/* Right: Interactive Music Genres - Clean Style */}
-            <div className="relative">
-              <div className="p-8 space-y-6">
-                {MUSIC_GENRES.map((genre) => {
-                  return (
-                    <div
-                      key={genre.id}
-                      className={`group relative cursor-pointer transition-all duration-300 ${
-                        selectedGenre === genre.id
-                          ? "transform translate-x-2"
-                          : "hover:translate-x-1"
-                      }`}
-                      onClick={() => setSelectedGenre(genre.id)}
-                    >
-                      {/* Simple dark dot indicator */}
-                      <div
-                        className={`absolute -left-12 top-4 w-3 h-3 rounded-full transition-all duration-300 ${
-                          selectedGenre === genre.id
-                            ? "bg-gray-800 scale-125"
-                            : "bg-gray-500 opacity-60 group-hover:opacity-100 group-hover:bg-gray-600"
-                        }`}
-                      ></div>
-
-                      {/* Content */}
-                      <div className="flex items-center space-x-4">
-                        {/* Text Content - Dark theme for light background */}
-                        <div className="flex-1 text-left">
-                          <h3
-                            className={`text-2xl font-light mb-1 tracking-wide transition-colors duration-300 ${
-                              selectedGenre === genre.id
-                                ? "text-gray-900 font-medium"
-                                : "text-gray-700 group-hover:text-gray-900"
-                            }`}
-                          >
-                            {t(`about.genres.${genre.id}.title`)}
-                          </h3>
-
-                          {/* Animated underline */}
-                          <div
-                            className={`mb-2 transition-all duration-500 ${
-                              selectedGenre === genre.id
-                                ? "w-20 h-0.5 bg-gray-700"
-                                : "w-12 h-px bg-gray-400 group-hover:w-16 group-hover:bg-gray-600"
-                            }`}
-                          ></div>
-
-                          <p
-                            className={`text-sm font-light transition-colors duration-300 ${
-                              selectedGenre === genre.id
-                                ? "text-gray-600"
-                                : "text-gray-500 group-hover:text-gray-600"
-                            }`}
-                          >
-                            {t(`about.genres.${genre.id}.subtitle`)}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Selected background effect */}
-                      {selectedGenre === genre.id && (
-                        <div className="absolute inset-0 -mx-4 -my-2 bg-gray-600 rounded-lg opacity-10 -z-10"></div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
+          <AlbumPlayer t={t} className="mx-auto max-w-6xl" />
         </div>
 
         {/* YouTube Video Links Grid */}
