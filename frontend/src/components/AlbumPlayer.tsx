@@ -225,7 +225,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
       
       wavesurfer.current = null;
     };
-  }, [currentTrack?.fileName]); // Only depend on the fileName to prevent unnecessary re-renders
+  }, [currentTrack?.id]); // Depend on track ID to ensure switching works
 
   // Listen to other player status
   useEffect(() => {
@@ -258,9 +258,17 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
 
   // Handle track selection
   const handleTrackSelect = (track: Track) => {
-    if (isPlaying && wavesurfer.current) {
-      wavesurfer.current.pause();
+    // Stop current audio and reset states
+    if (wavesurfer.current) {
+      try {
+        wavesurfer.current.pause();
+        audioManager.stopCurrentPlayer();
+      } catch (error) {
+        console.warn('Error stopping current track:', error);
+      }
     }
+    setIsPlaying(false);
+    setCurrentTime(0);
     setCurrentTrack(track);
   };
 
@@ -372,9 +380,12 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
                         e.stopPropagation();
                         togglePlayPause();
                       }}
-                      className="w-6 h-6 bg-black text-white flex items-center justify-center text-xs"
+                      className="text-black hover:text-gray-600 transition-colors p-1"
                     >
-                      ⏸
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                        <rect x="2" y="1" width="2" height="10" />
+                        <rect x="8" y="1" width="2" height="10" />
+                      </svg>
                     </button>
                   ) : currentTrack?.id === track.id ? (
                     <button
@@ -382,9 +393,11 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
                         e.stopPropagation();
                         togglePlayPause();
                       }}
-                      className="w-6 h-6 bg-black text-white flex items-center justify-center text-xs"
+                      className="text-black hover:text-gray-600 transition-colors p-1"
                     >
-                      ▶
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                        <path d="M2 1v10l8-5z" />
+                      </svg>
                     </button>
                   ) : (
                     <span className="text-gray-400 font-medium">{index + 1}</span>
