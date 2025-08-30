@@ -22,33 +22,33 @@ export default function ContactSection({ t }: ComponentWithTranslation) {
   };
   return (
     <section id="contact" className="bg-white py-16">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Right side - Content */}
-          <div className="space-y-8 order-1 lg:order-2">
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="text-center">
+          {/* Centered Content */}
+          <div className="space-y-8">
             <div>
               <h1 className="text-6xl font-light text-black mb-4">
                 {t("contact.title")}
               </h1>
-              <p className="text-lg text-gray-700 leading-relaxed mb-8">
+              <p className="text-lg text-gray-700 leading-relaxed mb-8 max-w-3xl mx-auto">
                 {t("contact.description")}
               </p>
             </div>
 
             {/* Contact Info */}
-            <div className="space-y-8">
+            <div className="space-y-6">
               <div>
                 <h3 className="text-xl font-medium text-black mb-3">
                   {t("contact.get_quote")}
                 </h3>
-                <p className="text-gray-700 mb-4">
+                <p className="text-gray-700 mb-8 max-w-2xl mx-auto">
                   {t("contact.quote_description")}
                 </p>
-                <div className="text-2xl font-medium text-black my-16">
+                <div className="text-2xl font-medium text-black my-12">
                   dulcets.info@gmail.com
                 </div>
 
-                <div className="flex gap-3">
+                <div className="flex gap-3 justify-center flex-wrap">
                   <a
                     href="mailto:dulcets.info@gmail.com"
                     onClick={handleEmailClick}

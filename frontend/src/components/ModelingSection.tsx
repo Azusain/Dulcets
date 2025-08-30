@@ -155,7 +155,7 @@ export default function ModelingSectionWithLightbox({
                 </span>
               </div>
 
-              <h2 className="text-7xl lg:text-8xl font-black leading-tight text-white mb-6">
+              <h2 className="text-7xl lg:text-8xl font-black leading-tight text-gray-900 mb-6">
                 <span className="relative whitespace-nowrap">
                   {t("modeling.title_main")}
                   <span
@@ -165,13 +165,13 @@ export default function ModelingSectionWithLightbox({
                   </span>
                 </span>
                 <br />
-                <span className="text-6xl lg:text-7xl text-gray-300 whitespace-nowrap">
+                <span className="text-6xl lg:text-7xl text-gray-600 whitespace-nowrap">
                   {t("modeling.title_sub")}
                 </span>
               </h2>
             </div>
 
-            <div className="space-y-6 text-lg leading-relaxed text-gray-300">
+            <div className="space-y-6 text-lg leading-relaxed text-gray-700">
               <p>{t("modeling.description")}</p>
 
               <p>
@@ -193,7 +193,7 @@ export default function ModelingSectionWithLightbox({
 
             <div className="flex items-center space-x-4 pt-6">
               <div className="w-12 h-0.5 bg-gradient-to-r from-cyan-500 to-purple-500"></div>
-              <span className="text-sm text-gray-400 font-medium">
+              <span className="text-sm text-gray-600 font-medium">
                 {t("modeling.click_to_view")}
               </span>
             </div>
@@ -215,7 +215,7 @@ export default function ModelingSectionWithLightbox({
 
       <style jsx>{`
         .modeling-section {
-          background: #f8fafc;
+          background: #f1f5f9;
           position: relative;
           overflow: hidden;
           padding: 80px 0;
