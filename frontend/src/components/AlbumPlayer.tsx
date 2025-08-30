@@ -316,11 +316,16 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
         {/* Sliding underline */}
         <div 
           className="absolute bottom-0 h-0.5 bg-black transition-all duration-300 ease-out"
-          style={{
-            width: `${GENRE_OPTIONS.find(g => g.id === selectedGenre)?.name.length * 8 + 16}px`,
-            transform: `translateX(${GENRE_OPTIONS.slice(0, GENRE_OPTIONS.findIndex(g => g.id === selectedGenre)).reduce((acc, genre) => acc + genre.name.length * 8 + 32 + 16, 0)}px)`,
-            left: '0px'
-          }}
+          style={(() => {
+            const currentGenre = GENRE_OPTIONS.find(g => g.id === selectedGenre);
+            const currentIndex = GENRE_OPTIONS.findIndex(g => g.id === selectedGenre);
+            
+            return {
+              width: `${(currentGenre?.name.length || 0) * 8 + 16}px`,
+              transform: `translateX(${GENRE_OPTIONS.slice(0, currentIndex).reduce((acc, genre) => acc + genre.name.length * 8 + 32 + 16, 0)}px)`,
+              left: '0px'
+            };
+          })()}
         />
       </div>
 
