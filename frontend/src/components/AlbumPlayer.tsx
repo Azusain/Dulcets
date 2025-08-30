@@ -182,24 +182,33 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
   const currentGenre = genres[selectedGenre];
   
   return (
-    <div className={`bg-white ${className}`}>
+    <div className={className}>
       {/* Genre Selection Tabs */}
-      <div className="border-b border-gray-200 mb-8">
+      <div className="relative border-b border-gray-200 mb-8">
         <div className="flex gap-8">
           {GENRE_OPTIONS.map((genre) => (
             <button
               key={genre.id}
               onClick={() => handleGenreChange(genre.id)}
-              className={`pb-3 text-sm font-medium border-b-2 transition-colors ${
+              className={`pb-3 text-sm font-medium transition-colors relative z-10 ${
                 selectedGenre === genre.id
-                  ? "border-black text-black"
-                  : "border-transparent text-gray-500 hover:text-gray-900 hover:border-gray-300"
+                  ? "text-black"
+                  : "text-gray-500 hover:text-gray-900"
               }`}
             >
               {genre.name}
             </button>
           ))}
         </div>
+        {/* Sliding underline */}
+        <div 
+          className="absolute bottom-0 h-0.5 bg-black transition-all duration-300 ease-out"
+          style={{
+            width: `${GENRE_OPTIONS.find(g => g.id === selectedGenre)?.name.length * 8 + 16}px`,
+            transform: `translateX(${GENRE_OPTIONS.slice(0, GENRE_OPTIONS.findIndex(g => g.id === selectedGenre)).reduce((acc, genre) => acc + genre.name.length * 8 + 32 + 16, 0)}px)`,
+            left: '0px'
+          }}
+        />
       </div>
 
       <div className="grid md:grid-cols-3 gap-12">

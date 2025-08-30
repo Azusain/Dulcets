@@ -149,7 +149,7 @@ const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
   return (
     <section
       id="works"
-      className="relative bg-gradient-to-b from-gray-50 to-white"
+      className="relative bg-gradient-to-b from-gray-50 to-gray-50"
     >
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Section Header */}
