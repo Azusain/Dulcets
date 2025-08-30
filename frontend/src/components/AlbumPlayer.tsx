@@ -138,6 +138,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
         const handlePlay = () => {
           if (!isComponentMounted) return;
           setIsPlaying(true);
+          // Use currentTrack.fileName directly to avoid dependency issues
           const audioUrl = getAssetPath(`/audio/${currentTrack.fileName}`);
           audioManager.setCurrentPlayer(wavesurferInstance, audioUrl);
         };
@@ -224,7 +225,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
       
       wavesurfer.current = null;
     };
-  }, [currentTrack, getAssetPath, audioManager]);
+  }, [currentTrack?.fileName]); // Only depend on the fileName to prevent unnecessary re-renders
 
   // Listen to other player status
   useEffect(() => {
@@ -244,7 +245,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
     return () => {
       clearInterval(checkInterval);
     };
-  }, [isPlaying, audioManager]);
+  }, [isPlaying]); // Remove audioManager dependency as it's a singleton
 
   // Handle genre change
   const handleGenreChange = (genreId: string) => {
