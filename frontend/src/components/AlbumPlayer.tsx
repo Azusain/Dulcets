@@ -445,7 +445,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
         </div>
       </div>
       
-      {/* Full-width Waveform at Bottom - Aligned with Album Info Text */}
+      {/* Waveform Section - Aligned with Album Info Text */}
       {currentTrack && (
         <div className="border-t border-gray-200 pt-8 mt-8">
           <div className="mb-4">
@@ -457,12 +457,16 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
             </div>
           </div>
           
-          {/* Waveform - Full width aligned with album info text */}
-          <div 
-            ref={waveformRef}
-            className="w-full mb-4 bg-gray-50 rounded-lg"
-            style={{ height: "80px" }}
-          />
+          {/* Waveform - Using grid to align with album info text */}
+          <div className="grid md:grid-cols-3 gap-12">
+            <div className="md:col-span-3">
+              <div 
+                ref={waveformRef}
+                className="w-full mb-4 bg-gray-50 rounded-lg"
+                style={{ height: "80px" }}
+              />
+            </div>
+          </div>
           
           {/* Loading with spinner */}
           {isLoading && (
