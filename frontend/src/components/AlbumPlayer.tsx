@@ -342,9 +342,9 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
         />
       </div>
 
-      <div className="grid md:grid-cols-3 gap-12 md:h-[600px]">
+      <div className="grid md:grid-cols-3 gap-12 items-stretch">
         {/* Left: Album Cover and Info */}
-        <div className="md:col-span-1">
+        <div className="md:col-span-1 flex flex-col md:min-h-[600px]">
           <div className="aspect-square bg-gray-100 mb-6">
             {currentGenre?.albumCover ? (
               <img
@@ -378,7 +378,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
         </div>
 
         {/* Right: Track List and Waveform */}
-        <div className="md:col-span-2 flex flex-col">
+        <div className="md:col-span-2 flex flex-col md:min-h-[600px]">
           {/* Track List - Takes available space */}
           <div className="flex-grow overflow-y-auto">
             <div className="space-y-1">
@@ -461,7 +461,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
               {/* Waveform */}
               <div 
                 ref={waveformRef}
-                className="w-full mb-4 bg-gray-50 rounded-lg"
+                className="w-full bg-gray-50 rounded-lg"
                 style={{ height: "80px" }}
               />
               
