@@ -135,7 +135,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
           cursorColor: "#000000",
           barWidth: 2,
           barRadius: 1,
-          height: 80,
+          height: 44,
           normalize: true,
           backend: "WebAudio",
           mediaControls: false,
@@ -476,7 +476,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
         {/* Right: Track List and Waveform */}
         <div className="md:col-span-2 flex flex-col">
           {/* Track List */}
-          <div className="overflow-y-auto max-h-[400px]">
+          <div className="overflow-y-auto max-h-[400px] mb-6">
             <div className="space-y-1">
               {currentGenre?.tracks.map((track, index) => (
                 <div
@@ -564,15 +564,14 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
             </div>
           </div>
 
-          {/* Waveform Visualization - Directly under list */}
+          {/* Waveform Visualization - Aligned with playback controls */}
           {currentTrack && (
-            <div className="border-t border-gray-200 pt-4 mt-4">
-              {/* Waveform only */}
-              <div className="relative">
+            <div className="flex items-center justify-center" style={{ height: "44px", marginTop: "32px" }}>
+              <div className="relative w-full">
                 <div 
                   ref={waveformRef}
                   className="w-full bg-gray-50 rounded-lg"
-                  style={{ height: "80px" }}
+                  style={{ height: "44px" }}
                 />
                 
                 {/* Loading overlay - positioned absolutely to not affect layout */}
