@@ -25,7 +25,7 @@ cd /d "%TARGET_FOLDER%" || (
 )
 
 REM Path to audio normalizer executable
-set NORMALIZER="C:\Users\azusaing\Desktop\Code\audio_normalizer\build\Release\audio_normalizer.exe"
+set NORMALIZER="C:\Users\azusaing\.cargo\bin\audio_normalizer.exe"
 
 REM Check if normalizer exists
 if not exist %NORMALIZER% (
@@ -102,8 +102,8 @@ for /r %%f in (*.mp3 *.wav *.flac *.ogg *.aiff *.au *.m4a *.wma) do (
         if not exist "!output_file!" (
             echo [!processed!/!total!] Processing: %%~nxf
             
-            REM Run normalization to -14 LUFS
-            %NORMALIZER% -l -14 "!filepath!" "!output_file!" >nul 2>&1
+            REM Run normalization to -14 LUFS with 500ms fade in/out
+            %NORMALIZER% -l -14 --fade-in 0.5 --fade-out 0.5 "!filepath!" "!output_file!" >nul 2>&1
             
             if !errorlevel!==0 (
                 echo   ✓ SUCCESS: !output_file!

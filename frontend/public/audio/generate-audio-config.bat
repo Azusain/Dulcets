@@ -42,36 +42,40 @@ for /d %%d in (*) do (
         set "COUNT=0"
         
         for %%f in ("%%d\*.mp3" "%%d\*.wav" "%%d\*.flac") do (
-            set /a COUNT+=1
+            REM Skip already normalized files
             set "FILE=%%~nf"
-            set "PATH=!FOLDER!/%%~nxf"
-            
-            REM Clean display name
-            set "CLEAN=!FILE!"
-            set "CLEAN=!CLEAN:【=!"
-            set "CLEAN=!CLEAN:】=!"
-            set "CLEAN=!CLEAN:（=!"
-            set "CLEAN=!CLEAN:）=!"
-            set "CLEAN=!CLEAN:_Full=!"
-            set "CLEAN=!CLEAN:_demo=!"
-            set "CLEAN=!CLEAN:_1=!"
-            set "CLEAN=!CLEAN:_2=!"
-            
-            REM Get artist
-            set "ARTIST=Dulcets"
-            echo !FILE! | findstr /i "Shintou" >nul && set "ARTIST=Shintou"
-            echo !FILE! | findstr /i "Koyaka" >nul && set "ARTIST=Koyaka"
-            
-            if not "!FIRST_TRACK!"=="1" echo , >> audio-config.json
-            set "FIRST_TRACK=0"
-            
-            echo       { >> audio-config.json
-            echo         "id": "!ID!-!COUNT!", >> audio-config.json
-            echo         "fileName": "!PATH!", >> audio-config.json
-            echo         "displayName": "!CLEAN!", >> audio-config.json
-            echo         "artist": "!ARTIST!", >> audio-config.json
-            echo         "duration": "3:30" >> audio-config.json
-            echo       } >> audio-config.json
+            echo !FILE! | findstr /i "^normalized_" >nul
+            if !errorlevel! neq 0 (
+                set /a COUNT+=1
+                set "PATH=!FOLDER!/%%~nxf"
+                
+                REM Clean display name
+                set "CLEAN=!FILE!"
+                set "CLEAN=!CLEAN:【=!"
+                set "CLEAN=!CLEAN:】=!"
+                set "CLEAN=!CLEAN:（=!"
+                set "CLEAN=!CLEAN:）=!"
+                set "CLEAN=!CLEAN:_Full=!"
+                set "CLEAN=!CLEAN:_demo=!"
+                set "CLEAN=!CLEAN:_1=!"
+                set "CLEAN=!CLEAN:_2=!"
+                
+                REM Get artist
+                set "ARTIST=Dulcets"
+                echo !FILE! | findstr /i "Shintou" >nul && set "ARTIST=Shintou"
+                echo !FILE! | findstr /i "Koyaka" >nul && set "ARTIST=Koyaka"
+                
+                if not "!FIRST_TRACK!"=="1" echo , >> audio-config.json
+                set "FIRST_TRACK=0"
+                
+                echo       { >> audio-config.json
+                echo         "id": "!ID!-!COUNT!", >> audio-config.json
+                echo         "fileName": "!PATH!", >> audio-config.json
+                echo         "displayName": "!CLEAN!", >> audio-config.json
+                echo         "artist": "!ARTIST!", >> audio-config.json
+                echo         "duration": "3:30" >> audio-config.json
+                echo       } >> audio-config.json
+            )
         )
         
         echo     ] >> audio-config.json
