@@ -342,7 +342,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
         />
       </div>
 
-      <div className="grid md:grid-cols-3 gap-12">
+      <div className="grid md:grid-cols-3 gap-12 md:h-[600px]">
         {/* Left: Album Cover and Info */}
         <div className="md:col-span-1">
           <div className="aspect-square bg-gray-100 mb-6">
@@ -378,75 +378,77 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
         </div>
 
         {/* Right: Track List and Waveform */}
-        <div className="md:col-span-2">
-          {/* Track List */}
-          <div className="space-y-1 mb-8">
-            {currentGenre?.tracks.map((track, index) => (
-              <div
-                key={track.id}
-                onClick={() => handleTrackSelect(track)}
-                className={`flex items-center gap-4 py-3 px-2 cursor-pointer transition-colors ${
-                  currentTrack?.id === track.id 
-                    ? "bg-gray-100" 
-                    : "hover:bg-gray-50"
-                }`}
-              >
-                {/* Track Number / Play Button */}
-                <div className="w-8 flex items-center justify-center text-sm">
-                  {currentTrack?.id === track.id && isPlaying ? (
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        togglePlayPause();
-                      }}
-                      className="text-black hover:text-gray-600 transition-colors p-1"
-                    >
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
-                        <rect x="2" y="1" width="2" height="10" />
-                        <rect x="8" y="1" width="2" height="10" />
-                      </svg>
-                    </button>
-                  ) : currentTrack?.id === track.id ? (
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        togglePlayPause();
-                      }}
-                      className="text-black hover:text-gray-600 transition-colors p-1"
-                    >
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
-                        <path d="M2 1v10l8-5z" />
-                      </svg>
-                    </button>
-                  ) : (
-                    <span className="text-gray-400 font-medium">{index + 1}</span>
-                  )}
-                </div>
+        <div className="md:col-span-2 flex flex-col">
+          {/* Track List - Takes available space */}
+          <div className="flex-grow overflow-y-auto">
+            <div className="space-y-1">
+              {currentGenre?.tracks.map((track, index) => (
+                <div
+                  key={track.id}
+                  onClick={() => handleTrackSelect(track)}
+                  className={`flex items-center gap-4 py-3 px-2 cursor-pointer transition-colors ${
+                    currentTrack?.id === track.id 
+                      ? "bg-gray-100" 
+                      : "hover:bg-gray-50"
+                  }`}
+                >
+                  {/* Track Number / Play Button */}
+                  <div className="w-8 flex items-center justify-center text-sm">
+                    {currentTrack?.id === track.id && isPlaying ? (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          togglePlayPause();
+                        }}
+                        className="text-black hover:text-gray-600 transition-colors p-1"
+                      >
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                          <rect x="2" y="1" width="2" height="10" />
+                          <rect x="8" y="1" width="2" height="10" />
+                        </svg>
+                      </button>
+                    ) : currentTrack?.id === track.id ? (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          togglePlayPause();
+                        }}
+                        className="text-black hover:text-gray-600 transition-colors p-1"
+                      >
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                          <path d="M2 1v10l8-5z" />
+                        </svg>
+                      </button>
+                    ) : (
+                      <span className="text-gray-400 font-medium">{index + 1}</span>
+                    )}
+                  </div>
 
-                {/* Track Info */}
-                <div className="flex-1 min-w-0">
-                  <h4 className="font-medium truncate text-black">
-                    {track.displayName}
-                    {track.isHit && <span className="ml-2 px-2 py-1 bg-gray-200 text-xs rounded font-medium">HIT</span>}
-                  </h4>
-                </div>
+                  {/* Track Info */}
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-medium truncate text-black">
+                      {track.displayName}
+                      {track.isHit && <span className="ml-2 px-2 py-1 bg-gray-200 text-xs rounded font-medium">HIT</span>}
+                    </h4>
+                  </div>
 
-                {/* Artist */}
-                <div className="text-gray-500 text-sm min-w-0 flex-shrink-0">
-                  Naked Identity Created by King
-                </div>
+                  {/* Artist */}
+                  <div className="text-gray-500 text-sm min-w-0 flex-shrink-0">
+                    Naked Identity Created by King
+                  </div>
 
-                {/* Duration */}
-                <div className="text-gray-400 text-sm font-mono w-12 text-right">
-                  {track.duration}
+                  {/* Duration */}
+                  <div className="text-gray-400 text-sm font-mono w-12 text-right">
+                    {track.duration}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
           
-          {/* Waveform Player - Below Track List */}
+          {/* Waveform Player - Fixed at bottom */}
           {currentTrack && (
-            <div className="border-t border-gray-200 pt-6">
+            <div className="border-t border-gray-200 pt-6 mt-auto">
               <div className="mb-4">
                 <div className="text-lg font-medium text-black mb-1">
                   {currentTrack.displayName}
