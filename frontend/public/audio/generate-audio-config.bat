@@ -42,15 +42,15 @@ for /d %%d in (*) do (
         set "COUNT=0"
         
         for %%f in ("%%d\*.mp3" "%%d\*.wav" "%%d\*.flac" "%%d\*.ogg" "%%d\*.m4a") do (
-            REM Skip already normalized files
+            REM Process all audio files (including normalized ones)
             set "FILE=%%~nf"
-            echo !FILE! | findstr /i "^normalized_" >nul
-            if !errorlevel! neq 0 (
                 set /a COUNT+=1
                 set "PATH=!FOLDER!/%%~nxf"
                 
                 REM Clean display name
                 set "CLEAN=!FILE!"
+                REM Remove normalized_ prefix
+                if "!CLEAN:~0,11!"=="normalized_" set "CLEAN=!CLEAN:~11!"
                 set "CLEAN=!CLEAN:【=!"
                 set "CLEAN=!CLEAN:】=!"
                 set "CLEAN=!CLEAN:（=!"
@@ -60,10 +60,10 @@ for /d %%d in (*) do (
                 set "CLEAN=!CLEAN:_1=!"
                 set "CLEAN=!CLEAN:_2=!"
                 
-                REM Get artist
+                REM Get artist - using string replacement
                 set "ARTIST=Dulcets"
-                echo !FILE! | findstr /i "Shintou" >nul && set "ARTIST=Shintou"
-                echo !FILE! | findstr /i "Koyaka" >nul && set "ARTIST=Koyaka"
+                if not "!FILE:Shintou=!"=="!FILE!" set "ARTIST=Shintou"
+                if not "!FILE:Koyaka=!"=="!FILE!" set "ARTIST=Koyaka"
                 
                 if not "!FIRST_TRACK!"=="1" echo , >> audio-config.json
                 set "FIRST_TRACK=0"
@@ -75,7 +75,6 @@ for /d %%d in (*) do (
                 echo         "artist": "!ARTIST!", >> audio-config.json
                 echo         "duration": "3:30" >> audio-config.json
                 echo       } >> audio-config.json
-            )
         )
         
         echo     ] >> audio-config.json
@@ -90,4 +89,4 @@ echo ================================================
 echo ✓ Config generated: audio-config.json
 echo ✓ Backup saved: audio-config.json.backup
 echo ================================================
-pause
+if "%NOPAUSE%"=="" pause

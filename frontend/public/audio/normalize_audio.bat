@@ -25,30 +25,16 @@ cd /d "%TARGET_FOLDER%" || (
 )
 
 REM Path to audio normalizer executable
-set NORMALIZER="C:\Users\azusaing\.cargo\bin\audio_normalizer.exe"
-
-REM Check if normalizer exists
-if not exist %NORMALIZER% (
-    echo ERROR: Audio normalizer not found at %NORMALIZER%
-    echo.
-    echo Please ensure the audio_normalizer is built and available.
-    echo You can also use ffmpeg-normalize as an alternative:
-    echo   pip install ffmpeg-normalize
-    echo   ffmpeg-normalize -f input.wav -o output.wav -t -14
-    echo.
-    pause
-    exit /b 1
-)
+set NORMALIZER="audio_normalizer.exe"
 
 echo Scanning for audio files...
-echo NOTE: Your audio_normalizer only supports WAV files.
-echo MP3/FLAC files will be skipped. Convert them to WAV first if needed.
+echo NOTE: Your audio_normalizer now supports MP3, FLAC, and WAV files.
 echo.
 
 REM Count total files for progress tracking (exclude already normalized files)
 set /a total=0
 set /a skipped=0
-for /r %%f in (*.wav) do (
+for /r %%f in (*.mp3 *.flac *.wav) do (
     set "filename=%%~nf"
     echo !filename! | findstr /i "^normalized_" >nul
     if !errorlevel! neq 0 (
@@ -71,43 +57,46 @@ if %total%==0 (
 echo Starting normalization to -14 LUFS...
 echo ================================================
 
-REM Process each audio file recursively - only WAV files supported by your normalizer
+REM Process each audio file recursively - MP3, FLAC, and WAV files supported
 set /a processed=0
 set /a success=0
 set /a failed=0
 
-for /r %%f in (*.wav) do (
+for /r %%f in (*.mp3 *.flac *.wav) do (
     set "filepath=%%f"
     set "filename=%%~nf"
     set "filedir=%%~dpf"
+    set "fileext=%%~xf"
     
-    REM Skip files that already start with "normalized_"
-    echo !filename! | findstr /i "^normalized_" >nul
-    if !errorlevel! neq 0 (
-        set /a processed+=1
-        
-        REM Create normalized filename
-        set "output_file=!filedir!normalized_!filename!.wav"
-        
-        REM Skip if normalized version already exists
-        if not exist "!output_file!" (
+        REM Skip files that already start with "normalized_"
+        echo !filename! | findstr /i "^normalized_" >nul
+        if !errorlevel! neq 0 (
+            set /a processed+=1
+            
+            REM Create normalized filename - output as WAV
+            set "normalized_file=!filedir!normalized_!filename!.wav"
+            
             echo [!processed!/!total!] Processing: %%~nxf
-            
-            REM Run normalization to -14 LUFS with 500ms fade in/out
-            %NORMALIZER% normalize --lufs=-14 --fade-in 0.5 --fade-out 0.5 "!filepath!" "!output_file!"
-            
+                
+                REM Run normalization to -14 LUFS with 500ms fade in/out
+                %NORMALIZER% "!filepath!" "!normalized_file!" --lufs=-14 --fade-in=0.5 --fade-out=0.5 --quiet
+                
             if !errorlevel!==0 (
-                echo   ✓ SUCCESS: !output_file!
-                set /a success+=1
+                if exist "!normalized_file!" (
+                    del "!filepath!"
+                    echo   SUCCESS: %%~nxf - normalized to WAV
+                    set /a success+=1
+                ) else (
+                    echo   FAILED: No output generated for %%~nxf
+                    set /a failed+=1
+                )
             ) else (
-                echo   ✗ FAILED: !filepath!
+                echo   FAILED: %%~nxf
+                if exist "!normalized_file!" del "!normalized_file!"
                 set /a failed+=1
             )
-        ) else (
-            echo [!processed!/!total!] SKIP: %%~nxf (already exists)
+            echo.
         )
-        echo.
-    )
 )
 
 echo ================================================
