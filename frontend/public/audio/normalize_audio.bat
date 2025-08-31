@@ -41,12 +41,14 @@ if not exist %NORMALIZER% (
 )
 
 echo Scanning for audio files...
+echo NOTE: Your audio_normalizer only supports WAV files.
+echo MP3/FLAC files will be skipped. Convert them to WAV first if needed.
 echo.
 
 REM Count total files for progress tracking (exclude already normalized files)
 set /a total=0
 set /a skipped=0
-for /r %%f in (*.mp3 *.wav *.flac *.ogg *.aiff *.au *.m4a *.wma) do (
+for /r %%f in (*.wav) do (
     set "filename=%%~nf"
     echo !filename! | findstr /i "^normalized_" >nul
     if !errorlevel! neq 0 (
@@ -69,12 +71,12 @@ if %total%==0 (
 echo Starting normalization to -14 LUFS...
 echo ================================================
 
-REM Process each audio file recursively
+REM Process each audio file recursively - only WAV files supported by your normalizer
 set /a processed=0
 set /a success=0
 set /a failed=0
 
-for /r %%f in (*.mp3 *.wav *.flac *.ogg *.aiff *.au *.m4a *.wma) do (
+for /r %%f in (*.wav) do (
     set "filepath=%%f"
     set "filename=%%~nf"
     set "filedir=%%~dpf"
@@ -84,26 +86,15 @@ for /r %%f in (*.mp3 *.wav *.flac *.ogg *.aiff *.au *.m4a *.wma) do (
     if !errorlevel! neq 0 (
         set /a processed+=1
         
-        REM Get file extension
-        set "extension=%%~xf"
-        
-        REM Create normalized filename - prefer FLAC for quality
-        if /i "!extension!"==".mp3" (
-            set "output_file=!filedir!normalized_!filename!.flac"
-        ) else if /i "!extension!"==".m4a" (
-            set "output_file=!filedir!normalized_!filename!.flac"
-        ) else if /i "!extension!"==".wma" (
-            set "output_file=!filedir!normalized_!filename!.flac"
-        ) else (
-            set "output_file=!filedir!normalized_!filename!!extension!"
-        )
+        REM Create normalized filename
+        set "output_file=!filedir!normalized_!filename!.wav"
         
         REM Skip if normalized version already exists
         if not exist "!output_file!" (
             echo [!processed!/!total!] Processing: %%~nxf
             
             REM Run normalization to -14 LUFS with 500ms fade in/out
-            %NORMALIZER% -l -14 --fade-in 0.5 --fade-out 0.5 "!filepath!" "!output_file!" >nul 2>&1
+            %NORMALIZER% normalize --lufs=-14 --fade-in 0.5 --fade-out 0.5 "!filepath!" "!output_file!"
             
             if !errorlevel!==0 (
                 echo   ✓ SUCCESS: !output_file!

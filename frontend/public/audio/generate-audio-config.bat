@@ -41,7 +41,7 @@ for /d %%d in (*) do (
         set "FIRST_TRACK=1"
         set "COUNT=0"
         
-        for %%f in ("%%d\*.mp3" "%%d\*.wav" "%%d\*.flac") do (
+        for %%f in ("%%d\*.mp3" "%%d\*.wav" "%%d\*.flac" "%%d\*.ogg" "%%d\*.m4a") do (
             REM Skip already normalized files
             set "FILE=%%~nf"
             echo !FILE! | findstr /i "^normalized_" >nul
