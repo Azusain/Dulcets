@@ -320,9 +320,15 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
             const currentGenre = GENRE_OPTIONS.find(g => g.id === selectedGenre);
             const currentIndex = GENRE_OPTIONS.findIndex(g => g.id === selectedGenre);
             
+            // Calculate the position more accurately
+            let offset = 0;
+            for (let i = 0; i < currentIndex; i++) {
+              offset += GENRE_OPTIONS[i].name.length * 9 + 32; // Adjusted spacing
+            }
+            
             return {
-              width: `${(currentGenre?.name.length || 0) * 8 + 16}px`,
-              transform: `translateX(${GENRE_OPTIONS.slice(0, currentIndex).reduce((acc, genre) => acc + genre.name.length * 8 + 32 + 16, 0)}px)`,
+              width: `${(currentGenre?.name.length || 0) * 9 + 16}px`, // Adjusted width calculation
+              transform: `translateX(${offset}px)`,
               left: '0px'
             };
           })()}
@@ -366,7 +372,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
 
         {/* Right: Track List */}
         <div className="md:col-span-2">
-          <div className="space-y-1">
+          <div className="space-y-1 mb-8">
             {currentGenre?.tracks.map((track, index) => (
               <div
                 key={track.id}
@@ -429,35 +435,37 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
               </div>
             ))}
           </div>
-        </div>
-      </div>
-
-      {/* Current Track Player at Bottom */}
-      {currentTrack && (
-        <div className="border-t border-gray-200 pt-8">
-          <div className="mb-6 text-center">
-            <div className="text-xl font-bold text-black mb-2">
-              {currentTrack.displayName}
-            </div>
-            <div className="text-sm text-gray-500 mb-4">
-              {formatTime(currentTime)} / {formatTime(duration)}
-            </div>
-          </div>
           
-          {/* Waveform */}
-          <div 
-            ref={waveformRef}
-            className="w-full mb-4 bg-gray-50 rounded-lg"
-            style={{ height: "80px" }}
-          />
-          
-          {isLoading && (
-            <div className="text-center text-sm text-gray-500 py-4">
-              {t ? t("loading") : "読み込み中"}
+          {/* Current Track Player - Below Track List */}
+          {currentTrack && (
+            <div className="border-t border-gray-200 pt-6">
+              <div className="mb-4">
+                <div className="text-lg font-medium text-black mb-1">
+                  {currentTrack.displayName}
+                </div>
+                <div className="text-sm text-gray-500 mb-3">
+                  {formatTime(currentTime)} / {formatTime(duration)}
+                </div>
+              </div>
+              
+              {/* Waveform */}
+              <div 
+                ref={waveformRef}
+                className="w-full mb-4 bg-gray-50 rounded-lg"
+                style={{ height: "80px" }}
+              />
+              
+              {/* Loading with spinner */}
+              {isLoading && (
+                <div className="flex items-center justify-center gap-2 text-sm text-gray-500 py-4">
+                  <div className="w-4 h-4 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin"></div>
+                  {t ? t("loading") : "読み込み中"}
+                </div>
+              )}
             </div>
           )}
         </div>
-      )}
+      </div>
     </div>
   );
 };
