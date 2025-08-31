@@ -320,22 +320,29 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
             const currentGenre = GENRE_OPTIONS.find(g => g.id === selectedGenre);
             const currentIndex = GENRE_OPTIONS.findIndex(g => g.id === selectedGenre);
             
-            // Calculate the position more accurately
-            let offset = 0;
-            for (let i = 0; i < currentIndex; i++) {
-              offset += GENRE_OPTIONS[i].name.length * 9 + 32; // Adjusted spacing
-            }
+            // Precise calculation using specific measurements for each text
+            const measurements: Record<string, { width: number; offset: number }> = {
+              'IDOL': { width: 40, offset: 0 },
+              'J-ROCK': { width: 54, offset: 72 },
+              'J-POP': { width: 46, offset: 158 },
+              'ORCHESTRA': { width: 74, offset: 236 },
+              'EDM': { width: 32, offset: 342 },
+              'BGM': { width: 32, offset: 406 }
+            };
+            
+            const current = currentGenre?.name || 'IDOL';
+            const measurement = measurements[current] || { width: 40, offset: 0 };
             
             return {
-              width: `${(currentGenre?.name.length || 0) * 9 + 16}px`, // Adjusted width calculation
-              transform: `translateX(${offset}px)`,
+              width: `${measurement.width}px`,
+              transform: `translateX(${measurement.offset}px)`,
               left: '0px'
             };
           })()}
         />
       </div>
 
-      <div className="grid md:grid-cols-3 gap-12 mb-8">
+      <div className="grid md:grid-cols-3 gap-12">
         {/* Left: Album Cover */}
         <div className="md:col-span-1">
           <div className="aspect-square bg-gray-100 mb-6">
@@ -372,7 +379,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
 
         {/* Right: Track List */}
         <div className="md:col-span-2">
-          <div className="space-y-1 mb-8">
+          <div className="space-y-1">
             {currentGenre?.tracks.map((track, index) => (
               <div
                 key={track.id}
@@ -435,37 +442,37 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
               </div>
             ))}
           </div>
+        </div>
+      </div>
+      
+      {/* Full-width Waveform at Bottom - Aligned with Album Info Text */}
+      {currentTrack && (
+        <div className="border-t border-gray-200 pt-8 mt-8">
+          <div className="mb-4">
+            <div className="text-lg font-medium text-black mb-1">
+              {currentTrack.displayName}
+            </div>
+            <div className="text-sm text-gray-500 mb-3">
+              {formatTime(currentTime)} / {formatTime(duration)}
+            </div>
+          </div>
           
-          {/* Current Track Player - Below Track List */}
-          {currentTrack && (
-            <div className="border-t border-gray-200 pt-6">
-              <div className="mb-4">
-                <div className="text-lg font-medium text-black mb-1">
-                  {currentTrack.displayName}
-                </div>
-                <div className="text-sm text-gray-500 mb-3">
-                  {formatTime(currentTime)} / {formatTime(duration)}
-                </div>
-              </div>
-              
-              {/* Waveform */}
-              <div 
-                ref={waveformRef}
-                className="w-full mb-4 bg-gray-50 rounded-lg"
-                style={{ height: "80px" }}
-              />
-              
-              {/* Loading with spinner */}
-              {isLoading && (
-                <div className="flex items-center justify-center gap-2 text-sm text-gray-500 py-4">
-                  <div className="w-4 h-4 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin"></div>
-                  {t ? t("loading") : "読み込み中"}
-                </div>
-              )}
+          {/* Waveform - Full width aligned with album info text */}
+          <div 
+            ref={waveformRef}
+            className="w-full mb-4 bg-gray-50 rounded-lg"
+            style={{ height: "80px" }}
+          />
+          
+          {/* Loading with spinner */}
+          {isLoading && (
+            <div className="flex items-center justify-center gap-2 text-sm text-gray-500 py-4">
+              <div className="w-4 h-4 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin"></div>
+              {t ? t("loading") : "読み込み中"}
             </div>
           )}
         </div>
-      </div>
+      )}
     </div>
   );
 };
