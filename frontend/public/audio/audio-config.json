@@ -6,10 +6,24 @@
     "tracks": [
       {
         "id": "idol-1",
-        "fileName": "normalized_星空のプレッジ_Kuri_Full_4.flac",
+        "fileName": "idol/【アイドル】星空のプレッジ_Kuri_Full_4【-14LUFS】（Shintou）.mp3",
         "displayName": "星空のプレッジ",
         "artist": "Shintou",
         "duration": "3:45"
+      },
+      {
+        "id": "idol-2",
+        "fileName": "idol/【アイドル】Aquamarine_9【-14LUFS】（Shintou）.mp3",
+        "displayName": "Aquamarine",
+        "artist": "Shintou",
+        "duration": "4:02"
+      },
+      {
+        "id": "idol-3",
+        "fileName": "idol/男子アイドル風.mp3",
+        "displayName": "男子アイドル風",
+        "artist": "Dulcets",
+        "duration": "3:15"
       }
     ]
   },
@@ -20,11 +34,32 @@
     "tracks": [
       {
         "id": "jrock-1",
-        "fileName": "normalized_yumehanabi_demo_03.flac",
-        "displayName": "夢花火",
+        "fileName": "Rock/【Rock】君と奏でる歌_Full_8_Mastered（Shintou）.mp3",
+        "displayName": "君と奏でる歌",
         "artist": "Shintou",
         "duration": "4:12",
         "isHit": true
+      },
+      {
+        "id": "jrock-2",
+        "fileName": "Rock/【Rock】1（Koyaka）.mp3",
+        "displayName": "Rock 1",
+        "artist": "Koyaka",
+        "duration": "3:28"
+      },
+      {
+        "id": "jrock-3",
+        "fileName": "Rock/【Rock】2（Koyaka）.mp3",
+        "displayName": "Rock 2",
+        "artist": "Koyaka",
+        "duration": "3:45"
+      },
+      {
+        "id": "jrock-4",
+        "fileName": "Rock/ボカロ風.mp3",
+        "displayName": "ボカロ風",
+        "artist": "Dulcets",
+        "duration": "3:33"
       }
     ]
   },
@@ -35,10 +70,32 @@
     "tracks": [
       {
         "id": "jpop-1",
-        "fileName": "normalized_夏の音がした_Demo_01.flac",
-        "displayName": "夏の音がした",
+        "fileName": "pop/【Pop】アリガト。_9【-14LUFS】（Shintou）.mp3",
+        "displayName": "アリガト。",
         "artist": "Shintou",
         "duration": "3:28"
+      },
+      {
+        "id": "jpop-2",
+        "fileName": "pop/【ケルトソング】夢花火_6【-14LUFS】（Shintou）.mp3",
+        "displayName": "夢花火",
+        "artist": "Shintou",
+        "duration": "4:15",
+        "isHit": true
+      },
+      {
+        "id": "jpop-3",
+        "fileName": "pop/【バラード】（Koyaka）.mp3",
+        "displayName": "バラード",
+        "artist": "Koyaka",
+        "duration": "4:02"
+      },
+      {
+        "id": "jpop-4",
+        "fileName": "pop/80年代.mp3",
+        "displayName": "80年代",
+        "artist": "Dulcets",
+        "duration": "3:12"
       }
     ]
   },
@@ -49,10 +106,17 @@
     "tracks": [
       {
         "id": "orchestra-1",
-        "fileName": "normalized_船に託して.flac",
+        "fileName": "Orchestra/船に託して(2).mp3",
         "displayName": "船に託して",
         "artist": "Sakuma遙",
         "duration": "5:20"
+      },
+      {
+        "id": "orchestra-2",
+        "fileName": "Orchestra/灰色の月.mp3",
+        "displayName": "灰色の月",
+        "artist": "Dulcets",
+        "duration": "4:45"
       }
     ]
   },
@@ -63,10 +127,24 @@
     "tracks": [
       {
         "id": "edm-1",
-        "fileName": "normalized_星奈こやかの曲.flac",
-        "displayName": "星奈こやかの曲",
-        "artist": "星奈こやか",
+        "fileName": "EDM/EDM1.mp3",
+        "displayName": "EDM Track 1",
+        "artist": "Dulcets",
         "duration": "3:55"
+      },
+      {
+        "id": "edm-2",
+        "fileName": "EDM/EDM2.mp3",
+        "displayName": "EDM Track 2",
+        "artist": "Dulcets",
+        "duration": "4:18"
+      },
+      {
+        "id": "edm-3",
+        "fileName": "EDM/EDM3.mp3",
+        "displayName": "EDM Track 3",
+        "artist": "Dulcets",
+        "duration": "3:42"
       }
     ]
   },
@@ -77,10 +155,31 @@
     "tracks": [
       {
         "id": "bgm-1",
-        "fileName": "normalized_実験基地.flac",
-        "displayName": "実験基地",
-        "artist": "アンナ",
+        "fileName": "Game Music - BGM/【Piano】Aquamarine_piano_2【-20LUFS】（sn0w）.mp3",
+        "displayName": "Aquamarine Piano",
+        "artist": "sn0w",
         "duration": "2:48"
+      },
+      {
+        "id": "bgm-2",
+        "fileName": "Game Music - BGM/RPG_1.mp3",
+        "displayName": "RPG Theme 1",
+        "artist": "Dulcets",
+        "duration": "3:15"
+      },
+      {
+        "id": "bgm-3",
+        "fileName": "Game Music - BGM/boss戦_1.mp3",
+        "displayName": "Boss Battle",
+        "artist": "Dulcets",
+        "duration": "2:58"
+      },
+      {
+        "id": "bgm-4",
+        "fileName": "Game Music - BGM/ケルト_demo.mp3",
+        "displayName": "Celtic Demo",
+        "artist": "Dulcets",
+        "duration": "3:22"
       }
     ]
   }
