@@ -488,16 +488,10 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
                       : "hover:bg-gray-100"
                   }`}
                 >
-                  {/* Track Number / Play Button */}
+                  {/* Track Number */}
                   <div className="w-8 flex items-center justify-center text-sm">
                     {currentTrack?.id === track.id && isPlaying ? (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          togglePlayPause();
-                        }}
-                        className="text-black hover:text-gray-600 transition-colors p-1 flex items-center justify-center"
-                      >
+                      <div className="text-black flex items-center justify-center">
                         {/* Animated waveform bars */}
                         <div className="flex items-end gap-0.5 h-3">
                           <div className="w-0.5 bg-current animate-pulse" style={{ animation: 'waveform1 0.4s ease-in-out infinite alternate', height: '60%' }}></div>
@@ -505,26 +499,11 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
                           <div className="w-0.5 bg-current animate-pulse" style={{ animation: 'waveform3 0.35s ease-in-out infinite alternate', height: '80%' }}></div>
                           <div className="w-0.5 bg-current animate-pulse" style={{ animation: 'waveform4 0.55s ease-in-out infinite alternate', height: '40%' }}></div>
                         </div>
-                      </button>
-                    ) : currentTrack?.id === track.id ? (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          togglePlayPause();
-                        }}
-                        className="text-black hover:text-gray-600 transition-colors p-1"
-                      >
-                        <svg
-                          width="12"
-                          height="12"
-                          viewBox="0 0 12 12"
-                          fill="currentColor"
-                        >
-                          <path d="M2 1v10l8-5z" />
-                        </svg>
-                      </button>
+                      </div>
                     ) : (
-                      <span className="text-gray-400 font-medium">
+                      <span className={`font-medium ${
+                        currentTrack?.id === track.id ? "text-black" : "text-gray-400"
+                      }`}>
                         {index + 1}
                       </span>
                     )}
@@ -564,9 +543,9 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
             </div>
           </div>
 
-          {/* Waveform Visualization - Aligned with playback controls */}
+          {/* Waveform Visualization - Perfectly aligned with playback controls */}
           {currentTrack && (
-            <div className="flex items-center justify-center" style={{ height: "44px", marginTop: "32px" }}>
+            <div className="flex items-center justify-center" style={{ height: "44px", marginTop: "48px" }}>
               <div className="relative w-full">
                 <div 
                   ref={waveformRef}
