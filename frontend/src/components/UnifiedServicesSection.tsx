@@ -47,8 +47,6 @@ export default function UnifiedServicesSection({
 
         <div className="relative z-10">
           <MusicProductionSection t={t} />
-
-          <ModelingSectionWithLightbox translations={translations} />
         </div>
       </div>
 
