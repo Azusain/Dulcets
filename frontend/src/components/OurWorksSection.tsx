@@ -43,15 +43,15 @@ const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
   useEffect(() => {
     const handleSetGenre = (event: CustomEvent) => {
       const { genreId } = event.detail;
-      if (genreId && MUSIC_GENRES.some(g => g.id === genreId)) {
+      if (genreId && MUSIC_GENRES.some((g) => g.id === genreId)) {
         setSelectedGenre(genreId);
       }
     };
 
-    window.addEventListener('setGenre', handleSetGenre as EventListener);
-    
+    window.addEventListener("setGenre", handleSetGenre as EventListener);
+
     return () => {
-      window.removeEventListener('setGenre', handleSetGenre as EventListener);
+      window.removeEventListener("setGenre", handleSetGenre as EventListener);
     };
   }, []);
 
@@ -84,67 +84,16 @@ const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
         }
       } catch (error) {
         console.error("Failed to load audio config:", error);
-        // Fallback configuration with hardcoded values
-        const fallbackConfig = {
-          jrock: {
-            id: "jrock",
-            fileName: "yumehanabi_demo_03.mp3",
-            displayName: "夢花火",
-            artist: "Shintou",
-            genre: "J-Rock",
-          },
-          jpop: {
-            id: "jpop",
-            fileName: "夏の音がした_Demo_01.mp3",
-            displayName: "夏の音がした",
-            artist: "Shintou",
-            genre: "J-Pop",
-          },
-          idol: {
-            id: "idol",
-            fileName: "星空のプレッジ_Kuri_Full_4.mp3",
-            displayName: "星空のプレッジ",
-            artist: "Shintou",
-            genre: "Idol",
-          },
-          orchestra: {
-            id: "orchestra",
-            fileName: "船に託して.mp3",
-            displayName: "船に託して",
-            artist: "Sakuma遙",
-            genre: "Orchestra",
-          },
-          edm: {
-            id: "edm",
-            fileName: "星奈こやかの曲.mp3",
-            displayName: "星奈こやかの曲",
-            artist: "星奈こやか",
-            genre: "EDM",
-          },
-          bgm: {
-            id: "bgm",
-            fileName: "実験基地.mp3",
-            displayName: "実験基地",
-            artist: "アンナ",
-            genre: "BGM",
-          },
-        };
-        if (isMounted) {
-          setAudioConfig(fallbackConfig);
-        }
+        // No fallback options.
       }
     };
 
     loadAudioConfig();
 
     return () => {
-      isMounted = false; // 清理函数
+      isMounted = false;
     };
-  }, []); // 移除getAssetPath依赖，只在组件挂载时运行一次
-
-  const currentAudioConfig = audioConfig[
-    selectedGenre as keyof typeof audioConfig
-  ] as GenreConfig;
+  }, []);
 
   return (
     <section
