@@ -343,7 +343,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
       </div>
 
       <div className="grid md:grid-cols-3 gap-12">
-        {/* Left: Album Cover */}
+        {/* Left: Album Cover and Info */}
         <div className="md:col-span-1">
           <div className="aspect-square bg-gray-100 mb-6">
             {currentGenre?.albumCover ? (
@@ -365,15 +365,44 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
             )}
           </div>
           
-          {/* Album Info */}
-          <div>
-            <h3 className="text-2xl font-bold text-black mb-2">
-              {currentGenre?.genreName || "ALTERNΔTE"}
-            </h3>
-            <p className="text-gray-600 mb-4">Naked Identity Created by King</p>
-            <p className="text-sm text-gray-500">
-              {new Date().getFullYear()}.{String(new Date().getMonth() + 1).padStart(2, '0')}.{String(new Date().getDate()).padStart(2, '0')} • いいね3
-            </p>
+          {/* Album Info with Waveform to the right */}
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+            {/* Album Text Info */}
+            <div className="flex-shrink-0">
+              <h3 className="text-2xl font-bold text-black mb-2">
+                {currentGenre?.genreName || "ALTERNΔTE"}
+              </h3>
+              <p className="text-gray-600 mb-4">Naked Identity Created by King</p>
+              <p className="text-sm text-gray-500">
+                {new Date().getFullYear()}.{String(new Date().getMonth() + 1).padStart(2, '0')}.{String(new Date().getDate()).padStart(2, '0')} • いいね3
+              </p>
+            </div>
+            
+            {/* Waveform - Right of album info on large screens, below on small screens */}
+            {currentTrack && (
+              <div className="flex-grow">
+                <div className="mb-2">
+                  <div className="text-sm font-medium text-black">
+                    {currentTrack.displayName}
+                  </div>
+                  <div className="text-xs text-gray-500">
+                    {formatTime(currentTime)} / {formatTime(duration)}
+                  </div>
+                </div>
+                <div 
+                  ref={waveformRef}
+                  className="w-full bg-gray-50 rounded-lg"
+                  style={{ height: "80px" }}
+                />
+                {/* Loading with spinner */}
+                {isLoading && (
+                  <div className="flex items-center justify-center gap-2 text-xs text-gray-500 py-2">
+                    <div className="w-3 h-3 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin"></div>
+                    {t ? t("loading") : "読み込み中"}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
 
@@ -444,39 +473,6 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
           </div>
         </div>
       </div>
-      
-      {/* Waveform Section - Aligned with Album Info Text */}
-      {currentTrack && (
-        <div className="border-t border-gray-200 pt-8 mt-8">
-          <div className="mb-4">
-            <div className="text-lg font-medium text-black mb-1">
-              {currentTrack.displayName}
-            </div>
-            <div className="text-sm text-gray-500 mb-3">
-              {formatTime(currentTime)} / {formatTime(duration)}
-            </div>
-          </div>
-          
-          {/* Waveform - Using grid to align with album info text */}
-          <div className="grid md:grid-cols-3 gap-12">
-            <div className="md:col-span-3">
-              <div 
-                ref={waveformRef}
-                className="w-full mb-4 bg-gray-50 rounded-lg"
-                style={{ height: "80px" }}
-              />
-            </div>
-          </div>
-          
-          {/* Loading with spinner */}
-          {isLoading && (
-            <div className="flex items-center justify-center gap-2 text-sm text-gray-500 py-4">
-              <div className="w-4 h-4 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin"></div>
-              {t ? t("loading") : "読み込み中"}
-            </div>
-          )}
-        </div>
-      )}
     </div>
   );
 };
