@@ -6,7 +6,7 @@
     "tracks": [
       {
         "id": "idol-1",
-        "fileName": "normalized_yumehanabi_demo_03.flac",
+        "fileName": "normalized_星空のプレッジ_Kuri_Full_4.flac",
         "displayName": "星空のプレッジ",
         "artist": "Shintou",
         "duration": "3:45"
@@ -35,7 +35,7 @@
     "tracks": [
       {
         "id": "jpop-1",
-        "fileName": "normalized_yumehanabi_demo_03.flac",
+        "fileName": "normalized_夏の音がした_Demo_01.flac",
         "displayName": "夏の音がした",
         "artist": "Shintou",
         "duration": "3:28"
@@ -49,7 +49,7 @@
     "tracks": [
       {
         "id": "orchestra-1",
-        "fileName": "normalized_yumehanabi_demo_03.flac",
+        "fileName": "normalized_船に託して.flac",
         "displayName": "船に託して",
         "artist": "Sakuma遙",
         "duration": "5:20"
@@ -63,7 +63,7 @@
     "tracks": [
       {
         "id": "edm-1",
-        "fileName": "normalized_yumehanabi_demo_03.flac",
+        "fileName": "normalized_星奈こやかの曲.flac",
         "displayName": "星奈こやかの曲",
         "artist": "星奈こやか",
         "duration": "3:55"
@@ -77,7 +77,7 @@
     "tracks": [
       {
         "id": "bgm-1",
-        "fileName": "normalized_yumehanabi_demo_03.flac",
+        "fileName": "normalized_実験基地.flac",
         "displayName": "実験基地",
         "artist": "アンナ",
         "duration": "2:48"

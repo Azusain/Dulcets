@@ -110,11 +110,11 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
         wavesurferInstance = WaveSurfer.create({
           container: waveformRef.current,
           waveColor: "#94a3b8",
-          progressColor: "#5865f2",
-          cursorColor: "#5865f2",
+          progressColor: "#000000",
+          cursorColor: "#000000",
           barWidth: 2,
           barRadius: 1,
-          height: 60,
+          height: 80,
           normalize: true,
           backend: "WebAudio",
           mediaControls: false,
@@ -329,7 +329,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
         />
       </div>
 
-      <div className="grid md:grid-cols-3 gap-12">
+      <div className="grid md:grid-cols-3 gap-12 mb-8">
         {/* Left: Album Cover */}
         <div className="md:col-span-1">
           <div className="aspect-square bg-gray-100 mb-6">
@@ -429,35 +429,35 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
               </div>
             ))}
           </div>
+        </div>
+      </div>
 
-          {/* Current Track Player */}
-          {currentTrack && (
-            <div className="mt-8 pt-6 border-t border-gray-200">
-              <div className="mb-4">
-                <div className="text-lg font-medium text-black mb-1">
-                  {currentTrack.displayName}
-                </div>
-                <div className="text-sm text-gray-500 mb-3">
-                  {formatTime(currentTime)} / {formatTime(duration)}
-                </div>
-              </div>
-              
-              {/* Waveform */}
-              <div 
-                ref={waveformRef}
-                className="w-full mb-4 bg-gray-50"
-                style={{ height: "60px" }}
-              />
-              
-              {isLoading && (
-                <div className="text-center text-sm text-gray-500 py-4">
-                  {t ? t("loading") : "読み込み中"}
-                </div>
-              )}
+      {/* Current Track Player at Bottom */}
+      {currentTrack && (
+        <div className="border-t border-gray-200 pt-8">
+          <div className="mb-6 text-center">
+            <div className="text-xl font-bold text-black mb-2">
+              {currentTrack.displayName}
+            </div>
+            <div className="text-sm text-gray-500 mb-4">
+              {formatTime(currentTime)} / {formatTime(duration)}
+            </div>
+          </div>
+          
+          {/* Waveform */}
+          <div 
+            ref={waveformRef}
+            className="w-full mb-4 bg-gray-50 rounded-lg"
+            style={{ height: "80px" }}
+          />
+          
+          {isLoading && (
+            <div className="text-center text-sm text-gray-500 py-4">
+              {t ? t("loading") : "読み込み中"}
             </div>
           )}
         </div>
-      </div>
+      )}
     </div>
   );
 };
