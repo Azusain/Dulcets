@@ -1,87 +1,323 @@
-{
-  "idol": {
-    "id": "idol",
-    "genreName": "IDOL",
-    "albumCover": "/images/music/idol-cover.svg",
-    "tracks": [
-      {
-        "id": "idol-1",
-        "fileName": "normalized_星空のプレッジ_Kuri_Full_4.flac",
-        "displayName": "星空のプレッジ",
-        "artist": "Shintou",
-        "duration": "3:45"
-      }
-    ]
-  },
-  "jrock": {
-    "id": "jrock",
-    "genreName": "J-ROCK",
-    "albumCover": "/images/music/jrock-cover.svg",
-    "tracks": [
-      {
-        "id": "jrock-1",
-        "fileName": "normalized_yumehanabi_demo_03.flac",
-        "displayName": "夢花火",
-        "artist": "Shintou",
-        "duration": "4:12",
-        "isHit": true
-      }
-    ]
-  },
-  "jpop": {
-    "id": "jpop",
-    "genreName": "J-POP",
-    "albumCover": "/images/music/jpop-cover.svg",
-    "tracks": [
-      {
-        "id": "jpop-1",
-        "fileName": "normalized_夏の音がした_Demo_01.flac",
-        "displayName": "夏の音がした",
-        "artist": "Shintou",
-        "duration": "3:28"
-      }
-    ]
-  },
-  "orchestra": {
-    "id": "orchestra",
-    "genreName": "ORCHESTRA",
-    "albumCover": "/images/music/orchestra-cover.svg",
-    "tracks": [
-      {
-        "id": "orchestra-1",
-        "fileName": "normalized_船に託して.flac",
-        "displayName": "船に託して",
-        "artist": "Sakuma遙",
-        "duration": "5:20"
-      }
-    ]
-  },
-  "edm": {
-    "id": "edm",
-    "genreName": "EDM",
-    "albumCover": "/images/music/edm-cover.svg",
-    "tracks": [
-      {
-        "id": "edm-1",
-        "fileName": "normalized_星奈こやかの曲.flac",
-        "displayName": "星奈こやかの曲",
-        "artist": "星奈こやか",
-        "duration": "3:55"
-      }
-    ]
-  },
-  "bgm": {
-    "id": "bgm",
-    "genreName": "BGM",
-    "albumCover": "/images/music/bgm-cover.svg",
-    "tracks": [
-      {
-        "id": "bgm-1",
-        "fileName": "normalized_実験基地.flac",
-        "displayName": "実験基地",
-        "artist": "アンナ",
-        "duration": "2:48"
-      }
-    ]
-  }
-}
+{ 
+  "edm": { 
+    "id": "edm", 
+    "genreName": "EDM", 
+    "albumCover": "/images/music/edm-cover.svg", 
+    "tracks": [ 
+      { 
+        "id": "edm-1", 
+        "fileName": "EDM/normalized_EDM1.flac", 
+        "displayName": "EDM1", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "edm-2", 
+        "fileName": "EDM/normalized_EDM2.flac", 
+        "displayName": "EDM2", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "edm-3", 
+        "fileName": "EDM/normalized_EDM3.flac", 
+        "displayName": "EDM3", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "edm-4", 
+        "fileName": "EDM/normalized_EDM4.flac", 
+        "displayName": "EDM4", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+    ] 
+  } 
+, 
+  "bgm": { 
+    "id": "bgm", 
+    "genreName": "BGM", 
+    "albumCover": "/images/music/bgm-cover.svg", 
+    "tracks": [ 
+      { 
+        "id": "bgm-1", 
+        "fileName": "Game Music - BGM/normalized_boss戦_1.flac", 
+        "displayName": "boss戦", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "bgm-2", 
+        "fileName": "Game Music - BGM/normalized_monster hunter風_1.flac", 
+        "displayName": "monster hunter風", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "bgm-3", 
+        "fileName": "Game Music - BGM/normalized_monster hunter風_2.flac", 
+        "displayName": "monster hunter風", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "bgm-4", 
+        "fileName": "Game Music - BGM/normalized_PERSONA風.flac", 
+        "displayName": "PERSONA風", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "bgm-5", 
+        "fileName": "Game Music - BGM/normalized_RPG_1.flac", 
+        "displayName": "RPG", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "bgm-6", 
+        "fileName": "Game Music - BGM/normalized_RPG_2.flac", 
+        "displayName": "RPG", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "bgm-7", 
+        "fileName": "Game Music - BGM/normalized_RPG_バトル_1.flac", 
+        "displayName": "RPG_バトル", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "bgm-8", 
+        "fileName": "Game Music - BGM/normalized_【Piano】Aquamarine_piano_2【-20LUFS】（sn0w）.flac", 
+        "displayName": "PianoAquamarine_piano-20LUFSsn0w", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "bgm-9", 
+        "fileName": "Game Music - BGM/normalized_アニメ風 BGM.flac", 
+        "displayName": "アニメ風 BGM", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "bgm-10", 
+        "fileName": "Game Music - BGM/normalized_ケルト_demo.flac", 
+        "displayName": "ケルト", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "bgm-11", 
+        "fileName": "Game Music - BGM/normalized_ハリーポッター風.flac", 
+        "displayName": "ハリーポッター風", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+    ] 
+  } 
+, 
+  "idol": { 
+    "id": "idol", 
+    "genreName": "IDOL", 
+    "albumCover": "/images/music/idol-cover.svg", 
+    "tracks": [ 
+      { 
+        "id": "idol-1", 
+        "fileName": "idol/normalized_【アイドル】Aquamarine_9【-14LUFS】（Shintou）.flac", 
+        "displayName": "アイドルAquamarine_9-14LUFSShintou", 
+        "artist": "Shintou", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "idol-2", 
+        "fileName": "idol/normalized_【アイドル】星空のプレッジ_Kuri_Full_4【-14LUFS】（Shintou）.flac", 
+        "displayName": "アイドル星空のプレッジ_Kuri_4-14LUFSShintou", 
+        "artist": "Shintou", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "idol-3", 
+        "fileName": "idol/normalized_男子アイドル風.flac", 
+        "displayName": "男子アイドル風", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+    ] 
+  } 
+, 
+  "orchestra": { 
+    "id": "orchestra", 
+    "genreName": "ORCHESTRA", 
+    "albumCover": "/images/music/orchestra-cover.svg", 
+    "tracks": [ 
+      { 
+        "id": "orchestra-1", 
+        "fileName": "Orchestra/normalized_灰色の月.flac", 
+        "displayName": "灰色の月", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "orchestra-2", 
+        "fileName": "Orchestra/normalized_船に託して(2).flac", 
+        "displayName": "船に託して(2)", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+    ] 
+  } 
+, 
+  "jpop": { 
+    "id": "jpop", 
+    "genreName": "J-POP", 
+    "albumCover": "/images/music/jpop-cover.svg", 
+    "tracks": [ 
+      { 
+        "id": "jpop-1", 
+        "fileName": "pop/normalized_80年代.flac", 
+        "displayName": "80年代", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "jpop-2", 
+        "fileName": "pop/normalized_pop_1.flac", 
+        "displayName": "pop", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "jpop-3", 
+        "fileName": "pop/normalized_pop_2.flac", 
+        "displayName": "pop", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "jpop-4", 
+        "fileName": "pop/normalized_pop_3.flac", 
+        "displayName": "pop_3", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "jpop-5", 
+        "fileName": "pop/normalized_【Pop】アリガト。_9【-14LUFS】（Shintou）.flac", 
+        "displayName": "Popアリガト。_9-14LUFSShintou", 
+        "artist": "Shintou", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "jpop-6", 
+        "fileName": "pop/normalized_【ケルトソング】夢花火_6【-14LUFS】（Shintou）.flac", 
+        "displayName": "ケルトソング夢花火_6-14LUFSShintou", 
+        "artist": "Shintou", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "jpop-7", 
+        "fileName": "pop/normalized_【バラード】（Koyaka）.flac", 
+        "displayName": "バラードKoyaka", 
+        "artist": "Koyaka", 
+        "duration": "3:30" 
+      } 
+    ] 
+  } 
+, 
+  "jrock": { 
+    "id": "jrock", 
+    "genreName": "J-ROCK", 
+    "albumCover": "/images/music/jrock-cover.svg", 
+    "tracks": [ 
+      { 
+        "id": "jrock-1", 
+        "fileName": "Rock/normalized_Rock_part1.flac", 
+        "displayName": "Rock_part1", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "jrock-2", 
+        "fileName": "Rock/normalized_Rock_part2.flac", 
+        "displayName": "Rock_part2", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "jrock-3", 
+        "fileName": "Rock/normalized_Rock_part3.flac", 
+        "displayName": "Rock_part3", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "jrock-4", 
+        "fileName": "Rock/normalized_【other rock】（Koyaka）.flac", 
+        "displayName": "other rockKoyaka", 
+        "artist": "Koyaka", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "jrock-5", 
+        "fileName": "Rock/normalized_【Rock】1（Koyaka）.flac", 
+        "displayName": "Rock1Koyaka", 
+        "artist": "Koyaka", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "jrock-6", 
+        "fileName": "Rock/normalized_【Rock】2（Koyaka）.flac", 
+        "displayName": "Rock2Koyaka", 
+        "artist": "Koyaka", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "jrock-7", 
+        "fileName": "Rock/normalized_【Rock】君と奏でる歌_Full_8_Mastered（Shintou）.flac", 
+        "displayName": "Rock君と奏でる歌_8_MasteredShintou", 
+        "artist": "Shintou", 
+        "duration": "3:30" 
+      } 
+, 
+      { 
+        "id": "jrock-8", 
+        "fileName": "Rock/normalized_ボカロ風.flac", 
+        "displayName": "ボカロ風", 
+        "artist": "Dulcets", 
+        "duration": "3:30" 
+      } 
+    ] 
+  } 
+} 
