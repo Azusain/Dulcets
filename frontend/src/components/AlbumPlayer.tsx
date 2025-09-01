@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import WaveSurfer from "wavesurfer.js";
 import AudioManager from "../utils/audioManager";
 import { useAssetPath } from "@/hooks/useAssetPath";
+import { getAudioDuration, formatDuration } from "../utils/audioUtils";
 
 // Add CSS animations for waveform bars
 const waveformStyles = `
@@ -29,7 +30,8 @@ interface Track {
   fileName: string;
   displayName: string;
   artist: string;
-  duration: string;
+  duration: string; // Static duration from JSON
+  actualDuration?: number; // Dynamic duration in seconds
   isHit?: boolean;
 }
 
@@ -69,7 +71,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
     { id: "bgm", name: "BGM" },
   ];
 
-  // Load audio configuration
+  // Load audio configuration and dynamic durations
   useEffect(() => {
     const loadAudioConfig = async () => {
       try {
@@ -80,7 +82,40 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
         if (response.ok) {
           const config = await response.json();
           console.log("Config loaded:", config);
+          
+          // Load actual durations for all tracks in background
+          const loadDurations = async () => {
+            const updatedConfig = { ...config };
+            
+            for (const genreId in config) {
+              const genre = config[genreId];
+              if (genre.tracks) {
+                for (let i = 0; i < genre.tracks.length; i++) {
+                  const track = genre.tracks[i];
+                  try {
+                    const audioUrl = getAssetPath(`/audio/${track.fileName}`);
+                    const actualDuration = await getAudioDuration(audioUrl);
+                    updatedConfig[genreId].tracks[i] = {
+                      ...track,
+                      actualDuration
+                    };
+                    console.log(`Loaded duration for ${track.displayName}: ${formatDuration(actualDuration)}`);
+                  } catch (error) {
+                    console.warn(`Failed to load duration for ${track.displayName}:`, error);
+                  }
+                }
+              }
+            }
+            
+            // Update state with loaded durations
+            setGenres(updatedConfig);
+          };
+          
+          // Set initial config first (without durations)
           setGenres(config);
+          
+          // Then load durations asynchronously
+          loadDurations();
 
           // Set first track of selected genre as current only if we don't have a current track
           if (!currentTrack) {
@@ -340,6 +375,27 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
       {/* Add dynamic styles for waveform animation */}
       <style dangerouslySetInnerHTML={{ __html: waveformStyles }} />
 
+      {/* Waveform Visualization - Centered above tabs */}
+      {currentTrack && (
+        <div className="flex items-center justify-center mb-8">
+          <div className="relative w-full max-w-4xl">
+            <div
+              ref={waveformRef}
+              className="w-full bg-gray-50 rounded-lg"
+              style={{ height: "44px" }}
+            />
+
+            {/* Loading overlay - positioned absolutely to not affect layout */}
+            {isLoading && (
+              <div className="absolute inset-0 flex items-center justify-center gap-2 text-sm text-gray-500 bg-gray-50 rounded-lg">
+                <div className="w-4 h-4 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin"></div>
+                {t ? t("loading") : "読み込み中"}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* Genre Selection Tabs */}
       <div className="relative border-b border-gray-200 mb-8">
         <div className="flex gap-8">
@@ -483,11 +539,11 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
           </div>
         </div>
 
-        {/* Right: Track List and Waveform */}
+        {/* Right: Track List - Fixed height to match album cover */}
         <div className="md:col-span-2 flex flex-col">
-          {/* Track List */}
-          <div className="overflow-y-auto max-h-[400px] mb-6">
-            <div className="space-y-1">
+          {/* Track List - Fixed height to match album cover */}
+          <div className="overflow-y-auto h-96">
+            <div className="space-y-1 pr-2">
               {currentGenre?.tracks.map((track, index) => (
                 <div
                   key={track.id}
@@ -574,40 +630,16 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
                       <span className="inline-flex items-center justify-end gap-1">
                         <span>{formatTime(currentTime)}</span>
                         <span>/</span>
-                        <span>{track.duration}</span>
+                        <span>{track.actualDuration ? formatDuration(track.actualDuration) : track.duration}</span>
                       </span>
                     ) : (
-                      <span>{track.duration}</span>
+                      <span>{track.actualDuration ? formatDuration(track.actualDuration) : track.duration}</span>
                     )}
                   </div>
                 </div>
               ))}
             </div>
           </div>
-
-          {/* Waveform Visualization - Perfectly aligned with playback controls */}
-          {currentTrack && (
-            <div
-              className="flex items-center justify-center"
-              style={{ height: "44px", marginTop: "48px" }}
-            >
-              <div className="relative w-full">
-                <div
-                  ref={waveformRef}
-                  className="w-full bg-gray-50 rounded-lg"
-                  style={{ height: "44px" }}
-                />
-
-                {/* Loading overlay - positioned absolutely to not affect layout */}
-                {isLoading && (
-                  <div className="absolute inset-0 flex items-center justify-center gap-2 text-sm text-gray-500 bg-gray-50 rounded-lg">
-                    <div className="w-4 h-4 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin"></div>
-                    {t ? t("loading") : "読み込み中"}
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </div>
