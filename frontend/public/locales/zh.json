@@ -4,8 +4,8 @@
   "loading": "加载中",
   "hero": {
     "subtitle": "很久以前，有着只存在于梦境中的旋律，被称为 Dulcets（多塞茨）。那如星辰般纯净的音色，治愈着人们的心灵，指引着追寻美妙声音的人们。",
-    "explore_artists": "探索艺术家",
-    "latest_releases": "最新发布"
+    "explore_artists": "我们的作品",
+    "latest_releases": "我们的服务"
   },
   "about": {
     "title": "关于我们",
@@ -81,30 +81,30 @@
   "services": {
     "title": "我们的服务",
     "our_service": "我们的服务",
-    "subtitle": "我们提供的三大主要服务：音乐制作、绘画作品、3D建模",
+    "subtitle": "音乐制作",
     "music": {
-      "title": "[ZH] Music Production",
-      "description": "[ZH] High-quality music production, including composing, arranging, and recording."
+      "title": "音乐制作",
+      "description": "高品质音乐制作，包括作曲、编曲和录音服务。"
     },
     "artist": {
-      "title": "[ZH] Artist Management",
-      "description": "[ZH] Comprehensive artist management services to help you grow your career."
+      "title": "艺术家管理",
+      "description": "全面的艺术家管理服务，助您发展音乐事业。"
     },
     "production": {
-      "title": "[ZH] Sound Production",
-      "description": "[ZH] Professional sound production, including mixing, mastering, and sound effects."
+      "title": "声音制作",
+      "description": "专业声音制作，包括混音、母带处理和音效设计。"
     },
     "distribution": {
-      "title": "[ZH] Music Distribution",
-      "description": "[ZH] Global music distribution to all major platforms, including Spotify, Apple Music, and more."
+      "title": "音乐发行",
+      "description": "全球音乐发行至所有主流平台，包括Spotify、Apple Music等。"
     },
     "marketing": {
-      "title": "[ZH] Music Marketing",
-      "description": "[ZH] Customized music marketing campaigns to help you reach your target audience."
+      "title": "音乐营销",
+      "description": "定制化音乐营销策略，帮助您触达目标听众。"
     },
     "events": {
-      "title": "[ZH] Event Planning",
-      "description": "[ZH] Professional event planning services, including concerts, fan meetings, and more."
+      "title": "活动策划",
+      "description": "专业活动策划服务，包括演唱会、粉丝见面会等。"
     }
   },
   "releases": {
@@ -123,7 +123,7 @@
   "works": {
     "title": "我们的作品",
     "read_more": "阅读更多",
-    "lead_description": "[ZH] Explore our collection of music works and video content. From original compositions to cover songs, enjoy our diverse range of creative works."
+    "lead_description": "探索我们的音乐作品和视频内容合集。从原创作品到翻唱歌曲，享受我们多样化的创意作品。"
   },
   "pricing": {
     "title": "服务价位",

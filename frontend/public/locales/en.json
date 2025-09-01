@@ -4,8 +4,8 @@
   "loading": "Loading",
   "hero": {
     "subtitle": "Long ago, there existed melodies that lived only in dreams, called Dulcets. Their tones were as pure as stars, healing people's hearts and guiding those who sought beautiful sounds.",
-    "explore_artists": "Explore Artists",
-    "latest_releases": "Latest Releases"
+    "explore_artists": "Our Works",
+    "latest_releases": "Our Services"
   },
   "about": {
     "title": "About Us",
@@ -81,7 +81,7 @@
   "services": {
     "title": "Our Services",
     "our_service": "Our Service",
-    "subtitle": "Our three main services: Music Production, Artwork, and 3D Modeling",
+    "subtitle": "Music Production",
     "music": {
       "title": "Music Production",
       "description": "High-quality music production, including composing, arranging, and recording."

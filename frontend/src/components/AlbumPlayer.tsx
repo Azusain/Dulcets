@@ -301,31 +301,43 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
     const scrollContainer = playlistRef.current;
     if (!scrollContainer) return;
 
+    let scrollTimeout: NodeJS.Timeout | null = null;
+
     const checkScrollPosition = () => {
       const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
       const isScrollable = scrollHeight > clientHeight;
-      const isAtBottom = scrollTop + clientHeight >= scrollHeight - 10; // 10px threshold
+      const isAtBottomThreshold = scrollTop + clientHeight >= scrollHeight - 10; // 10px threshold
       
-      setShowScrollIndicator(isScrollable && !isAtBottom);
+      // Show scroll indicator when content is scrollable but not at bottom
+      setShowScrollIndicator(isScrollable && !isAtBottomThreshold);
+    };
+
+    const handleScroll = () => {
+      // Check scroll position
+      checkScrollPosition();
     };
 
     // Check initial state
     checkScrollPosition();
 
     // Add scroll listener to inner container for position detection
-    scrollContainer.addEventListener('scroll', checkScrollPosition);
+    scrollContainer.addEventListener('scroll', handleScroll);
 
     // Check when content changes
     const observer = new ResizeObserver(checkScrollPosition);
     observer.observe(scrollContainer);
 
     return () => {
-      scrollContainer.removeEventListener('scroll', checkScrollPosition);
+      scrollContainer.removeEventListener('scroll', handleScroll);
       observer.disconnect();
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
     };
   }, [genres[selectedGenre]?.tracks]); // Re-run when tracks change
 
-  // Separate effect for preventing scroll bubbling on entire area
+
+  // Separate effect for preventing scroll bubbling - only when content is scrollable
   useEffect(() => {
     const playlistArea = playlistAreaRef.current;
     if (!playlistArea) return;
@@ -337,7 +349,17 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
       // Find the scrollable container
       const scrollContainer = playlistRef.current;
       if (!scrollContainer) {
-        e.stopPropagation();
+        // No scroll container, allow page scroll
+        return;
+      }
+      
+      // Check if content is actually scrollable
+      const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
+      const isContentScrollable = scrollHeight > clientHeight;
+      
+      if (!isContentScrollable) {
+        // Content doesn't need scrolling, allow page scroll
+        console.log('Content not scrollable, allowing page scroll');
         return;
       }
       
@@ -346,8 +368,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
       const isInsideScrollContainer = scrollContainer.contains(targetElement);
       
       if (isInsideScrollContainer) {
-        // Allow internal scrolling but prevent bubbling to parent
-        const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
+        // Content is scrollable and we're inside - handle scroll prevention
         const deltaY = e.deltaY;
         
         // Check if we can still scroll in the intended direction
@@ -362,30 +383,39 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
           e.preventDefault();
           e.stopPropagation();
         }
-      } else {
-        // Outside scroll container, prevent everything
-        e.preventDefault();
-        e.stopPropagation();
       }
+      // If outside scroll container, do nothing (allow normal page scroll)
     };
 
     const handleTouchMove = (e: TouchEvent) => {
-      // Also handle touch events on mobile
-      e.stopPropagation();
+      // Only handle touch events if content is scrollable
+      const scrollContainer = playlistRef.current;
+      if (!scrollContainer) return;
+      
+      const { scrollHeight, clientHeight } = scrollContainer;
+      const isContentScrollable = scrollHeight > clientHeight;
+      
+      if (isContentScrollable) {
+        const targetElement = e.target as Element;
+        const isInsideScrollContainer = scrollContainer.contains(targetElement);
+        if (isInsideScrollContainer) {
+          e.stopPropagation();
+        }
+      }
     };
 
-    // Add wheel listener to the entire playlist area to prevent bubbling
+    // Add wheel listener to the entire playlist area
     playlistArea.addEventListener('wheel', handleWheel, { passive: false, capture: true });
     playlistArea.addEventListener('touchmove', handleTouchMove, { passive: false, capture: true });
     
-    console.log('Added scroll prevention listeners'); // Debug
+    console.log('Added conditional scroll prevention listeners'); // Debug
 
     return () => {
       playlistArea.removeEventListener('wheel', handleWheel, { capture: true });
       playlistArea.removeEventListener('touchmove', handleTouchMove, { capture: true });
-      console.log('Removed scroll prevention listeners'); // Debug
+      console.log('Removed conditional scroll prevention listeners'); // Debug
     };
-  }, []); // Empty dependency to run once and stay
+  }, [genres[selectedGenre]?.tracks]); // Re-run when tracks change to check scrollability
 
   // Handle genre change
   const handleGenreChange = (genreId: string) => {
@@ -704,7 +734,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
               </div>
             </div>
 
-            {/* Scroll indicator overlay */}
+            {/* Scroll indicator overlay - shown when can scroll more */}
             {showScrollIndicator && (
               <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none">
                 {/* Gradient overlay */}
@@ -730,6 +760,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
                 </div>
               </div>
             )}
+            
           </div>
         </div>
       </div>

@@ -99,15 +99,11 @@ const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
     <section
       id="works"
       className="relative bg-gradient-to-b from-gray-50 to-gray-50"
+      style={{ scrollMarginTop: '120px' }}
     >
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <div className="inline-block mb-6">
-            <span className="text-sm font-medium uppercase tracking-wider text-gray-500 bg-white px-6 py-2 rounded-full shadow-sm border border-gray-200">
-              {t("works.title")}
-            </span>
-          </div>
           <h2 className="text-4xl lg:text-5xl font-light text-gray-800 mb-6 tracking-wide">
             {t("works.title")}
           </h2>
