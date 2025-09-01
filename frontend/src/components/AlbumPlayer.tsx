@@ -4,7 +4,7 @@ import WaveSurfer from "wavesurfer.js";
 import AudioManager from "../utils/audioManager";
 import { useAssetPath } from "@/hooks/useAssetPath";
 
-// Add CSS animations for waveform bars
+// Add CSS animations for waveform bars and scroll indicator
 const waveformStyles = `
   @keyframes waveform1 {
     0% { height: 20%; }
@@ -21,6 +21,19 @@ const waveformStyles = `
   @keyframes waveform4 {
     0% { height: 15%; }
     100% { height: 60%; }
+  }
+  @keyframes bounceArrow {
+    0%, 100% {
+      transform: translateY(0);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translateY(4px);
+      opacity: 1;
+    }
+  }
+  .scroll-indicator {
+    animation: bounceArrow 2s ease-in-out infinite;
   }
 `;
 
@@ -54,8 +67,11 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [shouldAutoPlay, setShouldAutoPlay] = useState(false);
+  const [showScrollIndicator, setShowScrollIndicator] = useState(false);
 
   const waveformRef = useRef<HTMLDivElement>(null);
+  const playlistRef = useRef<HTMLDivElement>(null);
+  const playlistAreaRef = useRef<HTMLDivElement>(null);
   const wavesurfer = useRef<WaveSurfer | null>(null);
   const audioManager = AudioManager.getInstance();
   const { getAssetPath } = useAssetPath();
@@ -280,6 +296,97 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
     };
   }, [isPlaying]); // Remove audioManager dependency as it's a singleton
 
+  // Handle scroll detection for playlist
+  useEffect(() => {
+    const scrollContainer = playlistRef.current;
+    if (!scrollContainer) return;
+
+    const checkScrollPosition = () => {
+      const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
+      const isScrollable = scrollHeight > clientHeight;
+      const isAtBottom = scrollTop + clientHeight >= scrollHeight - 10; // 10px threshold
+      
+      setShowScrollIndicator(isScrollable && !isAtBottom);
+    };
+
+    // Check initial state
+    checkScrollPosition();
+
+    // Add scroll listener to inner container for position detection
+    scrollContainer.addEventListener('scroll', checkScrollPosition);
+
+    // Check when content changes
+    const observer = new ResizeObserver(checkScrollPosition);
+    observer.observe(scrollContainer);
+
+    return () => {
+      scrollContainer.removeEventListener('scroll', checkScrollPosition);
+      observer.disconnect();
+    };
+  }, [genres[selectedGenre]?.tracks]); // Re-run when tracks change
+
+  // Separate effect for preventing scroll bubbling on entire area
+  useEffect(() => {
+    const playlistArea = playlistAreaRef.current;
+    if (!playlistArea) return;
+
+    // Prevent scroll event from bubbling to parent elements but allow internal scrolling
+    const handleWheel = (e: WheelEvent) => {
+      console.log('Handling scroll on playlist area'); // Debug
+      
+      // Find the scrollable container
+      const scrollContainer = playlistRef.current;
+      if (!scrollContainer) {
+        e.stopPropagation();
+        return;
+      }
+      
+      // Check if the target is inside the scrollable area
+      const targetElement = e.target as Element;
+      const isInsideScrollContainer = scrollContainer.contains(targetElement);
+      
+      if (isInsideScrollContainer) {
+        // Allow internal scrolling but prevent bubbling to parent
+        const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
+        const deltaY = e.deltaY;
+        
+        // Check if we can still scroll in the intended direction
+        const canScrollUp = scrollTop > 0;
+        const canScrollDown = scrollTop < scrollHeight - clientHeight;
+        
+        if ((deltaY < 0 && canScrollUp) || (deltaY > 0 && canScrollDown)) {
+          // Allow the scroll inside the container, but prevent bubbling
+          e.stopPropagation();
+        } else {
+          // At boundary, prevent both default and bubbling
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      } else {
+        // Outside scroll container, prevent everything
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      // Also handle touch events on mobile
+      e.stopPropagation();
+    };
+
+    // Add wheel listener to the entire playlist area to prevent bubbling
+    playlistArea.addEventListener('wheel', handleWheel, { passive: false, capture: true });
+    playlistArea.addEventListener('touchmove', handleTouchMove, { passive: false, capture: true });
+    
+    console.log('Added scroll prevention listeners'); // Debug
+
+    return () => {
+      playlistArea.removeEventListener('wheel', handleWheel, { capture: true });
+      playlistArea.removeEventListener('touchmove', handleTouchMove, { capture: true });
+      console.log('Removed scroll prevention listeners'); // Debug
+    };
+  }, []); // Empty dependency to run once and stay
+
   // Handle genre change
   const handleGenreChange = (genreId: string) => {
     setSelectedGenre(genreId);
@@ -503,10 +610,11 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
         </div>
 
         {/* Right: Track List - Fixed height to match album cover */}
-        <div className="md:col-span-2 flex flex-col">
+        <div ref={playlistAreaRef} className="md:col-span-2 flex flex-col">
           {/* Track List - Fixed height to match album cover */}
-          <div className="overflow-y-auto h-96">
-            <div className="space-y-1 pr-2">
+          <div className="relative">
+            <div ref={playlistRef} className="overflow-y-auto h-96">
+              <div className="space-y-1 pr-2">
               {currentGenre?.tracks.map((track, index) => (
                 <div
                   key={track.id}
@@ -593,7 +701,35 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
                   </div>
                 </div>
               ))}
+              </div>
             </div>
+
+            {/* Scroll indicator overlay */}
+            {showScrollIndicator && (
+              <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none">
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-50 via-gray-50/60 to-transparent"></div>
+                
+                {/* Bouncing arrow */}
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 scroll-indicator">
+                  <svg 
+                    width="28" 
+                    height="28" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    className="text-gray-600"
+                  >
+                    <path 
+                      d="M7 10l5 5 5-5" 
+                      stroke="currentColor" 
+                      strokeWidth="2" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

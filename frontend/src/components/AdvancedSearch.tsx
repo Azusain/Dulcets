@@ -127,20 +127,18 @@ export default function AdvancedSearch({ isOpen, onClose, onNavigate, currentLan
   const loadDynamicData = useCallback(async () => {
     try {
       // Use getAssetPath hook to get correct paths for both local and GitHub Pages
-      const [worksRes, artworksRes, modelingRes] = await Promise.all([
+      const [worksRes, artworksRes] = await Promise.all([
         fetch(getAssetPath('/service/works.json')).catch(() => ({ json: () => [] })),
-        fetch(getAssetPath('/service/artworks.json')).catch(() => ({ json: () => [] })),
-        fetch(getAssetPath('/service/3d_modeling.json')).catch(() => ({ json: () => [] }))
+        fetch(getAssetPath('/service/artworks.json')).catch(() => ({ json: () => [] }))
       ]);
 
-      const [works, artworks, modeling] = await Promise.all([
+      const [works, artworks] = await Promise.all([
         worksRes.json?.() || [],
-        artworksRes.json?.() || [],
-        modelingRes.json?.() || []
+        artworksRes.json?.() || []
       ]);
 
       // Pass current language to build language-specific index with getAssetPath for proper URLs
-      const dynamicItems = buildDynamicSearchIndex(works, artworks, modeling, currentLanguage || 'ja', translate, getAssetPath);
+      const dynamicItems = buildDynamicSearchIndex(works, artworks, [], currentLanguage || 'ja', translate, getAssetPath);
       setDynamicIndex(dynamicItems);
     } catch (error) {
       console.warn('Failed to load dynamic search data:', error);
