@@ -154,7 +154,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
           console.log("WaveSurfer ready");
           setIsLoading(false);
           setDuration(wavesurferInstance?.getDuration() || 0);
-          
+
           // Auto-play if flag is set
           if (shouldAutoPlay) {
             setShouldAutoPlay(false);
@@ -339,7 +339,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
     <div className={className}>
       {/* Add dynamic styles for waveform animation */}
       <style dangerouslySetInnerHTML={{ __html: waveformStyles }} />
-      
+
       {/* Genre Selection Tabs */}
       <div className="relative border-b border-gray-200 mb-8">
         <div className="flex gap-8">
@@ -351,7 +351,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
                 selectedGenre === genre.id
                   ? "text-black"
                   : "text-gray-500 hover:text-gray-900"
-              }`}
+              }  hover:cursor-pointer`}
             >
               {genre.name}
             </button>
@@ -373,12 +373,12 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
               string,
               { width: number; offset: number }
             > = {
-              IDOL: { width: 40, offset: 0 },
-              "J-ROCK": { width: 54, offset: 72 },
-              "J-POP": { width: 46, offset: 158 },
-              ORCHESTRA: { width: 74, offset: 236 },
-              EDM: { width: 32, offset: 342 },
-              BGM: { width: 32, offset: 406 },
+              IDOL: { width: 35, offset: 0 },
+              "J-ROCK": { width: 54, offset: 64 },
+              "J-POP": { width: 46, offset: 147 },
+              ORCHESTRA: { width: 74, offset: 225 },
+              EDM: { width: 32, offset: 335 },
+              BGM: { width: 32, offset: 400 },
             };
 
             const current = currentGenre?.name || "IDOL";
@@ -426,18 +426,23 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
               onClick={() => {
                 const currentGenreData = genres[selectedGenre];
                 if (currentGenreData && currentTrack) {
-                  const currentIndex = currentGenreData.tracks.findIndex(t => t.id === currentTrack.id);
-                  const prevIndex = currentIndex > 0 ? currentIndex - 1 : currentGenreData.tracks.length - 1;
+                  const currentIndex = currentGenreData.tracks.findIndex(
+                    (t) => t.id === currentTrack.id
+                  );
+                  const prevIndex =
+                    currentIndex > 0
+                      ? currentIndex - 1
+                      : currentGenreData.tracks.length - 1;
                   handleTrackSelect(currentGenreData.tracks[prevIndex]);
                 }
               }}
               className="cursor-pointer hover:opacity-60 transition-opacity"
             >
               <svg width="32" height="32" viewBox="0 0 24 24" fill="black">
-                <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+                <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" />
               </svg>
             </button>
-            
+
             {/* Play/Pause */}
             <button
               onClick={togglePlayPause}
@@ -445,29 +450,34 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
             >
               {isPlaying ? (
                 <svg width="44" height="44" viewBox="0 0 24 24" fill="black">
-                  <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                  <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
                 </svg>
               ) : (
                 <svg width="44" height="44" viewBox="0 0 24 24" fill="black">
-                  <path d="M8 5v14l11-7z"/>
+                  <path d="M8 5v14l11-7z" />
                 </svg>
               )}
             </button>
-            
+
             {/* Next Track */}
             <button
               onClick={() => {
                 const currentGenreData = genres[selectedGenre];
                 if (currentGenreData && currentTrack) {
-                  const currentIndex = currentGenreData.tracks.findIndex(t => t.id === currentTrack.id);
-                  const nextIndex = currentIndex < currentGenreData.tracks.length - 1 ? currentIndex + 1 : 0;
+                  const currentIndex = currentGenreData.tracks.findIndex(
+                    (t) => t.id === currentTrack.id
+                  );
+                  const nextIndex =
+                    currentIndex < currentGenreData.tracks.length - 1
+                      ? currentIndex + 1
+                      : 0;
                   handleTrackSelect(currentGenreData.tracks[nextIndex]);
                 }
               }}
               className="cursor-pointer hover:opacity-60 transition-opacity"
             >
               <svg width="32" height="32" viewBox="0 0 24 24" fill="black">
-                <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+                <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
               </svg>
             </button>
           </div>
@@ -494,16 +504,48 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
                       <div className="text-black flex items-center justify-center">
                         {/* Animated waveform bars */}
                         <div className="flex items-end gap-0.5 h-3">
-                          <div className="w-0.5 bg-current animate-pulse" style={{ animation: 'waveform1 0.4s ease-in-out infinite alternate', height: '60%' }}></div>
-                          <div className="w-0.5 bg-current animate-pulse" style={{ animation: 'waveform2 0.45s ease-in-out infinite alternate', height: '100%' }}></div>
-                          <div className="w-0.5 bg-current animate-pulse" style={{ animation: 'waveform3 0.35s ease-in-out infinite alternate', height: '80%' }}></div>
-                          <div className="w-0.5 bg-current animate-pulse" style={{ animation: 'waveform4 0.55s ease-in-out infinite alternate', height: '40%' }}></div>
+                          <div
+                            className="w-0.5 bg-current animate-pulse"
+                            style={{
+                              animation:
+                                "waveform1 0.4s ease-in-out infinite alternate",
+                              height: "60%",
+                            }}
+                          ></div>
+                          <div
+                            className="w-0.5 bg-current animate-pulse"
+                            style={{
+                              animation:
+                                "waveform2 0.45s ease-in-out infinite alternate",
+                              height: "100%",
+                            }}
+                          ></div>
+                          <div
+                            className="w-0.5 bg-current animate-pulse"
+                            style={{
+                              animation:
+                                "waveform3 0.35s ease-in-out infinite alternate",
+                              height: "80%",
+                            }}
+                          ></div>
+                          <div
+                            className="w-0.5 bg-current animate-pulse"
+                            style={{
+                              animation:
+                                "waveform4 0.55s ease-in-out infinite alternate",
+                              height: "40%",
+                            }}
+                          ></div>
                         </div>
                       </div>
                     ) : (
-                      <span className={`font-medium ${
-                        currentTrack?.id === track.id ? "text-black" : "text-gray-400"
-                      }`}>
+                      <span
+                        className={`font-medium ${
+                          currentTrack?.id === track.id
+                            ? "text-black"
+                            : "text-gray-400"
+                        }`}
+                      >
                         {index + 1}
                       </span>
                     )}
@@ -545,14 +587,17 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
 
           {/* Waveform Visualization - Perfectly aligned with playback controls */}
           {currentTrack && (
-            <div className="flex items-center justify-center" style={{ height: "44px", marginTop: "48px" }}>
+            <div
+              className="flex items-center justify-center"
+              style={{ height: "44px", marginTop: "48px" }}
+            >
               <div className="relative w-full">
-                <div 
+                <div
                   ref={waveformRef}
                   className="w-full bg-gray-50 rounded-lg"
                   style={{ height: "44px" }}
                 />
-                
+
                 {/* Loading overlay - positioned absolutely to not affect layout */}
                 {isLoading && (
                   <div className="absolute inset-0 flex items-center justify-center gap-2 text-sm text-gray-500 bg-gray-50 rounded-lg">
