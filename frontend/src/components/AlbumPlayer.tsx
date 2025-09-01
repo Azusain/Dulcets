@@ -558,13 +558,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
                         </div>
                       </div>
                     ) : (
-                      <span
-                        className={`font-medium ${
-                          currentTrack?.id === track.id
-                            ? "text-black"
-                            : "text-gray-400"
-                        }`}
-                      >
+                      <span className={`font-medium text-gray-700`}>
                         {index + 1}
                       </span>
                     )}
@@ -591,10 +585,10 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
                       <span className="inline-flex items-center justify-end gap-1">
                         <span>{formatTime(currentTime)}</span>
                         <span>/</span>
-                        <span className="text-black">{track.duration}</span>
+                        <span className="text-gray-700">{track.duration}</span>
                       </span>
                     ) : (
-                      <span className="text-black">{track.duration}</span>
+                      <span className="text-gray-700">{track.duration}</span>
                     )}
                   </div>
                 </div>
