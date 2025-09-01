@@ -2,9 +2,8 @@
 setlocal enabledelayedexpansion
 chcp 65001 > nul
 
-REM Auto Audio Config Generator - Scans folders and generates config
 echo ================================================
-echo     Audio Config Generator
+echo     Simple Audio Config Generator
 echo ================================================
 
 REM Backup existing config
@@ -41,40 +40,66 @@ for /d %%d in (*) do (
         set "FIRST_TRACK=1"
         set "COUNT=0"
         
-        for %%f in ("%%d\*.mp3" "%%d\*.wav" "%%d\*.flac" "%%d\*.ogg" "%%d\*.m4a") do (
-            REM Process all audio files (including normalized ones)
+        REM Process all audio formats
+        for %%f in ("!FOLDER!\*.mp3" "!FOLDER!\*.wav" "!FOLDER!\*.flac" "!FOLDER!\*.ogg" "!FOLDER!\*.m4a") do (
             set "FILE=%%~nf"
-                set /a COUNT+=1
-                set "PATH=!FOLDER!/%%~nxf"
+            set /a COUNT+=1
+            set "FILEPATH=!FOLDER!/%%~nxf"
+            
+            REM Clean display name
+            set "CLEAN=!FILE!"
+            if "!CLEAN:~0,11!"=="normalized_" set "CLEAN=!CLEAN:~11!"
+            set "CLEAN=!CLEAN:【=!"
+            set "CLEAN=!CLEAN:】=!"
+            set "CLEAN=!CLEAN:（=!"
+            set "CLEAN=!CLEAN:）=!"
+            set "CLEAN=!CLEAN:_Full=!"
+            set "CLEAN=!CLEAN:_demo=!"
+            set "CLEAN=!CLEAN:_1=!"
+            set "CLEAN=!CLEAN:_2=!"
+            
+            REM Get artist - using string replacement
+            set "ARTIST=Dulcets"
+            if not "!FILE:Shintou=!"=="!FILE!" set "ARTIST=Shintou"
+            if not "!FILE:Koyaka=!"=="!FILE!" set "ARTIST=Koyaka"
+            
+            if not "!FIRST_TRACK!"=="1" echo , >> audio-config.json
+            set "FIRST_TRACK=0"
+            
+            echo       { >> audio-config.json
+            echo         "id": "!ID!-!COUNT!", >> audio-config.json
+            echo         "fileName": "!FILEPATH!", >> audio-config.json
+            echo         "displayName": "!CLEAN!", >> audio-config.json
+            echo         "artist": "!ARTIST!", >> audio-config.json
+            
+            REM Get duration - simple method that works
+            echo     - Getting duration for: %%~nxf
+            set "DURATION=3:30"
+            
+            REM Extract duration directly using one command
+            for /f "tokens=2" %%k in ('ffprobe -i "%%f" 2^>^&1 ^| findstr "Duration:"') do (
+                set "RAWDUR=%%k"
+                if "!RAWDUR:~-1!"=="," set "RAWDUR=!RAWDUR:~0,-1!"
                 
-                REM Clean display name
-                set "CLEAN=!FILE!"
-                REM Remove normalized_ prefix
-                if "!CLEAN:~0,11!"=="normalized_" set "CLEAN=!CLEAN:~11!"
-                set "CLEAN=!CLEAN:【=!"
-                set "CLEAN=!CLEAN:】=!"
-                set "CLEAN=!CLEAN:（=!"
-                set "CLEAN=!CLEAN:）=!"
-                set "CLEAN=!CLEAN:_Full=!"
-                set "CLEAN=!CLEAN:_demo=!"
-                set "CLEAN=!CLEAN:_1=!"
-                set "CLEAN=!CLEAN:_2=!"
+                set "HH=!RAWDUR:~0,2!"
+                set "MM=!RAWDUR:~3,2!"
+                set "SS=!RAWDUR:~6,2!"
                 
-                REM Get artist - using string replacement
-                set "ARTIST=Dulcets"
-                if not "!FILE:Shintou=!"=="!FILE!" set "ARTIST=Shintou"
-                if not "!FILE:Koyaka=!"=="!FILE!" set "ARTIST=Koyaka"
+                set /a "H=1!HH!-100"
+                set /a "M=1!MM!-100"
+                set /a "S=1!SS!-100"
+                set /a "TOTMIN=!H!*60+!M!"
                 
-                if not "!FIRST_TRACK!"=="1" echo , >> audio-config.json
-                set "FIRST_TRACK=0"
-                
-                echo       { >> audio-config.json
-                echo         "id": "!ID!-!COUNT!", >> audio-config.json
-                echo         "fileName": "!PATH!", >> audio-config.json
-                echo         "displayName": "!CLEAN!", >> audio-config.json
-                echo         "artist": "!ARTIST!", >> audio-config.json
-                echo         "duration": "3:30" >> audio-config.json
-                echo       } >> audio-config.json
+                if !S! lss 10 (
+                    set "DURATION=!TOTMIN!:0!S!"
+                ) else (
+                    set "DURATION=!TOTMIN!:!S!"
+                )
+            )
+            
+            echo     - Duration: !DURATION!
+            echo         "duration": "!DURATION!" >> audio-config.json
+            echo       } >> audio-config.json
         )
         
         echo     ] >> audio-config.json
@@ -87,6 +112,5 @@ echo } >> audio-config.json
 
 echo ================================================
 echo ✓ Config generated: audio-config.json
-echo ✓ Backup saved: audio-config.json.backup
 echo ================================================
 if "%NOPAUSE%"=="" pause

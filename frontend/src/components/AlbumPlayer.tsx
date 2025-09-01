@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from "react";
 import WaveSurfer from "wavesurfer.js";
 import AudioManager from "../utils/audioManager";
 import { useAssetPath } from "@/hooks/useAssetPath";
-import { getAudioDuration, formatDuration } from "../utils/audioUtils";
 
 // Add CSS animations for waveform bars
 const waveformStyles = `
@@ -30,8 +29,7 @@ interface Track {
   fileName: string;
   displayName: string;
   artist: string;
-  duration: string; // Static duration from JSON
-  actualDuration?: number; // Dynamic duration in seconds
+  duration: string;
   isHit?: boolean;
 }
 
@@ -71,7 +69,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
     { id: "bgm", name: "BGM" },
   ];
 
-  // Load audio configuration and dynamic durations
+  // Load audio configuration
   useEffect(() => {
     const loadAudioConfig = async () => {
       try {
@@ -82,40 +80,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
         if (response.ok) {
           const config = await response.json();
           console.log("Config loaded:", config);
-          
-          // Load actual durations for all tracks in background
-          const loadDurations = async () => {
-            const updatedConfig = { ...config };
-            
-            for (const genreId in config) {
-              const genre = config[genreId];
-              if (genre.tracks) {
-                for (let i = 0; i < genre.tracks.length; i++) {
-                  const track = genre.tracks[i];
-                  try {
-                    const audioUrl = getAssetPath(`/audio/${track.fileName}`);
-                    const actualDuration = await getAudioDuration(audioUrl);
-                    updatedConfig[genreId].tracks[i] = {
-                      ...track,
-                      actualDuration
-                    };
-                    console.log(`Loaded duration for ${track.displayName}: ${formatDuration(actualDuration)}`);
-                  } catch (error) {
-                    console.warn(`Failed to load duration for ${track.displayName}:`, error);
-                  }
-                }
-              }
-            }
-            
-            // Update state with loaded durations
-            setGenres(updatedConfig);
-          };
-          
-          // Set initial config first (without durations)
           setGenres(config);
-          
-          // Then load durations asynchronously
-          loadDurations();
 
           // Set first track of selected genre as current only if we don't have a current track
           if (!currentTrack) {
@@ -136,7 +101,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
     if (Object.keys(genres).length === 0) {
       loadAudioConfig();
     }
-  }, [getAssetPath]); // Remove selectedGenre dependency to prevent infinite loop
+  }, [getAssetPath]);
 
   // Initialize WaveSurfer when current track changes
   useEffect(() => {
@@ -630,10 +595,10 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
                       <span className="inline-flex items-center justify-end gap-1">
                         <span>{formatTime(currentTime)}</span>
                         <span>/</span>
-                        <span>{track.actualDuration ? formatDuration(track.actualDuration) : track.duration}</span>
+                        <span>{track.duration}</span>
                       </span>
                     ) : (
-                      <span>{track.actualDuration ? formatDuration(track.actualDuration) : track.duration}</span>
+                      <span>{track.duration}</span>
                     )}
                   </div>
                 </div>
