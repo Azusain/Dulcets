@@ -1,0 +1,40 @@
+{ 
+  "edm": { 
+    "id": "edm", 
+    "genreName": "EDM", 
+    "albumCover": "/images/music/edm-cover.svg", 
+    "tracks": [ 
+      { 
+        "id": "edm-1", 
+        "fileName": "EDM/normalized_EDM1.flac", 
+        "displayName": "EDM1", 
+        "artist": "Dulcets", 
+        "duration": "1:34" 
+      } 
+, 
+      { 
+        "id": "edm-2", 
+        "fileName": "EDM/normalized_EDM2.flac", 
+        "displayName": "EDM2", 
+        "artist": "Dulcets", 
+        "duration": "1:46" 
+      } 
+, 
+      { 
+        "id": "edm-3", 
+        "fileName": "EDM/normalized_EDM3.flac", 
+        "displayName": "EDM3", 
+        "artist": "Dulcets", 
+        "duration": "0:56" 
+      } 
+, 
+      { 
+        "id": "edm-4", 
+        "fileName": "EDM/normalized_EDM4.flac", 
+        "displayName": "EDM4", 
+        "artist": "Dulcets", 
+        "duration": "1:06" 
+      } 
+    ] 
+  } 
+} 
