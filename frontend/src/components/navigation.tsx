@@ -175,7 +175,7 @@ const DsNavigation = () => {
             <a href="#works" className="hover:underline">
               {t("works.title")}
             </a>
-            <a href="#services" className="hover:underline">
+            <a href="#why-choose-us" className="hover:underline">
               {t("services.title")}
             </a>
           </div>

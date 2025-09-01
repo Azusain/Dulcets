@@ -11,14 +11,9 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({ t }) => {
 
   return (
     <>
-      <div className="bg-gradient-to-b from-gray-50 to-white py-16">
+      <div id="why-choose-us" className="bg-gradient-to-b from-gray-50 to-white py-16" style={{ scrollMarginTop: '120px' }}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center">
-            <div className="inline-block mb-6">
-              <span className="text-sm font-medium uppercase tracking-wider text-gray-500 bg-white px-6 py-2 rounded-full shadow-sm border border-gray-200">
-                {t("services.title")}
-              </span>
-            </div>
             <h2 className="text-4xl lg:text-5xl font-light text-gray-800 mb-6 tracking-wide">
               {t("services.our_service")}
             </h2>

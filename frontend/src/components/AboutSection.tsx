@@ -10,7 +10,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
   const { getAssetPath } = useAssetPath();
 
   return (
-    <section id="about" className="relative overflow-hidden bg-gray-50 py-12">
+    <section id="about" className="relative overflow-hidden bg-gray-50 py-12" style={{ scrollMarginTop: '120px' }}>
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         {/* Header section with Tokyo night background */}
         <header className="mb-8 text-center relative">

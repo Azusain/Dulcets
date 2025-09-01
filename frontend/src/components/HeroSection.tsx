@@ -94,7 +94,7 @@ export default function HeroSection({ t }: ComponentWithTranslation) {
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
           <a
-            href="#artists"
+            href="#works"
             className="px-10 py-4 text-white font-medium transform hover:scale-105 transition-all duration-300 relative overflow-hidden group cursor-pointer"
             style={{
               backgroundColor: '#5865F2',
@@ -113,7 +113,7 @@ export default function HeroSection({ t }: ComponentWithTranslation) {
             </svg>
           </a>
           <a
-            href="#releases"
+            href="#why-choose-us"
             className="px-10 py-4 bg-transparent text-white font-medium transform hover:scale-105 transition-all duration-300 relative overflow-hidden group cursor-pointer"
             style={{
               border: '2px solid #5865F2',
