@@ -47,7 +47,7 @@ interface AlbumPlayerProps {
 
 const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
   const [genres, setGenres] = useState<Record<string, Genre>>({});
-  const [selectedGenre, setSelectedGenre] = useState<string>("idol");
+  const [selectedGenre, setSelectedGenre] = useState<string>("jpop");
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -61,12 +61,11 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
   const { getAssetPath } = useAssetPath();
 
   const GENRE_OPTIONS = [
+    { id: "jpop", name: "POPS" },
+    { id: "jrock", name: "ROCK" },
     { id: "idol", name: "IDOL" },
-    { id: "jrock", name: "J-ROCK" },
-    { id: "jpop", name: "J-POP" },
-    { id: "orchestra", name: "ORCHESTRA" },
-    { id: "edm", name: "EDM" },
     { id: "bgm", name: "BGM" },
+    { id: "edm", name: "EDM" },
   ];
 
   // Load audio configuration
@@ -394,15 +393,14 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
               string,
               { width: number; offset: number }
             > = {
-              IDOL: { width: 35, offset: 0 },
-              "J-ROCK": { width: 54, offset: 64 },
-              "J-POP": { width: 46, offset: 147 },
-              ORCHESTRA: { width: 74, offset: 225 },
-              EDM: { width: 32, offset: 335 },
-              BGM: { width: 32, offset: 400 },
+              POPS: { width: 38, offset: 0 },
+              ROCK: { width: 42, offset: 67 },
+              IDOL: { width: 35, offset: 139 },
+              BGM: { width: 32, offset: 206 },
+              EDM: { width: 32, offset: 270 },
             };
 
-            const current = currentGenre?.name || "IDOL";
+            const current = currentGenre?.name || "POPS";
             const measurement = measurements[current] || {
               width: 40,
               offset: 0,
@@ -585,9 +583,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
                   </div>
 
                   {/* Artist */}
-                  <div className="text-gray-500 text-sm min-w-0 flex-shrink-0">
-                    Dulcets
-                  </div>
+                  <div className="text-gray-500 text-sm min-w-0 flex-shrink-0"></div>
 
                   {/* Duration - show current time when playing this track */}
                   <div className="text-gray-400 text-sm font-mono w-24 text-right whitespace-nowrap">
@@ -595,10 +591,10 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
                       <span className="inline-flex items-center justify-end gap-1">
                         <span>{formatTime(currentTime)}</span>
                         <span>/</span>
-                        <span>{track.duration}</span>
+                        <span className="text-black">{track.duration}</span>
                       </span>
                     ) : (
-                      <span>{track.duration}</span>
+                      <span className="text-black">{track.duration}</span>
                     )}
                   </div>
                 </div>
