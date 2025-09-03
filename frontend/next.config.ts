@@ -77,6 +77,12 @@ const nextConfig: NextConfig = {
   },
   // Generate SEO files during build
   webpack: (config, { buildId, dev, isServer }) => {
+    // Ignore HLS .ts files (TypeScript segments) from being processed as TypeScript
+    config.module.rules.push({
+      test: /\/hls\/.*\.ts$/,
+      type: 'asset/resource',
+    });
+    
     if (!dev && isServer) {
       // Create out directory if it doesn't exist
       const outDir = path.join(process.cwd(), 'out');

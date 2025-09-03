@@ -1,16 +1,111 @@
 "use client";
 
+import { useRef, useEffect } from "react";
 import { getAssetPath } from "../utils/assetPath";
+import Hls from "hls.js";
 
 export default function VideoBackground() {
-  // Get video source - only MP4 since webm doesn't exist
-  const videoSrc = getAssetPath("/videos/hero-background.mp4");
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const hlsRef = useRef<Hls | null>(null);
   
-  console.log('VideoBackground - Source:', videoSrc);
+  // Get HLS video source
+  const videoSrc = getAssetPath("/hls/hero-background.m3u8");
+  
+  console.log('VideoBackground - HLS Source:', videoSrc);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const initializeHLS = () => {
+      // Cleanup previous instance
+      if (hlsRef.current) {
+        hlsRef.current.destroy();
+        hlsRef.current = null;
+      }
+
+      if (Hls.isSupported()) {
+        const hls = new Hls({
+          enableWorker: true,
+          lowLatencyMode: false,
+          debug: false,
+          capLevelToPlayerSize: false,
+          maxLoadingDelay: 4,
+          maxBufferLength: 30,
+          maxBufferSize: 60 * 1000 * 1000,
+          maxBufferHole: 0.5,
+          highBufferWatchdogPeriod: 2,
+          nudgeOffset: 0.1,
+          nudgeMaxRetry: 3,
+          maxFragLookUpTolerance: 0.25,
+          liveSyncDurationCount: 3,
+          liveMaxLatencyDurationCount: Infinity,
+          manifestLoadingTimeOut: 10000,
+          manifestLoadingMaxRetry: 1,
+          manifestLoadingRetryDelay: 1000,
+          levelLoadingTimeOut: 10000,
+          levelLoadingMaxRetry: 2,
+          fragLoadingTimeOut: 20000,
+          fragLoadingMaxRetry: 3,
+          fragLoadingRetryDelay: 1000,
+          startFragPrefetch: true,
+          testBandwidth: false,
+        });
+
+        hlsRef.current = hls;
+        hls.loadSource(videoSrc);
+        hls.attachMedia(video);
+
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          console.log('HLS manifest parsed, starting video');
+          video.play().catch(console.error);
+        });
+
+        hls.on(Hls.Events.ERROR, (event, data) => {
+          console.error('HLS error:', event, data);
+          if (data.fatal) {
+            switch (data.type) {
+              case Hls.ErrorTypes.NETWORK_ERROR:
+                console.log('Network error, trying to recover...');
+                hls.startLoad();
+                break;
+              case Hls.ErrorTypes.MEDIA_ERROR:
+                console.log('Media error, trying to recover...');
+                hls.recoverMediaError();
+                break;
+              default:
+                console.log('Fatal error, destroying HLS instance');
+                hls.destroy();
+                break;
+            }
+          }
+        });
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        // Safari native HLS support
+        console.log('Using native HLS support');
+        video.src = videoSrc;
+        video.addEventListener('loadedmetadata', () => {
+          video.play().catch(console.error);
+        });
+      } else {
+        console.error('HLS is not supported in this browser');
+      }
+    };
+
+    initializeHLS();
+
+    return () => {
+      if (hlsRef.current) {
+        hlsRef.current.destroy();
+        hlsRef.current = null;
+      }
+    };
+  }, [videoSrc]);
 
   return (
     <>
       <video
+        ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover z-10"
         autoPlay
         muted
@@ -24,8 +119,7 @@ export default function VideoBackground() {
           console.log('Video can play');
         }}
       >
-        <source src={videoSrc} type="video/mp4" />
-        Your browser does not support the video tag.
+        Your browser does not support HLS video streaming.
       </video>
       
       {/* Debug info will be in console */}
