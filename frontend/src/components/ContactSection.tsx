@@ -21,7 +21,11 @@ export default function ContactSection({ t }: ComponentWithTranslation) {
     setTimeout(() => setEmailClickMessage(""), 3000);
   };
   return (
-    <section id="contact" className="bg-white py-16" style={{ scrollMarginTop: '120px' }}>
+    <section
+      id="contact"
+      className="bg-white py-16"
+      style={{ scrollMarginTop: "120px" }}
+    >
       <div className="max-w-5xl mx-auto px-6">
         <div className="text-center">
           {/* Centered Content */}
@@ -31,7 +35,9 @@ export default function ContactSection({ t }: ComponentWithTranslation) {
                 {t("contact.title")}
               </h1>
               <p className="text-lg text-gray-700 leading-relaxed mb-8 max-w-3xl mx-auto">
-                {t("contact.description")}
+                {t("contact.description_1")}
+                <br />
+                {t("contact.description_2")}
               </p>
             </div>
 
