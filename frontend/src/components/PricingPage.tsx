@@ -20,11 +20,8 @@ export default function PricingPage({
   };
 
   return (
-    <LoadingManager loadingText={t("loading")}>
-      <div className="min-h-screen">
-        {/* Detailed Pricing Table */}
-        <PricingSection translations={translations} />
-      </div>
-    </LoadingManager>
+    <div className="min-h-screen">
+      <PricingSection translations={translations} />
+    </div>
   );
 }

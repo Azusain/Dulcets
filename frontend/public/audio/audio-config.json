@@ -2,28 +2,28 @@
   "jpop": {
     "id": "jpop",
     "genreName": "J-POP",
-    "albumCover": "/images/music/jpop-cover.svg",
+    "albumCover": "/images/music/JPOP.PNG",
     "tracks": [
       {
         "id": "jpop-1",
-        "fileName": "pop/normalized_80年代pops.flac",
-        "displayName": "80年代 POPS",
+        "fileName": "pop/normalized_ケルトソング.flac",
+        "displayName": "ケルトソング",
         "artist": "Dulcets",
-        "duration": "1:39"
+        "duration": "3:42"
       },
       {
         "id": "jpop-2",
-        "fileName": "pop/normalized_pops1.flac",
-        "displayName": "POPS_1",
-        "artist": "Dulcets",
-        "duration": "2:02"
-      },
-      {
-        "id": "jpop-3",
         "fileName": "pop/normalized_pops2.flac",
         "displayName": "POPS_2",
         "artist": "Dulcets",
         "duration": "1:44"
+      },
+      {
+        "id": "jpop-3",
+        "fileName": "pop/normalized_pops1.flac",
+        "displayName": "POPS_1",
+        "artist": "Dulcets",
+        "duration": "2:02"
       },
       {
         "id": "jpop-4",
@@ -34,17 +34,17 @@
       },
       {
         "id": "jpop-5",
+        "fileName": "pop/normalized_80年代pops.flac",
+        "displayName": "80年代 POPS",
+        "artist": "Dulcets",
+        "duration": "1:39"
+      },
+      {
+        "id": "jpop-6",
         "fileName": "pop/normalized_pops4.flac",
         "displayName": "POPS_4",
         "artist": "Dulcets",
         "duration": "2:18"
-      },
-      {
-        "id": "jpop-6",
-        "fileName": "pop/normalized_ケルトソング.flac",
-        "displayName": "ケルトソング",
-        "artist": "Dulcets",
-        "duration": "3:42"
       },
       {
         "id": "jpop-7",
@@ -58,7 +58,7 @@
   "jrock": {
     "id": "jrock",
     "genreName": "J-ROCK",
-    "albumCover": "/images/music/jrock-cover.svg",
+    "albumCover": "/images/music/JROCK.png",
     "tracks": [
       {
         "id": "jrock-1",
@@ -121,7 +121,7 @@
   "idol": {
     "id": "idol",
     "genreName": "IDOL",
-    "albumCover": "/images/music/idol-cover.svg",
+    "albumCover": "/images/music/IDOL.png",
     "tracks": [
       {
         "id": "idol-1",
@@ -149,7 +149,7 @@
   "bgm": {
     "id": "bgm",
     "genreName": "BGM",
-    "albumCover": "/images/music/bgm-cover.svg",
+    "albumCover": "/images/music/BGM.png",
     "tracks": [
       {
         "id": "bgm-1",

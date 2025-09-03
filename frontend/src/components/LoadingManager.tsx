@@ -2,11 +2,16 @@
 
 import { useLoading } from "@/contexts/LoadingContext";
 import { useAssetPath } from "@/hooks/useAssetPath";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface LoadingManagerProps {
   children: React.ReactNode;
   loadingText: string;
 }
+
+// 使用模块级变量跟踪首次加载状态
+let isInitialLoad = true;
 
 export default function LoadingManager({
   children,
@@ -14,14 +19,41 @@ export default function LoadingManager({
 }: LoadingManagerProps) {
   const { isLoading } = useLoading();
   const { getAssetPath } = useAssetPath();
+  const router = useRouter();
+  const [shouldShowLoading, setShouldShowLoading] = useState(false);
+
+  useEffect(() => {
+    // 只在初始加载时显示loading动画
+    if (isInitialLoad && isLoading) {
+      setShouldShowLoading(true);
+      // 标记已经完成初始加载
+      isInitialLoad = false;
+    } else {
+      setShouldShowLoading(false);
+    }
+  }, [isLoading]);
+
+  // 监听页面刷新 - 重置初始加载状态
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      // 页面刷新时重置状态
+      isInitialLoad = true;
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
   return (
     <div
       className="min-h-screen text-white"
       style={{ background: "#000000", minHeight: "100vh" }}
     >
-      {/* Loading Animation - Below Navigation */}
-      {isLoading && (
+      {/* Loading Animation - 只在首次访问时显示 */}
+      {shouldShowLoading && (
         <div className="loading-screen fixed inset-0 z-[99999] flex items-center justify-center">
           <div className="text-center relative z-10">
             <div className="loading-animation -translate-56">
@@ -76,11 +108,11 @@ export default function LoadingManager({
         id="main-content"
         className="main-content-react"
         style={{
-          opacity: isLoading ? 0 : 1,
-          visibility: "visible", // 总是可见，让背景透过加载屏幕
-          transition: isLoading ? "none" : "opacity 0.8s ease-out 0.2s",
+          opacity: shouldShowLoading ? 0 : 1,
+          visibility: "visible",
+          transition: shouldShowLoading ? "none" : "opacity 0.8s ease-out 0.2s",
           backgroundColor: "transparent",
-          zIndex: isLoading ? 1 : "auto", // 在加载时保持在最底层
+          zIndex: shouldShowLoading ? 1 : "auto",
         }}
       >
         {children}
