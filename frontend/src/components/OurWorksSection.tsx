@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import AlbumPlayer from "./AlbumPlayer";
+import VideoPlayer from "./VideoPlayer";
 import { ServiceCard } from "./ServiceCard";
 import { useAssetPath } from "@/hooks/useAssetPath";
 import works from "../../public/service/works.json";
@@ -116,6 +117,23 @@ const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
         {/* Music Player Section */}
         <div className="mb-16">
           <AlbumPlayer t={t} className="mx-auto max-w-6xl" />
+        </div>
+
+        {/* Video Player Section */}
+        <div className="mb-16">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl lg:text-3xl font-light text-gray-700 mb-4">
+              Featured Video
+            </h3>
+            <div className="mx-auto w-16 h-px bg-gray-300 mb-4"></div>
+          </div>
+          <VideoPlayer
+            title="Featured Video"
+            description="High-quality video streaming using HLS technology"
+            videoUrl={getAssetPath("/hls/hero-background.m3u8")}
+            className="mx-auto max-w-6xl"
+            t={t}
+          />
         </div>
 
         {/* YouTube Video Links Grid */}
