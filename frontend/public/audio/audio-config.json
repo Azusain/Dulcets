@@ -1,8 +1,8 @@
 {
-  "jpop": {
-    "id": "jpop",
-    "genreName": "J-POP",
-    "albumCover": "/images/music/JPOP.PNG",
+  "pops": {
+    "id": "pops",
+    "genreName": "POPS",
+    "albumCover": "/images/music/POPS.PNG",
     "tracks": [
       {
         "id": "jpop-1",
@@ -55,10 +55,10 @@
       }
     ]
   },
-  "jrock": {
-    "id": "jrock",
-    "genreName": "J-ROCK",
-    "albumCover": "/images/music/JROCK.png",
+  "rock": {
+    "id": "rock",
+    "genreName": "ROCK",
+    "albumCover": "/images/music/ROCK.png",
     "tracks": [
       {
         "id": "jrock-1",

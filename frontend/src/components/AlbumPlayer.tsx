@@ -60,7 +60,7 @@ interface AlbumPlayerProps {
 
 const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
   const [genres, setGenres] = useState<Record<string, Genre>>({});
-  const [selectedGenre, setSelectedGenre] = useState<string>("jpop");
+  const [selectedGenre, setSelectedGenre] = useState<string>("pops");
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -77,8 +77,8 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
   const { getAssetPath } = useAssetPath();
 
   const GENRE_OPTIONS = [
-    { id: "jpop", name: "POPS" },
-    { id: "jrock", name: "ROCK" },
+    { id: "pops", name: "POPS" },
+    { id: "rock", name: "ROCK" },
     { id: "idol", name: "IDOL" },
     { id: "bgm", name: "BGM" },
     { id: "edm", name: "EDM" },
@@ -307,7 +307,7 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
       const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
       const isScrollable = scrollHeight > clientHeight;
       const isAtBottomThreshold = scrollTop + clientHeight >= scrollHeight - 10; // 10px threshold
-      
+
       // Show scroll indicator when content is scrollable but not at bottom
       setShowScrollIndicator(isScrollable && !isAtBottomThreshold);
     };
@@ -321,21 +321,20 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
     checkScrollPosition();
 
     // Add scroll listener to inner container for position detection
-    scrollContainer.addEventListener('scroll', handleScroll);
+    scrollContainer.addEventListener("scroll", handleScroll);
 
     // Check when content changes
     const observer = new ResizeObserver(checkScrollPosition);
     observer.observe(scrollContainer);
 
     return () => {
-      scrollContainer.removeEventListener('scroll', handleScroll);
+      scrollContainer.removeEventListener("scroll", handleScroll);
       observer.disconnect();
       if (scrollTimeout) {
         clearTimeout(scrollTimeout);
       }
     };
   }, [genres[selectedGenre]?.tracks]); // Re-run when tracks change
-
 
   // Separate effect for preventing scroll bubbling - only when content is scrollable
   useEffect(() => {
@@ -344,37 +343,37 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
 
     // Prevent scroll event from bubbling to parent elements but allow internal scrolling
     const handleWheel = (e: WheelEvent) => {
-      console.log('Handling scroll on playlist area'); // Debug
-      
+      console.log("Handling scroll on playlist area"); // Debug
+
       // Find the scrollable container
       const scrollContainer = playlistRef.current;
       if (!scrollContainer) {
         // No scroll container, allow page scroll
         return;
       }
-      
+
       // Check if content is actually scrollable
       const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
       const isContentScrollable = scrollHeight > clientHeight;
-      
+
       if (!isContentScrollable) {
         // Content doesn't need scrolling, allow page scroll
-        console.log('Content not scrollable, allowing page scroll');
+        console.log("Content not scrollable, allowing page scroll");
         return;
       }
-      
+
       // Check if the target is inside the scrollable area
       const targetElement = e.target as Element;
       const isInsideScrollContainer = scrollContainer.contains(targetElement);
-      
+
       if (isInsideScrollContainer) {
         // Content is scrollable and we're inside - handle scroll prevention
         const deltaY = e.deltaY;
-        
+
         // Check if we can still scroll in the intended direction
         const canScrollUp = scrollTop > 0;
         const canScrollDown = scrollTop < scrollHeight - clientHeight;
-        
+
         if ((deltaY < 0 && canScrollUp) || (deltaY > 0 && canScrollDown)) {
           // Allow the scroll inside the container, but prevent bubbling
           e.stopPropagation();
@@ -391,10 +390,10 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
       // Only handle touch events if content is scrollable
       const scrollContainer = playlistRef.current;
       if (!scrollContainer) return;
-      
+
       const { scrollHeight, clientHeight } = scrollContainer;
       const isContentScrollable = scrollHeight > clientHeight;
-      
+
       if (isContentScrollable) {
         const targetElement = e.target as Element;
         const isInsideScrollContainer = scrollContainer.contains(targetElement);
@@ -405,15 +404,23 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
     };
 
     // Add wheel listener to the entire playlist area
-    playlistArea.addEventListener('wheel', handleWheel, { passive: false, capture: true });
-    playlistArea.addEventListener('touchmove', handleTouchMove, { passive: false, capture: true });
-    
-    console.log('Added conditional scroll prevention listeners'); // Debug
+    playlistArea.addEventListener("wheel", handleWheel, {
+      passive: false,
+      capture: true,
+    });
+    playlistArea.addEventListener("touchmove", handleTouchMove, {
+      passive: false,
+      capture: true,
+    });
+
+    console.log("Added conditional scroll prevention listeners"); // Debug
 
     return () => {
-      playlistArea.removeEventListener('wheel', handleWheel, { capture: true });
-      playlistArea.removeEventListener('touchmove', handleTouchMove, { capture: true });
-      console.log('Removed conditional scroll prevention listeners'); // Debug
+      playlistArea.removeEventListener("wheel", handleWheel, { capture: true });
+      playlistArea.removeEventListener("touchmove", handleTouchMove, {
+        capture: true,
+      });
+      console.log("Removed conditional scroll prevention listeners"); // Debug
     };
   }, [genres[selectedGenre]?.tracks]); // Re-run when tracks change to check scrollability
 
@@ -645,92 +652,94 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
           <div className="relative">
             <div ref={playlistRef} className="overflow-y-auto h-96">
               <div className="space-y-1 pr-2">
-              {currentGenre?.tracks.map((track, index) => (
-                <div
-                  key={track.id}
-                  onClick={() => handleTrackSelect(track)}
-                  className={`flex items-center gap-4 py-3 px-2 cursor-pointer transition-colors ${
-                    currentTrack?.id === track.id
-                      ? "bg-gray-200"
-                      : "hover:bg-gray-100"
-                  }`}
-                >
-                  {/* Track Number */}
-                  <div className="w-8 flex items-center justify-center text-sm">
-                    {currentTrack?.id === track.id && isPlaying ? (
-                      <div className="text-black flex items-center justify-center">
-                        {/* Animated waveform bars */}
-                        <div className="flex items-end gap-0.5 h-3">
-                          <div
-                            className="w-0.5 bg-current animate-pulse"
-                            style={{
-                              animation:
-                                "waveform1 0.4s ease-in-out infinite alternate",
-                              height: "60%",
-                            }}
-                          ></div>
-                          <div
-                            className="w-0.5 bg-current animate-pulse"
-                            style={{
-                              animation:
-                                "waveform2 0.45s ease-in-out infinite alternate",
-                              height: "100%",
-                            }}
-                          ></div>
-                          <div
-                            className="w-0.5 bg-current animate-pulse"
-                            style={{
-                              animation:
-                                "waveform3 0.35s ease-in-out infinite alternate",
-                              height: "80%",
-                            }}
-                          ></div>
-                          <div
-                            className="w-0.5 bg-current animate-pulse"
-                            style={{
-                              animation:
-                                "waveform4 0.55s ease-in-out infinite alternate",
-                              height: "40%",
-                            }}
-                          ></div>
+                {currentGenre?.tracks.map((track, index) => (
+                  <div
+                    key={track.id}
+                    onClick={() => handleTrackSelect(track)}
+                    className={`flex items-center gap-4 py-3 px-2 cursor-pointer transition-colors ${
+                      currentTrack?.id === track.id
+                        ? "bg-gray-200"
+                        : "hover:bg-gray-100"
+                    }`}
+                  >
+                    {/* Track Number */}
+                    <div className="w-8 flex items-center justify-center text-sm">
+                      {currentTrack?.id === track.id && isPlaying ? (
+                        <div className="text-black flex items-center justify-center">
+                          {/* Animated waveform bars */}
+                          <div className="flex items-end gap-0.5 h-3">
+                            <div
+                              className="w-0.5 bg-current animate-pulse"
+                              style={{
+                                animation:
+                                  "waveform1 0.4s ease-in-out infinite alternate",
+                                height: "60%",
+                              }}
+                            ></div>
+                            <div
+                              className="w-0.5 bg-current animate-pulse"
+                              style={{
+                                animation:
+                                  "waveform2 0.45s ease-in-out infinite alternate",
+                                height: "100%",
+                              }}
+                            ></div>
+                            <div
+                              className="w-0.5 bg-current animate-pulse"
+                              style={{
+                                animation:
+                                  "waveform3 0.35s ease-in-out infinite alternate",
+                                height: "80%",
+                              }}
+                            ></div>
+                            <div
+                              className="w-0.5 bg-current animate-pulse"
+                              style={{
+                                animation:
+                                  "waveform4 0.55s ease-in-out infinite alternate",
+                                height: "40%",
+                              }}
+                            ></div>
+                          </div>
                         </div>
-                      </div>
-                    ) : (
-                      <span className={`font-medium text-gray-700`}>
-                        {index + 1}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Track Info */}
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-medium truncate text-black">
-                      {track.displayName}
-                      {track.isHit && (
-                        <span className="ml-2 px-2 py-1 bg-gray-200 text-xs rounded font-medium">
-                          HIT
+                      ) : (
+                        <span className={`font-medium text-gray-700`}>
+                          {index + 1}
                         </span>
                       )}
-                    </h4>
-                  </div>
+                    </div>
 
-                  {/* Artist */}
-                  <div className="text-gray-500 text-sm min-w-0 flex-shrink-0"></div>
+                    {/* Track Info */}
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-medium truncate text-black">
+                        {track.displayName}
+                        {track.isHit && (
+                          <span className="ml-2 px-2 py-1 bg-gray-200 text-xs rounded font-medium">
+                            HIT
+                          </span>
+                        )}
+                      </h4>
+                    </div>
 
-                  {/* Duration - show current time when playing this track */}
-                  <div className="text-gray-400 text-sm font-mono w-24 text-right whitespace-nowrap">
-                    {currentTrack?.id === track.id && isPlaying ? (
-                      <span className="inline-flex items-center justify-end gap-1">
-                        <span>{formatTime(currentTime)}</span>
-                        <span>/</span>
+                    {/* Artist */}
+                    <div className="text-gray-500 text-sm min-w-0 flex-shrink-0"></div>
+
+                    {/* Duration - show current time when playing this track */}
+                    <div className="text-gray-400 text-sm font-mono w-24 text-right whitespace-nowrap">
+                      {currentTrack?.id === track.id && isPlaying ? (
+                        <span className="inline-flex items-center justify-end gap-1">
+                          <span>{formatTime(currentTime)}</span>
+                          <span>/</span>
+                          <span className="text-gray-700">
+                            {track.duration}
+                          </span>
+                        </span>
+                      ) : (
                         <span className="text-gray-700">{track.duration}</span>
-                      </span>
-                    ) : (
-                      <span className="text-gray-700">{track.duration}</span>
-                    )}
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
               </div>
             </div>
 
@@ -739,28 +748,27 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
               <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none">
                 {/* Gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-50 via-gray-50/60 to-transparent"></div>
-                
+
                 {/* Bouncing arrow */}
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 scroll-indicator">
-                  <svg 
-                    width="28" 
-                    height="28" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
+                  <svg
+                    width="28"
+                    height="28"
+                    viewBox="0 0 24 24"
+                    fill="none"
                     className="text-gray-600"
                   >
-                    <path 
-                      d="M7 10l5 5 5-5" 
-                      stroke="currentColor" 
-                      strokeWidth="2" 
-                      strokeLinecap="round" 
+                    <path
+                      d="M7 10l5 5 5-5"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
                       strokeLinejoin="round"
                     />
                   </svg>
                 </div>
               </div>
             )}
-            
           </div>
         </div>
       </div>
