@@ -247,7 +247,7 @@
   "edm": {
     "id": "edm",
     "genreName": "EDM",
-    "albumCover": "/images/music/edm-cover.svg",
+    "albumCover": "/images/music/EDM.png",
     "tracks": [
       {
         "id": "edm-1",

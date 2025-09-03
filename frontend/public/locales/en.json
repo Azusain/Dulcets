@@ -354,7 +354,8 @@
     "follow_description": "Stay connected and check out our latest work across our social platforms.",
     "email_copied": "Email address copied!",
     "opening_email_app": "Opening your default email application...",
-    "description": "Get in touch with us for your next project. We're here to help bring your musical vision to life."
+    "description_1": "Get in touch with us for your next project.",
+    "description_2": "We're here to help bring your musical vision to life."
   },
   "search": {
     "placeholder": "Search music, services, artworks...",

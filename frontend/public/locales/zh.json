@@ -354,7 +354,8 @@
     "follow_description": "保持联系，在我们的社交平台上查看我们的最新作品。",
     "email_copied": "邮箱地址已复制！",
     "opening_email_app": "正在打开您的默认邮件应用程序...",
-    "description": "请与我们联系您的下一个项目。我们在这里帮助您实现音乐感想。"
+    "description_1": "请与我们联系您的下一个项目。",
+    "description_2": "我们在这里帮助您实现音乐梦想。"
   },
   "search": {
     "placeholder": "搜索音乐、服务、艺术作品...",

@@ -5,6 +5,7 @@ import { ComponentWithTranslation } from "@/components/MainPage";
 import VideoBackground from "@/components/VideoBackground";
 import MouseCursor from "@/components/MouseCursor";
 import YouTubeModal from "@/components/YouTubeModal";
+import { getAssetPath } from "@/utils/assetPath";
 
 // Pre-generated particles for static rendering
 const staticParticles = Array.from({ length: 50 }, (_, i) => ({
@@ -16,7 +17,7 @@ const staticParticles = Array.from({ length: 50 }, (_, i) => ({
 
 export default function HeroSection({ t }: ComponentWithTranslation) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const youtubeVideoId = "iuhEOhyqo8g"; // YouTube视频ID
+  const youtubeVideoId = "iuhEOhyqo8g";
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -24,117 +25,164 @@ export default function HeroSection({ t }: ComponentWithTranslation) {
   return (
     <>
       <MouseCursor />
-      <YouTubeModal 
-        isOpen={isModalOpen} 
-        onClose={closeModal} 
-        videoId={youtubeVideoId} 
+      <YouTubeModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        videoId={youtubeVideoId}
       />
-      <section 
-        id="hero" 
+      <section
+        id="hero"
         className="relative h-screen overflow-hidden cursor-pointer"
       >
-      {/* Video Background */}
-      <div className="absolute inset-0 z-0">
-        {/* Main video background */}
-        <VideoBackground />
-
-        {/* CSS Fallback Background - shows when video fails */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-purple-900 to-pink-900 z-0">
-          {/* Static particles/stars effect */}
-          <div className="absolute inset-0 opacity-30">
-            {staticParticles.map((particle, i) => (
-              <div
-                key={i}
-                className="absolute w-1 h-1 bg-white rounded-full animate-pulse"
-                style={{
-                  left: particle.left,
-                  top: particle.top,
-                  animationDelay: particle.delay,
-                  animationDuration: particle.duration,
-                }}
-              />
-            ))}
-          </div>
-          {/* Moving gradient overlay */}
+        {/* Video Background */}
+        <div className="absolute inset-0 z-0">
+          {/* Main video background */}
+          <VideoBackground />
+          {/* CSS Fallback Background - shows when video fails */}
           <div
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/10 to-transparent animate-pulse"
-            style={{ animation: "float 8s ease-in-out infinite" }}
-          />
-        </div>
-      </div>
-
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black z-10"></div>
-
-      {/* Clickable background layer */}
-      <div 
-        className="absolute inset-0 cursor-pointer"
-        style={{ 
-          zIndex: 15,
-          backgroundColor: 'transparent',
-          pointerEvents: 'auto'
-        }}
-        onClick={openModal}
-      ></div>
-
-      {/* Hero Content - Repositioned to left-middle-upper with adjusted sizes */}
-      <div 
-        className="container mx-auto px-6 h-full flex flex-col justify-center items-start relative text-left" 
-        style={{
-          marginTop: '-8vh',
-          zIndex: 20,
-          pointerEvents: 'none'
-        }}
-      >
-        <h1 className="text-[clamp(6rem,16vw,12rem)] leading-tight mb-6 animate-float" style={{ fontFamily: "'Great Vibes', 'Alex Brush', 'Pinyon Script', cursive", fontWeight: 400, letterSpacing: '0.02em', color: 'white', textShadow: '2px 2px 8px rgba(0, 0, 0, 0.7)' }}>
-          Dulcets
-        </h1>
-        <p className="text-[clamp(1.2rem,3.5vw,2rem)] text-gray-100 max-w-4xl mb-10 animate-fade-in opacity-85 font-classical" style={{ fontFamily: "'Crimson Text', 'EB Garamond', 'Libre Baskerville', 'Times New Roman', 'Noto Serif JP', serif", fontWeight: 300, letterSpacing: '0.02em', lineHeight: 1.7, fontStyle: 'normal' }}>
-          {t("hero.subtitle")}
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4">
-          <a
-            href="#works"
-            className="px-10 py-4 text-white font-medium transform hover:scale-105 transition-all duration-300 relative overflow-hidden group cursor-pointer"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0 blur-[32px]"
             style={{
-              backgroundColor: '#5865F2',
-              pointerEvents: 'auto'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#4752C4';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#5865F2';
+              backgroundImage: `url(${getAssetPath(
+                "/images/backgrounds/hero_background.png"
+              )})`,
             }}
           >
-            <span className="relative z-10">{t("hero.explore_artists")}</span>
-            <svg className="w-5 h-5 ml-2 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-            </svg>
-          </a>
-          <a
-            href="#why-choose-us"
-            className="px-10 py-4 bg-transparent text-white font-medium transform hover:scale-105 transition-all duration-300 relative overflow-hidden group cursor-pointer"
+            {/* Static particles/stars effect */}
+            <div className="absolute inset-0 opacity-30">
+              {staticParticles.map((particle, i) => (
+                <div
+                  key={i}
+                  className="absolute w-1 h-1 bg-white rounded-full animate-pulse"
+                  style={{
+                    left: particle.left,
+                    top: particle.top,
+                    animationDelay: particle.delay,
+                    animationDuration: particle.duration,
+                  }}
+                />
+              ))}
+            </div>
+            {/* Moving gradient overlay - 可选择保留或移除 */}
+            <div
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/10 to-transparent animate-pulse"
+              style={{ animation: "float 8s ease-in-out infinite" }}
+            />
+          </div>
+        </div>
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black z-10"></div>
+
+        {/* Clickable background layer */}
+        <div
+          className="absolute inset-0 cursor-pointer"
+          style={{
+            zIndex: 15,
+            backgroundColor: "transparent",
+            pointerEvents: "auto",
+          }}
+          onClick={openModal}
+        ></div>
+
+        {/* Hero Content - Repositioned to left-middle-upper with adjusted sizes */}
+        <div
+          className="container mx-auto px-6 h-full flex flex-col justify-center items-start relative text-left"
+          style={{
+            marginTop: "-8vh",
+            zIndex: 20,
+            pointerEvents: "none",
+          }}
+        >
+          <h1
+            className="text-[clamp(6rem,16vw,12rem)] leading-tight mb-6 animate-float"
             style={{
-              border: '2px solid #5865F2',
-              pointerEvents: 'auto'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgba(88, 101, 242, 0.2)';
-              e.currentTarget.style.borderColor = '#4752C4';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'transparent';
-              e.currentTarget.style.borderColor = '#5865F2';
+              fontFamily:
+                "'Great Vibes', 'Alex Brush', 'Pinyon Script', cursive",
+              fontWeight: 400,
+              letterSpacing: "0.02em",
+              color: "white",
+              textShadow: "2px 2px 8px rgba(0, 0, 0, 0.7)",
             }}
           >
-            <span className="relative z-10">{t("hero.latest_releases")}</span>
-            <svg className="w-5 h-5 ml-2 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-            </svg>
-          </a>
+            Dulcets
+          </h1>
+          <p
+            className="text-[clamp(1.2rem,3.5vw,2rem)] text-gray-100 max-w-4xl mb-10 animate-fade-in opacity-85 font-classical"
+            style={{
+              fontFamily:
+                "'Crimson Text', 'EB Garamond', 'Libre Baskerville', 'Times New Roman', 'Noto Serif JP', serif",
+              fontWeight: 300,
+              letterSpacing: "0.02em",
+              lineHeight: 1.7,
+              fontStyle: "normal",
+            }}
+          >
+            {t("hero.subtitle")}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <a
+              href="#works"
+              className="px-10 py-4 text-white font-medium transform hover:scale-105 transition-all duration-300 relative overflow-hidden group cursor-pointer"
+              style={{
+                backgroundColor: "#5865F2",
+                pointerEvents: "auto",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "#4752C4";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "#5865F2";
+              }}
+            >
+              <span className="relative z-10">{t("hero.explore_artists")}</span>
+              <svg
+                className="w-5 h-5 ml-2 inline-block"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 5l7 7-7 7"
+                ></path>
+              </svg>
+            </a>
+            <a
+              href="#why-choose-us"
+              className="px-10 py-4 bg-transparent text-white font-medium transform hover:scale-105 transition-all duration-300 relative overflow-hidden group cursor-pointer"
+              style={{
+                border: "2px solid #5865F2",
+                pointerEvents: "auto",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor =
+                  "rgba(88, 101, 242, 0.2)";
+                e.currentTarget.style.borderColor = "#4752C4";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "transparent";
+                e.currentTarget.style.borderColor = "#5865F2";
+              }}
+            >
+              <span className="relative z-10">{t("hero.latest_releases")}</span>
+              <svg
+                className="w-5 h-5 ml-2 inline-block"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 5l7 7-7 7"
+                ></path>
+              </svg>
+            </a>
+          </div>
         </div>
-      </div>
       </section>
     </>
   );
