@@ -12,18 +12,18 @@
         "duration": "3:42"
       },
       {
-        "id": "jpop-2",
-        "fileName": "pop/normalized_pops2.flac",
-        "displayName": "POPS_2",
-        "artist": "Dulcets",
-        "duration": "1:44"
-      },
-      {
         "id": "jpop-3",
         "fileName": "pop/normalized_pops1.flac",
         "displayName": "POPS_1",
         "artist": "Dulcets",
         "duration": "2:02"
+      },
+      {
+        "id": "jpop-2",
+        "fileName": "pop/normalized_pops2.flac",
+        "displayName": "POPS_2",
+        "artist": "Dulcets",
+        "duration": "1:44"
       },
       {
         "id": "jpop-4",
@@ -33,18 +33,18 @@
         "duration": "4:00"
       },
       {
-        "id": "jpop-5",
-        "fileName": "pop/normalized_80年代pops.flac",
-        "displayName": "80年代 POPS",
-        "artist": "Dulcets",
-        "duration": "1:39"
-      },
-      {
         "id": "jpop-6",
         "fileName": "pop/normalized_pops4.flac",
         "displayName": "POPS_4",
         "artist": "Dulcets",
         "duration": "2:18"
+      },
+      {
+        "id": "jpop-5",
+        "fileName": "pop/normalized_80年代pops.flac",
+        "displayName": "80年代 POPS",
+        "artist": "Dulcets",
+        "duration": "1:39"
       },
       {
         "id": "jpop-7",
