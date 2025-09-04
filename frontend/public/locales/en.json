@@ -3,7 +3,7 @@
   "information": "Information",
   "loading": "Loading",
   "hero": {
-    "subtitle": "Long ago, there existed melodies that lived only in dreams, called Dulcets. Their tones were as pure as stars, healing people's hearts and guiding those who sought beautiful sounds.",
+    "subtitle": "Long time ago, there existed melodies that lived only in dreams, called Dulcets. Their tones were as pure as stars, healing people's hearts and guiding those who sought beautiful sounds.",
     "explore_artists": "Our Works",
     "latest_releases": "Our Services"
   },
@@ -347,7 +347,8 @@
     "title": "Contact",
     "visit_us": "Visit Us",
     "get_quote": "Get a Quote",
-    "quote_description": "Ready to start your project? Reach out to us for a personalized quote and consultation.",
+    "quote_description_1": "Ready to start your project?",
+    "quote_description_2": "Reach out to us for a personalized quote and consultation.",
     "send_email": "Send us an Email",
     "copy_email": "Copy Email Address",
     "follow_us": "Follow Us",

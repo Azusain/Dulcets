@@ -48,7 +48,9 @@ export default function ContactSection({ t }: ComponentWithTranslation) {
                   {t("contact.get_quote")}
                 </h3>
                 <p className="text-gray-700 mb-8 max-w-2xl mx-auto">
-                  {t("contact.quote_description")}
+                  {t("contact.quote_description_1")}
+                  <br />
+                  {t("contact.quote_description_2")}
                 </p>
                 <div className="text-2xl font-medium text-black my-12">
                   dulcets.info@gmail.com
