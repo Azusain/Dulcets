@@ -15,10 +15,10 @@ set "FIRST=1"
 
 REM Process folders in desired order: J-POP, J-ROCK, IDOL, BGM (merged), EDM
 REM J-POP
-call :ProcessCategory "pop" "jpop" "J-POP"
+call :ProcessCategory "pop" "pops" "POPS"
 
 REM J-ROCK  
-call :ProcessCategory "Rock" "jrock" "J-ROCK"
+call :ProcessCategory "Rock" "rock" "ROCK"
 
 REM IDOL
 call :ProcessCategory "idol" "idol" "IDOL"
