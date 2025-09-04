@@ -69,24 +69,10 @@
       },
       {
         "id": "jrock-2",
-        "fileName": "Rock/normalized_Rock_2_part1.flac",
-        "displayName": "Rock_2_part1",
+        "fileName": "Rock/normalized_Rock_2.flac",
+        "displayName": "Rock_2",
         "artist": "Dulcets",
         "duration": "0:34"
-      },
-      {
-        "id": "jrock-3",
-        "fileName": "Rock/normalized_Rock_2_part2.flac",
-        "displayName": "Rock_2_part2",
-        "artist": "Dulcets",
-        "duration": "1:13"
-      },
-      {
-        "id": "jrock-4",
-        "fileName": "Rock/normalized_Rock_2_part3.flac",
-        "displayName": "Rock_2_part3",
-        "artist": "Dulcets",
-        "duration": "0:36"
       },
       {
         "id": "jrock-5",
