@@ -19,15 +19,6 @@ function detectBasePath(): string {
   // TODO: basepath
   const detectedBasePath = needsBasePath ? "" : "";
 
-  console.log("detectBasePath:", {
-    hostname,
-    pathname,
-    isGitHubPages,
-    isInDulcetsPath,
-    needsBasePath,
-    detectedBasePath,
-  });
-
   return detectedBasePath;
 }
 
@@ -39,7 +30,6 @@ export function useAssetPath() {
     // Re-detect on mount to ensure accuracy (only run once)
     const detected = detectBasePath();
     setBasePath(detected);
-    console.log("useAssetPath: basePath set to:", detected);
   }, []); // Empty dependency array to run only once
 
   const getAssetPath = (path: string) => {
@@ -47,7 +37,6 @@ export function useAssetPath() {
     const cleanPath = path.startsWith("/") ? path : `/${path}`;
     const fullPath = `${basePath}${cleanPath}`;
 
-    console.log(`getAssetPath: ${path} -> ${fullPath}`);
     return fullPath;
   };
 

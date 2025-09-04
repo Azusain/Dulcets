@@ -84,17 +84,67 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
     { id: "edm", name: "EDM" },
   ];
 
+  const GENRE_FONT_CONFIG: Record<
+    string,
+    {
+      fontSize: string;
+      position: {
+        top?: string;
+        bottom?: string;
+        left?: string;
+        right?: string;
+      };
+      transform?: string;
+      letterSpacing?: string;
+      fontWeight?: number;
+    }
+  > = {
+    pops: {
+      fontSize: "5rem", // 最大
+      position: { top: "50%", left: "50%" },
+      transform: "translate(-50%, -50%)",
+      letterSpacing: "0.04em",
+      fontWeight: 500,
+    },
+    rock: {
+      fontSize: "5rem", // 最大
+      position: { top: "50%", left: "50%" },
+      transform: "translate(-50%, -50%)",
+      letterSpacing: "0.04em",
+      fontWeight: 500,
+    },
+    idol: {
+      fontSize: "5rem", // 最大
+      position: { top: "50%", left: "50%" },
+      transform: "translate(-50%, -50%)",
+      letterSpacing: "0.04em",
+      fontWeight: 500,
+    },
+    bgm: {
+      fontSize: "5rem", // 最大
+      position: { top: "50%", left: "50%" },
+      transform: "translate(-50%, -50%)",
+      letterSpacing: "0.04em",
+      fontWeight: 500,
+    },
+    edm: {
+      fontSize: "5rem", // 最大
+      position: { top: "50%", left: "50%" },
+      transform: "translate(-50%, -50%)",
+      letterSpacing: "0.04em",
+      fontWeight: 500,
+    },
+  };
+
   // Load audio configuration
   useEffect(() => {
     const loadAudioConfig = async () => {
       try {
         const configUrl = getAssetPath("/audio/audio-config.json");
-        console.log("Loading config from:", configUrl);
         const response = await fetch(configUrl);
 
         if (response.ok) {
           const config = await response.json();
-          console.log("Config loaded:", config);
           setGenres(config);
 
           // Set first track of selected genre as current only if we don't have a current track
@@ -166,7 +216,6 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
         // Event listeners
         const handleReady = () => {
           if (!isComponentMounted) return;
-          console.log("WaveSurfer ready");
           setIsLoading(false);
           setDuration(wavesurferInstance?.getDuration() || 0);
 
@@ -223,7 +272,6 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
 
         // Load audio
         const audioUrl = getAssetPath(`/audio/${currentTrack.fileName}`);
-        console.log("Loading audio:", audioUrl);
         setIsLoading(true);
 
         if (isComponentMounted) {
@@ -343,8 +391,6 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
 
     // Prevent scroll event from bubbling to parent elements but allow internal scrolling
     const handleWheel = (e: WheelEvent) => {
-      console.log("Handling scroll on playlist area"); // Debug
-
       // Find the scrollable container
       const scrollContainer = playlistRef.current;
       if (!scrollContainer) {
@@ -358,7 +404,6 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
 
       if (!isContentScrollable) {
         // Content doesn't need scrolling, allow page scroll
-        console.log("Content not scrollable, allowing page scroll");
         return;
       }
 
@@ -413,14 +458,11 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
       capture: true,
     });
 
-    console.log("Added conditional scroll prevention listeners"); // Debug
-
     return () => {
       playlistArea.removeEventListener("wheel", handleWheel, { capture: true });
       playlistArea.removeEventListener("touchmove", handleTouchMove, {
         capture: true,
       });
-      console.log("Removed conditional scroll prevention listeners"); // Debug
     };
   }, [genres[selectedGenre]?.tracks]); // Re-run when tracks change to check scrollability
 
@@ -562,21 +604,52 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
       <div className="grid md:grid-cols-3 gap-12 items-start">
         {/* Left: Album Cover and Info */}
         <div className="md:col-span-1 flex flex-col">
-          <div className="aspect-square bg-gray-100 mb-6">
+          <div className="aspect-square bg-gray-100 mb-6 relative">
             {currentGenre?.albumCover ? (
-              <img
-                src={getAssetPath(currentGenre.albumCover)}
-                alt={currentGenre.genreName}
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  // Fallback to gradient background if image fails to load
-                  (e.target as HTMLImageElement).style.display = "none";
-                }}
-              />
+              <>
+                <img
+                  src={getAssetPath(currentGenre.albumCover)}
+                  alt={currentGenre.genreName}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    // Fallback to gradient background if image fails to load
+                    (e.target as HTMLImageElement).style.display = "none";
+                  }}
+                  style={{ boxShadow: "0 0 15px rgba(0, 0, 0, 0.3)" }}
+                />
+                {/* Genre name overlay */}
+                <div className="absolute inset-0">
+                  <div
+                    className="absolute"
+                    style={{
+                      fontFamily:
+                        "'Crimson Text', 'EB Garamond', 'Libre Baskerville', 'Times New Roman', 'Noto Serif JP', serif",
+                      fontStyle: "normal",
+                      color: "rgba(255, 255, 255, 0.7)", // 半透明白色
+                      // 应用当前选中类型的配置
+                      fontSize:
+                        GENRE_FONT_CONFIG[selectedGenre]?.fontSize || "3rem",
+                      fontWeight:
+                        GENRE_FONT_CONFIG[selectedGenre]?.fontWeight || 300,
+                      letterSpacing:
+                        GENRE_FONT_CONFIG[selectedGenre]?.letterSpacing ||
+                        "0.05em",
+                      transform:
+                        GENRE_FONT_CONFIG[selectedGenre]?.transform ||
+                        "translate(-50%, -50%)",
+                      ...GENRE_FONT_CONFIG[selectedGenre]?.position,
+                    }}
+                  >
+                    {GENRE_OPTIONS.find((g) => g.id === selectedGenre)?.name ||
+                      selectedGenre.toUpperCase()}
+                  </div>
+                </div>
+              </>
             ) : (
               <div className="w-full h-full bg-gradient-to-br from-purple-400 to-blue-500 flex items-center justify-center">
                 <div className="text-white text-4xl font-bold">
-                  {currentGenre?.genreName || "MUSIC"}
+                  {GENRE_OPTIONS.find((g) => g.id === selectedGenre)?.name ||
+                    selectedGenre.toUpperCase()}
                 </div>
               </div>
             )}
