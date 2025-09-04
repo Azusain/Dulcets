@@ -89,12 +89,10 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
     const loadAudioConfig = async () => {
       try {
         const configUrl = getAssetPath("/audio/audio-config.json");
-        console.log("Loading config from:", configUrl);
         const response = await fetch(configUrl);
 
         if (response.ok) {
           const config = await response.json();
-          console.log("Config loaded:", config);
           setGenres(config);
 
           // Set first track of selected genre as current only if we don't have a current track
@@ -166,7 +164,6 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
         // Event listeners
         const handleReady = () => {
           if (!isComponentMounted) return;
-          console.log("WaveSurfer ready");
           setIsLoading(false);
           setDuration(wavesurferInstance?.getDuration() || 0);
 
@@ -223,7 +220,6 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
 
         // Load audio
         const audioUrl = getAssetPath(`/audio/${currentTrack.fileName}`);
-        console.log("Loading audio:", audioUrl);
         setIsLoading(true);
 
         if (isComponentMounted) {
@@ -343,8 +339,6 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
 
     // Prevent scroll event from bubbling to parent elements but allow internal scrolling
     const handleWheel = (e: WheelEvent) => {
-      console.log("Handling scroll on playlist area"); // Debug
-
       // Find the scrollable container
       const scrollContainer = playlistRef.current;
       if (!scrollContainer) {
@@ -358,7 +352,6 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
 
       if (!isContentScrollable) {
         // Content doesn't need scrolling, allow page scroll
-        console.log("Content not scrollable, allowing page scroll");
         return;
       }
 
@@ -413,14 +406,11 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
       capture: true,
     });
 
-    console.log("Added conditional scroll prevention listeners"); // Debug
-
     return () => {
       playlistArea.removeEventListener("wheel", handleWheel, { capture: true });
       playlistArea.removeEventListener("touchmove", handleTouchMove, {
         capture: true,
       });
-      console.log("Removed conditional scroll prevention listeners"); // Debug
     };
   }, [genres[selectedGenre]?.tracks]); // Re-run when tracks change to check scrollability
 
