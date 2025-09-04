@@ -64,17 +64,10 @@ const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
       try {
         // Use getAssetPath to handle different deployment paths
         const configUrl = getAssetPath("/audio/audio-config.json");
-        console.log("Attempting to load audio config from:", configUrl);
         const response = await fetch(configUrl);
-        console.log(
-          "Audio config response status:",
-          response.status,
-          response.statusText
-        );
 
         if (response.ok && isMounted) {
           const config = await response.json();
-          console.log("Audio config loaded successfully:", config);
           setAudioConfig(config);
         } else if (!response.ok) {
           console.error("Failed to fetch audio config. Response:", {

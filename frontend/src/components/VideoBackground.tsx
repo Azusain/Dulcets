@@ -7,11 +7,9 @@ import Hls from "hls.js";
 export default function VideoBackground() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const hlsRef = useRef<Hls | null>(null);
-  
+
   // Get HLS video source
   const videoSrc = getAssetPath("/hls/hero-background.m3u8");
-  
-  console.log('VideoBackground - HLS Source:', videoSrc);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -57,38 +55,33 @@ export default function VideoBackground() {
         hls.attachMedia(video);
 
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
-          console.log('HLS manifest parsed, starting video');
           video.play().catch(console.error);
         });
 
         hls.on(Hls.Events.ERROR, (event, data) => {
-          console.error('HLS error:', event, data);
+          console.error("HLS error:", event, data);
           if (data.fatal) {
             switch (data.type) {
               case Hls.ErrorTypes.NETWORK_ERROR:
-                console.log('Network error, trying to recover...');
                 hls.startLoad();
                 break;
               case Hls.ErrorTypes.MEDIA_ERROR:
-                console.log('Media error, trying to recover...');
                 hls.recoverMediaError();
                 break;
               default:
-                console.log('Fatal error, destroying HLS instance');
                 hls.destroy();
                 break;
             }
           }
         });
-      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
         // Safari native HLS support
-        console.log('Using native HLS support');
         video.src = videoSrc;
-        video.addEventListener('loadedmetadata', () => {
+        video.addEventListener("loadedmetadata", () => {
           video.play().catch(console.error);
         });
       } else {
-        console.error('HLS is not supported in this browser');
+        console.error("HLS is not supported in this browser");
       }
     };
 
@@ -113,15 +106,13 @@ export default function VideoBackground() {
         playsInline
         preload="metadata"
         onError={(e) => {
-          console.error('Video failed to load:', e.currentTarget.error);
+          console.error("Video failed to load:", e.currentTarget.error);
         }}
-        onCanPlay={() => {
-          console.log('Video can play');
-        }}
+        onCanPlay={() => {}}
       >
         Your browser does not support HLS video streaming.
       </video>
-      
+
       {/* Debug info will be in console */}
     </>
   );
