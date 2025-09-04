@@ -25,11 +25,11 @@
   "deployment": {
     "production": {
       "domain": "https://azusain.github.io",
-      "basePath": "/Dulcets"
+      "basePath": ""
     },
     "github": {
       "domain": "https://azusain.github.io",
-      "basePath": "/Dulcets"
+      "basePath": ""
     },
     "development": {
       "domain": "http://localhost:3000",
