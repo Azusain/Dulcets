@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import AlbumPlayer from "./AlbumPlayer";
-import VideoPlayer from "./VideoPlayer";
 import { ServiceCard } from "./ServiceCard";
 import { useAssetPath } from "@/hooks/useAssetPath";
 import works from "../../public/service/works.json";

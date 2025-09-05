@@ -123,7 +123,7 @@
   "works": {
     "title": "我们的作品",
     "read_more": "阅读更多",
-    "lead_description": "探索我们的音乐作品和视频内容合集。从原创作品到翻唱歌曲，享受我们多样化的创意作品。"
+    "lead_description": "探索我们的音乐作品和视频内容合集。享受我们多样化的原创作品。"
   },
   "pricing": {
     "title": "服务价位",
@@ -352,7 +352,7 @@
     "send_email": "发送邮件给我们",
     "copy_email": "复制邮箱地址",
     "follow_us": "关注我们",
-    "follow_description": "保持联系，在我们的社交平台上查看我们的最新作品。",
+    "follow_description": "在我们的社交平台上查看我们的最新作品。",
     "email_copied": "邮箱地址已复制！",
     "opening_email_app": "正在打开您的默认邮件应用程序...",
     "description_1": "请与我们联系您的下一个项目。",
