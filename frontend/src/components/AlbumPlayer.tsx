@@ -617,33 +617,6 @@ const AlbumPlayer: React.FC<AlbumPlayerProps> = ({ className = "", t }) => {
                   }}
                   style={{ boxShadow: "0 0 15px rgba(0, 0, 0, 0.3)" }}
                 />
-                {/* Genre name overlay */}
-                <div className="absolute inset-0">
-                  <div
-                    className="absolute"
-                    style={{
-                      fontFamily:
-                        "'Crimson Text', 'EB Garamond', 'Libre Baskerville', 'Times New Roman', 'Noto Serif JP', serif",
-                      fontStyle: "normal",
-                      color: "rgba(255, 255, 255, 0.7)", // 半透明白色
-                      // 应用当前选中类型的配置
-                      fontSize:
-                        GENRE_FONT_CONFIG[selectedGenre]?.fontSize || "3rem",
-                      fontWeight:
-                        GENRE_FONT_CONFIG[selectedGenre]?.fontWeight || 300,
-                      letterSpacing:
-                        GENRE_FONT_CONFIG[selectedGenre]?.letterSpacing ||
-                        "0.05em",
-                      transform:
-                        GENRE_FONT_CONFIG[selectedGenre]?.transform ||
-                        "translate(-50%, -50%)",
-                      ...GENRE_FONT_CONFIG[selectedGenre]?.position,
-                    }}
-                  >
-                    {GENRE_OPTIONS.find((g) => g.id === selectedGenre)?.name ||
-                      selectedGenre.toUpperCase()}
-                  </div>
-                </div>
               </>
             ) : (
               <div className="w-full h-full bg-gradient-to-br from-purple-400 to-blue-500 flex items-center justify-center">
