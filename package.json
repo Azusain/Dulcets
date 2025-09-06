@@ -1,0 +1,10 @@
+{
+  "name": "dulcets-automation",
+  "version": "1.0.0",
+  "scripts": {
+    "sync-works": "node tools/sync-works.js",
+    "fetch-youtube": "go run tools/youtube-fetcher.go -full-data",
+    "update-all": "npm run fetch-youtube && npm run sync-works"
+  },
+  "type": "commonjs"
+}
