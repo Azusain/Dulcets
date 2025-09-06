@@ -59,17 +59,33 @@ export default function VideoBackground() {
         });
 
         hls.on(Hls.Events.ERROR, (event, data) => {
-          console.error("HLS error:", event, data);
+          // 只记录严重错误，减少控制台噪音
           if (data.fatal) {
+            console.warn("HLS fatal error:", data.type, data.details);
             switch (data.type) {
               case Hls.ErrorTypes.NETWORK_ERROR:
-                hls.startLoad();
+                // 网络错误时静默重试
+                try {
+                  hls.startLoad();
+                } catch (e) {
+                  // 忽略重试失败
+                }
                 break;
               case Hls.ErrorTypes.MEDIA_ERROR:
-                hls.recoverMediaError();
+                // 媒体错误时尝试恢复
+                try {
+                  hls.recoverMediaError();
+                } catch (e) {
+                  // 忽略恢复失败
+                }
                 break;
               default:
-                hls.destroy();
+                // 其他错误静默销毁
+                try {
+                  hls.destroy();
+                } catch (e) {
+                  // 忽略销毁失败
+                }
                 break;
             }
           }

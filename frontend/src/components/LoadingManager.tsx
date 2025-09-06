@@ -10,7 +10,7 @@ interface LoadingManagerProps {
   loadingText: string;
 }
 
-
+// 使用模块级变量跟踪首次加载状态
 let isInitialLoad = true;
 
 export default function LoadingManager({
@@ -20,22 +20,27 @@ export default function LoadingManager({
   const { isLoading } = useLoading();
   const { getAssetPath } = useAssetPath();
   const router = useRouter();
-  const [shouldShowLoading, setShouldShowLoading] = useState(true); // 初始为true确保立即显示
+  const [shouldShowLoading, setShouldShowLoading] = useState(true);
+  const [isInitialPageLoad, setIsInitialPageLoad] = useState(true);
 
   useEffect(() => {
-
     if (isInitialLoad) {
       setShouldShowLoading(true);
+      setIsInitialPageLoad(true);
     }
   }, []);
 
   useEffect(() => {
     if (isInitialLoad && isLoading) {
+      // 只有初始加载时才显示动画
       setShouldShowLoading(true);
+      setIsInitialPageLoad(true);
       isInitialLoad = false;
-    } else if (!isLoading) {
+    } else {
+      // 不管是否isLoading，都不显示动画
       setShouldShowLoading(false);
-      // 加载完成后直接操作DOM确保内容显示
+      setIsInitialPageLoad(false);
+      // 确保内容显示
       const mainContent = document.getElementById('main-content');
       if (mainContent) {
         mainContent.style.opacity = '1';
@@ -44,10 +49,10 @@ export default function LoadingManager({
     }
   }, [isLoading]);
 
-
+  // 监听页面刷新 - 重置初始加载状态
   useEffect(() => {
     const handleBeforeUnload = () => {
-
+      // 页面刷新时重置状态
       isInitialLoad = true;
     };
 
