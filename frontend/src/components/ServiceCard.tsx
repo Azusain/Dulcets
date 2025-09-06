@@ -6,7 +6,7 @@ import { getAssetPath } from "../utils/assetPath";
 interface ServiceCardProps {
   image: string;
   title: string;
-  description: string;
+  date: string;
   href?: string;
   delay?: number;
 }
@@ -14,7 +14,7 @@ interface ServiceCardProps {
 export const ServiceCard = ({
   image,
   title,
-  description,
+  date,
   href = "#",
   delay = 0,
 }: ServiceCardProps) => {
@@ -60,13 +60,13 @@ export const ServiceCard = ({
                 : "transform translate-y-full opacity-0"
             }`}
           >
-            <div className="space-y-3">
-              <h3 className="text-lg font-bold text-white leading-tight drop-shadow-lg">
+            <div className="space-y-2">
+              <p className="text-[15px] text-gray-100/90 font-medium drop-shadow-md">
+                {date} Release
+              </p>
+              <h3 className="text-[20px] font-bold text-white leading-tight drop-shadow-lg">
                 {title}
               </h3>
-              <p className="text-sm text-white/90 leading-relaxed drop-shadow-md">
-                {description}
-              </p>
             </div>
           </div>
 
