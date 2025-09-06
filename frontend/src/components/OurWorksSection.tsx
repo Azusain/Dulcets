@@ -150,6 +150,8 @@ const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
                   description={content.excerpt}
                   href={post.videoUrl}
                   delay={index * 100}
+                  viewCount={post.viewCount}
+                  likeCount={post.likeCount}
                 />
               );
             })}
