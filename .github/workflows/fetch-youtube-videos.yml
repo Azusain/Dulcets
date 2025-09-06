@@ -1,0 +1,77 @@
+name: fetch YouTube videos
+
+on:
+  schedule:
+    # run at 12:00 PM JST (3:00 AM UTC) daily
+    - cron: '0 3 * * *'
+    # run at 12:00 AM JST (3:00 PM UTC previous day) daily
+    - cron: '0 15 * * *'
+  workflow_dispatch: # allows manual triggering
+    inputs:
+      force_update:
+        description: 'force update even if no new videos'
+        required: false
+        default: 'false'
+        type: boolean
+
+jobs:
+  fetch-videos:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+        with:
+          # use personal access token to bypass branch protection
+          token: ${{ secrets.PAT_TOKEN }}
+          fetch-depth: 0
+
+      - name: setup node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: install dependencies
+        working-directory: ./frontend
+        run: npm ci
+
+      - name: fetch YouTube videos
+        working-directory: ./frontend
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: npm run fetch:youtube
+
+      - name: check for changes
+        id: verify-changed-files
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: commit changes
+        if: steps.verify-changed-files.outputs.changed == 'true' || github.event.inputs.force_update == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add work.json
+          git commit -m "auto-update: fetch latest YouTube videos [$(date +'%Y-%m-%d %H:%M:%S')]"
+          # push directly to main branch using PAT token
+          git push origin main
+
+      - name: summary
+        run: |
+          if [ -f work.json ]; then
+            video_count=$(jq '.videos | length' work.json)
+            last_updated=$(jq -r '.lastUpdated' work.json)
+            echo "## YouTube videos update completed ✅" >> $GITHUB_STEP_SUMMARY
+            echo "- **videos found:** $video_count" >> $GITHUB_STEP_SUMMARY
+            echo "- **last updated:** $last_updated" >> $GITHUB_STEP_SUMMARY
+            echo "- **changes:** ${{ steps.verify-changed-files.outputs.changed }}" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## YouTube videos update failed ❌" >> $GITHUB_STEP_SUMMARY
+            echo "work.json file was not generated" >> $GITHUB_STEP_SUMMARY
+          fi

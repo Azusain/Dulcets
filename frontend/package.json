@@ -20,7 +20,8 @@
     "translate:inconsistent:execute": "node scripts/auto-translate-i18n.js --inconsistent --execute",
     "generate-seo": "node scripts/generate-sitemap.js",
     "check:deps": "node scripts/check-unused-dependencies.js",
-    "fix:lint": "node scripts/fix-lint-issues.js"
+    "fix:lint": "node scripts/fix-lint-issues.js",
+    "fetch:youtube": "node -r ts-node/register tools/fetch-youtube-videos.ts"
   },
   "deployment": {
     "production": {
@@ -56,6 +57,7 @@
     "eslint": "9.33.0",
     "eslint-config-next": "15.4.6",
     "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }
