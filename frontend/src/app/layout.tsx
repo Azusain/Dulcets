@@ -66,14 +66,9 @@ export default function RootLayout({
               pointer-events: auto !important;
             }
             
-            /* Navigation styles */
-            nav {
-              position: fixed !important;
-              top: 0 !important;
-              left: 0 !important;
-              right: 0 !important;
-              z-index: 9999 !important;
-              width: 100% !important;
+            /* Page transition effects for navigation */
+            #main-content {
+              transition: opacity 0.3s ease-in-out;
             }
           `,
           }}
