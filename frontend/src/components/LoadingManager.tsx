@@ -10,7 +10,7 @@ interface LoadingManagerProps {
   loadingText: string;
 }
 
-// 使用模块级变量跟踪首次加载状态
+
 let isInitialLoad = true;
 
 export default function LoadingManager({
@@ -20,23 +20,34 @@ export default function LoadingManager({
   const { isLoading } = useLoading();
   const { getAssetPath } = useAssetPath();
   const router = useRouter();
-  const [shouldShowLoading, setShouldShowLoading] = useState(false);
+  const [shouldShowLoading, setShouldShowLoading] = useState(true); // 初始为true确保立即显示
 
   useEffect(() => {
-    // 只在初始加载时显示loading动画
+
+    if (isInitialLoad) {
+      setShouldShowLoading(true);
+    }
+  }, []);
+
+  useEffect(() => {
     if (isInitialLoad && isLoading) {
       setShouldShowLoading(true);
-      // 标记已经完成初始加载
       isInitialLoad = false;
-    } else {
+    } else if (!isLoading) {
       setShouldShowLoading(false);
+      // 加载完成后直接操作DOM确保内容显示
+      const mainContent = document.getElementById('main-content');
+      if (mainContent) {
+        mainContent.style.opacity = '1';
+        mainContent.style.pointerEvents = 'auto';
+      }
     }
   }, [isLoading]);
 
-  // 监听页面刷新 - 重置初始加载状态
+
   useEffect(() => {
     const handleBeforeUnload = () => {
-      // 页面刷新时重置状态
+
       isInitialLoad = true;
     };
 
@@ -52,7 +63,7 @@ export default function LoadingManager({
       className="min-h-screen text-white"
       style={{ background: "#000000", minHeight: "100vh" }}
     >
-      {/* Loading Animation - 只在首次访问时显示 */}
+
       {shouldShowLoading && (
         <div className="loading-screen fixed inset-0 z-[99999] flex items-center justify-center">
           <div className="text-center relative z-10">
@@ -108,11 +119,12 @@ export default function LoadingManager({
         id="main-content"
         className="main-content-react"
         style={{
-          opacity: shouldShowLoading ? 0 : 1,
+          opacity: shouldShowLoading ? '0' : '1',
           visibility: "visible",
           transition: shouldShowLoading ? "none" : "opacity 0.8s ease-out 0.2s",
           backgroundColor: "transparent",
           zIndex: shouldShowLoading ? 1 : "auto",
+          pointerEvents: shouldShowLoading ? 'none' : 'auto',
         }}
       >
         {children}
