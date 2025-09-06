@@ -115,39 +115,12 @@ const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
         <div className="border-t border-gray-200 pt-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {works.map((post, index) => {
-              // Get localized title and excerpt based on current language
-              const getLocalizedContent = () => {
-                const currentLang =
-                  t("nav.home") === "Home"
-                    ? "en"
-                    : t("nav.home") === "ホーム"
-                    ? "jp"
-                    : "zh";
-
-                return {
-                  title:
-                    currentLang === "en"
-                      ? post.titleEn
-                      : currentLang === "jp"
-                      ? post.titleJp
-                      : post.title,
-                  excerpt:
-                    currentLang === "en"
-                      ? post.excerptEn
-                      : currentLang === "jp"
-                      ? post.excerptJp
-                      : post.excerpt,
-                };
-              };
-
-              const content = getLocalizedContent();
-
               return (
                 <ServiceCard
                   key={index}
                   image={post.image}
-                  title={content.title}
-                  description={content.excerpt}
+                  title={post.title}
+                  date={post.date}
                   href={post.videoUrl}
                   delay={index * 100}
                 />
