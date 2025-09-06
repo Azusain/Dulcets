@@ -1,79 +1,95 @@
-# YouTube videos auto-fetching system
+# YouTube Videos Auto-Fetching System
 
-这个系统会自动从 YouTube 频道获取视频信息并更新 `work.json` 文件。
+This system automatically fetches video information from a YouTube channel and updates the `work.json` file.
 
-## 设置步骤
+## Tech Stack
 
-### 1. 获取 YouTube API key
+- **Go Program**: `tools/youtube-fetcher.go` - Main data fetching program
+- **GitHub Actions**: Automated execution and scheduled updates  
+- **YouTube Data API v3**: Video data retrieval
 
-1. 访问 [Google Cloud Console](https://console.cloud.google.com/)
-2. 创建一个新项目或选择现有项目
-3. 启用 YouTube Data API v3
-4. 创建 API key（限制为 YouTube Data API v3）
+## Setup Instructions
 
-### 2. 获取 YouTube 频道 ID
+### 1. Get YouTube API Key
 
-由于脚本中硬编码了频道 ID `UCfM3zsQsOnfWNUppiycmBuw`，你需要确认这是否是正确的 @Dulcets 频道 ID。
+1. Visit [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select an existing one
+3. Enable YouTube Data API v3
+4. Create an API key (restrict to YouTube Data API v3)
 
-如果需要获取正确的频道 ID：
-1. 访问频道页面 https://www.youtube.com/@Dulcets
-2. 查看页面源码搜索 "channelId" 或使用浏览器开发者工具
-3. 或者使用 YouTube API 通过频道名称查询
+### 2. Set up GitHub Secrets
 
-### 3. 设置 GitHub Secrets
-
-在你的 GitHub 仓库中添加以下 secrets：
+Add the following secrets to your GitHub repository:
 
 #### YOUTUBE_API_KEY
-- 去 GitHub 仓库 → Settings → Secrets and variables → Actions
-- 点击 "New repository secret"
+- Go to GitHub repository → Settings → Secrets and variables → Actions
+- Click "New repository secret"
 - Name: `YOUTUBE_API_KEY`
-- Value: 你从 Google Cloud Console 获取的 API key
+- Value: Your API key from Google Cloud Console
 
-#### PAT_TOKEN (绕过分支保护)
-- 去 GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)
-- 点击 "Generate new token (classic)"
-- 设置 expiration 和所需权限：
-  - `repo` (完整访问权限)
-  - `workflow` (如果需要修改 workflow 文件)
-- 复制生成的 token
-- 在仓库的 Secrets 中添加：
+#### PAT_TOKEN (Bypass branch protection)
+- Go to GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)
+- Click "Generate new token (classic)"
+- Set expiration and required permissions:
+  - `repo` (Full control)
+  - `workflow` (If you need to modify workflow files)
+- Copy the generated token
+- Add to repository secrets:
   - Name: `PAT_TOKEN`
-  - Value: 你刚才生成的 personal access token
+  - Value: Your personal access token
 
-### 4. 手动测试
+### 3. Manual Testing
 
-在设置完成后，你可以：
+After setup, you can:
 
-1. 手动运行 GitHub Action（去 Actions → fetch YouTube videos → Run workflow）
-2. 或者在本地测试：
+1. Run GitHub Action manually (Actions → fetch YouTube videos → Run workflow)
+2. Or test locally:
    ```bash
-   cd frontend
-   npm install
-   export YOUTUBE_API_KEY="your_api_key_here"
-   npm run fetch:youtube
+   cd tools
+   go run youtube-fetcher.go -api-key="your_key" -output="../work.json" -verbose
    ```
 
-### 5. 自动运行时间
+### 4. Automatic Schedule
 
-GitHub Action 会在以下时间自动运行（日本时间）：
-- 每天中午 12:00 (UTC 3:00)
-- 每天午夜 12:00 (UTC 15:00)
+GitHub Action runs automatically at (Japan Time):
+- Daily at 12:00 PM (UTC 3:00)
+- Daily at 12:00 AM (UTC 15:00)
 
-## 文件说明
+## File Structure
 
-- `tools/types.ts` - TypeScript 类型定义
-- `tools/fetch-youtube-videos.ts` - 主要的数据获取脚本
-- `.github/workflows/fetch-youtube-videos.yml` - GitHub Actions 工作流
-- `work.json` - 输出文件（将在项目根目录生成）
+- `tools/youtube-fetcher.go` - Main Go program for fetching YouTube data
+- `tools/go.mod` - Go module file
+- `.github/workflows/fetch-youtube-videos.yml` - GitHub Actions workflow
+- `work.json` - Output file (generated in project root)
 
-## work.json 结构
+## CLI Usage
+
+The Go program supports various command-line options:
+
+```bash
+# Basic usage with API key
+go run youtube-fetcher.go -api-key="your_key"
+
+# Custom output path and verbose logging
+go run youtube-fetcher.go -api-key="your_key" -output="../work.json" -verbose
+
+# Using environment variable
+YOUTUBE_API_KEY="your_key" go run youtube-fetcher.go -verbose
+
+# Different channel ID
+go run youtube-fetcher.go -api-key="your_key" -channel-id="CHANNEL_ID"
+
+# Show help
+go run youtube-fetcher.go -help
+```
+
+## work.json Structure
 
 ```json
 {
   "videos": [
     {
-      "title": "视频标题",
+      "title": "Video Title",
       "date": "2025-01-06",
       "viewCount": 12345,
       "url": "https://www.youtube.com/watch?v=VIDEO_ID",
@@ -84,11 +100,21 @@ GitHub Action 会在以下时间自动运行（日本时间）：
 }
 ```
 
-## 故障排除
+## API Features
 
-如果遇到问题：
+The `YouTubeFetcher` struct provides reusable methods:
 
-1. 检查 GitHub Actions 日志
-2. 确认 API key 有效且有足够配额
-3. 确认频道 ID 正确
-4. 检查 PAT token 权限是否足够
+- `GetChannelUploadsPlaylistID()` - Get channel's uploads playlist
+- `GetVideoIDsFromPlaylist(playlistID)` - Get all video IDs from playlist
+- `GetVideoDetails(videoIDs)` - Get detailed info for video IDs
+- `FetchAllVideos()` - Complete workflow to fetch all channel videos
+- `SaveToFile(workData)` - Save data to JSON file
+
+## Troubleshooting
+
+If you encounter issues:
+
+1. Check GitHub Actions logs
+2. Verify API key is valid and has sufficient quota
+3. Confirm channel ID is correct
+4. Check PAT token has sufficient permissions
