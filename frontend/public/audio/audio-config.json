@@ -5,13 +5,6 @@
     "albumCover": "/images/music/POPS.png",
     "tracks": [
       {
-        "id": "jpop-1",
-        "fileName": "pop/normalized_ケルトソング.flac",
-        "displayName": "ケルトソング",
-        "artist": "Dulcets",
-        "duration": "3:42"
-      },
-      {
         "id": "jpop-3",
         "fileName": "pop/normalized_pops1.flac",
         "displayName": "POPS_1",
@@ -52,6 +45,13 @@
         "displayName": "バラード",
         "artist": "Dulcets",
         "duration": "4:24"
+      },
+      {
+        "id": "jpop-1",
+        "fileName": "pop/normalized_ケルトソング.flac",
+        "displayName": "ケルトソング",
+        "artist": "Dulcets",
+        "duration": "3:42"
       }
     ]
   },
@@ -110,18 +110,18 @@
     "albumCover": "/images/music/IDOL.png",
     "tracks": [
       {
-        "id": "idol-1",
-        "fileName": "idol/normalized_アイドル風_1.flac",
-        "displayName": "アイドル風_1",
-        "artist": "Dulcets",
-        "duration": "4:34"
-      },
-      {
         "id": "idol-2",
         "fileName": "idol/normalized_アイドル風_2.flac",
-        "displayName": "アイドル風_2",
+        "displayName": "アイドル風_1",
         "artist": "Dulcets",
         "duration": "3:34"
+      },
+      {
+        "id": "idol-1",
+        "fileName": "idol/normalized_アイドル風_1.flac",
+        "displayName": "アイドル風_2",
+        "artist": "Dulcets",
+        "duration": "4:34"
       },
       {
         "id": "idol-3",
@@ -138,11 +138,25 @@
     "albumCover": "/images/music/BGM.png",
     "tracks": [
       {
-        "id": "bgm-1",
-        "fileName": "Game Music - BGM/normalized_Boss戦.flac",
-        "displayName": "Boss 戦",
+        "id": "bgm-11",
+        "fileName": "Game Music - BGM/normalized_アニメ風 BGM.flac",
+        "displayName": "アニメ風 BGM",
         "artist": "Dulcets",
-        "duration": "1:07"
+        "duration": "0:59"
+      },
+      {
+        "id": "bgm-7",
+        "fileName": "Game Music - BGM/normalized_Piano.flac",
+        "displayName": "Piano",
+        "artist": "Dulcets",
+        "duration": "3:06"
+      },
+      {
+        "id": "bgm-12",
+        "fileName": "Game Music - BGM/normalized_ケルト_demo.flac",
+        "displayName": "ケルト",
+        "artist": "Dulcets",
+        "duration": "0:59"
       },
       {
         "id": "bgm-2",
@@ -159,6 +173,48 @@
         "duration": "0:59"
       },
       {
+        "id": "bgm-6",
+        "fileName": "Game Music - BGM/normalized_PERSONA風.flac",
+        "displayName": "PERSONA 風",
+        "artist": "Dulcets",
+        "duration": "0:41"
+      },
+      {
+        "id": "bgm-13",
+        "fileName": "Game Music - BGM/normalized_ハリーポッター風.flac",
+        "displayName": "ハリーポッター風",
+        "artist": "Dulcets",
+        "duration": "1:42"
+      },
+      {
+        "id": "bgm-9",
+        "fileName": "Game Music - BGM/normalized_RPG_2.flac",
+        "displayName": "RPG_BGM_1",
+        "artist": "Dulcets",
+        "duration": "1:13"
+      },
+      {
+        "id": "bgm-8",
+        "fileName": "Game Music - BGM/normalized_RPG_1.flac",
+        "displayName": "RPG_BGM_2",
+        "artist": "Dulcets",
+        "duration": "0:38"
+      },
+      {
+        "id": "bgm-10",
+        "fileName": "Game Music - BGM/normalized_RPG_バトル_1.flac",
+        "displayName": "RPG_バトル_1",
+        "artist": "Dulcets",
+        "duration": "1:43"
+      },
+      {
+        "id": "bgm-1",
+        "fileName": "Game Music - BGM/normalized_Boss戦.flac",
+        "displayName": "RPG_Boss 戦",
+        "artist": "Dulcets",
+        "duration": "1:07"
+      },
+      {
         "id": "bgm-4",
         "fileName": "Game Music - BGM/normalized_Orchestra_1.flac",
         "displayName": "Orchestra_1",
@@ -171,62 +227,6 @@
         "displayName": "Orchestra_2",
         "artist": "Dulcets",
         "duration": "2:35"
-      },
-      {
-        "id": "bgm-6",
-        "fileName": "Game Music - BGM/normalized_PERSONA風.flac",
-        "displayName": "PERSONA 風",
-        "artist": "Dulcets",
-        "duration": "0:41"
-      },
-      {
-        "id": "bgm-7",
-        "fileName": "Game Music - BGM/normalized_Piano.flac",
-        "displayName": "Piano",
-        "artist": "Dulcets",
-        "duration": "3:06"
-      },
-      {
-        "id": "bgm-8",
-        "fileName": "Game Music - BGM/normalized_RPG_1.flac",
-        "displayName": "RPG_1",
-        "artist": "Dulcets",
-        "duration": "0:38"
-      },
-      {
-        "id": "bgm-9",
-        "fileName": "Game Music - BGM/normalized_RPG_2.flac",
-        "displayName": "RPG_2",
-        "artist": "Dulcets",
-        "duration": "1:13"
-      },
-      {
-        "id": "bgm-10",
-        "fileName": "Game Music - BGM/normalized_RPG_バトル_1.flac",
-        "displayName": "RPG_バトル_1",
-        "artist": "Dulcets",
-        "duration": "1:43"
-      },
-      {
-        "id": "bgm-11",
-        "fileName": "Game Music - BGM/normalized_アニメ風 BGM.flac",
-        "displayName": "アニメ風 BGM",
-        "artist": "Dulcets",
-        "duration": "0:59"
-      },
-      {
-        "id": "bgm-12",
-        "fileName": "Game Music - BGM/normalized_ケルト_demo.flac",
-        "displayName": "ケルト",
-        "artist": "Dulcets",
-        "duration": "0:59"
-      },
-      {
-        "id": "bgm-13",
-        "fileName": "Game Music - BGM/normalized_ハリーポッター風.flac",
-        "displayName": "ハリーポッター風",
-        "artist": "Dulcets",
-        "duration": "1:42"
       }
     ]
   },
