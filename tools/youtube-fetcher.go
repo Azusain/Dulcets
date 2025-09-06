@@ -15,16 +15,16 @@ import (
 
 // VideoMetadata represents video information for work.json
 type VideoMetadata struct {
-	Title       string `json:"title"`
-	Date        string `json:"date"`
-	ViewCount   int64  `json:"viewCount"`
-	LikeCount   int64  `json:"likeCount,omitempty"`
+	Title        string `json:"title"`
+	Date         string `json:"date"`
+	ViewCount    int64  `json:"viewCount"`
+	LikeCount    int64  `json:"likeCount,omitempty"`
 	CommentCount int64  `json:"commentCount,omitempty"`
-	Description string `json:"description,omitempty"`
-	Duration    string `json:"duration,omitempty"`
-	IsShort     bool   `json:"isShort,omitempty"`
-	URL         string `json:"url"`
-	Thumbnail   string `json:"thumbnail,omitempty"`
+	Description  string `json:"description,omitempty"`
+	Duration     string `json:"duration,omitempty"`
+	IsShort      bool   `json:"isShort,omitempty"`
+	URL          string `json:"url"`
+	Thumbnail    string `json:"thumbnail,omitempty"`
 }
 
 // WorkData represents the complete work.json structure
@@ -81,12 +81,12 @@ type YouTubeVideoResponse struct {
 
 // Config holds configuration for the YouTube fetcher
 type Config struct {
-	APIKey       string
-	ChannelID    string
-	Output       string
-	Verbose      bool
+	APIKey        string
+	ChannelID     string
+	Output        string
+	Verbose       bool
 	IncludeShorts bool
-	FullData     bool
+	FullData      bool
 }
 
 // YouTubeFetcher provides methods to fetch YouTube data
@@ -111,7 +111,7 @@ func (yf *YouTubeFetcher) log(format string, args ...interface{}) {
 
 func (yf *YouTubeFetcher) makeRequest(url string) ([]byte, error) {
 	yf.log("making request to: %s", url)
-	
+
 	resp, err := yf.client.Get(url)
 	if err != nil {
 		return nil, fmt.Errorf("request failed: %v", err)
@@ -205,14 +205,14 @@ func (yf *YouTubeFetcher) isShort(duration string) bool {
 	if !strings.HasPrefix(duration, "PT") {
 		return false
 	}
-	
+
 	duration = strings.TrimPrefix(duration, "PT")
-	
+
 	// If it contains hours, it's definitely not a short
 	if strings.Contains(duration, "H") {
 		return false
 	}
-	
+
 	// If it contains minutes, check if it's more than 1 minute
 	if strings.Contains(duration, "M") {
 		parts := strings.Split(duration, "M")
@@ -223,7 +223,7 @@ func (yf *YouTubeFetcher) isShort(duration string) bool {
 			}
 		}
 	}
-	
+
 	// If only seconds, check if it's 60 or less
 	if strings.HasSuffix(duration, "S") {
 		secPart := strings.TrimSuffix(duration, "S")
@@ -239,7 +239,7 @@ func (yf *YouTubeFetcher) isShort(duration string) bool {
 			return seconds <= 60
 		}
 	}
-	
+
 	return true // Default to short if duration is very short or unclear
 }
 
@@ -376,13 +376,13 @@ func (yf *YouTubeFetcher) SaveToFile(workData *WorkData) error {
 func main() {
 	// Command line flags
 	var (
-		apiKey       = flag.String("api-key", "", "YouTube Data API v3 key")
-		channelID    = flag.String("channel-id", "UCDmQ1drrmdD-8OULooXEwaw", "YouTube channel ID")
-		output       = flag.String("output", "work.json", "Output file path")
-		verbose      = flag.Bool("verbose", false, "Enable verbose logging")
+		apiKey        = flag.String("api-key", "", "YouTube Data API v3 key")
+		channelID     = flag.String("channel-id", "UCDmQ1drrmdD-8OULooXEwaw", "YouTube channel ID")
+		output        = flag.String("output", "work.json", "Output file path")
+		verbose       = flag.Bool("verbose", false, "Enable verbose logging")
 		includeShorts = flag.Bool("include-shorts", false, "Include YouTube Shorts in results")
-		fullData     = flag.Bool("full-data", false, "Include all available data (description, likes, comments, etc.)")
-		help         = flag.Bool("help", false, "Show help message")
+		fullData      = flag.Bool("full-data", false, "Include all available data (description, likes, comments, etc.)")
+		help          = flag.Bool("help", false, "Show help message")
 	)
 
 	flag.Parse()
@@ -417,12 +417,12 @@ func main() {
 	}
 
 	config := &Config{
-		APIKey:       *apiKey,
-		ChannelID:    *channelID,
-		Output:       *output,
-		Verbose:      *verbose,
+		APIKey:        *apiKey,
+		ChannelID:     *channelID,
+		Output:        *output,
+		Verbose:       *verbose,
 		IncludeShorts: *includeShorts,
-		FullData:     *fullData,
+		FullData:      *fullData,
 	}
 
 	fetcher := NewYouTubeFetcher(config)
