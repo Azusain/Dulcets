@@ -18,21 +18,34 @@ export function useLoading() {
   return context;
 }
 
+// 使用模块级变量跟踪是否为初始访问
+let isInitialVisit = true;
+
 export function LoadingProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const pathname = usePathname();
 
   useEffect(() => {
-    // Show loading when pathname changes
-    setIsLoading(true);
-    
-    // Hide loading after animation duration (adjusted to 1800ms for optimal UX)
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1800);
-
-    return () => clearTimeout(timer);
+    if (isInitialVisit) {
+      // 初始访问：显示完整加载动画
+      setIsLoading(true);
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+        isInitialVisit = false; // 标记已经完成初始加载
+      }, 1800);
+      return () => clearTimeout(timer);
+    }
+    // 页面间导航：不做任何操作，保持 isLoading 为 false
   }, [pathname]);
+
+  // 监听页面刷新重置状态
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      isInitialVisit = true;
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, []);
 
   return (
     <LoadingContext.Provider value={{ isLoading, setIsLoading }}>

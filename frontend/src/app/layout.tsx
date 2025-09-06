@@ -54,13 +54,21 @@ export default function RootLayout({
         <style
           dangerouslySetInnerHTML={{
             __html: `
-            nav {
-              position: fixed !important;
-              top: 0 !important;
-              left: 0 !important;
-              right: 0 !important;
-              z-index: 9999 !important;
-              width: 100% !important;
+            /* Hide main content until React loading manager takes over */
+            #main-content {
+              opacity: 0;
+              pointer-events: none;
+            }
+            
+            /* Allow React to override when loading is complete */
+            #main-content[style*="opacity: 1"] {
+              opacity: 1 !important;
+              pointer-events: auto !important;
+            }
+            
+            /* Page transition effects for navigation */
+            #main-content {
+              transition: opacity 0.3s ease-in-out;
             }
           `,
           }}

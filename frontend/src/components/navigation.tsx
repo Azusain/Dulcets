@@ -24,13 +24,33 @@ const DsNavigation = () => {
   const pathname = usePathname();
 
   // Check if on a sub-page (not the main page)
+  // Normalize pathname by removing trailing slash for comparison
+  const normalizedPath = pathname.endsWith('/') && pathname.length > 1 
+    ? pathname.slice(0, -1) 
+    : pathname;
+    
   const isSubPage =
     pathname.includes("/pricing") ||
-    (pathname !== "/" &&
-      pathname !== "/en" &&
-      pathname !== "/jp" &&
-      pathname !== "/zh");
+    (normalizedPath !== "/" &&
+      normalizedPath !== "/en" &&
+      normalizedPath !== "/jp" &&
+      normalizedPath !== "/zh");
 
+  // Update navigation background based on page type and scroll position
+  useEffect(() => {
+    if (isSubPage) {
+      // Sub-pages always have opaque background
+      setIsScrolled(true);
+    } else {
+      // Main page: check scroll position
+      const heroHeight = window.innerHeight;
+      const scrollPosition = window.scrollY;
+      const shouldBeScrolled = scrollPosition > heroHeight * 0.8;
+      setIsScrolled(shouldBeScrolled);
+    }
+  }, [isSubPage, pathname]);
+
+  // Separate effect for scroll handling to avoid conflicts
   useEffect(() => {
     const handleScroll = () => {
       if (isSubPage) {
@@ -41,21 +61,15 @@ const DsNavigation = () => {
         const heroHeight = window.innerHeight;
         const scrollPosition = window.scrollY;
         // Start turning black after 80% of the viewport height
-        setIsScrolled(scrollPosition > heroHeight * 0.8);
+        const shouldBeScrolled = scrollPosition > heroHeight * 0.8;
+        setIsScrolled(shouldBeScrolled);
       }
     };
-
-    // Set initial state immediately for sub-pages
-    if (isSubPage) {
-      setIsScrolled(true);
-    }
-
-    // Check once on initialization
-    handleScroll();
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isSubPage]);
+
 
   // Handle navigation visibility based on loading state
   useEffect(() => {

@@ -20,16 +20,32 @@ export default function LoadingManager({
   const { isLoading } = useLoading();
   const { getAssetPath } = useAssetPath();
   const router = useRouter();
-  const [shouldShowLoading, setShouldShowLoading] = useState(false);
+  const [shouldShowLoading, setShouldShowLoading] = useState(true);
+  const [isInitialPageLoad, setIsInitialPageLoad] = useState(true);
 
   useEffect(() => {
-    // 只在初始加载时显示loading动画
-    if (isInitialLoad && isLoading) {
+    if (isInitialLoad) {
       setShouldShowLoading(true);
-      // 标记已经完成初始加载
+      setIsInitialPageLoad(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isInitialLoad && isLoading) {
+      // 只有初始加载时才显示动画
+      setShouldShowLoading(true);
+      setIsInitialPageLoad(true);
       isInitialLoad = false;
     } else {
+      // 不管是否isLoading，都不显示动画
       setShouldShowLoading(false);
+      setIsInitialPageLoad(false);
+      // 确保内容显示
+      const mainContent = document.getElementById('main-content');
+      if (mainContent) {
+        mainContent.style.opacity = '1';
+        mainContent.style.pointerEvents = 'auto';
+      }
     }
   }, [isLoading]);
 
@@ -52,7 +68,7 @@ export default function LoadingManager({
       className="min-h-screen text-white"
       style={{ background: "#000000", minHeight: "100vh" }}
     >
-      {/* Loading Animation - 只在首次访问时显示 */}
+
       {shouldShowLoading && (
         <div className="loading-screen fixed inset-0 z-[99999] flex items-center justify-center">
           <div className="text-center relative z-10">
@@ -108,11 +124,12 @@ export default function LoadingManager({
         id="main-content"
         className="main-content-react"
         style={{
-          opacity: shouldShowLoading ? 0 : 1,
+          opacity: shouldShowLoading ? '0' : '1',
           visibility: "visible",
           transition: shouldShowLoading ? "none" : "opacity 0.8s ease-out 0.2s",
           backgroundColor: "transparent",
           zIndex: shouldShowLoading ? 1 : "auto",
+          pointerEvents: shouldShowLoading ? 'none' : 'auto',
         }}
       >
         {children}
