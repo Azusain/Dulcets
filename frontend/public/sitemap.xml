@@ -1,154 +1,213 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- Home Page -->
   <url>
-    <loc>https://azusain.github.io/Dulcets</loc>
-    <lastmod>2025-09-03</lastmod>
+    <loc>https://www.dulcets.co.jp</loc>
+    <lastmod>2025-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://azusain.github.io/Dulcets?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://azusain.github.io/Dulcets?lang=en" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://azusain.github.io/Dulcets?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://azusain.github.io/Dulcets" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dulcets.co.jp/jp" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dulcets.co.jp/en" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dulcets.co.jp/zh" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dulcets.co.jp" />
   </url>
   <url>
-    <loc>https://azusain.github.io/Dulcets?lang=en</loc>
-    <lastmod>2025-09-03</lastmod>
+    <loc>https://www.dulcets.co.jp/jp</loc>
+    <lastmod>2025-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://azusain.github.io/Dulcets?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://azusain.github.io/Dulcets?lang=en" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://azusain.github.io/Dulcets?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://azusain.github.io/Dulcets" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dulcets.co.jp/jp" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dulcets.co.jp/en" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dulcets.co.jp/zh" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dulcets.co.jp" />
   </url>
   <url>
-    <loc>https://azusain.github.io/Dulcets?lang=zh</loc>
-    <lastmod>2025-09-03</lastmod>
+    <loc>https://www.dulcets.co.jp/en</loc>
+    <lastmod>2025-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://azusain.github.io/Dulcets?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://azusain.github.io/Dulcets?lang=en" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://azusain.github.io/Dulcets?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://azusain.github.io/Dulcets" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dulcets.co.jp/jp" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dulcets.co.jp/en" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dulcets.co.jp/zh" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dulcets.co.jp" />
   </url>
   <url>
-    <loc>https://azusain.github.io/Dulcets/about</loc>
-    <lastmod>2025-09-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://azusain.github.io/Dulcets/about?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://azusain.github.io/Dulcets/about?lang=en" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://azusain.github.io/Dulcets/about?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://azusain.github.io/Dulcets/about" />
-  </url>
-  <url>
-    <loc>https://azusain.github.io/Dulcets/about?lang=en</loc>
-    <lastmod>2025-09-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://azusain.github.io/Dulcets/about?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://azusain.github.io/Dulcets/about?lang=en" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://azusain.github.io/Dulcets/about?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://azusain.github.io/Dulcets/about" />
-  </url>
-  <url>
-    <loc>https://azusain.github.io/Dulcets/about?lang=zh</loc>
-    <lastmod>2025-09-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://azusain.github.io/Dulcets/about?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://azusain.github.io/Dulcets/about?lang=en" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://azusain.github.io/Dulcets/about?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://azusain.github.io/Dulcets/about" />
-  </url>
-  <url>
-    <loc>https://azusain.github.io/Dulcets/services</loc>
-    <lastmod>2025-09-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://azusain.github.io/Dulcets/services?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://azusain.github.io/Dulcets/services?lang=en" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://azusain.github.io/Dulcets/services?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://azusain.github.io/Dulcets/services" />
-  </url>
-  <url>
-    <loc>https://azusain.github.io/Dulcets/services?lang=en</loc>
-    <lastmod>2025-09-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://azusain.github.io/Dulcets/services?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://azusain.github.io/Dulcets/services?lang=en" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://azusain.github.io/Dulcets/services?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://azusain.github.io/Dulcets/services" />
-  </url>
-  <url>
-    <loc>https://azusain.github.io/Dulcets/services?lang=zh</loc>
-    <lastmod>2025-09-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://azusain.github.io/Dulcets/services?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://azusain.github.io/Dulcets/services?lang=en" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://azusain.github.io/Dulcets/services?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://azusain.github.io/Dulcets/services" />
-  </url>
-  <url>
-    <loc>https://azusain.github.io/Dulcets/works</loc>
-    <lastmod>2025-09-03</lastmod>
+    <loc>https://www.dulcets.co.jp/zh</loc>
+    <lastmod>2025-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://azusain.github.io/Dulcets/works?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://azusain.github.io/Dulcets/works?lang=en" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://azusain.github.io/Dulcets/works?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://azusain.github.io/Dulcets/works" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dulcets.co.jp/jp" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dulcets.co.jp/en" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dulcets.co.jp/zh" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dulcets.co.jp" />
   </url>
+  
+  <!-- About Page -->
   <url>
-    <loc>https://azusain.github.io/Dulcets/works?lang=en</loc>
-    <lastmod>2025-09-03</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://www.dulcets.co.jp/about</loc>
+    <lastmod>2025-09-07</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://azusain.github.io/Dulcets/works?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://azusain.github.io/Dulcets/works?lang=en" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://azusain.github.io/Dulcets/works?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://azusain.github.io/Dulcets/works" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dulcets.co.jp/jp/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dulcets.co.jp/en/about" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dulcets.co.jp/zh/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dulcets.co.jp/about" />
   </url>
   <url>
-    <loc>https://azusain.github.io/Dulcets/works?lang=zh</loc>
-    <lastmod>2025-09-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://azusain.github.io/Dulcets/works?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://azusain.github.io/Dulcets/works?lang=en" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://azusain.github.io/Dulcets/works?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://azusain.github.io/Dulcets/works" />
-  </url>
-  <url>
-    <loc>https://azusain.github.io/Dulcets/contact</loc>
-    <lastmod>2025-09-03</lastmod>
+    <loc>https://www.dulcets.co.jp/jp/about</loc>
+    <lastmod>2025-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://azusain.github.io/Dulcets/contact?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://azusain.github.io/Dulcets/contact?lang=en" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://azusain.github.io/Dulcets/contact?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://azusain.github.io/Dulcets/contact" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dulcets.co.jp/jp/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dulcets.co.jp/en/about" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dulcets.co.jp/zh/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dulcets.co.jp/about" />
   </url>
   <url>
-    <loc>https://azusain.github.io/Dulcets/contact?lang=en</loc>
-    <lastmod>2025-09-03</lastmod>
+    <loc>https://www.dulcets.co.jp/en/about</loc>
+    <lastmod>2025-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dulcets.co.jp/jp/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dulcets.co.jp/en/about" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dulcets.co.jp/zh/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dulcets.co.jp/about" />
+  </url>
+  <url>
+    <loc>https://www.dulcets.co.jp/zh/about</loc>
+    <lastmod>2025-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dulcets.co.jp/jp/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dulcets.co.jp/en/about" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dulcets.co.jp/zh/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dulcets.co.jp/about" />
+  </url>
+  
+  <!-- Services Page -->
+  <url>
+    <loc>https://www.dulcets.co.jp/services</loc>
+    <lastmod>2025-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dulcets.co.jp/jp/services" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dulcets.co.jp/en/services" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dulcets.co.jp/zh/services" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dulcets.co.jp/services" />
+  </url>
+  <url>
+    <loc>https://www.dulcets.co.jp/jp/services</loc>
+    <lastmod>2025-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dulcets.co.jp/jp/services" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dulcets.co.jp/en/services" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dulcets.co.jp/zh/services" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dulcets.co.jp/services" />
+  </url>
+  <url>
+    <loc>https://www.dulcets.co.jp/en/services</loc>
+    <lastmod>2025-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dulcets.co.jp/jp/services" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dulcets.co.jp/en/services" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dulcets.co.jp/zh/services" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dulcets.co.jp/services" />
+  </url>
+  <url>
+    <loc>https://www.dulcets.co.jp/zh/services</loc>
+    <lastmod>2025-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dulcets.co.jp/jp/services" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dulcets.co.jp/en/services" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dulcets.co.jp/zh/services" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dulcets.co.jp/services" />
+  </url>
+  
+  <!-- Works Page -->
+  <url>
+    <loc>https://www.dulcets.co.jp/works</loc>
+    <lastmod>2025-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dulcets.co.jp/jp/works" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dulcets.co.jp/en/works" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dulcets.co.jp/zh/works" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dulcets.co.jp/works" />
+  </url>
+  <url>
+    <loc>https://www.dulcets.co.jp/jp/works</loc>
+    <lastmod>2025-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dulcets.co.jp/jp/works" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dulcets.co.jp/en/works" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dulcets.co.jp/zh/works" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dulcets.co.jp/works" />
+  </url>
+  <url>
+    <loc>https://www.dulcets.co.jp/en/works</loc>
+    <lastmod>2025-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dulcets.co.jp/jp/works" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dulcets.co.jp/en/works" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dulcets.co.jp/zh/works" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dulcets.co.jp/works" />
+  </url>
+  <url>
+    <loc>https://www.dulcets.co.jp/zh/works</loc>
+    <lastmod>2025-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dulcets.co.jp/jp/works" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dulcets.co.jp/en/works" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dulcets.co.jp/zh/works" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dulcets.co.jp/works" />
+  </url>
+  
+  <!-- Contact Page -->
+  <url>
+    <loc>https://www.dulcets.co.jp/contact</loc>
+    <lastmod>2025-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dulcets.co.jp/jp/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dulcets.co.jp/en/contact" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dulcets.co.jp/zh/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dulcets.co.jp/contact" />
+  </url>
+  <url>
+    <loc>https://www.dulcets.co.jp/jp/contact</loc>
+    <lastmod>2025-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://azusain.github.io/Dulcets/contact?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://azusain.github.io/Dulcets/contact?lang=en" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://azusain.github.io/Dulcets/contact?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://azusain.github.io/Dulcets/contact" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dulcets.co.jp/jp/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dulcets.co.jp/en/contact" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dulcets.co.jp/zh/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dulcets.co.jp/contact" />
   </url>
   <url>
-    <loc>https://azusain.github.io/Dulcets/contact?lang=zh</loc>
-    <lastmod>2025-09-03</lastmod>
+    <loc>https://www.dulcets.co.jp/en/contact</loc>
+    <lastmod>2025-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://azusain.github.io/Dulcets/contact?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://azusain.github.io/Dulcets/contact?lang=en" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://azusain.github.io/Dulcets/contact?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://azusain.github.io/Dulcets/contact" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dulcets.co.jp/jp/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dulcets.co.jp/en/contact" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dulcets.co.jp/zh/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dulcets.co.jp/contact" />
+  </url>
+  <url>
+    <loc>https://www.dulcets.co.jp/zh/contact</loc>
+    <lastmod>2025-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.dulcets.co.jp/jp/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.dulcets.co.jp/en/contact" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.dulcets.co.jp/zh/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.dulcets.co.jp/contact" />
   </url>
 </urlset>

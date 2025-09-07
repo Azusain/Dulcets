@@ -102,7 +102,9 @@ const OurWorksSection: React.FC<OurWorksSectionProps> = ({ t }) => {
           </h2>
           <div className="mx-auto w-24 h-px bg-gray-400 mb-6"></div>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            {t("works.lead_description")}
+            {t("works.lead_description_1")}
+            <br />
+            {t("works.lead_description_2")}
           </p>
         </div>
 

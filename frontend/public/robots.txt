@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://azusain.github.io/Dulcets/sitemap.xml
+Sitemap: https://www.dulcets.co.jp/sitemap.xml
 
 # Crawl-delay
 Crawl-delay: 1
