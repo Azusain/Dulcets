@@ -158,7 +158,11 @@
       "contactPoint": {
         "@type": "ContactPoint",
         "contactType": "customer support",
-        "availableLanguage": ["Japanese", "English", "Chinese"]
+        "availableLanguage": [
+          "Japanese",
+          "English",
+          "Chinese"
+        ]
       }
     },
     "musicGroup": {
@@ -170,16 +174,22 @@
         "en": "Music production team specializing in anime songs, J-Pop, J-Rock, and orchestral music",
         "zh": "专门制作动漫歌曲、J-Pop、J-Rock和管弦乐的音乐制作团队"
       },
-      "genre": ["J-Pop", "J-Rock", "Anime Music", "Instrumental", "Electronic"]
+      "genre": [
+        "J-Pop",
+        "J-Rock",
+        "Anime Music",
+        "Instrumental",
+        "Electronic"
+      ]
     },
     "localBusiness": {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "Dulcets",
       "description": {
-        "ja": "音楽制作・クリエイティブサービススタジオ",
-        "en": "Music production and creative services studio",
-        "zh": "音乐制作和创意服务工作室"
+        "ja": "音楽制作・クリエイティブサービス",
+        "en": "Music production and creative services",
+        "zh": "音乐制作和创意服务"
       },
       "serviceArea": {
         "@type": "Place",
