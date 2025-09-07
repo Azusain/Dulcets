@@ -13,203 +13,235 @@ export interface SEOData {
   hreflangUrls?: { [key: string]: string };
 }
 
-// Multilingual titles configuration
-export const multilingualTitles = {
-  ja: {
-    base: "Dulcets - プロフェッショナル音楽制作&クリエイティブサービス",
-    home: "Dulcets - 音楽プロダクション",
-    about: "Dulcetsについて - 音楽制作チーム",
-    services: "音楽制作サービス - Dulcets",
-    works: "私たちの作品 - Dulcets音楽ポートフォリオ",
-    contact: "お問い合わせ - Dulcets音楽制作依頼",
-  },
-  en: {
-    base: "Dulcets - Professional Music Production & Creative Services",
-    home: "Dulcets - Professional Music Production",
-    about: "About Dulcets - Music Production Team",
-    services: "Music Production Services - Dulcets",
-    works: "Our Works - Dulcets Music Portfolio",
-    contact: "Contact Dulcets - Music Production Inquiry",
-  },
-  zh: {
-    base: "Dulcets - 专业音乐制作与创意服务",
-    home: "Dulcets - 专业音乐制作",
-    about: "关于 Dulcets - 音乐制作团队",
-    services: "音乐制作服务 - Dulcets",
-    works: "我们的作品 - Dulcets 音乐作品集",
-    contact: "联系 Dulcets - 音乐制作咨询",
-  },
-};
+// type definitions for SEO config
+type LanguageCode = "ja" | "en" | "zh";
+type PageType = "base" | "home" | "about" | "services" | "works" | "contact";
 
-// Base SEO configuration
-export const baseSEO: SEOData = {
-  title: multilingualTitles.ja.base, // Default to Japanese
-  description:
-    "Dulcets specializes in Japanese Anime Songs, J-Pop, J-Rock, and BGM production. We offer comprehensive music production, artwork, and 3D modeling services with multilingual support.",
-  keywords: [
-    "music production",
-    "anime song",
-    "J-Pop",
-    "J-Rock",
-    "BGM",
-    "Japanese music",
-    "idol music",
-    "orchestral music",
-    "EDM",
-    "音楽制作",
-    "アニメソング",
-    "アイドル",
-    "オーケストラ",
-    "3D modeling",
-    "artwork",
-    "creative services",
-  ],
-  ogType: "website",
-  twitterCard: "summary_large_image",
-  ogImage: "/images/logo_full.png",
-};
+interface SEOConfig {
+  titles: Record<LanguageCode, Record<PageType, string>>;
+  descriptions: Record<LanguageCode, Record<PageType, string>>;
+  base: {
+    keywords: string[];
+    ogType: string;
+    twitterCard: string;
+    ogImage: string;
+  };
+  pages: Record<Exclude<PageType, "base">, {
+    keywords: string[];
+    ogTitle: Record<LanguageCode, string>;
+  }>;
+  schemas: {
+    organization: any;
+    musicGroup: any;
+    localBusiness: any;
+  };
+}
 
-// Page-specific SEO data
-export const pageSEO = {
-  home: {
-    ...baseSEO,
-    ogTitle: "Dulcets - Professional Music Production Studio",
-    ogDescription:
-      "Creating unique and captivating Japanese music with comprehensive creative services. From concept to completion.",
-  },
-  about: {
-    ...baseSEO,
-    title: "About Dulcets - Music Production Team",
-    description:
-      "Learn about Dulcets, a professional music production team specializing in anime songs, J-Pop, J-Rock, and comprehensive creative services.",
-    keywords: [...baseSEO.keywords, "about", "team", "company", "music studio"],
-  },
-  services: {
-    ...baseSEO,
-    title: "Music Production Services - Dulcets",
-    description:
-      "Professional music production services including composition, arrangement, recording, mixing, mastering, and creative content production.",
-    keywords: [
-      ...baseSEO.keywords,
-      "services",
-      "recording",
-      "mixing",
-      "mastering",
-      "composition",
-    ],
-  },
-  works: {
-    ...baseSEO,
-    title: "Our Works - Dulcets Music Portfolio",
-    description:
-      "Explore our portfolio of music productions, artworks, and 3D modeling projects. Discover the quality and creativity of Dulcets.",
-    keywords: [
-      ...baseSEO.keywords,
-      "portfolio",
-      "works",
-      "showcase",
-      "examples",
-    ],
-  },
-  contact: {
-    ...baseSEO,
-    title: "Contact Dulcets - Music Production Inquiry",
-    description:
-      "Get in touch with Dulcets for your music production needs. We offer multilingual support in Japanese, English, and Chinese.",
-    keywords: [
-      ...baseSEO.keywords,
-      "contact",
-      "inquiry",
-      "quote",
-      "consultation",
-    ],
-  },
-};
+// cached config
+let seoConfig: SEOConfig | null = null;
+
+// detect language from route
+export function detectLanguageFromRoute(pathname: string): LanguageCode {
+  if (pathname.startsWith("/jp") || pathname.startsWith("/jp/")) {
+    return "ja";
+  }
+  if (pathname.startsWith("/en") || pathname.startsWith("/en/")) {
+    return "en";
+  }
+  if (pathname.startsWith("/zh") || pathname.startsWith("/zh/")) {
+    return "zh";
+  }
+  // default to japanese for routes without language prefix
+  return "ja";
+}
+
+// load SEO config from JSON
+export async function loadSEOConfig(): Promise<SEOConfig> {
+  if (seoConfig) {
+    return seoConfig;
+  }
+
+  const response = await fetch("/seo/config.json");
+  if (!response.ok) {
+    throw new Error(`failed to load SEO config: ${response.status} ${response.statusText}`);
+  }
+  
+  seoConfig = await response.json();
+  return seoConfig!;
+}
 
 import { generateCanonicalUrl, getAssetUrl } from "./deployment";
 
-// Structured data schemas
-// TODO: SEO.
-export const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Dulcets",
-  description:
-    "Professional music production and creative services specializing in Japanese music",
-  url: generateCanonicalUrl(),
-  logo: getAssetUrl("/images/logo_black.png"),
-  sameAs: [
-    "https://www.youtube.com/@Dulcets",
-    "https://x.com/Dulcets_staff",
-    "https://space.bilibili.com/3546744298146784",
-    "https://www.nicovideo.jp/user/134411796",
-    "https://ko-fi.com/dulcets_official",
-  ],
-  contactPoint: {
-    "@type": "ContactPoint",
-    contactType: "customer support",
-    availableLanguage: ["Japanese", "English", "Chinese"],
-  },
-};
+// get structured data schemas from config with language support
+export async function getOrganizationSchema(language: LanguageCode = "ja") {
+  const config = await loadSEOConfig();
+  const schema = config.schemas.organization;
+  return {
+    ...schema,
+    description: schema.description[language] || schema.description.ja,
+    url: generateCanonicalUrl(),
+    logo: getAssetUrl(schema.logo),
+  };
+}
 
-export const musicGroupSchema = {
-  "@context": "https://schema.org",
-  "@type": "MusicGroup",
-  name: "Dulcets",
-  description:
-    "Music production team specializing in anime songs, J-Pop, J-Rock, and orchestral music",
-  genre: ["J-Pop", "J-Rock", "Anime Music", "Instrumental", "Electronic"],
-  url: generateCanonicalUrl(),
-};
+export async function getMusicGroupSchema(language: LanguageCode = "ja") {
+  const config = await loadSEOConfig();
+  const schema = config.schemas.musicGroup;
+  return {
+    ...schema,
+    description: schema.description[language] || schema.description.ja,
+    url: generateCanonicalUrl(),
+  };
+}
 
-export const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: "Dulcets",
-  description: "Music production and creative services studio",
-  url: generateCanonicalUrl(),
-  serviceArea: {
-    "@type": "Place",
-    name: "Global",
-  },
-  offers: {
-    "@type": "Offer",
-    description: "Music production, artwork, and 3D modeling services",
-  },
-};
+export async function getLocalBusinessSchema(language: LanguageCode = "ja") {
+  const config = await loadSEOConfig();
+  const schema = config.schemas.localBusiness;
+  return {
+    ...schema,
+    description: schema.description[language] || schema.description.ja,
+    url: generateCanonicalUrl(),
+    offers: {
+      ...schema.offers,
+      description: schema.offers.description[language] || schema.offers.description.ja,
+    },
+  };
+}
 
-// Generate hreflang URLs for multilingual support
+// legacy exports - these return promises
+export const organizationSchema = getOrganizationSchema();
+export const musicGroupSchema = getMusicGroupSchema();
+export const localBusinessSchema = getLocalBusinessSchema();
+
+// generate hreflang URLs for multilingual support
 export function generateHreflangUrls(path: string = ""): {
   [key: string]: string;
 } {
   const baseUrl = generateCanonicalUrl();
   return {
-    ja: `${baseUrl}${path}?lang=ja`,
-    en: `${baseUrl}${path}?lang=en`,
-    zh: `${baseUrl}${path}?lang=zh`,
+    ja: `${baseUrl}/jp${path}`,
+    en: `${baseUrl}/en${path}`,
+    zh: `${baseUrl}/zh${path}`,
     "x-default": `${baseUrl}${path}`,
   };
 }
 
-// Get localized title based on language
-export function getLocalizedTitle(
-  page: keyof typeof multilingualTitles.ja,
-  language: "ja" | "en" | "zh" = "ja"
-): string {
-  return multilingualTitles[language][page] || multilingualTitles.ja[page];
+// get localized title based on language and route
+export async function getLocalizedTitle(
+  page: Exclude<PageType, "base">,
+  language: LanguageCode = "ja"
+): Promise<string> {
+  const config = await loadSEOConfig();
+  return config.titles[language][page] || config.titles.ja[page];
 }
 
-// Update page SEO with localized titles
-export function getLocalizedPageSEO(
-  page: "home" | "about" | "services" | "works" | "contact",
-  language: "ja" | "en" | "zh" = "ja"
-) {
-  const localizedTitle = getLocalizedTitle(page, language);
-  const seoData = pageSEO[page];
+// get localized description
+export async function getLocalizedDescription(
+  page: Exclude<PageType, "base">,
+  language: LanguageCode = "ja"
+): Promise<string> {
+  const config = await loadSEOConfig();
+  return config.descriptions[language][page] || config.descriptions.ja[page];
+}
 
+// get localized page SEO data with route-based language detection
+export async function getLocalizedPageSEO(
+  page: Exclude<PageType, "base">,
+  language: LanguageCode = "ja",
+  pathname?: string
+): Promise<SEOData> {
+  const config = await loadSEOConfig();
+  const detectedLanguage = pathname ? detectLanguageFromRoute(pathname) : language;
+  
+  const title = config.titles[detectedLanguage][page] || config.titles.ja[page];
+  const description = config.descriptions[detectedLanguage][page] || config.descriptions.ja[page];
+  const ogTitle = config.pages[page].ogTitle[detectedLanguage] || config.pages[page].ogTitle.ja;
+  
+  const keywords = [...config.base.keywords, ...config.pages[page].keywords];
+  
   return {
-    ...seoData,
-    title: localizedTitle,
-    ogTitle: localizedTitle,
+    title,
+    description,
+    keywords,
+    ogTitle,
+    ogDescription: description,
+    ogImage: config.base.ogImage,
+    ogType: config.base.ogType,
+    twitterCard: config.base.twitterCard,
+    hreflangUrls: generateHreflangUrls(pathname || ""),
   };
+}
+
+// get base SEO data for any language
+export async function getBaseSEO(language: LanguageCode = "ja"): Promise<SEOData> {
+  const config = await loadSEOConfig();
+  
+  return {
+    title: config.titles[language].base,
+    description: config.descriptions[language].base,
+    keywords: config.base.keywords,
+    ogTitle: config.titles[language].base,
+    ogDescription: config.descriptions[language].base,
+    ogImage: config.base.ogImage,
+    ogType: config.base.ogType,
+    twitterCard: config.base.twitterCard,
+  };
+}
+
+// import fallback SEO data
+import fallbackSEO from '../../public/seo/fallback.json';
+
+// sync version for react components - uses cached config or fallback
+export function getLocalizedPageSEOSync(
+  page: Exclude<PageType, "base">,
+  language: LanguageCode = "ja",
+  pathname?: string
+): SEOData {
+  // if config is not loaded yet, use fallback
+  if (!seoConfig) {
+    return {
+      ...fallbackSEO,
+      hreflangUrls: generateHreflangUrls(pathname || ""),
+    };
+  }
+
+  const detectedLanguage = pathname ? detectLanguageFromRoute(pathname) : language;
+  
+  const title = seoConfig.titles[detectedLanguage][page] || seoConfig.titles.ja[page];
+  const description = seoConfig.descriptions[detectedLanguage][page] || seoConfig.descriptions.ja[page];
+  const ogTitle = seoConfig.pages[page].ogTitle[detectedLanguage] || seoConfig.pages[page].ogTitle.ja;
+  
+  const keywords = [...seoConfig.base.keywords, ...seoConfig.pages[page].keywords];
+  
+  return {
+    title,
+    description,
+    keywords,
+    ogTitle,
+    ogDescription: description,
+    ogImage: seoConfig.base.ogImage,
+    ogType: seoConfig.base.ogType,
+    twitterCard: seoConfig.base.twitterCard,
+    hreflangUrls: generateHreflangUrls(pathname || ""),
+  };
+}
+
+// simple title updater for client-side use
+export function updatePageTitle(page: Exclude<PageType, "base">) {
+  if (typeof window === 'undefined') return;
+  
+  const pathname = window.location.pathname;
+  let language: LanguageCode = 'ja';
+  
+  if (pathname.startsWith('/en')) language = 'en';
+  else if (pathname.startsWith('/zh')) language = 'zh';
+  else if (pathname.startsWith('/jp')) language = 'ja';
+  
+  getLocalizedTitle(page, language).then(title => {
+    document.title = title;
+  }).catch(() => {
+    // fallback to sync version if async fails
+    const seoData = getLocalizedPageSEOSync(page, language, pathname);
+    document.title = seoData.title;
+  });
 }

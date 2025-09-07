@@ -10,8 +10,8 @@ export interface DeploymentConfig {
 // Default configuration for client-side fallback
 const DEFAULT_CONFIG = {
   "production": {
-    "domain": "https://azusain.github.io",
-    "basePath": "/Dulcets"
+    "domain": "https://www.dulcets.co.jp",
+    "basePath": ""
   },
   "github": {
     "domain": "https://azusain.github.io",

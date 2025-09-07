@@ -1,0 +1,198 @@
+{
+  "titles": {
+    "ja": {
+      "base": "Dulcets - プロフェッショナル音楽制作",
+      "home": "Dulcets - 音楽プロダクション",
+      "about": "Dulcetsについて - 音楽制作チーム",
+      "services": "音楽制作サービス - Dulcets",
+      "works": "私たちの作品 - Dulcets音楽ポートフォリオ",
+      "contact": "お問い合わせ - Dulcets音楽制作依頼"
+    },
+    "en": {
+      "base": "Dulcets - Professional Music Production",
+      "home": "Dulcets - Professional Music Production",
+      "about": "About Dulcets - Music Production Team",
+      "services": "Music Production Services - Dulcets",
+      "works": "Our Works - Dulcets Music Portfolio",
+      "contact": "Contact Dulcets - Music Production Inquiry"
+    },
+    "zh": {
+      "base": "Dulcets - 专业音乐制作",
+      "home": "Dulcets - 专业音乐制作",
+      "about": "关于 Dulcets - 音乐制作团队",
+      "services": "音乐制作服务 - Dulcets",
+      "works": "我们的作品 - Dulcets 音乐作品集",
+      "contact": "联系 Dulcets - 音乐制作咨询"
+    }
+  },
+  "descriptions": {
+    "ja": {
+      "base": "Dulcetsは日本のアニメソング、J-Pop、J-Rock、BGM制作を専門としています。多言語対応で、包括的な音楽制作、アートワーク、3Dモデリングサービスを提供しています。",
+      "home": "ユニークで魅力的な日本の音楽を、包括的なクリエイティブサービスで創造。コンセプトから完成まで。",
+      "about": "アニメソング、J-Pop、J-Rock、包括的なクリエイティブサービスを専門とするプロフェッショナル音楽制作チームDulcetsについて学ぶ。",
+      "services": "作曲、編曲、録音、ミキシング、マスタリング、クリエイティブコンテンツ制作を含むプロフェッショナル音楽制作サービス。",
+      "works": "私たちの音楽制作、アートワーク、3Dモデリングプロジェクトのポートフォリオをご覧ください。Dulcetsの品質と創造性を発見してください。",
+      "contact": "音楽制作のニーズについてDulcetsにお問い合わせください。日本語、英語、中国語での多言語サポートを提供しています。"
+    },
+    "en": {
+      "base": "Dulcets specializes in Japanese Anime Songs, J-Pop, J-Rock, and BGM production. We offer comprehensive music production, artwork, and 3D modeling services with multilingual support.",
+      "home": "Creating unique and captivating Japanese music with comprehensive creative services. From concept to completion.",
+      "about": "Learn about Dulcets, a professional music production team specializing in anime songs, J-Pop, J-Rock, and comprehensive creative services.",
+      "services": "Professional music production services including composition, arrangement, recording, mixing, mastering, and creative content production.",
+      "works": "Explore our portfolio of music productions, artworks, and 3D modeling projects. Discover the quality and creativity of Dulcets.",
+      "contact": "Get in touch with Dulcets for your music production needs. We offer multilingual support in Japanese, English, and Chinese."
+    },
+    "zh": {
+      "base": "Dulcets专注于日本动漫歌曲、J-Pop、J-Rock和BGM制作。我们提供全面的音乐制作、艺术设计和3D建模服务，支持多语言。",
+      "home": "通过全面的创意服务创造独特而迷人的日本音乐。从概念到完成。",
+      "about": "了解Dulcets，一个专注于动漫歌曲、J-Pop、J-Rock和全面创意服务的专业音乐制作团队。",
+      "services": "专业音乐制作服务，包括作曲、编曲、录音、混音、母带制作和创意内容制作。",
+      "works": "探索我们的音乐制作、艺术设计和3D建模项目作品集。发现Dulcets的质量和创造力。",
+      "contact": "就您的音乐制作需求联系Dulcets。我们提供日语、英语和中文的多语言支持。"
+    }
+  },
+  "base": {
+    "keywords": [
+      "music production",
+      "anime song",
+      "J-Pop",
+      "J-Rock",
+      "BGM",
+      "Japanese music",
+      "idol music",
+      "orchestral music",
+      "EDM",
+      "音楽制作",
+      "アニメソング",
+      "アイドル",
+      "オーケストラ",
+      "3D modeling",
+      "artwork",
+      "creative services"
+    ],
+    "ogType": "website",
+    "twitterCard": "summary_large_image",
+    "ogImage": "/images/logo_full.png"
+  },
+  "pages": {
+    "home": {
+      "keywords": [],
+      "ogTitle": {
+        "ja": "Dulcets - プロフェッショナル音楽制作",
+        "en": "Dulcets - Professional Music Production",
+        "zh": "Dulcets - 专业音乐制作"
+      }
+    },
+    "about": {
+      "keywords": [
+        "about",
+        "team",
+        "company",
+        "music studio"
+      ],
+      "ogTitle": {
+        "ja": "Dulcetsについて - 音楽制作チーム",
+        "en": "About Dulcets - Music Production Team",
+        "zh": "关于 Dulcets - 音乐制作团队"
+      }
+    },
+    "services": {
+      "keywords": [
+        "services",
+        "recording",
+        "mixing",
+        "mastering",
+        "composition"
+      ],
+      "ogTitle": {
+        "ja": "音楽制作サービス - Dulcets",
+        "en": "Music Production Services - Dulcets",
+        "zh": "音乐制作服务 - Dulcets"
+      }
+    },
+    "works": {
+      "keywords": [
+        "portfolio",
+        "works",
+        "showcase",
+        "examples"
+      ],
+      "ogTitle": {
+        "ja": "私たちの作品 - Dulcets音楽ポートフォリオ",
+        "en": "Our Works - Dulcets Music Portfolio",
+        "zh": "我们的作品 - Dulcets 音乐作品集"
+      }
+    },
+    "contact": {
+      "keywords": [
+        "contact",
+        "inquiry",
+        "quote",
+        "consultation"
+      ],
+      "ogTitle": {
+        "ja": "お問い合わせ - Dulcets音楽制作依頼",
+        "en": "Contact Dulcets - Music Production Inquiry",
+        "zh": "联系 Dulcets - 音乐制作咨询"
+      }
+    }
+  },
+  "schemas": {
+    "organization": {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Dulcets",
+      "description": {
+        "ja": "日本の音楽に特化したプロフェッショナル音楽制作・クリエイティブサービス",
+        "en": "Professional music production and creative services specializing in Japanese music",
+        "zh": "专注于日本音乐的专业音乐制作和创意服务"
+      },
+      "logo": "/images/logo_black.png",
+      "sameAs": [
+        "https://www.youtube.com/@Dulcets",
+        "https://x.com/Dulcets_staff",
+        "https://space.bilibili.com/3546744298146784",
+        "https://www.nicovideo.jp/user/134411796",
+        "https://ko-fi.com/dulcets_official"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "availableLanguage": ["Japanese", "English", "Chinese"]
+      }
+    },
+    "musicGroup": {
+      "@context": "https://schema.org",
+      "@type": "MusicGroup",
+      "name": "Dulcets",
+      "description": {
+        "ja": "アニメソング、J-Pop、J-Rock、オーケストラ音楽を専門とする音楽制作チーム",
+        "en": "Music production team specializing in anime songs, J-Pop, J-Rock, and orchestral music",
+        "zh": "专门制作动漫歌曲、J-Pop、J-Rock和管弦乐的音乐制作团队"
+      },
+      "genre": ["J-Pop", "J-Rock", "Anime Music", "Instrumental", "Electronic"]
+    },
+    "localBusiness": {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Dulcets",
+      "description": {
+        "ja": "音楽制作・クリエイティブサービススタジオ",
+        "en": "Music production and creative services studio",
+        "zh": "音乐制作和创意服务工作室"
+      },
+      "serviceArea": {
+        "@type": "Place",
+        "name": "Global"
+      },
+      "offers": {
+        "@type": "Offer",
+        "description": {
+          "ja": "音楽制作、アートワーク、3Dモデリングサービス",
+          "en": "Music production, artwork, and 3D modeling services",
+          "zh": "音乐制作、艺术设计和3D建模服务"
+        }
+      }
+    }
+  }
+}

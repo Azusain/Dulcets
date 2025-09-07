@@ -2,7 +2,7 @@ import ConditionalNavigation from "@/components/ConditionalNavigation";
 import SEOHead from "@/components/SEOHead";
 import { LoadingProvider } from "@/contexts/LoadingContext";
 import { getAssetPath } from "@/utils/assetPath";
-import { getLocalizedPageSEO, generateHreflangUrls } from "@/utils/seo";
+import { getLocalizedPageSEOSync, generateHreflangUrls } from "@/utils/seo";
 import "./global.css";
 import "./loading.css";
 
@@ -12,10 +12,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   // Use Japanese home page SEO as default for layout
-  const seoData = {
-    ...getLocalizedPageSEO('home', 'ja'),
-    hreflangUrls: generateHreflangUrls()
-  };
+  const seoData = getLocalizedPageSEOSync('home', 'ja');
 
   return (
     <html lang="ja">
